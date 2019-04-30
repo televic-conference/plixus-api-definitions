@@ -1,9 +1,9 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "version" : "1.0",
     "title" : "Plixus API 1.0",
-    "description" : "REST API for cure on the Central Unit. Handles Diagnostics and Events."
+    "description" : "REST API for cure on the Central Unit. Handles Diagnostics and Events.",
+    "version" : "1.0"
   },
   "host" : "localhost:9012",
   "schemes" : [ "http" ],
@@ -67,7 +67,6 @@
         "operationId" : "ApiV1ConfideaLicensesGet",
         "consumes" : [ ],
         "produces" : [ "text/plain" ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -110,7 +109,6 @@
         "operationId" : "ApiV1ConfideaLicensesLeftGet",
         "consumes" : [ ],
         "produces" : [ "text/plain" ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -179,7 +177,6 @@
         "operationId" : "ApiV1DevicesTypesGet",
         "consumes" : [ ],
         "produces" : [ "text/plain" ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -201,7 +198,6 @@
         "operationId" : "ApiV1DiagnosticsDevicesGet",
         "consumes" : [ ],
         "produces" : [ "text/plain" ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -223,7 +219,6 @@
         "operationId" : "ApiV1DiagnosticsDevicesDetailsGet",
         "consumes" : [ ],
         "produces" : [ "text/plain" ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -290,7 +285,6 @@
         "operationId" : "ApiV1DiagnosticsDevicesErrorsDelete",
         "consumes" : [ ],
         "produces" : [ ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success"
@@ -395,7 +389,6 @@
         "operationId" : "ApiV1DiagnosticsDevicesHighlightstateDelete",
         "consumes" : [ ],
         "produces" : [ ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success"
@@ -472,7 +465,6 @@
         "operationId" : "ApiV1DiagnosticsTestPost",
         "consumes" : [ ],
         "produces" : [ ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success"
@@ -485,7 +477,6 @@
         "operationId" : "ApiV1DiagnosticsTestDelete",
         "consumes" : [ ],
         "produces" : [ ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success"
@@ -500,7 +491,6 @@
         "operationId" : "ApiNotificationConnectPost",
         "consumes" : [ ],
         "produces" : [ "text/plain" ],
-        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -619,6 +609,375 @@
           }
         }
       }
+    },
+    "/api/v1/buttons" : {
+      "get" : {
+        "tags" : [ "Buttons" ],
+        "summary" : "Get all buttons in the room",
+        "operationId" : "Buttons_GetRoomButtons",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatButton"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Buttons" ],
+        "summary" : "Change some buttons in the room",
+        "operationId" : "Buttons_ChangeButtons",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "buttons",
+          "in" : "body",
+          "description" : "Buttons to change with their new state",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SeatButton"
+            }
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Buttons" ],
+        "summary" : "Add some custom buttons in the room",
+        "operationId" : "Buttons_AddCustomButtons",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "buttons",
+          "in" : "body",
+          "description" : "Custom buttons to add (button type should be custom)",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SeatButton"
+            }
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Buttons" ],
+        "summary" : "Remove some custom buttons in the room",
+        "operationId" : "Buttons_RemoveCustomButtons",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "buttons",
+          "in" : "body",
+          "description" : "Custom buttons to remove (button type should be custom)",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SeatButton"
+            }
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/buttons/{seat}" : {
+      "get" : {
+        "tags" : [ "Buttons" ],
+        "summary" : "Get some buttons in the room based on seat number",
+        "operationId" : "Buttons_GetSeatButtons",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "seat",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatButton"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/buttons/push/{loopback}" : {
+      "post" : {
+        "tags" : [ "Buttons" ],
+        "summary" : "Push some buttons in the room",
+        "operationId" : "Buttons_PushButtons",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "buttons",
+          "in" : "body",
+          "description" : "Buttons to change with their new state",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SeatButton"
+            }
+          }
+        }, {
+          "name" : "loopback",
+          "in" : "path",
+          "description" : "True when cu should handle the button presses internally",
+          "required" : true,
+          "type" : "boolean"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/leds" : {
+      "get" : {
+        "tags" : [ "Leds" ],
+        "summary" : "Get all leds in the room",
+        "operationId" : "Leds_GetRoomLeds",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatLed"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Leds" ],
+        "summary" : "Change some leds in the room",
+        "operationId" : "Leds_ChangeLeds",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "leds",
+          "in" : "body",
+          "description" : "Leds to change with their new state",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SeatLed"
+            }
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/leds/{seat}" : {
+      "get" : {
+        "tags" : [ "Leds" ],
+        "summary" : "Get some leds in the room based on seat number",
+        "operationId" : "Leds_GetSeatLeds",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "seat",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatLed"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/leds/button/{buttonType}" : {
+      "get" : {
+        "tags" : [ "Leds" ],
+        "summary" : "Get some leds in the room based on led button type",
+        "operationId" : "Leds_GetRoomButtonLeds",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "buttonType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "microphone", "prior", "next", "voting", "nameplate", "custom" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatLed"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/leds/device/{deviceType}" : {
+      "get" : {
+        "tags" : [ "Leds" ],
+        "summary" : "Get some leds in the room based on led device type",
+        "operationId" : "Leds_GetRoomDeviceLeds",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "deviceType",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatLed"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/buttons/type/{buttonType}" : {
+      "get" : {
+        "tags" : [ "Buttons" ],
+        "summary" : "Get some buttons in the room based on button type",
+        "operationId" : "Buttons_GetRoomButtonsByType",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "buttonType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "microphone", "prior", "next", "voting", "nameplate", "custom" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatButton"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/leds/type/{ledType}" : {
+      "get" : {
+        "tags" : [ "Leds" ],
+        "summary" : "Get some leds in the room based on led type",
+        "operationId" : "Leds_GetRoomLedsByType",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "ledType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "button", "microphone", "device" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatLed"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -667,53 +1026,53 @@
       "type" : "object",
       "properties" : {
         "badgeLicensesMax" : {
-          "description" : "The maximum amount of badge licenses available",
           "format" : "int32",
+          "description" : "The maximum amount of badge licenses available",
           "type" : "integer"
         },
         "badgeLicenseLeft" : {
-          "description" : "The amount of badge licenses currently available",
           "format" : "int32",
+          "description" : "The amount of badge licenses currently available",
           "type" : "integer"
         },
         "bluetoothLicensesMax" : {
-          "description" : "The maximum amount of bluetooth audio licenses available",
           "format" : "int32",
+          "description" : "The maximum amount of bluetooth audio licenses available",
           "type" : "integer"
         },
         "bluetoothLicenseLeft" : {
-          "description" : "The amount of bluetooth audio licenses currently available",
           "format" : "int32",
+          "description" : "The amount of bluetooth audio licenses currently available",
           "type" : "integer"
         },
         "dualDelegateLicensesMax" : {
-          "description" : "The maximum amount of dual elegate licenses available",
           "format" : "int32",
+          "description" : "The maximum amount of dual elegate licenses available",
           "type" : "integer"
         },
         "dualDelegateLicenseLeft" : {
-          "description" : "The amount of dual elegate licenses currently available",
           "format" : "int32",
+          "description" : "The amount of dual elegate licenses currently available",
           "type" : "integer"
         },
         "interpretationLicensesMax" : {
-          "description" : "The maximum amount of interpretation licenses available",
           "format" : "int32",
+          "description" : "The maximum amount of interpretation licenses available",
           "type" : "integer"
         },
         "interpretationLicenseLeft" : {
-          "description" : "The amount of interpretation licenses currently available",
           "format" : "int32",
+          "description" : "The amount of interpretation licenses currently available",
           "type" : "integer"
         },
         "votingLicensesMax" : {
-          "description" : "The maximum amount of voting licenses available",
           "format" : "int32",
+          "description" : "The maximum amount of voting licenses available",
           "type" : "integer"
         },
         "votingLicenseLeft" : {
-          "description" : "The amount of voting licenses currently available",
           "format" : "int32",
+          "description" : "The amount of voting licenses currently available",
           "type" : "integer"
         }
       }
@@ -723,8 +1082,8 @@
       "type" : "object",
       "properties" : {
         "id" : {
-          "description" : "Id of the device as integer",
           "format" : "int32",
+          "description" : "Id of the device as integer",
           "type" : "integer"
         },
         "type" : {
@@ -1078,6 +1437,97 @@
           "items" : {
             "type" : "string"
           }
+        }
+      }
+    },
+    "SeatButton" : {
+      "description" : "A button somewhere on a seat",
+      "type" : "object",
+      "properties" : {
+        "seatNumber" : {
+          "format" : "int32",
+          "description" : "Number of seat where te button is located",
+          "type" : "integer"
+        },
+        "button" : {
+          "$ref" : "#/definitions/Button",
+          "description" : "Definition of the button located on the seat"
+        },
+        "isPressEnabled" : {
+          "description" : "True when button press is enabled",
+          "type" : "boolean"
+        },
+        "isReleaseEnabled" : {
+          "description" : "True when button release is enabled",
+          "type" : "boolean"
+        }
+      }
+    },
+    "Button" : {
+      "description" : "Definition of a button",
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "description" : "Type of the button",
+          "enum" : [ "microphone", "prior", "next", "voting", "nameplate", "custom" ],
+          "type" : "string"
+        },
+        "index" : {
+          "format" : "int32",
+          "description" : "Index of the button if there is more than one button",
+          "type" : "integer"
+        },
+        "name" : {
+          "description" : "Name of the button when it's a custom button",
+          "type" : "string"
+        }
+      }
+    },
+    "SeatLed" : {
+      "description" : "Seat led with its state",
+      "type" : "object",
+      "properties" : {
+        "seatNumber" : {
+          "format" : "int32",
+          "description" : "Number of the seat where the led is located",
+          "type" : "integer"
+        },
+        "type" : {
+          "description" : "Type of led",
+          "enum" : [ "button", "microphone", "device" ],
+          "type" : "string"
+        },
+        "deviceType" : {
+          "format" : "int32",
+          "description" : "Type of device when led type is 'Device'",
+          "type" : "integer"
+        },
+        "index" : {
+          "format" : "int32",
+          "description" : "Zero based index of the led if there is more than one led",
+          "type" : "integer"
+        },
+        "state" : {
+          "description" : "State of the led",
+          "enum" : [ "on", "blinkingSlow", "blinkingMedium", "blinkingFast", "off" ],
+          "type" : "string"
+        },
+        "onColor" : {
+          "$ref" : "#/definitions/LedColor",
+          "description" : "Color to be used when led is on"
+        },
+        "offColor" : {
+          "$ref" : "#/definitions/LedColor",
+          "description" : "Color to be used when led is off"
+        }
+      }
+    },
+    "LedColor" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "description" : "Hex RGB value of the color",
+          "type" : "string"
         }
       }
     }
