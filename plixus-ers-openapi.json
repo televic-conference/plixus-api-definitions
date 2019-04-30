@@ -1,0 +1,1686 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "Plixus ERS API 1.0",
+    "description" : "REST API for the Embedded Room Server on the CU.",
+    "version" : "1.0"
+  },
+  "host" : "localhost:9111",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/api/events/intercom/conversationrequested" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for Intercom request event",
+            "schema" : {
+              "$ref" : "#/definitions/ConversationRequested"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/intercom/conversationaccepted" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for Intercom accept event",
+            "schema" : {
+              "$ref" : "#/definitions/ConversationAccepted"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/intercom/conversationended" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for Intercom end event",
+            "schema" : {
+              "$ref" : "#/definitions/ConversationEnded"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/intercom/conversationcanceled" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for Intercom end event",
+            "schema" : {
+              "$ref" : "#/definitions/ConversationCanceled"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/intercom/enabled" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for Intercom enabled event",
+            "schema" : {
+              "$ref" : "#/definitions/IntercomEnabled"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/intercom/disabled" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for Intercom enabled event",
+            "schema" : {
+              "$ref" : "#/definitions/IntercomDisabled"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/video/activeconfiguration" : {
+      "get" : {
+        "tags" : [ "Video" ],
+        "summary" : "Returns the active configuration",
+        "operationId" : "Video_GetActiveVideoConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VideoConfigurationData"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Video" ],
+        "summary" : "Uses the configuration passed with this call as the active configuration",
+        "operationId" : "Video_SaveActiveVideoConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "data",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/VideoConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/video/inputnodes/{inputGroup}/{stream}" : {
+      "put" : {
+        "tags" : [ "Video" ],
+        "summary" : "Set or clear the connection of a video input group to a video stream.",
+        "operationId" : "Video_SetInputNodeState",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "inputGroup",
+          "in" : "path",
+          "description" : "input group id",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "stream",
+          "in" : "path",
+          "description" : "stream id",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "data",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/VideoNodeState"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/video/selectornodes/{stream}/{selectorGroup}" : {
+      "put" : {
+        "tags" : [ "Video" ],
+        "summary" : "Set or clear the connection between a video stream and a video selector group.",
+        "operationId" : "Video_SetSelectorNodeState",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "stream",
+          "in" : "path",
+          "description" : "input group id",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "selectorGroup",
+          "in" : "path",
+          "description" : "stream id",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "data",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/VideoNodeState"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/videoconfigurations" : {
+      "get" : {
+        "tags" : [ "VideoConfigurations" ],
+        "operationId" : "VideoConfigurations_GetVideoConfigurations",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/VideoConfigurationInfo"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "VideoConfigurations" ],
+        "summary" : "Create a new video configuration",
+        "operationId" : "VideoConfigurations_CreateVideoConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "data",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/VideoConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VideoConfigurationDetails"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/videoconfigurations/{id}" : {
+      "get" : {
+        "tags" : [ "VideoConfigurations" ],
+        "operationId" : "VideoConfigurations_GetVideoConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VideoConfigurationDetails"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "VideoConfigurations" ],
+        "summary" : "Overwrite an existing configuration",
+        "operationId" : "VideoConfigurations_UpdateVideoConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "data",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/VideoConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "VideoConfigurations" ],
+        "operationId" : "VideoConfigurations_DeleteVideoConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/video/streams/{stream}/enabled" : {
+      "put" : {
+        "tags" : [ "Video" ],
+        "summary" : "Make a video stream available for delegates.",
+        "operationId" : "video_EnableStream",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "stream does not exist"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Video" ],
+        "summary" : "Make a video stream unavailable for delegates.",
+        "operationId" : "video_DisableStream",
+        "responses" : {
+          "204" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "stream does not exist"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "stream",
+        "in" : "path",
+        "description" : "Id of the stream",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/intercom/seats" : {
+      "get" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Get the seats which have enabled intercom capability",
+        "operationId" : "Intercom_GetSeats",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/booths" : {
+      "get" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Get the booths which have enabled intercom capability",
+        "operationId" : "Intercom_GetBooths",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/seats/{seatId}/enabled" : {
+      "put" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Enable intercom for a seat",
+        "operationId" : "Intercom_EnableForSeat",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "seatId",
+          "in" : "path",
+          "description" : "id of the seat",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Disable intercom for a seat",
+        "operationId" : "Intercom_DisableForSeat",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "seatId",
+          "in" : "path",
+          "description" : "id of the seat",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/booths/{boothId}/enabled" : {
+      "put" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Enable intercom for a booth",
+        "operationId" : "Intercom_EnableForBooth",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "boothId",
+          "in" : "path",
+          "description" : "id of the booth",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Disable intercom for a booth",
+        "operationId" : "Intercom_DisableForBooth",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "boothId",
+          "in" : "path",
+          "description" : "id of the booth",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/conversations" : {
+      "get" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Get a list of active conversations",
+        "operationId" : "Intercom_GetConversations",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Conversation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/requests" : {
+      "get" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Gets an ordered list of all seats which are requesting to speak.",
+        "operationId" : "Intercom_GetRequests",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ordered list of seats which are requesting to speak.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ConversationRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/requests/seat/{fromSeat}/{toSeat}" : {
+      "post" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Request to start a conversation with a seat",
+        "operationId" : "Intercom_RequestConverstationToSeat",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "fromSeat",
+          "in" : "path",
+          "description" : "Seat ID that requests the conversation",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "toSeat",
+          "in" : "path",
+          "description" : "Seat ID that receives the conversation request",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/requests/booth/{fromSeat}/{toBooth}" : {
+      "post" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Request to start a conversation with a seat in a booth",
+        "operationId" : "Intercom_RequestConverstationToBooth",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "fromSeat",
+          "in" : "path",
+          "description" : "Seat ID that requests the conversation",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "toBooth",
+          "in" : "path",
+          "description" : "Booth ID that receives the conversation request",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/requests/accept/{seat}" : {
+      "post" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Accept a conversation request",
+        "operationId" : "Intercom_AcceptConversationRequest",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "seat",
+          "in" : "path",
+          "description" : "Seat ID that accepts a conversation request. Can be a seat inside a booth.",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Conversation that has started",
+            "schema" : {
+              "$ref" : "#/definitions/Conversation"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/conversations/{fromSeat}/{toSeat}" : {
+      "post" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "Start a conversation between two seats",
+        "operationId" : "Intercom_StartConversation",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "fromSeat",
+          "in" : "path",
+          "description" : "Seat ID of first seat in the conversation",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "toSeat",
+          "in" : "path",
+          "description" : "Seat ID of second seat in the conversation",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Conversation that has started",
+            "schema" : {
+              "$ref" : "#/definitions/Conversation"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/intercom/conversations/{seat}" : {
+      "delete" : {
+        "tags" : [ "Intercom" ],
+        "summary" : "End a conversation, or decline/cancel a conversation request.",
+        "operationId" : "Intercom_EndConversation",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "seat",
+          "in" : "path",
+          "description" : "Seat ID that ends the call",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/notification/connect" : {
+      "post" : {
+        "tags" : [ "Notification" ],
+        "summary" : "Get a client id for long polling requests",
+        "operationId" : "ApiNotificationConnectPost",
+        "consumes" : [ ],
+        "produces" : [ "text/plain" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/NotificationId"
+            }
+          }
+        }
+      }
+    },
+    "/api/notification/{client}/nextevent" : {
+      "get" : {
+        "tags" : [ "Notification" ],
+        "summary" : "Make a long polling request for the next event",
+        "operationId" : "ApiNotificationByClientNexteventGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain" ],
+        "parameters" : [ {
+          "name" : "client",
+          "in" : "path",
+          "description" : "Unique id of client that makes the request (retrieved by call to connect)",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/Notification"
+            }
+          },
+          "408" : {
+            "description" : "Request Timeout"
+          }
+        }
+      }
+    },
+    "/api/notification/{client}/modules" : {
+      "get" : {
+        "tags" : [ "Notification" ],
+        "summary" : "Get list of notification modules for client",
+        "operationId" : "ApiNotificationByClientModulesGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain" ],
+        "parameters" : [ {
+          "name" : "client",
+          "in" : "path",
+          "description" : "Unique id of client",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/NotificationModule"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notification/{client}/modules/{module}/unsubscribe" : {
+      "post" : {
+        "tags" : [ "Notification" ],
+        "summary" : "Unsubscribe client from notification module",
+        "operationId" : "ApiNotificationByClientModulesByModuleUnsubscribePost",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "client",
+          "in" : "path",
+          "description" : "Unique id of client",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "module",
+          "in" : "path",
+          "description" : "Name of module to unsubscribe from",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/notification/{client}/modules/{module}/subscribe" : {
+      "post" : {
+        "tags" : [ "Notification" ],
+        "summary" : "Subscribe client to notification module",
+        "operationId" : "ApiNotificationByClientModulesByModuleSubscribePost",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "client",
+          "in" : "path",
+          "description" : "Unique id of client",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "module",
+          "in" : "path",
+          "description" : "Name of module to subscribe to",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/events/discussion/conferencesettingschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for ConferenceSettingsChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/ConferenceSettingsChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/discussion/defaultchannelselectorvolumeupdate" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DefaultChannelSelectorVolumeUpdate event",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultChannelSelectorVolumeUpdate"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/discussion/defaultconferencesettingschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DefaultConferenceSettingsChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultConferenceSettingsChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/channelselectors/volume/default/{gain}" : {
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Change the default channel selector volume for the room",
+        "operationId" : "Discussion_ChangeDefaultChannelSelectorVolume",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "gain",
+          "in" : "path",
+          "description" : "gain specified in tenths of decibel",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/channelselectors/volume/default" : {
+      "get" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Get the default channel selector volume for the room",
+        "operationId" : "Discussion_GetDefaultChannelSelectorVolume",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultChannelSelectorVolumeInfo"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/channelselectors/volume/default/apply" : {
+      "post" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Apply the default channel selector volume to the room",
+        "operationId" : "Discussion_ApplyDefaultChannelSelectorVolume",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/seats" : {
+      "get" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Get the discussion state of all seats in the room",
+        "operationId" : "Discussion_GetSeatDiscussionStates",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SeatDiscussionState"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/settings" : {
+      "get" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Get the current conference settings of the room",
+        "operationId" : "Discussion_GetRoomConferenceSettings",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RoomConferenceSettings"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Change the current conference settings of the room",
+        "operationId" : "Discussion_ChangeRoomConferenceSettings",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "settings",
+          "in" : "body",
+          "description" : "Settings to change towards",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RoomConferenceSettings"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/settings/default" : {
+      "get" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Get the default conference settings of the rooom",
+        "operationId" : "Discussion_GetDefaultRoomConferenceSettings",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RoomConferenceSettings"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Change the default conference settings of the room",
+        "operationId" : "Discussion_ChangeDefaultRoomConferenceSettings",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "settings",
+          "in" : "body",
+          "description" : "Settings to change towards",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RoomConferenceSettings"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/speakers/previous" : {
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Move to the previous speaker",
+        "operationId" : "Discussion_MoveToPreviousSpeaker",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/speakers" : {
+      "get" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Gets an ordered list of all the seats which are currently speaking.",
+        "operationId" : "Discussion_GetSpeakers",
+        "responses" : {
+          "200" : {
+            "description" : "Ordered list of all the seats which are currently speaking.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Clear all delegates and chairmen that are speaking or requesting to speak",
+        "operationId" : "Discussion_ClearAll",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/speakers/delegates" : {
+      "delete" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Clear the delegates that are currently speaking",
+        "operationId" : "Discussion_ClearSpeakers",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/speakers/next" : {
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Move to the next speaker",
+        "operationId" : "Discussion_MoveToNextSpeaker",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/events/discussion/seatdiscussionstatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for SeatMicrophoneStateChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/SeatDiscussionStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/requests" : {
+      "get" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Gets an ordered list of all seats which are requesting to speak.",
+        "operationId" : "Discussion_GetRequests",
+        "responses" : {
+          "200" : {
+            "description" : "Ordered list of seats which are requesting to speak.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Clear the seats that are currently requesting to speak",
+        "operationId" : "Discussion_ClearSpeakerRequests",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/replies" : {
+      "get" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Gets an ordered list of all the seats which are currently requesting to reply.",
+        "operationId" : "Discussion_GetReplies",
+        "responses" : {
+          "200" : {
+            "description" : "Ordered list of all the seats which are currently requesting to reply.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events/discussion/speakerlistchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "ordered list of seats which are currently speaking.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events/discussion/requestlistchanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "ordered list of seats which are currently requesting to speak.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events/discussion/replylistchanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "ordered list of seats which are currently requesting to reply.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/seats/{seat}" : {
+      "get" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Get the discussion state of one seat",
+        "operationId" : "Discussion_GetSeatDiscussionState",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "seat",
+          "in" : "path",
+          "description" : "ID of the seat",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatDiscussionState"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/seats/{seat}/microphone" : {
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Toggle the microphone of a seat on / off",
+        "operationId" : "Discussion_ToggleSeatMicrophone",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "seat",
+          "in" : "path",
+          "description" : "ID of the seat",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/seats/{seat}/reply" : {
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Toggle the reply state of a seat",
+        "operationId" : "Discussion_ToggleReply",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "seat",
+          "in" : "path",
+          "description" : "ID of the seat",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/discussion/seats/{seat}/request" : {
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Toggle the request state of a seat",
+        "operationId" : "Discussion_ToggleRequest",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "seat",
+          "in" : "path",
+          "description" : "ID of the seat",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ConferenceSettingsChanged" : {
+      "type" : "object",
+      "properties" : {
+        "settings" : {
+          "$ref" : "#/definitions/RoomConferenceSettings"
+        }
+      }
+    },
+    "DefaultConferenceSettingsChanged" : {
+      "type" : "object",
+      "properties" : {
+        "settings" : {
+          "$ref" : "#/definitions/RoomConferenceSettings"
+        }
+      }
+    },
+    "DefaultChannelSelectorVolumeUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "defaultChannelSelectorVolumeInfo" : {
+          "$ref" : "#/definitions/DefaultChannelSelectorVolumeInfo"
+        }
+      }
+    },
+    "DefaultChannelSelectorVolumeInfo" : {
+      "type" : "object",
+      "properties" : {
+        "gain" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "VideoConfigurationInfo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "locked" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "VideoConfigurationData" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "locked" : {
+          "type" : "boolean"
+        },
+        "inputGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VideoInputGroup"
+          }
+        },
+        "videoStreams" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VideoStream"
+          }
+        },
+        "selectorGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VideoSelectorGroup"
+          }
+        }
+      }
+    },
+    "VideoInputGroup" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "inputs" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "backupInput" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "type" : {
+          "enum" : [ "normal", "talking_head", "request" ],
+          "type" : "string"
+        }
+      }
+    },
+    "VideoSelectorGroup" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "selectors" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "VideoNodeState" : {
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "VideoConfigurationDetails" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "locked" : {
+          "type" : "boolean"
+        },
+        "inputGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VideoInputGroup"
+          }
+        },
+        "videoStreams" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VideoStream"
+          }
+        },
+        "selectorGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VideoSelectorGroup"
+          }
+        }
+      }
+    },
+    "VideoStream" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "inputGroup" : {
+          "format" : "int32",
+          "description" : "Specifies which input group is connected to the stream. Equals -1 when no group connected.",
+          "type" : "integer"
+        },
+        "selectorGroups" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "isEnabled" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "Conversation" : {
+      "type" : "object",
+      "properties" : {
+        "fromSeat" : {
+          "description" : "ID of seat that initiates the conversation",
+          "type" : "integer"
+        },
+        "toSeat" : {
+          "description" : "ID of seat that accepts the conversation",
+          "type" : "integer"
+        },
+        "startDateTime" : {
+          "format" : "date-time",
+          "description" : "Start date and time of conversation",
+          "type" : "string"
+        }
+      }
+    },
+    "ConversationRequest" : {
+      "type" : "object",
+      "properties" : {
+        "fromSeat" : {
+          "description" : "ID of seat that requests the conversation",
+          "type" : "integer"
+        },
+        "toType" : {
+          "description" : "Type of the receiver of the call",
+          "enum" : [ "seat", "booth" ],
+          "type" : "string"
+        },
+        "toId" : {
+          "description" : "Seat or booth ID of the receiver of the call",
+          "type" : "integer"
+        }
+      }
+    },
+    "ConversationRequested" : {
+      "type" : "object",
+      "properties" : {
+        "fromSeat" : {
+          "description" : "Seat ID that requests the call",
+          "type" : "integer"
+        },
+        "toType" : {
+          "description" : "Type of the receiver of the call",
+          "enum" : [ "seat", "booth" ],
+          "type" : "string"
+        },
+        "toId" : {
+          "description" : "Seat or booth ID of the receiver of the call",
+          "type" : "integer"
+        }
+      }
+    },
+    "ConversationAccepted" : {
+      "type" : "object",
+      "properties" : {
+        "fromSeat" : {
+          "description" : "Seat ID that requested the call",
+          "type" : "integer"
+        },
+        "toSeat" : {
+          "description" : "Seat ID that accepted the call",
+          "type" : "integer"
+        }
+      }
+    },
+    "ConversationEnded" : {
+      "type" : "object",
+      "properties" : {
+        "fromSeat" : {
+          "description" : "Seat ID that requested the call",
+          "type" : "integer"
+        },
+        "toSeat" : {
+          "description" : "Seat ID that accepted the call",
+          "type" : "integer"
+        }
+      }
+    },
+    "ConversationCanceled" : {
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "description" : "Seat ID that canceled the call",
+          "type" : "integer"
+        }
+      }
+    },
+    "IntercomEnabled" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "description" : "Booth or seat",
+          "enum" : [ "seat", "booth" ],
+          "type" : "string"
+        },
+        "id" : {
+          "description" : "Id of the booth or seat",
+          "type" : "integer"
+        }
+      }
+    },
+    "IntercomDisabled" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "description" : "Booth or seat",
+          "enum" : [ "seat", "booth" ],
+          "type" : "string"
+        },
+        "id" : {
+          "description" : "Id of the booth or seat",
+          "type" : "integer"
+        }
+      }
+    },
+    "NotificationId" : {
+      "properties" : {
+        "connectionId" : {
+          "description" : "The client id for notifications",
+          "type" : "string"
+        }
+      }
+    },
+    "Notification" : {
+      "description" : "Notification with event information",
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the event",
+          "type" : "string"
+        },
+        "moduleName" : {
+          "description" : "Name of the module where the event occurred",
+          "type" : "string"
+        },
+        "timestamp" : {
+          "format" : "date-time",
+          "description" : "Date and time when the event occurred",
+          "type" : "string"
+        },
+        "data" : {
+          "description" : "Information about the event",
+          "type" : "object"
+        }
+      }
+    },
+    "NotificationModule" : {
+      "description" : "Module that exposes notifications",
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the module",
+          "type" : "string"
+        },
+        "isSubscribed" : {
+          "description" : "True when the client is subscribed to this module",
+          "type" : "boolean"
+        }
+      }
+    },
+    "RoomConferenceSettings" : {
+      "type" : "object",
+      "properties" : {
+        "maximumNumberOfSpeakers" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "microphoneMode" : {
+          "enum" : [ "directAccess", "request", "group", "other" ]
+        },
+        "microphoneActivationType" : {
+          "enum" : [ "toggle", "push", "vox" ],
+          "type" : "string"
+        },
+        "canSpeakerOverrideOtherSpeaker" : {
+          "type" : "boolean"
+        },
+        "canSpeakerCancelRequest" : {
+          "type" : "boolean"
+        },
+        "lowHeadphoneEabled" : {
+          "type" : "boolean"
+        },
+        "canSwitchOff" : {
+          "type" : "boolean"
+        },
+        "enableReply" : {
+          "type" : "boolean"
+        },
+        "buttonReply" : {
+          "enum" : [ "prior", "next" ]
+        },
+        "ledColorOn" : {
+          "enum" : [ "red", "green" ],
+          "type" : "string"
+        },
+        "ledColorRequest" : {
+          "enum" : [ "red", "green" ],
+          "type" : "string"
+        },
+        "ledColorReply" : {
+          "enum" : [ "red", "green" ],
+          "type" : "string"
+        },
+        "ledInactive" : {
+          "enum" : [ "off", "red", "green" ],
+          "type" : "string"
+        },
+        "ledStateNextInLine" : {
+          "enum" : [ "on", "off" ],
+          "type" : "string"
+        }
+      }
+    },
+    "SeatDiscussionState" : {
+      "type" : "object",
+      "properties" : {
+        "seatNumber" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "microphoneState" : {
+          "enum" : [ "on", "off" ],
+          "type" : "string"
+        },
+        "isRequestingToSpeak" : {
+          "type" : "boolean"
+        },
+        "isRequestingToReply" : {
+          "type" : "boolean"
+        },
+        "role" : {
+          "description" : "The role of the seat",
+          "enum" : [ "delegate", "vip", "chairman" ]
+        }
+      }
+    },
+    "SeatDiscussionStateChanged" : {
+      "type" : "object",
+      "properties" : {
+        "discussionState" : {
+          "$ref" : "#/definitions/SeatDiscussionState"
+        }
+      }
+    }
+  }
+}
