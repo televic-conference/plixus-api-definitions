@@ -1702,11 +1702,13 @@
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "name",
-          "in" : "query",
-          "description" : "Name to change towards",
+          "name" : "body",
+          "in" : "body",
+          "description" : "name",
           "required" : true,
-          "type" : "string"
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
