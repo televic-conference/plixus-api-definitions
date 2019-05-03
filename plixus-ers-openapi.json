@@ -1601,6 +1601,513 @@
           }
         }
       }
+    },
+    "/api/v1/interpretation/activeconfiguration" : {
+      "get" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Get id of the active interpretation configuration in the room",
+        "operationId" : "Interpretation_GetActiveConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/interpretation/channels/listeners" : {
+      "get" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Get a list of listeners per language channel in the room",
+        "operationId" : "Interpretation_GetChannelListeners",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ChannelListeners"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/interpretation/channels/qualities" : {
+      "get" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Get the current qualities of all language channels in the room",
+        "operationId" : "Interpretation_GetChannelQualities",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ChannelQuality"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/interpretation/desks" : {
+      "get" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Get the current state of all desks in the room",
+        "operationId" : "Interpretation_GetDeskStates",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DeskState"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/interpretation/floor/name" : {
+      "get" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Get the name of the floor channel that is used for the room",
+        "operationId" : "Interpretation_GetFloorName",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Change the name of the floor channel that is used for the room",
+        "operationId" : "Interpretation_SetFloorName",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name to change towards",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/interpretation/languages" : {
+      "get" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Get a list of languages defined for the room",
+        "operationId" : "Interpretation_GetLanguages",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Language"
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Change the list of languages defined for the room",
+        "operationId" : "Interpretation_SaveLanguages",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "languages",
+          "in" : "body",
+          "description" : "List of languages to change towards",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/Language"
+            }
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/interpretation/messages" : {
+      "post" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Send a message to all desks in a certain booth",
+        "operationId" : "Interpretation_SendMessage",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "model",
+          "in" : "body",
+          "description" : "Message and booth to send the message towards",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SendMessageModel"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/interpretationconfigurations" : {
+      "get" : {
+        "tags" : [ "InterpretationConfigurations" ],
+        "summary" : "Get a list of interpretation configurations for the room",
+        "operationId" : "InterpretationConfigurations_GetInterpretationConfigurations",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/InterpretationConfigurationDescription"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "InterpretationConfigurations" ],
+        "summary" : "Create a new interpretation configuration for the room",
+        "operationId" : "InterpretationConfigurations_CreateInterpretationConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "data",
+          "in" : "body",
+          "description" : "Data about the new interpretation configuration to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InterpretationConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InterpretationConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/interpretationconfigurations/{id}" : {
+      "get" : {
+        "tags" : [ "InterpretationConfigurations" ],
+        "summary" : "Get the details of a specific interpretation configuration in the room",
+        "operationId" : "InterpretationConfigurations_GetInterpretationConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the interpretation configuration",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InterpretationConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "InterpretationConfigurations" ],
+        "summary" : "Update the details of a specific interpretation configuration in the room",
+        "operationId" : "InterpretationConfigurations_UpdateInterpretationConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the interpretation configuration",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "data",
+          "in" : "body",
+          "description" : "Data about the interpretation configuration to update",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InterpretationConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InterpretationConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "InterpretationConfigurations" ],
+        "summary" : "Delete an existing interpretation configuration from the room",
+        "operationId" : "InterpretationConfigurations_DeleteInterpretationConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the interpretation configuration to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "InterpretationConfigurations" ],
+        "summary" : "Patch the details of an existing interpretation configuration",
+        "operationId" : "InterpretationConfigurations_PatchAudioRoutingConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the interpretation configuration to patch",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InterpretationConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/interpretationconfigurations/{id}/activate" : {
+      "post" : {
+        "tags" : [ "InterpretationConfigurations" ],
+        "summary" : "Change the active interpretation configuration for the room",
+        "operationId" : "InterpretationConfigurations_ChangeActiveConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the interpretation configuration to change to",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/autofloorstatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for AutoFloorStateChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/AutoFloorStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/channellistenersupdated" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for ChannelListenersUpdated event",
+            "schema" : {
+              "$ref" : "#/definitions/ChannelListenersUpdated"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/activeconfigurationchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for ActiveConfigurationChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/ActiveConfigurationChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/channelqualitychanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for ChannelQualityChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/ChannelQualityChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/deskactivechannelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeskActiveChannelChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/DeskActiveChannelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/deskactiveoutputchannelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeskActiveOutputChannelChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/DeskActiveOutputChannelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/deskactiverelaychannelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeskActiveRelayChannelChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/DeskActiveRelayChannelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/deskmicrophonestatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeskMicrophoneStateChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/DeskMicrophoneStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/deskslowdownended" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeskSlowdownEnded event",
+            "schema" : {
+              "$ref" : "#/definitions/DeskSlowdownEnded"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/deskslowndownrequested" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeskSlowndownRequested event",
+            "schema" : {
+              "$ref" : "#/definitions/DeskSlowndownRequested"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/floornamechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for FloorNameChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/FloorNameChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -2079,8 +2586,7 @@
       "properties" : {
         "type" : {
           "description" : "Type of the button",
-          "enum" : [ "microphone", "prior", "next", "voting", "nameplate", "custom" ],
-          "type" : "string"
+          "enum" : [ "microphone", "prior", "next", "voting", "nameplate", "reply", "custom" ]
         },
         "index" : {
           "format" : "int32",
@@ -2137,6 +2643,537 @@
       "properties" : {
         "value" : {
           "description" : "Hex RGB value of the color",
+          "type" : "string"
+        }
+      }
+    },
+    "DeskState" : {
+      "type" : "object",
+      "properties" : {
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "activeRelay" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "activeOutput" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "currentRelayChannelPresets" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "currentOutputChannelPresets" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "microphoneState" : {
+      "enum" : [ "on", "off", "mute" ],
+      "type" : "string"
+    },
+    "isSlowdownActive" : {
+      "type" : "boolean"
+    },
+    "Language" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "iso" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ChannelListeners" : {
+      "type" : "object",
+      "properties" : {
+        "channel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "listeners" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "ChannelQuality" : {
+      "type" : "object",
+      "properties" : {
+        "channel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "quality" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "SendMessageModel" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string"
+        },
+        "beep" : {
+          "type" : "boolean"
+        },
+        "booths" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "InterpretationConfigurationDescription" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        }
+      }
+    },
+    "InterpretationConfigurationData" : {
+      "description" : "Interpretation configuration data",
+      "required" : [ "name" ],
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the interpretation configuration",
+          "type" : "string"
+        },
+        "description" : {
+          "description" : "Description about the interpretation configuration",
+          "type" : "string"
+        },
+        "isLocked" : {
+          "description" : "True when interpretation configuration is locked for editing",
+          "type" : "boolean"
+        },
+        "isAudienceIndicationEnabled" : {
+          "description" : "True when audience indication is enabled",
+          "type" : "boolean"
+        },
+        "audienceIndicationUpdateInterval" : {
+          "format" : "int32",
+          "description" : "Interval in seconds to update the audience indication (when enabled)",
+          "type" : "integer"
+        },
+        "intraBoothConfiguration" : {
+          "$ref" : "#/definitions/intraBoothConfiguration",
+          "description" : "The interpretation mode configuration of desks between booths"
+        },
+        "interBoothInterpretationMode" : {
+          "description" : "The interpretation mode of desks within a booth",
+          "enum" : [ "mixed", "override", "lock_A_Override_B" ],
+          "type" : "string"
+        },
+        "isSlowdownEnabled" : {
+          "description" : "True when slow down button is enabled",
+          "type" : "boolean"
+        },
+        "channels" : {
+          "description" : "The language channels defined in this interpretation configuration",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LanguageChannel"
+          }
+        },
+        "deskConfigurations" : {
+          "description" : "The individual desk configurations",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/InterpretationDeskConfiguration"
+          }
+        }
+      }
+    },
+    "intraBoothConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "isMultipleChannelActivationAllowed" : {
+          "type" : "boolean"
+        },
+        "interpretationMode" : {
+          "enum" : [ "mixed", "override" ],
+          "type" : "string"
+        }
+      }
+    },
+    "LanguageChannel" : {
+      "type" : "object",
+      "properties" : {
+        "order" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "language" : {
+          "type" : "string"
+        },
+        "displayText" : {
+          "type" : "string"
+        },
+        "routingMode" : {
+          "enum" : [ "disabled", "booths", "external" ],
+          "type" : "string"
+        },
+        "booths" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "autoFloor" : {
+          "type" : "boolean"
+        },
+        "isRecorded" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "InterpretationDeskConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "allowedOutputChannels" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "relayChannelPresets" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "outputChannelPresets" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "InterpretationConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "isLocked" : {
+          "type" : "boolean"
+        },
+        "isAudienceIndicationEnabled" : {
+          "type" : "boolean"
+        },
+        "audienceIndicationUpdateInterval" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "intraBoothConfiguration" : {
+          "$ref" : "#/definitions/intraBoothConfiguration"
+        },
+        "interBoothInterpretationMode" : {
+          "enum" : [ "mixed", "override", "lock_A_Override_B" ],
+          "type" : "string"
+        },
+        "isSlowdownEnabled" : {
+          "type" : "boolean"
+        },
+        "channels" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LanguageChannel"
+          }
+        },
+        "deskConfigurations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/InterpretationDeskConfiguration"
+          }
+        }
+      }
+    },
+    "ActiveConfigurationChanged" : {
+      "type" : "object",
+      "properties" : {
+        "roomId" : {
+          "type" : "string"
+        },
+        "configurationId" : {
+          "type" : "string"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "AutoFloorStateChanged" : {
+      "type" : "object",
+      "properties" : {
+        "roomId" : {
+          "type" : "string"
+        },
+        "channel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "isActive" : {
+          "type" : "boolean"
+        },
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "ChannelListenersUpdated" : {
+      "type" : "object",
+      "properties" : {
+        "roomId" : {
+          "type" : "string"
+        },
+        "listeners" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ChannelListeners"
+          }
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "ChannelQualityChanged" : {
+      "type" : "object",
+      "properties" : {
+        "roomId" : {
+          "type" : "string"
+        },
+        "channel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "quality" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "DeskActiveChannelChanged" : {
+      "type" : "object",
+      "properties" : {
+        "relay" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "channel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "roomId" : {
+          "type" : "string"
+        },
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "DeskActiveOutputChannelChanged" : {
+      "type" : "object",
+      "properties" : {
+        "relay" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "channel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "roomId" : {
+          "type" : "string"
+        },
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "DeskActiveRelayChannelChanged" : {
+      "type" : "object",
+      "properties" : {
+        "relay" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "channel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "roomId" : {
+          "type" : "string"
+        },
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "DeskMicrophoneStateChanged" : {
+      "type" : "object",
+      "properties" : {
+        "newMicrophoneState" : {
+          "enum" : [ "on", "off", "mute" ],
+          "type" : "string"
+        },
+        "roomId" : {
+          "type" : "string"
+        },
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "DeskSlowdownEnded" : {
+      "type" : "object",
+      "properties" : {
+        "roomId" : {
+          "type" : "string"
+        },
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "DeskSlowndownRequested" : {
+      "type" : "object",
+      "properties" : {
+        "roomId" : {
+          "type" : "string"
+        },
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "FloorNameChanged" : {
+      "type" : "object",
+      "properties" : {
+        "roomId" : {
+          "type" : "string"
+        },
+        "floorName" : {
+          "type" : "string"
+        },
+        "timeStamp" : {
+          "format" : "date-time",
           "type" : "string"
         }
       }
