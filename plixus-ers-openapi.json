@@ -1751,10 +1751,7 @@
           "description" : "List of languages to change towards",
           "required" : true,
           "schema" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/definitions/Language"
-            }
+            "$ref" : "#/definitions/SaveLanguagesRequest"
           }
         } ],
         "responses" : {
@@ -2842,8 +2839,7 @@
           "type" : "string"
         },
         "routingMode" : {
-          "enum" : [ "disabled", "booths", "external" ],
-          "type" : "string"
+          "enum" : [ "disabled", "booth", "external", "empty" ]
         },
         "booths" : {
           "type" : "array",
@@ -3177,6 +3173,18 @@
         "timeStamp" : {
           "format" : "date-time",
           "type" : "string"
+        }
+      }
+    },
+    "SaveLanguagesRequest" : {
+      "required" : [ "languages" ],
+      "type" : "object",
+      "properties" : {
+        "languages" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Language"
+          }
         }
       }
     }
