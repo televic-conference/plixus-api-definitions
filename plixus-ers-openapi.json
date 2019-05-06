@@ -2918,14 +2918,7 @@
     "ActiveConfigurationChanged" : {
       "type" : "object",
       "properties" : {
-        "roomId" : {
-          "type" : "string"
-        },
         "configurationId" : {
-          "type" : "string"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
           "type" : "string"
         }
       }
@@ -2933,9 +2926,6 @@
     "AutoFloorStateChanged" : {
       "type" : "object",
       "properties" : {
-        "roomId" : {
-          "type" : "string"
-        },
         "channel" : {
           "format" : "int32",
           "type" : "integer"
@@ -2946,37 +2936,23 @@
         "booth" : {
           "format" : "int32",
           "type" : "integer"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
     "ChannelListenersUpdated" : {
       "type" : "object",
       "properties" : {
-        "roomId" : {
-          "type" : "string"
-        },
         "listeners" : {
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/ChannelListeners"
           }
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
     "ChannelQualityChanged" : {
       "type" : "object",
       "properties" : {
-        "roomId" : {
-          "type" : "string"
-        },
         "channel" : {
           "format" : "int32",
           "type" : "integer"
@@ -2984,10 +2960,6 @@
         "quality" : {
           "format" : "int32",
           "type" : "integer"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
@@ -3002,9 +2974,6 @@
           "format" : "int32",
           "type" : "integer"
         },
-        "roomId" : {
-          "type" : "string"
-        },
         "booth" : {
           "format" : "int32",
           "type" : "integer"
@@ -3012,10 +2981,6 @@
         "desk" : {
           "format" : "int32",
           "type" : "integer"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
@@ -3030,9 +2995,6 @@
           "format" : "int32",
           "type" : "integer"
         },
-        "roomId" : {
-          "type" : "string"
-        },
         "booth" : {
           "format" : "int32",
           "type" : "integer"
@@ -3040,10 +3002,6 @@
         "desk" : {
           "format" : "int32",
           "type" : "integer"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
@@ -3058,9 +3016,6 @@
           "format" : "int32",
           "type" : "integer"
         },
-        "roomId" : {
-          "type" : "string"
-        },
         "booth" : {
           "format" : "int32",
           "type" : "integer"
@@ -3068,10 +3023,6 @@
         "desk" : {
           "format" : "int32",
           "type" : "integer"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
@@ -3082,9 +3033,6 @@
           "enum" : [ "on", "off", "mute" ],
           "type" : "string"
         },
-        "roomId" : {
-          "type" : "string"
-        },
         "booth" : {
           "format" : "int32",
           "type" : "integer"
@@ -3092,19 +3040,12 @@
         "desk" : {
           "format" : "int32",
           "type" : "integer"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
     "DeskSlowdownEnded" : {
       "type" : "object",
       "properties" : {
-        "roomId" : {
-          "type" : "string"
-        },
         "booth" : {
           "format" : "int32",
           "type" : "integer"
@@ -3112,19 +3053,12 @@
         "desk" : {
           "format" : "int32",
           "type" : "integer"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
     "DeskSlowndownRequested" : {
       "type" : "object",
       "properties" : {
-        "roomId" : {
-          "type" : "string"
-        },
         "booth" : {
           "format" : "int32",
           "type" : "integer"
@@ -3132,10 +3066,6 @@
         "desk" : {
           "format" : "int32",
           "type" : "integer"
-        },
-        "timeStamp" : {
-          "format" : "date-time",
-          "type" : "string"
         }
       }
     },
