@@ -2,8 +2,12 @@
   "swagger" : "2.0",
   "info" : {
     "title" : "Plixus ERS API 1.0",
-    "description" : "REST API for the Embedded Room Server on the CU.",
-    "version" : "1.0"
+    "description" : "REST API for the Embedded Room Server on the CU.\n\n# Introduction\n\nHere comes a small introduction text about the API\n",
+    "version" : "1.0",
+    "x-logo" : {
+      "url" : "https://www.televic.com/themes/televic/images/logos/televic-group.svg",
+      "altText" : "Televic logo"
+    }
   },
   "host" : "localhost:9111",
   "schemes" : [ "http" ],
@@ -1605,7 +1609,7 @@
     "/api/v1/interpretation/activeconfiguration" : {
       "get" : {
         "tags" : [ "Interpretation" ],
-        "summary" : "Get id of the active interpretation configuration in the room",
+        "summary" : "Get the active interpretation configuration data",
         "operationId" : "Interpretation_GetActiveConfiguration",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -1613,7 +1617,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "type" : "string"
+              "$ref" : "#/definitions/InterpretationConfigurationData"
             }
           }
         }
@@ -1690,7 +1694,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "type" : "string"
+              "$ref" : "#/definitions/FloorNameData"
             }
           }
         }
@@ -1707,15 +1711,12 @@
           "description" : "name",
           "required" : true,
           "schema" : {
-            "type" : "string"
+            "$ref" : "#/definitions/FloorNameData"
           }
         } ],
         "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "type" : "string"
-            }
+          "204" : {
+            "description" : "Ok"
           }
         }
       }
@@ -1752,29 +1753,6 @@
           "required" : true,
           "schema" : {
             "$ref" : "#/definitions/SaveLanguagesRequest"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          }
-        }
-      }
-    },
-    "/api/v1/interpretation/messages" : {
-      "post" : {
-        "tags" : [ "Interpretation" ],
-        "summary" : "Send a message to all desks in a certain booth",
-        "operationId" : "Interpretation_SendMessage",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "model",
-          "in" : "body",
-          "description" : "Message and booth to send the message towards",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/SendMessageModel"
           }
         } ],
         "responses" : {
@@ -3187,6 +3165,22 @@
           }
         }
       }
+    },
+    "FloorNameData" : {
+      "required" : [ "name" ],
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        }
+      }
     }
-  }
+  },
+  "tags" : [ {
+    "name" : "Notification",
+    "description" : "Description about notification module\n"
+  }, {
+    "name" : "Events",
+    "description" : "Description about events module \n"
+  } ]
 }
