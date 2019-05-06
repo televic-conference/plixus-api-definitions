@@ -2060,19 +2060,6 @@
         }
       }
     },
-    "/api/events/interpretation/deskslowndownrequested" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "responses" : {
-          "200" : {
-            "description" : "Metadata for DeskSlowndownRequested event",
-            "schema" : {
-              "$ref" : "#/definitions/DeskSlowndownRequested"
-            }
-          }
-        }
-      }
-    },
     "/api/events/interpretation/floornamechanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -2081,6 +2068,19 @@
             "description" : "Metadata for FloorNameChanged event",
             "schema" : {
               "$ref" : "#/definitions/FloorNameChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/interpretation/deskslowdownrequested" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeskSlowndownRequested event",
+            "schema" : {
+              "$ref" : "#/definitions/DeskSlowndownRequested"
             }
           }
         }
@@ -3030,8 +3030,7 @@
       "type" : "object",
       "properties" : {
         "newMicrophoneState" : {
-          "enum" : [ "on", "off", "mute" ],
-          "type" : "string"
+          "enum" : [ "on", "off", "mute", "multiple_on" ]
         },
         "booth" : {
           "format" : "int32",
