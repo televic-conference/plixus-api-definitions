@@ -64,116 +64,6 @@
         }
       }
     },
-    "/api/v1/confidealicenses" : {
-      "get" : {
-        "tags" : [ "ConfideaLicensing" ],
-        "summary" : "Get a mapping of the serial numbers and applied licenses of all ConfideaNG devices",
-        "operationId" : "ApiV1ConfideaLicensesGet",
-        "consumes" : [ ],
-        "produces" : [ "text/plain" ],
-        "responses" : {
-          "200" : {
-            "description" : "Success",
-            "schema" : {
-              "uniqueItems" : false,
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/ConfideaLicenseWithSerial"
-              }
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "ConfideaLicensing" ],
-        "summary" : "Apply a certain license to all ConfideaNG devices",
-        "operationId" : "ApiV1ConfideaLicensesPut",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "license",
-          "in" : "body",
-          "description" : "License to apply",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ConfideaLicense"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Success"
-          }
-        }
-      }
-    },
-    "/api/v1/confidealicenses/left" : {
-      "get" : {
-        "tags" : [ "ConfideaLicensing" ],
-        "summary" : "Get an overview of the available Confidea licenses and how many are still available",
-        "operationId" : "ApiV1ConfideaLicensesLeftGet",
-        "consumes" : [ ],
-        "produces" : [ "text/plain" ],
-        "responses" : {
-          "200" : {
-            "description" : "Success",
-            "schema" : {
-              "$ref" : "#/definitions/ConfideaLicensesLeft"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/confidealicenses/{serial}" : {
-      "get" : {
-        "tags" : [ "ConfideaLicensing" ],
-        "summary" : "Get the Confidea license that has been applied to a specific Confidea device",
-        "operationId" : "ApiV1ConfideaLicensesSerialGet",
-        "consumes" : [ ],
-        "produces" : [ "text/plain" ],
-        "parameters" : [ {
-          "name" : "serial",
-          "in" : "path",
-          "description" : "The serial of the device",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Success",
-            "schema" : {
-              "$ref" : "#/definitions/ConfideaLicense"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "ConfideaLicensing" ],
-        "summary" : "Apply a Confidea license to a specific Confidea device",
-        "operationId" : "ApiV1ConfideaLicensesSerialPut",
-        "consumes" : [ ],
-        "produces" : [ "text/plain" ],
-        "parameters" : [ {
-          "name" : "serial",
-          "in" : "path",
-          "description" : "The serial of the device",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "license",
-          "in" : "body",
-          "description" : "License to apply",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ConfideaLicense"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Success"
-          }
-        }
-      }
-    },
     "/api/v1/devices/types" : {
       "get" : {
         "tags" : [ "Devices" ],
@@ -610,6 +500,107 @@
         "responses" : {
           "200" : {
             "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/devicelicenses/{devicetype}" : {
+      "get" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Get a mapping of the serial numbers and applied licenses of all ConfideaNG devices",
+        "operationId" : "ApiV1DeviceLicensesDeviceTypeGet",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/ConfideaLicenseWithSerialList"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Make changes to the existing configuration",
+        "operationId" : "ApiV1DeviceLicensesDeviceTypePut",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "license",
+          "in" : "body",
+          "description" : "List of devices who's licenses should specifically be modified. Only these device will be affected by this call.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ConfideaLicenseWithSerialList"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Create a completely new configuration",
+        "operationId" : "ApiV1DeviceLicensesDeviceTypePost",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The complete configuration that should be applied. Any devices that are not present in this list will be set to a default license with only a single microphone button enabled.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ConfideaLicenseWithSerialList"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "devicetype",
+        "in" : "path",
+        "required" : true,
+        "enum" : [ "confidea" ]
+      } ]
+    },
+    "/api/v1/devicelicenses/{devicetype}/left" : {
+      "get" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Get an overview of the available Confidea licenses and how many are still available",
+        "operationId" : "ApiV1DeviceLicensesLeftGet",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/ConfideaLicensesLeft"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "devicetype",
+        "in" : "path",
+        "required" : true,
+        "enum" : [ "confidea" ]
+      } ]
+    },
+    "/api/v1/devicelicenses/{devicetype}/{serial}" : {
+      "get" : {
+        "summary" : "Get the license that has been applied to a specific device",
+        "operationId" : "ApiV1DeviceLicensesDeviceTypeSerialGet",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Licenses applied to Confidea device with specific serial",
+            "schema" : {
+              "$ref" : "#/definitions/ConfideaLicense"
+            }
           }
         }
       }
@@ -1071,6 +1062,19 @@
           "type" : "array",
           "items" : {
             "type" : "string"
+          }
+        }
+      }
+    },
+    "ConfideaLicenseWithSerialList" : {
+      "description" : "List of ConfideaLicenses with mapped serial",
+      "type" : "object",
+      "properties" : {
+        "list" : {
+          "description" : "The list of Licenses mapped with serials",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ConfideaLicenseWithSerial"
           }
         }
       }
