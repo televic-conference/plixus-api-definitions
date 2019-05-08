@@ -564,6 +564,7 @@
         "name" : "devicetype",
         "in" : "path",
         "required" : true,
+        "type" : "string",
         "enum" : [ "confidea" ]
       } ]
     },
@@ -587,6 +588,7 @@
         "name" : "devicetype",
         "in" : "path",
         "required" : true,
+        "type" : "string",
         "enum" : [ "confidea" ]
       } ]
     },
@@ -608,6 +610,7 @@
         "name" : "devicetype",
         "in" : "path",
         "required" : true,
+        "type" : "string",
         "enum" : [ "confidea" ]
       } ]
     }
