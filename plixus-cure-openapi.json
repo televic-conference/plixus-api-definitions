@@ -594,6 +594,7 @@
     },
     "/api/v1/devicelicenses/{devicetype}/{serial}" : {
       "get" : {
+        "tags" : [ "DeviceLicensing" ],
         "summary" : "Get the license that has been applied to a specific device",
         "operationId" : "ApiV1DeviceLicensesDeviceTypeSerialGet",
         "produces" : [ "application/json" ],
