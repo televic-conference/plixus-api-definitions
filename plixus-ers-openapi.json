@@ -1773,10 +1773,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/InterpretationConfigurationDescription"
-              }
+              "$ref" : "#/definitions/InterpretationConfigurationList"
             }
           },
           "400" : {
@@ -1995,19 +1992,6 @@
         }
       }
     },
-    "/api/events/interpretation/deskactivechannelchanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "responses" : {
-          "200" : {
-            "description" : "Metadata for DeskActiveChannelChanged event",
-            "schema" : {
-              "$ref" : "#/definitions/DeskActiveChannelChanged"
-            }
-          }
-        }
-      }
-    },
     "/api/events/interpretation/deskactiveoutputchannelchanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -2080,7 +2064,7 @@
           "200" : {
             "description" : "Metadata for DeskSlowndownRequested event",
             "schema" : {
-              "$ref" : "#/definitions/DeskSlowndownRequested"
+              "$ref" : "#/definitions/DeskSlowdownRequested"
             }
           }
         }
@@ -2933,7 +2917,7 @@
         "isActive" : {
           "type" : "boolean"
         },
-        "booth" : {
+        "source" : {
           "format" : "int32",
           "type" : "integer"
         }
@@ -3055,19 +3039,6 @@
         }
       }
     },
-    "DeskSlowndownRequested" : {
-      "type" : "object",
-      "properties" : {
-        "booth" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "desk" : {
-          "format" : "int32",
-          "type" : "integer"
-        }
-      }
-    },
     "FloorNameChanged" : {
       "type" : "object",
       "properties" : {
@@ -3101,6 +3072,30 @@
       "properties" : {
         "name" : {
           "type" : "string"
+        }
+      }
+    },
+    "DeskSlowdownRequested" : {
+      "type" : "object",
+      "properties" : {
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "InterpretationConfigurationList" : {
+      "type" : "object",
+      "properties" : {
+        "configurations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/InterpretationConfigurationDescription"
+          }
         }
       }
     }
