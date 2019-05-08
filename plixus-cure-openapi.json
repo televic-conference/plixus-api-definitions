@@ -613,6 +613,11 @@
         "required" : true,
         "type" : "string",
         "enum" : [ "confidea" ]
+      }, {
+        "name" : "serial",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
       } ]
     }
   },
