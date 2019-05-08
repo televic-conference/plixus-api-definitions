@@ -603,7 +603,13 @@
             }
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "devicetype",
+        "in" : "path",
+        "required" : true,
+        "enum" : [ "confidea" ]
+      } ]
     }
   },
   "definitions" : {
