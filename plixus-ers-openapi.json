@@ -1889,31 +1889,6 @@
             "description" : "An invalid or missing input parameter will result in a bad request"
           }
         }
-      },
-      "patch" : {
-        "tags" : [ "InterpretationConfigurations" ],
-        "summary" : "Patch the details of an existing interpretation configuration",
-        "operationId" : "InterpretationConfigurations_PatchAudioRoutingConfiguration",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "Id of the interpretation configuration to patch",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/InterpretationConfiguration"
-            }
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
       }
     },
     "/api/v1/interpretationconfigurations/{id}/activate" : {
