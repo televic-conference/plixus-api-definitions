@@ -1948,7 +1948,7 @@
           "200" : {
             "description" : "Metadata for ActiveConfigurationChanged event",
             "schema" : {
-              "$ref" : "#/definitions/ActiveConfigurationChanged"
+              "$ref" : "#/definitions/ActiveInterpretationConfigurationChanged"
             }
           }
         }
@@ -2041,6 +2041,480 @@
             "schema" : {
               "$ref" : "#/definitions/DeskSlowdownRequested"
             }
+          }
+        }
+      }
+    },
+    "/api/v1/audiorouting/inputs" : {
+      "get" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Get a list of available audio inputs in the room",
+        "operationId" : "AudioRouting_GetAvailableAudioInputs",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioInputList"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/audiorouting/outputs" : {
+      "get" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Get a list of available audio outputs in the room",
+        "operationId" : "AudioRouting_GetAvailableAudioOutputs",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioOutputList"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/audiorouting/nodes/{group}/{channel}" : {
+      "put" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Change the state of a node in the active audio routing matrix",
+        "operationId" : "AudioRouting_SetAudioRoutingInputNodeState",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "group",
+          "in" : "path",
+          "description" : "Name of the audio routing group",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "channel",
+          "in" : "path",
+          "description" : "Name of the audio routing channel",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "model",
+          "in" : "body",
+          "description" : "Data to modify",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ChangeNodeStateModel"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/audioroutingconfigurations" : {
+      "get" : {
+        "tags" : [ "AudioRoutingConfigurations" ],
+        "summary" : "Get a list of audio routing configurations defined in the room",
+        "operationId" : "AudioRoutingConfigurations_GetAudioRoutingConfigurations",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingConfigurationList"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AudioRoutingConfigurations" ],
+        "summary" : "Create a new audio routing configuration for the room",
+        "operationId" : "AudioRoutingConfigurations_CreateAudioRoutingConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "data",
+          "in" : "body",
+          "description" : "Data about audio routing configuration to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioRoutingConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/audioroutingconfigurations/{id}" : {
+      "get" : {
+        "tags" : [ "AudioRoutingConfigurations" ],
+        "summary" : "Get the details of an audio routing configuration by id",
+        "operationId" : "AudioRoutingConfigurations_GetAudioRoutingConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the audio routing configuration",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioRoutingConfigurations" ],
+        "summary" : "Update the details of an existing audio routing configuration",
+        "operationId" : "AudioRoutingConfigurations_UpdateAudioRoutingConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the audio routing configuration to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "data",
+          "in" : "body",
+          "description" : "Data about the audio routing configuration to update",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioRoutingConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AudioRoutingConfigurations" ],
+        "summary" : "Delete an existing audio routing configuration from the room",
+        "operationId" : "AudioRoutingConfigurations_DeleteAudioRoutingConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the audio routing configuration to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/audioroutingconfigurations/empty/{name}" : {
+      "post" : {
+        "tags" : [ "AudioRoutingConfigurations" ],
+        "summary" : "Create an empty audio routing configuration for the room",
+        "operationId" : "AudioRoutingConfigurations_CreateEmptyAudioRoutingConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Name of the audio configuration to create",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/audioroutingconfigurations/{id}/activate" : {
+      "post" : {
+        "tags" : [ "AudioRoutingConfigurations" ],
+        "summary" : "Change the active audio routing configuration for the room",
+        "operationId" : "AudioRoutingConfigurations_ChangeActiveConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the audio routing configuration to change to",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/events/audiorouting/activeconfigurationchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for ActiveAudioConfigurationChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/ActiveAudioConfigurationChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiorouting/audioinputentrylevelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for AudioInputEntryLevelChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/AudioInputEntryLevelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiorouting/audiooutputentrylevelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for AudioOutputEntryLevelChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/AudioOutputEntryLevelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiorouting/audioroutingnodestatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for AudioRoutingNodesStateChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingNodeStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audiorouting/auxlevels" : {
+      "get" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Get the aux input and output levels in the room",
+        "responses" : {
+          "200" : {
+            "description" : "Aux input and output entry levels",
+            "schema" : {
+              "$ref" : "#/definitions/AuxLevels"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Modify the aux input and/or output levels",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AuxLevels"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audiorouting/settings/language" : {
+      "get" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Get the maximum number of language channels that can be used in the room",
+        "operationId" : "AudioRouting_GetMaximumNumberOfLanguageChannels",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioLanguageSettings"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Change the maximum number of language channels that can be used in the room",
+        "operationId" : "AudioRouting_SetMaximumNumberOfLanguageChannels",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioLanguageSettings"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/audiorouting/settings/autogainreduction" : {
+      "get" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Get the current value of auto gain reduction for the room",
+        "operationId" : "AudioRouting_GetAutoGainReduction",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AutoGainReduction"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Change the value of auto gain reduction for the room",
+        "operationId" : "AudioRouting_SetAutoGainReduction",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AutoGainReduction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/audiorouting/activeconfiguration" : {
+      "get" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Get id of the active configuration",
+        "operationId" : "AudioRouting_GetActiveConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingConfigurationData"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Save the active audio routing configuration",
+        "operationId" : "AudioRouting_SaveActiveConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
           }
         }
       }
@@ -2584,6 +3058,7 @@
       }
     },
     "DeskState" : {
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "booth" : {
@@ -2615,15 +3090,16 @@
             "format" : "int32",
             "type" : "integer"
           }
+        },
+        "isSlowdownActive" : {
+          "description" : "True when someone has requested to slow down",
+          "type" : "boolean"
         }
       }
     },
     "microphoneState" : {
       "enum" : [ "on", "off", "mute" ],
       "type" : "string"
-    },
-    "isSlowdownActive" : {
-      "type" : "boolean"
     },
     "Language" : {
       "type" : "object",
@@ -2722,7 +3198,7 @@
           "type" : "integer"
         },
         "intraBoothConfiguration" : {
-          "$ref" : "#/definitions/intraBoothConfiguration",
+          "$ref" : "#/definitions/IntraBoothConfiguration",
           "description" : "The interpretation mode configuration of desks between booths"
         },
         "interBoothInterpretationMode" : {
@@ -2747,18 +3223,6 @@
           "items" : {
             "$ref" : "#/definitions/InterpretationDeskConfiguration"
           }
-        }
-      }
-    },
-    "intraBoothConfiguration" : {
-      "type" : "object",
-      "properties" : {
-        "isMultipleChannelActivationAllowed" : {
-          "type" : "boolean"
-        },
-        "interpretationMode" : {
-          "enum" : [ "mixed", "override" ],
-          "type" : "string"
         }
       }
     },
@@ -2851,7 +3315,7 @@
           "type" : "integer"
         },
         "intraBoothConfiguration" : {
-          "$ref" : "#/definitions/intraBoothConfiguration"
+          "$ref" : "#/definitions/IntraBoothConfiguration"
         },
         "interBoothInterpretationMode" : {
           "enum" : [ "mixed", "override", "lock_A_Override_B" ],
@@ -2871,14 +3335,6 @@
           "items" : {
             "$ref" : "#/definitions/InterpretationDeskConfiguration"
           }
-        }
-      }
-    },
-    "ActiveConfigurationChanged" : {
-      "type" : "object",
-      "properties" : {
-        "configurationId" : {
-          "type" : "string"
         }
       }
     },
@@ -3073,6 +3529,392 @@
           }
         }
       }
+    },
+    "IntraBoothConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "isMultipleChannelActivationAllowed" : {
+          "type" : "boolean"
+        },
+        "interpretationMode" : {
+          "enum" : [ "mixed", "override" ],
+          "type" : "string"
+        }
+      }
+    },
+    "AudioRoutingConfigurationData" : {
+      "description" : "Audio routing configuration data",
+      "required" : [ "name" ],
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the audio routing configuration",
+          "type" : "string"
+        },
+        "description" : {
+          "description" : "Description of the audio routing configuration",
+          "type" : "string"
+        },
+        "inputGroups" : {
+          "description" : "Audio input groups",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioInputGroup"
+          }
+        },
+        "channels" : {
+          "description" : "Audio channels (including language channels)",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Channel"
+          }
+        },
+        "outputGroups" : {
+          "description" : "Audio output groups",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioOutputGroup"
+          }
+        },
+        "isLocked" : {
+          "description" : "True when configuration is locked for editing",
+          "type" : "boolean"
+        },
+        "isMultipleFloor" : {
+          "description" : "True when configuration has multiple floors",
+          "type" : "boolean"
+        }
+      }
+    },
+    "AudioInputGroup" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "type" : {
+          "enum" : [ "floor", "ambiance", "language", "user" ],
+          "type" : "string"
+        },
+        "inputs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioInput"
+          }
+        }
+      }
+    },
+    "Channel" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "inputNodes" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioRoutingNode"
+          }
+        },
+        "outputGroups" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "AudioOutputGroup" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "type" : {
+          "enum" : [ "floor", "language", "user" ],
+          "type" : "string"
+        },
+        "outputs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioOutput"
+          }
+        }
+      }
+    },
+    "AudioRoutingNode" : {
+      "type" : "object",
+      "properties" : {
+        "audioInputGroupName" : {
+          "type" : "string"
+        },
+        "state" : {
+          "enum" : [ "on", "off", "backup" ],
+          "type" : "string"
+        },
+        "mixValue" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "isLocked" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "AudioRoutingConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "inputGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioInputGroup"
+          }
+        },
+        "channels" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Channel"
+          }
+        },
+        "outputGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioOutputGroup"
+          }
+        },
+        "isPredefined" : {
+          "type" : "boolean"
+        },
+        "isLocked" : {
+          "type" : "boolean"
+        },
+        "isMultipleFloor" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "AudioInput" : {
+      "type" : "object",
+      "properties" : {
+        "nodeId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "inputType" : {
+          "enum" : [ "auxBalanced", "auxUnbalanced", "dante", "microphone", "sine" ],
+          "type" : "string"
+        },
+        "inputNumber" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "gain" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "AudioOutput" : {
+      "type" : "object",
+      "properties" : {
+        "nodeId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "outputType" : {
+          "enum" : [ "auxBalanced", "auxUnbalanced", "dante", "speaker" ],
+          "type" : "string"
+        },
+        "outputNumber" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "AudioRoutingConfigurationDescription" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "isPredefined" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "ChangeNodeStateModel" : {
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "enum" : [ "on", "off", "backup" ],
+          "type" : "string"
+        },
+        "mixValue" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "isLocked" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "ActiveAudioConfigurationChanged" : {
+      "type" : "object",
+      "properties" : {
+        "configurationId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AudioInputEntryLevelChanged" : {
+      "type" : "object",
+      "properties" : {
+        "auxInputNumber" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "level" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "AudioOutputEntryLevelChanged" : {
+      "type" : "object",
+      "properties" : {
+        "auxOutputNumber" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "level" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "ActiveInterpretationConfigurationChanged" : {
+      "type" : "object",
+      "properties" : {
+        "configurationId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AudioRoutingNodeStateChanged" : {
+      "type" : "object",
+      "properties" : {
+        "systemChannel" : {
+          "type" : "string"
+        },
+        "node" : {
+          "$ref" : "#/definitions/AudioRoutingNode"
+        }
+      }
+    },
+    "AutoGainReduction" : {
+      "title" : "Root Type for AutoGainReduction",
+      "description" : "The root of the AutoGainReduction type's schema.",
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "enum" : [ "off", "low", "medium", "high" ]
+        }
+      },
+      "example" : "{\n    \"value\": \"medium\"\n}"
+    },
+    "AuxLevel" : {
+      "title" : "Root Type for AuxLevel",
+      "description" : "The root of the AuxLevel type's schema.",
+      "type" : "object",
+      "properties" : {
+        "number" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "value" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      },
+      "example" : "{\n    \"number\": 1,\n    \"value\": 13\n}"
+    },
+    "AuxLevels" : {
+      "title" : "Root Type for AuxLevels",
+      "description" : "The root of the AuxLevels type's schema.",
+      "type" : "object",
+      "properties" : {
+        "inputs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AuxLevel"
+          }
+        },
+        "outputs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AuxLevel"
+          }
+        }
+      }
+    },
+    "AudioInputList" : {
+      "type" : "object",
+      "properties" : {
+        "inputs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioInput"
+          }
+        }
+      }
+    },
+    "AudioOutputList" : {
+      "type" : "object",
+      "properties" : {
+        "outputs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioOutput"
+          }
+        }
+      }
+    },
+    "AudioLanguageSettings" : {
+      "type" : "object",
+      "properties" : {
+        "maxLanguages" : {
+          "description" : "Maximum number of languages",
+          "type" : "integer"
+        }
+      }
+    },
+    "AudioRoutingConfigurationList" : {
+      "type" : "object",
+      "properties" : {
+        "configurations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioRoutingConfigurationDescription"
+          }
+        }
+      }
     }
   },
   "tags" : [ {
@@ -3081,5 +3923,11 @@
   }, {
     "name" : "Events",
     "description" : "Description about events module \n"
+  }, {
+    "name" : "AudioRouting",
+    "description" : "Description about audiorouting module"
+  }, {
+    "name" : "AudioRoutingConfigurations",
+    "description" : "Description about audiorouting configurations module"
   } ]
 }
