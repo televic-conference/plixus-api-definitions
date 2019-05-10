@@ -2518,6 +2518,177 @@
           }
         }
       }
+    },
+    "/api/v1/recording/state" : {
+      "get" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Get the current recording state",
+        "responses" : {
+          "200" : {
+            "description" : "The current recording state",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingState"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recording/start" : {
+      "post" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Start or resume recording",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/recording/pause" : {
+      "post" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Pause recording",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/recording/stop" : {
+      "post" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Stop recording",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/recording/settings" : {
+      "get" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Get the current recording settings",
+        "responses" : {
+          "200" : {
+            "description" : "Current recording settings",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingSettings"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Change the recording settings",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/recording/storage/{type}/files" : {
+      "get" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Get storage info",
+        "responses" : {
+          "200" : {
+            "description" : "Storage info",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingStorageInfo"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Remove a number of recorded files",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RecordingFilesInfo"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "type",
+        "in" : "path",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "internal", "external" ]
+      } ]
+    },
+    "/api/events/recording/recordingstatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Recording settings have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingSettingsChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/recording/recordingsettingschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Recording state has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/recording/recordingfailed" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Recording settings have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingFailed"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recording/storage/{type}" : {
+      "get" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Get storage files",
+        "responses" : {
+          "200" : {
+            "description" : "Storage info",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingStorageInfo"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "type",
+        "in" : "path",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "internal", "external" ]
+      } ]
     }
   },
   "definitions" : {
@@ -3096,10 +3267,6 @@
           "type" : "boolean"
         }
       }
-    },
-    "microphoneState" : {
-      "enum" : [ "on", "off", "mute" ],
-      "type" : "string"
     },
     "Language" : {
       "type" : "object",
@@ -3915,6 +4082,114 @@
           }
         }
       }
+    },
+    "RecordingState" : {
+      "title" : "Root Type for RecordingState",
+      "description" : "The root of the RecordingState type's schema.",
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "enum" : [ "idle", "active", "paused", "error" ]
+        }
+      },
+      "example" : "{\n    \"state\": \"active\"\n}"
+    },
+    "RecordingStorageInfo" : {
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "description" : "Reflects the state of the storage.",
+          "enum" : [ "free", "almostFull", "full", "invalid" ]
+        },
+        "fullSize" : {
+          "format" : "int64",
+          "description" : "The full capacity of the storage in kilobytes (0 if not connected)",
+          "type" : "integer"
+        },
+        "freeSize" : {
+          "format" : "int64",
+          "description" : "The remaining capacity of the storage in kilobytes (0 if not connected)",
+          "type" : "integer"
+        }
+      }
+    },
+    "RecordingFilesInfo" : {
+      "type" : "object",
+      "properties" : {
+        "files" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "RecordingStateChanged" : {
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "$ref" : "#/definitions/RecordingState"
+        }
+      }
+    },
+    "RecordingSettingsChanged" : {
+      "type" : "object",
+      "properties" : {
+        "settings" : {
+          "$ref" : "#/definitions/RecordingSettings"
+        }
+      }
+    },
+    "RecordingSettings" : {
+      "type" : "object",
+      "properties" : {
+        "storageType" : {
+          "description" : "The storage type on which the files are stored",
+          "enum" : [ "internal", "external" ]
+        },
+        "bitRate" : {
+          "description" : "The bit rate to be used for recording",
+          "enum" : [ "64", "128", "192", "256" ]
+        },
+        "autoDelete" : {
+          "description" : "Auto delete oldest files when no space left",
+          "type" : "boolean"
+        },
+        "autoSplit" : {
+          "description" : "Auto split recordings into separate files",
+          "type" : "boolean"
+        },
+        "autoSplitTime" : {
+          "description" : "Time (in seconds) after which an audio recording will be split into a new file",
+          "type" : "boolean"
+        },
+        "prefix" : {
+          "description" : "File name prefix",
+          "type" : "string"
+        },
+        "suffix" : {
+          "description" : "File name suffix",
+          "type" : "string"
+        },
+        "channels" : {
+          "description" : "Channels to be recorded (identified by system channel ID)",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "RecordingFailed" : {
+      "type" : "object",
+      "properties" : {
+        "errors" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
     }
   },
   "tags" : [ {
@@ -3929,5 +4204,8 @@
   }, {
     "name" : "AudioRoutingConfigurations",
     "description" : "Description about audiorouting configurations module"
+  }, {
+    "name" : "Recording",
+    "description" : "Description about recording module"
   } ]
 }
