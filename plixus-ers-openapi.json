@@ -15,6 +15,7 @@
     "/api/events/intercom/conversationrequested" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when an intercom conversation was requested",
         "responses" : {
           "200" : {
             "description" : "Metadata for Intercom request event",
@@ -28,6 +29,7 @@
     "/api/events/intercom/conversationaccepted" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when a seat has accepted an intercom request",
         "responses" : {
           "200" : {
             "description" : "Metadata for Intercom accept event",
@@ -41,6 +43,7 @@
     "/api/events/intercom/conversationended" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when an intercom conversation has ended",
         "responses" : {
           "200" : {
             "description" : "Metadata for Intercom end event",
@@ -54,6 +57,7 @@
     "/api/events/intercom/conversationcanceled" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when an intercom conversation was canceled",
         "responses" : {
           "200" : {
             "description" : "Metadata for Intercom end event",
@@ -67,6 +71,7 @@
     "/api/events/intercom/enabled" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when intercom capability was enabled for a seat",
         "responses" : {
           "200" : {
             "description" : "Metadata for Intercom enabled event",
@@ -80,6 +85,7 @@
     "/api/events/intercom/disabled" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the intercom capability was disabled for a seat",
         "responses" : {
           "200" : {
             "description" : "Metadata for Intercom enabled event",
@@ -784,6 +790,7 @@
     "/api/events/discussion/conferencesettingschanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the room conference settings have changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for ConferenceSettingsChanged event",
@@ -797,6 +804,7 @@
     "/api/events/discussion/defaultchannelselectorvolumeupdate" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the default channel selector volume has been updated",
         "responses" : {
           "200" : {
             "description" : "Metadata for DefaultChannelSelectorVolumeUpdate event",
@@ -810,6 +818,7 @@
     "/api/events/discussion/defaultconferencesettingschanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the room's default conference settings have changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for DefaultConferenceSettingsChanged event",
@@ -934,7 +943,7 @@
     "/api/v1/discussion/settings/default" : {
       "get" : {
         "tags" : [ "Discussion" ],
-        "summary" : "Get the default conference settings of the rooom",
+        "summary" : "Get the default conference settings of the room",
         "operationId" : "Discussion_GetDefaultRoomConferenceSettings",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -1044,6 +1053,7 @@
     "/api/events/discussion/seatdiscussionstatechanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the discussion state of a seat has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for SeatMicrophoneStateChanged event",
@@ -1105,6 +1115,7 @@
     "/api/events/discussion/speakerlistchanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the speaker list has changed",
         "responses" : {
           "200" : {
             "description" : "ordered list of seats which are currently speaking.",
@@ -1121,6 +1132,7 @@
     "/api/events/discussion/requestlistchanged/" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the request list has changed",
         "responses" : {
           "200" : {
             "description" : "ordered list of seats which are currently requesting to speak.",
@@ -1137,6 +1149,7 @@
     "/api/events/discussion/replylistchanged/" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the reply list has changed",
         "responses" : {
           "200" : {
             "description" : "ordered list of seats which are currently requesting to reply.",
@@ -1918,6 +1931,7 @@
     "/api/events/interpretation/autofloorstatechanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the auto floor state has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for AutoFloorStateChanged event",
@@ -1931,6 +1945,7 @@
     "/api/events/interpretation/channellistenersupdated" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the listeners to a language channel has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for ChannelListenersUpdated event",
@@ -1944,6 +1959,7 @@
     "/api/events/interpretation/activeconfigurationchanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the active interpretation configuration has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for ActiveConfigurationChanged event",
@@ -1957,6 +1973,7 @@
     "/api/events/interpretation/channelqualitychanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the quality of a language channel has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for ChannelQualityChanged event",
@@ -1970,6 +1987,7 @@
     "/api/events/interpretation/deskactiveoutputchannelchanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the active output channel of a desk has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for DeskActiveOutputChannelChanged event",
@@ -1983,6 +2001,7 @@
     "/api/events/interpretation/deskactiverelaychannelchanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the active relay channel of a desk has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for DeskActiveRelayChannelChanged event",
@@ -1996,6 +2015,7 @@
     "/api/events/interpretation/deskmicrophonestatechanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the microphone state of a desk has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for DeskMicrophoneStateChanged event",
@@ -2009,6 +2029,7 @@
     "/api/events/interpretation/deskslowdownended" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when a slowdown request has ended",
         "responses" : {
           "200" : {
             "description" : "Metadata for DeskSlowdownEnded event",
@@ -2022,6 +2043,7 @@
     "/api/events/interpretation/floornamechanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when a floor name change was made",
         "responses" : {
           "200" : {
             "description" : "Metadata for FloorNameChanged event",
@@ -2035,6 +2057,7 @@
     "/api/events/interpretation/deskslowdownrequested" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when a slowdown was requested",
         "responses" : {
           "200" : {
             "description" : "Metadata for DeskSlowndownRequested event",
@@ -2309,6 +2332,7 @@
     "/api/events/audiorouting/activeconfigurationchanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the active audio routing configuration has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for ActiveAudioConfigurationChanged event",
@@ -2322,6 +2346,7 @@
     "/api/events/audiorouting/audioinputentrylevelchanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when an aux audio input entry level has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for AudioInputEntryLevelChanged event",
@@ -2335,6 +2360,7 @@
     "/api/events/audiorouting/audiooutputentrylevelchanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when an aux audio output entry level has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for AudioOutputEntryLevelChanged event",
@@ -2348,6 +2374,7 @@
     "/api/events/audiorouting/audioroutingnodestatechanged" : {
       "get" : {
         "tags" : [ "Events" ],
+        "summary" : "Event when the state of an audio routing node has changed",
         "responses" : {
           "200" : {
             "description" : "Metadata for AudioRoutingNodesStateChanged event",
@@ -2630,7 +2657,7 @@
     "/api/events/recording/recordingstatechanged" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Recording settings have changed",
+        "summary" : "Event when recording state has changed",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -2644,7 +2671,7 @@
     "/api/events/recording/recordingsettingschanged" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Recording state has changed",
+        "summary" : "Event when recording settings have changed",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -2658,7 +2685,7 @@
     "/api/events/recording/recordingfailed" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Recording settings have changed",
+        "summary" : "Event when recording has failed",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -2689,6 +2716,44 @@
         "type" : "string",
         "enum" : [ "internal", "external" ]
       } ]
+    },
+    "/api/v1/messaging/seats" : {
+      "post" : {
+        "tags" : [ "Messaging" ],
+        "summary" : "Send a message to a number of seats",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/MessageToSeatsModel"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK\n"
+          }
+        }
+      }
+    },
+    "/api/v1/messaging/booth" : {
+      "post" : {
+        "tags" : [ "Messaging" ],
+        "summary" : "Send a message to a booth",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/MessageToBoothModel"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK\n"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -4190,6 +4255,55 @@
           }
         }
       }
+    },
+    "MessageToSeatsModel" : {
+      "title" : "Root Type for MessageToSeatsModel",
+      "description" : "Model for sending message to number of seats",
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "description" : "Content of the message that should be displayed",
+          "type" : "string"
+        },
+        "beep" : {
+          "description" : "True when audible beep should be played",
+          "type" : "boolean"
+        },
+        "seats" : {
+          "description" : "List of seat numbers where the message should be sent to",
+          "type" : "array",
+          "items" : { }
+        }
+      },
+      "example" : {
+        "message" : "some text",
+        "beep" : true,
+        "seats" : [ 1, 2, 3 ]
+      }
+    },
+    "MessageToBoothModel" : {
+      "title" : "Root Type for MessageToSeatsModel",
+      "description" : "Model for sending message to number of seats",
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "description" : "Content of the message that should be displayed",
+          "type" : "string"
+        },
+        "beep" : {
+          "description" : "True when audible beep should be played",
+          "type" : "boolean"
+        },
+        "booth" : {
+          "description" : "Number of booth where the message should be sent to",
+          "type" : "integer"
+        }
+      },
+      "example" : {
+        "message" : "This is an example message",
+        "beep" : true,
+        "booth" : 1
+      }
     }
   },
   "tags" : [ {
@@ -4197,7 +4311,10 @@
     "description" : "Description about notification module\n"
   }, {
     "name" : "Events",
-    "description" : "Description about events module \n"
+    "description" : "Description about events module\n"
+  }, {
+    "name" : "Discussion",
+    "description" : "Description about discussion module"
   }, {
     "name" : "AudioRouting",
     "description" : "Description about audiorouting module"
@@ -4205,7 +4322,31 @@
     "name" : "AudioRoutingConfigurations",
     "description" : "Description about audiorouting configurations module"
   }, {
+    "name" : "Video",
+    "description" : "Description about video module"
+  }, {
+    "name" : "VideoConfigurations",
+    "description" : "Description about video configurations module"
+  }, {
+    "name" : "Interpretation",
+    "description" : "Description about interpretation module"
+  }, {
+    "name" : "InterpretationConfigurations",
+    "description" : "Description about interpretation configurations module"
+  }, {
     "name" : "Recording",
     "description" : "Description about recording module"
+  }, {
+    "name" : "Messaging",
+    "description" : "Description about messaging module"
+  }, {
+    "name" : "Intercom",
+    "description" : "Description about intercom module"
+  }, {
+    "name" : "Buttons",
+    "description" : "Description about buttons module"
+  }, {
+    "name" : "Leds",
+    "description" : "Description about leds module"
   } ]
 }
