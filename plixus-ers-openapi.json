@@ -2563,7 +2563,7 @@
     "/api/v1/recording/start" : {
       "post" : {
         "tags" : [ "Recording" ],
-        "summary" : "Start or resume recording",
+        "summary" : "Start recording",
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -2736,21 +2736,236 @@
         }
       }
     },
-    "/api/v1/messaging/booth" : {
+    "/api/v1/meeting" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get info about the current meeting",
+        "responses" : {
+          "200" : {
+            "description" : "Meeting info",
+            "schema" : {
+              "$ref" : "#/definitions/Meeting"
+            }
+          }
+        }
+      },
       "post" : {
-        "tags" : [ "Messaging" ],
-        "summary" : "Send a message to a booth",
+        "tags" : [ "Meeting" ],
+        "summary" : "Schedule a meeting",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/MessageToBoothModel"
+            "$ref" : "#/definitions/ScheduleMeetingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Meeting info",
+            "schema" : {
+              "$ref" : "#/definitions/Meeting"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/prepare" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Prepare the meeting",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/start" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Start the meeting",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/pause" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Pause the meeting",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/resume" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Resume the meeting",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/end" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "End the meeting",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/recording/resume" : {
+      "post" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Resume recording",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/events/meeting/meetingstatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when state of the meeting has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/messaging/booths" : {
+      "post" : {
+        "tags" : [ "Messaging" ],
+        "summary" : "Send a message to a number of booths",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/MessageToBoothsModel"
           }
         } ],
         "responses" : {
           "204" : {
             "description" : "OK\n"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/delegates" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get list of delegates in the meeting",
+        "responses" : {
+          "200" : {
+            "description" : "List of meeting delegates",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingDelegateList"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Add some delegates in the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/MeetingDelegateList"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Change list of delegates in the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/MeetingDelegateList"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Clear delegates in the meeting",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/delegates/{seat}" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get delegate info for seat",
+        "responses" : {
+          "200" : {
+            "description" : "Delegate info",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingDelegate"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Remove delegate from the seat",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "Number of seat where delegate is seated",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/events/meeting/meetingdelegateschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when delegates participating in the meeting has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingDelegatesChanged"
+            }
           }
         }
       }
@@ -4281,7 +4496,79 @@
         "seats" : [ 1, 2, 3 ]
       }
     },
-    "MessageToBoothModel" : {
+    "Meeting" : {
+      "description" : "Details about current meeting",
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "description" : "The state of the meeting",
+          "enum" : [ "scheduled", "prepared", "running", "paused", "ended" ]
+        },
+        "delegates" : {
+          "description" : "Delegates participating in meeting",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingDelegate"
+          }
+        },
+        "startTime" : {
+          "format" : "date-time",
+          "description" : "Time when meeting has started",
+          "type" : "string"
+        },
+        "endTime" : {
+          "format" : "date-time",
+          "description" : "Time when meeting has ended",
+          "type" : "string"
+        },
+        "title" : {
+          "description" : "Title of the meeting",
+          "type" : "string"
+        }
+      }
+    },
+    "MeetingDelegate" : {
+      "title" : "Root Type for MeetingDelegate",
+      "description" : "Delegate participating in a meeting",
+      "type" : "object",
+      "properties" : {
+        "firstName" : {
+          "description" : "First name of the delegate",
+          "type" : "string"
+        },
+        "lastName" : {
+          "description" : "Last name of the delegate",
+          "type" : "string"
+        },
+        "seatNumber" : {
+          "format" : "int32",
+          "description" : "Number of seat where delegate is seated",
+          "type" : "integer"
+        }
+      },
+      "example" : "{\n    \"firstName\": \"Pieter\",\n    \"lastName\": \"Deparcq\",\n    \"seatNumber\": 3\n}"
+    },
+    "ScheduleMeetingRequest" : {
+      "title" : "Root Type for ScheduleMeetingRequest",
+      "description" : "Request for scheduling a meeting",
+      "type" : "object",
+      "properties" : {
+        "title" : {
+          "description" : "Title of the meeting",
+          "type" : "string"
+        }
+      },
+      "example" : "{\n    \"title\": \"Test meeting title\"\n}"
+    },
+    "MeetingStateChanged" : {
+      "type" : "object",
+      "properties" : {
+        "meeting" : {
+          "$ref" : "#/definitions/Meeting"
+        }
+      }
+    },
+    "MessageToBoothsModel" : {
       "title" : "Root Type for MessageToSeatsModel",
       "description" : "Model for sending message to number of seats",
       "type" : "object",
@@ -4294,15 +4581,38 @@
           "description" : "True when audible beep should be played",
           "type" : "boolean"
         },
-        "booth" : {
-          "description" : "Number of booth where the message should be sent to",
-          "type" : "integer"
+        "booths" : {
+          "description" : "List of booth numbers where the message should be sent to",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
         }
       },
       "example" : {
         "message" : "This is an example message",
         "beep" : true,
         "booth" : 1
+      }
+    },
+    "MeetingDelegateList" : {
+      "description" : "List of meeting delegates",
+      "type" : "object",
+      "properties" : {
+        "delegates" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingDelegate"
+          }
+        }
+      }
+    },
+    "MeetingDelegatesChanged" : {
+      "type" : "object",
+      "properties" : {
+        "delegates" : {
+          "$ref" : "#/definitions/MeetingDelegateList"
+        }
       }
     }
   },
@@ -4348,5 +4658,8 @@
   }, {
     "name" : "Leds",
     "description" : "Description about leds module"
+  }, {
+    "name" : "Meeting",
+    "description" : "Description about meeting module"
   } ]
 }
