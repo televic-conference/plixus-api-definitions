@@ -2969,6 +2969,243 @@
           }
         }
       }
+    },
+    "/api/v1/room/seats" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get all seats in the room",
+        "responses" : {
+          "200" : {
+            "description" : "Seats in the room",
+            "schema" : {
+              "$ref" : "#/definitions/SeatList"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get info about the room",
+        "responses" : {
+          "200" : {
+            "description" : "Room details",
+            "schema" : {
+              "$ref" : "#/definitions/Room"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/seats/{seat}/units" : {
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Move a unit to this seat",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SeatUnit"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "Number of seat",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/room/seats/{seat}/label" : {
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Rename a seat label",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RenameSeatRequest"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "Number of seat",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/room/seats/{seat}/role" : {
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Change the seat role",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ChangeSeatRoleRequest"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "Number of seat",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/events/room/seatadded" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when seat was added to the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatAdded"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/seatremoved" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when seat was added to the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatRemoved"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/seatunitschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when units on a seat have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatUnitsChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/seatlabelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when label of a seat has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatLabelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/seatrolechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when role of a seat has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatRoleChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/seatstatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when state of a seat has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/seats/{seat}/capabilities/{capability}/enabled" : {
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Enable a capability for this seat",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Room" ],
+        "summary" : "Disable a capability for this seat",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "Number of seat",
+        "required" : true,
+        "type" : "integer"
+      }, {
+        "name" : "capability",
+        "in" : "path",
+        "description" : "Name of the capability",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/events/room/seatcapabilitieschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when capabilities of a seat have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatCapabilitiesChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -4614,6 +4851,192 @@
           "$ref" : "#/definitions/MeetingDelegateList"
         }
       }
+    },
+    "Seat" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "Id of the seat",
+          "type" : "integer"
+        },
+        "label" : {
+          "description" : "Label of the seat",
+          "type" : "string"
+        },
+        "state" : {
+          "description" : "State of the seat",
+          "enum" : [ "normal", "broken" ]
+        },
+        "role" : {
+          "description" : "Role of the seat",
+          "enum" : [ "delegate", "vip", "chairman" ]
+        },
+        "units" : {
+          "description" : "Units located on the seat",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SeatUnit"
+          }
+        },
+        "capabilities" : {
+          "description" : "Capabilities of the seat",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SeatCapability"
+          }
+        }
+      }
+    },
+    "SeatUnit" : {
+      "description" : "Limited info about unit on seat",
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "Id of the unit",
+          "type" : "integer"
+        },
+        "serial" : {
+          "description" : "Serial number of the unit",
+          "type" : "string"
+        }
+      }
+    },
+    "SeatList" : {
+      "type" : "object",
+      "properties" : {
+        "seats" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Seat"
+          }
+        }
+      }
+    },
+    "Room" : {
+      "title" : "Root Type for Room",
+      "description" : "Details about the room",
+      "type" : "object",
+      "properties" : {
+        "ip" : {
+          "description" : "IP address of the room",
+          "type" : "string"
+        },
+        "mac" : {
+          "description" : "Mac address of the CU",
+          "type" : "string"
+        },
+        "state" : {
+          "description" : "State of the room",
+          "enum" : [ "meeting", "init", "test" ]
+        },
+        "numberOfSeats" : {
+          "description" : "Number of seats in the room",
+          "type" : "integer"
+        }
+      },
+      "example" : {
+        "ip" : "192.168.0.100",
+        "mac" : "00:0E:3D:10:A0:93",
+        "state" : "meeting",
+        "numberOfSeats" : 50
+      }
+    },
+    "RenameSeatRequest" : {
+      "type" : "object",
+      "properties" : {
+        "label" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ChangeSeatRoleRequest" : {
+      "type" : "object",
+      "properties" : {
+        "role" : {
+          "enum" : [ "delegate", "vip", "chairman" ]
+        }
+      }
+    },
+    "SeatAdded" : {
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "$ref" : "#/definitions/Seat"
+        }
+      }
+    },
+    "SeatRemoved" : {
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "SeatUnitsChanged" : {
+      "description" : "Units of a seat have changed",
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "$ref" : "#/definitions/Seat",
+          "description" : "Seat that has changed"
+        }
+      }
+    },
+    "SeatLabelChanged" : {
+      "description" : "Label of a seat has changed",
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "$ref" : "#/definitions/Seat",
+          "description" : "Seat that has changed"
+        }
+      }
+    },
+    "SeatRoleChanged" : {
+      "description" : "Role of a seat has changed",
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "$ref" : "#/definitions/Seat",
+          "description" : "Seat that has changed"
+        }
+      }
+    },
+    "SeatStateChanged" : {
+      "description" : "State of a seat has changed",
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "$ref" : "#/definitions/Seat",
+          "description" : "Seat that has changed"
+        }
+      }
+    },
+    "SeatCapability" : {
+      "title" : "Root Type for SeatCapability",
+      "description" : "The root of the SeatCapability type's schema.",
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the capability",
+          "type" : "string"
+        },
+        "enabled" : {
+          "description" : "True when capability is enabled",
+          "type" : "boolean"
+        }
+      },
+      "example" : "{\n    \"name\": \"discussion\",\n    \"enabled\": true\n}"
+    },
+    "SeatCapabilitiesChanged" : {
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "$ref" : "#/definitions/Seat",
+          "description" : "Seat that has changed"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -4661,5 +5084,8 @@
   }, {
     "name" : "Meeting",
     "description" : "Description about meeting module"
+  }, {
+    "name" : "Room",
+    "description" : "Description about the room module"
   } ]
 }
