@@ -2973,12 +2973,12 @@
     "/api/v1/room/seats" : {
       "get" : {
         "tags" : [ "Room" ],
-        "summary" : "Get all seats in the room",
+        "summary" : "Get all booths in the room",
         "responses" : {
           "200" : {
             "description" : "Seats in the room",
             "schema" : {
-              "$ref" : "#/definitions/SeatList"
+              "$ref" : "#/definitions/BoothList"
             }
           }
         }
@@ -3202,6 +3202,110 @@
             "description" : "OK",
             "schema" : {
               "$ref" : "#/definitions/SeatCapabilitiesChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/booths" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get all seats in the room",
+        "responses" : {
+          "200" : {
+            "description" : "Seats in the room",
+            "schema" : {
+              "$ref" : "#/definitions/SeatList"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/booths/{booth}/desks" : {
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Create a desk for booth",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CreateDeskForBoothRequest"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "booth",
+        "in" : "path",
+        "description" : "Number of the booth",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/room/booths/{booth}/desks/{desk}" : {
+      "delete" : {
+        "tags" : [ "Room" ],
+        "summary" : "Remove a desk from the booth",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "booth",
+        "in" : "path",
+        "required" : true,
+        "type" : "integer"
+      }, {
+        "name" : "desk",
+        "in" : "path",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/events/room/boothadded" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when booth was added to the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/BoothAdded"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/boothchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when booth has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/BoothChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/boothremoved" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when booth was removed from room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/BoothRemoved"
             }
           }
         }
@@ -5035,6 +5139,87 @@
         "seat" : {
           "$ref" : "#/definitions/Seat",
           "description" : "Seat that has changed"
+        }
+      }
+    },
+    "Desk" : {
+      "title" : "Root Type for Desk",
+      "description" : "The root of the Desk type's schema.",
+      "type" : "object",
+      "properties" : {
+        "number" : {
+          "description" : "Number of the desk",
+          "type" : "integer"
+        },
+        "seat" : {
+          "description" : "Seat that is located on desk",
+          "type" : "integer"
+        }
+      },
+      "example" : {
+        "number" : 1,
+        "seat" : 3
+      }
+    },
+    "Booth" : {
+      "description" : "Booth where translation is done by interpreters for certain language",
+      "type" : "object",
+      "properties" : {
+        "desks" : {
+          "description" : "Desks that are part of the booth",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Desk"
+          }
+        },
+        "number" : {
+          "description" : "Unique number of booth",
+          "type" : "integer"
+        }
+      }
+    },
+    "BoothList" : {
+      "description" : "List of booths",
+      "type" : "object",
+      "properties" : {
+        "booths" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Booth"
+          }
+        }
+      }
+    },
+    "CreateDeskForBoothRequest" : {
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "description" : "Number of the seat to place at the desk",
+          "type" : "integer"
+        }
+      }
+    },
+    "BoothAdded" : {
+      "type" : "object",
+      "properties" : {
+        "booth" : {
+          "$ref" : "#/definitions/Booth"
+        }
+      }
+    },
+    "BoothRemoved" : {
+      "type" : "object",
+      "properties" : {
+        "booth" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "BoothChanged" : {
+      "type" : "object",
+      "properties" : {
+        "booth" : {
+          "$ref" : "#/definitions/Booth"
         }
       }
     }
