@@ -2068,47 +2068,6 @@
         }
       }
     },
-    "/api/v1/audiorouting/nodes/{group}/{channel}" : {
-      "put" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Change the state of a node in the active audio routing matrix",
-        "operationId" : "AudioRouting_SetAudioRoutingInputNodeState",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "group",
-          "in" : "path",
-          "description" : "Name of the audio routing group",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "channel",
-          "in" : "path",
-          "description" : "Name of the audio routing channel",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "model",
-          "in" : "body",
-          "description" : "Data to modify",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/ChangeNodeStateModel"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          },
-          "405" : {
-            "description" : "Invalid license"
-          }
-        }
-      }
-    },
     "/api/v1/audioroutingconfigurations" : {
       "get" : {
         "tags" : [ "AudioRoutingConfigurations" ],
@@ -2231,33 +2190,6 @@
         "responses" : {
           "204" : {
             "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      }
-    },
-    "/api/v1/audioroutingconfigurations/empty/{name}" : {
-      "post" : {
-        "tags" : [ "AudioRoutingConfigurations" ],
-        "summary" : "Create an empty audio routing configuration for the room",
-        "operationId" : "AudioRoutingConfigurations_CreateEmptyAudioRoutingConfiguration",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "description" : "Name of the audio configuration to create",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioRoutingConfiguration"
-            }
           },
           "400" : {
             "description" : "An invalid or missing input parameter will result in a bad request"
@@ -3395,6 +3327,74 @@
         "responses" : {
           "204" : {
             "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/voting/sessions" : {
+      "get" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Get list of voting sessions in current meeting",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VotingSessionList"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Schedule a voting session",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VotingSession"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/voting/sessions/{id}" : {
+      "get" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Get voting session details"
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "Id of the voting session",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/audiorouting/nodes" : {
+      "put" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Change the state of a node in the active audio routing matrix",
+        "operationId" : "AudioRouting_SetAudioRoutingInputNodeState",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "model",
+          "in" : "body",
+          "description" : "Data to modify",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ChangeNodeStateModel"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
           }
         }
       }
@@ -4648,6 +4648,14 @@
         },
         "isLocked" : {
           "type" : "boolean"
+        },
+        "group" : {
+          "description" : "Input group of the node",
+          "type" : "string"
+        },
+        "channel" : {
+          "description" : "Channel of the node",
+          "type" : "string"
         }
       }
     },
@@ -4916,7 +4924,9 @@
         "seats" : {
           "description" : "List of seat numbers where the message should be sent to",
           "type" : "array",
-          "items" : { }
+          "items" : {
+            "type" : "integer"
+          }
         }
       },
       "example" : {
@@ -5432,6 +5442,154 @@
           }
         }
       }
+    },
+    "VotingSession" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "Unique identifier of the voting session",
+          "type" : "string"
+        },
+        "state" : {
+          "description" : "State of the voting session",
+          "enum" : [ "scheduled", "running", "paused", "ended" ]
+        },
+        "startTime" : {
+          "format" : "date-time",
+          "description" : "Start date and time of the voting session",
+          "type" : "string"
+        },
+        "endTime" : {
+          "format" : "date-time",
+          "description" : "End date and time of the voting session",
+          "type" : "string"
+        },
+        "votes" : {
+          "description" : "Votes that were cast during voting session",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Vote"
+          }
+        },
+        "options" : {
+          "description" : "Voting options that are available during voting session",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VotingOption"
+          }
+        },
+        "title" : {
+          "description" : "Title of the voting session",
+          "type" : "string"
+        }
+      }
+    },
+    "Vote" : {
+      "description" : "Vate cast during a voting session",
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "description" : "Seat that has casted the vote",
+          "type" : "integer"
+        },
+        "votingOption" : {
+          "description" : "Voting option that was selected",
+          "type" : "integer"
+        }
+      }
+    },
+    "VotingResults" : {
+      "description" : "Results of a voting session",
+      "type" : "object",
+      "properties" : {
+        "voted" : {
+          "description" : "Number of votes cast",
+          "type" : "integer"
+        },
+        "notVoted" : {
+          "description" : "Number of participants that did not vote",
+          "type" : "integer"
+        },
+        "total" : {
+          "description" : "Total number of participants",
+          "type" : "integer"
+        },
+        "optionResults" : {
+          "description" : "Results for each voting option",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VotingOptionResult"
+          }
+        }
+      }
+    },
+    "VotingOptionResult" : {
+      "title" : "Root Type for VotingOptionResult",
+      "description" : "Result for a specific voting option",
+      "type" : "object",
+      "properties" : {
+        "option" : {
+          "format" : "int32",
+          "description" : "Number of voting option",
+          "type" : "integer"
+        },
+        "result" : {
+          "format" : "int32",
+          "description" : "Number of votes for this option",
+          "type" : "integer"
+        }
+      },
+      "example" : "{\n    \"option\": 1,\n    \"result\": 10\n}"
+    },
+    "VotingOption" : {
+      "description" : "Voting option that can be voted for",
+      "type" : "object",
+      "properties" : {
+        "number" : {
+          "description" : "Number of the voting option",
+          "type" : "integer"
+        },
+        "description" : {
+          "description" : "Description of the voting option",
+          "type" : "string"
+        },
+        "color" : {
+          "description" : "Color of the voting option (hex value)",
+          "type" : "string"
+        },
+        "abstain" : {
+          "description" : "True when this counts as abstain vote",
+          "type" : "boolean"
+        }
+      }
+    },
+    "VotingSessionList" : {
+      "description" : "List of voting sessions",
+      "type" : "object",
+      "properties" : {
+        "sessions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VotingSession"
+          }
+        }
+      }
+    },
+    "ScheduleVotingSessionRequest" : {
+      "description" : "Request for scheduling voting session",
+      "type" : "object",
+      "properties" : {
+        "title" : {
+          "description" : "Title of the voting session"
+        },
+        "options" : {
+          "description" : "Voting options available for voting session",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VotingOption"
+          }
+        }
+      }
     }
   },
   "tags" : [ {
@@ -5485,5 +5643,8 @@
   }, {
     "name" : "Resources",
     "description" : "Description about resources module"
+  }, {
+    "name" : "Voting",
+    "description" : "Description about voting module"
   } ]
 }
