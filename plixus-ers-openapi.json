@@ -3347,6 +3347,14 @@
       "post" : {
         "tags" : [ "Voting" ],
         "summary" : "Schedule a voting session",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ScheduleVotingSessionRequest"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -3360,7 +3368,15 @@
     "/api/v1/voting/sessions/{id}" : {
       "get" : {
         "tags" : [ "Voting" ],
-        "summary" : "Get voting session details"
+        "summary" : "Get voting session details",
+        "responses" : {
+          "200" : {
+            "description" : "Details about voting session",
+            "schema" : {
+              "$ref" : "#/definitions/VotingSession"
+            }
+          }
+        }
       },
       "parameters" : [ {
         "name" : "id",
@@ -3395,6 +3411,103 @@
           },
           "405" : {
             "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/voting/sessions/{id}/start" : {
+      "post" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Start the voting session",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/voting/sessions/{id}/stop" : {
+      "post" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Stop the voting session",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/voting/sessions/{id}/pause" : {
+      "post" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Pause the voting session",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/voting/sessions/{id}/resume" : {
+      "post" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Resume the voting session",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/voting/sessions/{id}/reschedule" : {
+      "post" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Reschedule the voting session",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/voting/sessions/{id}/results" : {
+      "get" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Get the results of a voting session",
+        "responses" : {
+          "200" : {
+            "description" : "Results of voting session",
+            "schema" : {
+              "$ref" : "#/definitions/VotingResults"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/voting/votingsessionstatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when state of voting session has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VotingSessionStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/voting/votingparticipantvoted" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when participant of voting session has voted",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VotingParticipantVoted"
+            }
           }
         }
       }
@@ -4737,7 +4850,10 @@
           "type" : "integer"
         }
       },
-      "example" : "{\n    \"number\": 1,\n    \"value\": 13\n}"
+      "example" : {
+        "number" : 3,
+        "value" : 43
+      }
     },
     "AuxLevels" : {
       "title" : "Root Type for AuxLevels",
@@ -5588,6 +5704,22 @@
           "items" : {
             "$ref" : "#/definitions/VotingOption"
           }
+        }
+      }
+    },
+    "VotingSessionStateChanged" : {
+      "type" : "object",
+      "properties" : {
+        "session" : {
+          "$ref" : "#/definitions/VotingSession"
+        }
+      }
+    },
+    "VotingParticipantVoted" : {
+      "type" : "object",
+      "properties" : {
+        "session" : {
+          "$ref" : "#/definitions/VotingSession"
         }
       }
     }
