@@ -2068,46 +2068,6 @@
         }
       }
     },
-    "/api/v1/audiorouting/inputs" : {
-      "get" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Get a list of available audio inputs in the room",
-        "operationId" : "AudioRouting_GetAvailableAudioInputs",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioInputList"
-            }
-          },
-          "405" : {
-            "description" : "Invalid license"
-          }
-        }
-      }
-    },
-    "/api/v1/audiorouting/outputs" : {
-      "get" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Get a list of available audio outputs in the room",
-        "operationId" : "AudioRouting_GetAvailableAudioOutputs",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioOutputList"
-            }
-          },
-          "405" : {
-            "description" : "Invalid license"
-          }
-        }
-      }
-    },
     "/api/v1/audiorouting/nodes/{group}/{channel}" : {
       "put" : {
         "tags" : [ "AudioRouting" ],
@@ -2511,7 +2471,7 @@
     "/api/v1/audiorouting/activeconfiguration" : {
       "get" : {
         "tags" : [ "AudioRouting" ],
-        "summary" : "Get id of the active configuration",
+        "summary" : "Get the active configuration data",
         "operationId" : "AudioRouting_GetActiveConfiguration",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -3307,6 +3267,134 @@
             "schema" : {
               "$ref" : "#/definitions/BoothRemoved"
             }
+          }
+        }
+      }
+    },
+    "/api/v2/resources" : {
+      "get" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Get a list of all resources",
+        "operationId" : "Resources_GetAllResources",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ResourceInfo"
+              }
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Upload a resource",
+        "operationId" : "Resources_UploadResource",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "Resource",
+          "in" : "formData",
+          "description" : "Upload a resource",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v2/resources/{id}" : {
+      "get" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Get a resource by id",
+        "operationId" : "Resources_GetResource",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of resource that was generated when uploading",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Delete a resource",
+        "operationId" : "Resources_DeleteResource",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of resource to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/room/layout" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get the room layout",
+        "responses" : {
+          "200" : {
+            "description" : "Details about room layout",
+            "schema" : {
+              "$ref" : "#/definitions/RoomLayout"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Change the room layout",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RoomLayout"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
           }
         }
       }
@@ -5222,6 +5310,128 @@
           "$ref" : "#/definitions/Booth"
         }
       }
+    },
+    "ResourceInfo" : {
+      "description" : "Info about a resource",
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "Id of the resource",
+          "type" : "string"
+        },
+        "filename" : {
+          "description" : "File name of the resource",
+          "type" : "string"
+        },
+        "mimeType" : {
+          "description" : "Mime type of the resource",
+          "type" : "string"
+        },
+        "length" : {
+          "format" : "int64",
+          "description" : "Size of the resource file in bytes",
+          "type" : "integer"
+        },
+        "uploadDate" : {
+          "format" : "date-time",
+          "description" : "Date when file was uploaded",
+          "type" : "string"
+        }
+      }
+    },
+    "RoomLayoutNode" : {
+      "title" : "Root Type for RoomLayoutNode",
+      "description" : "Node in room layout that gives position (x, y) to a seat in the room",
+      "type" : "object",
+      "properties" : {
+        "x" : {
+          "format" : "int32",
+          "description" : "X coordinate in number of pixels of node",
+          "type" : "integer"
+        },
+        "y" : {
+          "format" : "int32",
+          "description" : "Y coordinate in number of pixels of node",
+          "type" : "integer"
+        },
+        "width" : {
+          "format" : "int32",
+          "description" : "Width in pixels of the node",
+          "type" : "integer"
+        },
+        "height" : {
+          "format" : "int32",
+          "description" : "Height in pixels of the node",
+          "type" : "integer"
+        },
+        "seat" : {
+          "format" : "int32",
+          "description" : "Number of the seat that the node is referencing",
+          "type" : "integer"
+        }
+      },
+      "example" : "{\r\n  \"x\": 0,\r\n  \"y\": 0,\r\n  \"width\": 0,\r\n  \"height\": 0,\r\n  \"seat\": 0\r\n}"
+    },
+    "RoomLayoutBackground" : {
+      "title" : "Root Type for RoomLayoutBackground",
+      "description" : "The root of the RoomLayoutBackground type's schema.",
+      "type" : "object",
+      "properties" : {
+        "resourceId" : {
+          "description" : "Id of resource that contains the background image",
+          "type" : "string"
+        },
+        "width" : {
+          "format" : "int32",
+          "description" : "Width in pixels of the background image",
+          "type" : "integer"
+        },
+        "height" : {
+          "format" : "int32",
+          "description" : "Height in pixels of the background image",
+          "type" : "integer"
+        },
+        "horizontalOffset" : {
+          "format" : "int32",
+          "description" : "Horizontal offset of background image",
+          "type" : "integer"
+        },
+        "verticalOffset" : {
+          "format" : "int32",
+          "description" : "Vertical offset of background image",
+          "type" : "integer"
+        },
+        "color" : {
+          "description" : "Color of background (hex value)",
+          "type" : "string"
+        }
+      },
+      "example" : "{\n    \"resourceId\": \"string\",\n    \"width\": 0,\n    \"height\": 0,\n    \"horizontalOffset\": 0,\n    \"verticalOffset\": 0\n}"
+    },
+    "RoomLayout" : {
+      "description" : "Layout of the room",
+      "type" : "object",
+      "properties" : {
+        "width" : {
+          "description" : "Width in pixels of the room layout",
+          "type" : "integer"
+        },
+        "height" : {
+          "description" : "Height in pixels of the room layout",
+          "type" : "integer"
+        },
+        "background" : {
+          "$ref" : "#/definitions/RoomLayoutBackground",
+          "description" : "Background of room layout"
+        },
+        "nodes" : {
+          "description" : "Nodes in the room that give a position to seats",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/RoomLayoutNode"
+          }
+        }
+      }
     }
   },
   "tags" : [ {
@@ -5272,5 +5482,8 @@
   }, {
     "name" : "Room",
     "description" : "Description about the room module"
+  }, {
+    "name" : "Resources",
+    "description" : "Description about resources module"
   } ]
 }
