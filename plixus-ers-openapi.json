@@ -801,20 +801,6 @@
         }
       }
     },
-    "/api/events/discussion/defaultchannelselectorvolumeupdate" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when the default channel selector volume has been updated",
-        "responses" : {
-          "200" : {
-            "description" : "Metadata for DefaultChannelSelectorVolumeUpdate event",
-            "schema" : {
-              "$ref" : "#/definitions/DefaultChannelSelectorVolumeUpdate"
-            }
-          }
-        }
-      }
-    },
     "/api/events/discussion/defaultconferencesettingschanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -825,59 +811,6 @@
             "schema" : {
               "$ref" : "#/definitions/DefaultConferenceSettingsChanged"
             }
-          }
-        }
-      }
-    },
-    "/api/v1/discussion/channelselectors/volume/default/{gain}" : {
-      "put" : {
-        "tags" : [ "Discussion" ],
-        "summary" : "Change the default channel selector volume for the room",
-        "operationId" : "Discussion_ChangeDefaultChannelSelectorVolume",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "gain",
-          "in" : "path",
-          "description" : "gain specified in tenths of decibel",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          }
-        }
-      }
-    },
-    "/api/v1/discussion/channelselectors/volume/default" : {
-      "get" : {
-        "tags" : [ "Discussion" ],
-        "summary" : "Get the default channel selector volume for the room",
-        "operationId" : "Discussion_GetDefaultChannelSelectorVolume",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/DefaultChannelSelectorVolumeInfo"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/discussion/channelselectors/volume/default/apply" : {
-      "post" : {
-        "tags" : [ "Discussion" ],
-        "summary" : "Apply the default channel selector volume to the room",
-        "operationId" : "Discussion_ApplyDefaultChannelSelectorVolume",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
           }
         }
       }
@@ -2235,34 +2168,6 @@
         }
       }
     },
-    "/api/events/audiorouting/audioinputentrylevelchanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when an aux audio input entry level has changed",
-        "responses" : {
-          "200" : {
-            "description" : "Metadata for AudioInputEntryLevelChanged event",
-            "schema" : {
-              "$ref" : "#/definitions/AudioInputEntryLevelChanged"
-            }
-          }
-        }
-      }
-    },
-    "/api/events/audiorouting/audiooutputentrylevelchanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when an aux audio output entry level has changed",
-        "responses" : {
-          "200" : {
-            "description" : "Metadata for AudioOutputEntryLevelChanged event",
-            "schema" : {
-              "$ref" : "#/definitions/AudioOutputEntryLevelChanged"
-            }
-          }
-        }
-      }
-    },
     "/api/events/audiorouting/audioroutingnodestatechanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -2273,129 +2178,6 @@
             "schema" : {
               "$ref" : "#/definitions/AudioRoutingNodeStateChanged"
             }
-          }
-        }
-      }
-    },
-    "/api/v1/audiorouting/auxlevels" : {
-      "get" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Get the aux input and output levels in the room",
-        "responses" : {
-          "200" : {
-            "description" : "Aux input and output entry levels",
-            "schema" : {
-              "$ref" : "#/definitions/AuxLevels"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Modify the aux input and/or output levels",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/AuxLevels"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/audiorouting/settings/language" : {
-      "get" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Get the maximum number of language channels that can be used in the room",
-        "operationId" : "AudioRouting_GetMaximumNumberOfLanguageChannels",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioLanguageSettings"
-            }
-          },
-          "405" : {
-            "description" : "Invalid license"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Change the maximum number of language channels that can be used in the room",
-        "operationId" : "AudioRouting_SetMaximumNumberOfLanguageChannels",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/AudioLanguageSettings"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          },
-          "405" : {
-            "description" : "Invalid license"
-          }
-        }
-      }
-    },
-    "/api/v1/audiorouting/settings/autogainreduction" : {
-      "get" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Get the current value of auto gain reduction for the room",
-        "operationId" : "AudioRouting_GetAutoGainReduction",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AutoGainReduction"
-            }
-          },
-          "405" : {
-            "description" : "Invalid license"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "AudioRouting" ],
-        "summary" : "Change the value of auto gain reduction for the room",
-        "operationId" : "AudioRouting_SetAutoGainReduction",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/AutoGainReduction"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          },
-          "405" : {
-            "description" : "Invalid license"
           }
         }
       }
@@ -3511,6 +3293,318 @@
           }
         }
       }
+    },
+    "/api/v1/audio/auxlevels" : {
+      "get" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Get the aux input and output levels in the room",
+        "responses" : {
+          "200" : {
+            "description" : "Aux input and output entry levels",
+            "schema" : {
+              "$ref" : "#/definitions/AuxLevels"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Modify the aux input and/or output levels",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AuxLevels"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audio/autogainreduction" : {
+      "get" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Get the current value of auto gain reduction for the room",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AutoGainReduction"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Change the value of auto gain reduction for the room",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AutoGainReduction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/audiorouting/languagesettings" : {
+      "get" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Get the language settings for audio routing",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioLanguageSettings"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Change the language settings for audio routing",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioLanguageSettings"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/audio/defaultchannelselectorvolume" : {
+      "get" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Get the default channel selector volume for the room",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultChannelSelectorVolume"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Change the default channel selector volume",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DefaultChannelSelectorVolume"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audio/defaultchannelselectorvolume/apply" : {
+      "post" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Apply the default channel selector volume to the room",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/audio/loudspeakervolume" : {
+      "get" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Get the loudspeaker volume for the room",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/LoudspeakerVolume"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Change the loudspeaker volume",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LoudspeakerVolume"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/events/audio/audioinputentrylevelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when an aux audio input entry level has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for AudioInputEntryLevelChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/AudioInputEntryLevelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audio/audiooutputentrylevelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when an aux audio output entry level has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for AudioOutputEntryLevelChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/AudioOutputEntryLevelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audio/defaultchannelselectorvolumechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the default channel selector volume has been updated",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DefaultChannelSelectorVolumeUpdate event",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultChannelSelectorVolumeChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audio/loudspeakervolumechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when loudspeaker volume in the room has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/LoudspeakerVolumeChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audio/dsp" : {
+      "get" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Get the active dsp configuration for the room",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessor"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Change the active dsp configuration for the room",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioDynamicsProcessor"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/events/audio/audiodynamicsprocessorchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when audio dynamics processor has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessorChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -3527,23 +3621,6 @@
       "properties" : {
         "settings" : {
           "$ref" : "#/definitions/RoomConferenceSettings"
-        }
-      }
-    },
-    "DefaultChannelSelectorVolumeUpdate" : {
-      "type" : "object",
-      "properties" : {
-        "defaultChannelSelectorVolumeInfo" : {
-          "$ref" : "#/definitions/DefaultChannelSelectorVolumeInfo"
-        }
-      }
-    },
-    "DefaultChannelSelectorVolumeInfo" : {
-      "type" : "object",
-      "properties" : {
-        "gain" : {
-          "format" : "int32",
-          "type" : "integer"
         }
       }
     },
@@ -5722,6 +5799,100 @@
           "$ref" : "#/definitions/VotingSession"
         }
       }
+    },
+    "LoudspeakerVolume" : {
+      "type" : "object",
+      "properties" : {
+        "gain" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "DefaultChannelSelectorVolumeChanged" : {
+      "type" : "object",
+      "properties" : {
+        "defaultChannelSelectorVolumeInfo" : {
+          "$ref" : "#/definitions/DefaultChannelSelectorVolume"
+        }
+      }
+    },
+    "DefaultChannelSelectorVolume" : {
+      "type" : "object",
+      "properties" : {
+        "gain" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "LoudspeakerVolumeChanged" : {
+      "type" : "object",
+      "properties" : {
+        "gain" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "AudioDynamicsProcessor" : {
+      "type" : "object",
+      "properties" : {
+        "compressorThreshold" : {
+          "description" : "compressor threshold [unit 0.1dBFS]",
+          "type" : "integer"
+        },
+        "compressorRatio" : {
+          "description" : "compressor ratio [unit 0.01]",
+          "type" : "integer"
+        },
+        "compressorAttackTime" : {
+          "description" : "compressor attack time [unit µs]",
+          "type" : "integer"
+        },
+        "compressorReleaseTime" : {
+          "description" : "compressor release time [unit µs]",
+          "type" : "integer"
+        },
+        "limiterTreshold" : {
+          "description" : "limiter threshold [unit 0.1 dBFS]",
+          "type" : "integer"
+        },
+        "limiterAttackTime" : {
+          "description" : "limiter attack time [unit µs]",
+          "type" : "integer"
+        },
+        "limiterReleaseTime" : {
+          "description" : "limiter release time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateThreshold" : {
+          "description" : "noise gate threshold [unit 0.1 dBFS]",
+          "type" : "integer"
+        },
+        "noiseGateMinimumGain" : {
+          "description" : "noise gate minimum gain [unit 0.1 dB]",
+          "type" : "integer"
+        },
+        "noiseGateAttackTime" : {
+          "description" : "noise gate attack time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateHoldTime" : {
+          "description" : "noise gate hold time [unit µs]",
+          "type" : "integer"
+        },
+        "makeUpGain" : {
+          "description" : "make up gain [unit 0.1 dB]",
+          "type" : "integer"
+        }
+      }
+    },
+    "AudioDynamicsProcessorChanged" : {
+      "type" : "object",
+      "properties" : {
+        "processor" : {
+          "$ref" : "#/definitions/AudioDynamicsProcessor"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -5731,8 +5902,17 @@
     "name" : "Events",
     "description" : "Description about events module\n"
   }, {
+    "name" : "Resources",
+    "description" : "Description about resources module"
+  }, {
+    "name" : "Room",
+    "description" : "Description about the room module"
+  }, {
     "name" : "Discussion",
     "description" : "Description about discussion module"
+  }, {
+    "name" : "Audio",
+    "description" : "Description about audio module"
   }, {
     "name" : "AudioRouting",
     "description" : "Description about audiorouting module"
@@ -5769,12 +5949,6 @@
   }, {
     "name" : "Meeting",
     "description" : "Description about meeting module"
-  }, {
-    "name" : "Room",
-    "description" : "Description about the room module"
-  }, {
-    "name" : "Resources",
-    "description" : "Description about resources module"
   }, {
     "name" : "Voting",
     "description" : "Description about voting module"
