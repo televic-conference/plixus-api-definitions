@@ -3712,7 +3712,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/DateTime"
+              "$ref" : "#/definitions/RoomDateTime"
             }
           }
         }
@@ -3725,7 +3725,7 @@
           "in" : "body",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/DateTime"
+            "$ref" : "#/definitions/RoomDateTime"
           }
         } ],
         "responses" : {
@@ -6132,20 +6132,11 @@
         }
       }
     },
-    "DateTime" : {
-      "type" : "object",
-      "properties" : {
-        "value" : {
-          "format" : "date-time",
-          "type" : "string"
-        }
-      }
-    },
     "RoomDateTimeChanged" : {
       "type" : "object",
       "properties" : {
         "dateTime" : {
-          "$ref" : "#/definitions/DateTime"
+          "$ref" : "#/definitions/RoomDateTime"
         }
       }
     },
@@ -6196,6 +6187,15 @@
       "properties" : {
         "reduction" : {
           "$ref" : "#/definitions/AutoGainReduction"
+        }
+      }
+    },
+    "RoomDateTime" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "format" : "date-time",
+          "type" : "string"
         }
       }
     }
