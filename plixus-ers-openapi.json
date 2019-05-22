@@ -2207,6 +2207,14 @@
         "operationId" : "AudioRouting_SaveActiveConfiguration",
         "consumes" : [ ],
         "produces" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioRoutingConfigurationData"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "No Content"
@@ -3601,6 +3609,200 @@
             "description" : "OK",
             "schema" : {
               "$ref" : "#/definitions/AudioDynamicsProcessorChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/regionalsettings/timeformat" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get the current time format for the room",
+        "responses" : {
+          "200" : {
+            "description" : "Time format",
+            "schema" : {
+              "$ref" : "#/definitions/TimeFormat"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Change the time format for the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TimeFormat"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/regionalsettings/dateformat" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get the current date format for the room",
+        "responses" : {
+          "200" : {
+            "description" : "Date format",
+            "schema" : {
+              "$ref" : "#/definitions/DateFormat"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Change the date format for the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DateFormat"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/events/room/timeformatchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when time format was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/TimeFormatChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/dateformatchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when date format was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DateFormatChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/datetime" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get current date and time of the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DateTime"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Change current date and time in the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DateTime"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/events/room/datetimechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when date and time of the room has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RoomDateTimeChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/ipconfiguration" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get the current ip configuration of the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/IpConfiguration"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Change the ip configuration of the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/IpConfiguration"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/events/room/ipconfigurationchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when ip configuration has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/IpConfigurationChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audio/autogainreductionchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when audio auto gain reduction has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AutoGainReductionChanged"
             }
           }
         }
@@ -5883,6 +6085,10 @@
         "makeUpGain" : {
           "description" : "make up gain [unit 0.1 dB]",
           "type" : "integer"
+        },
+        "noiseGateReleaseTime" : {
+          "description" : "noise gate release time [unit µs]",
+          "type" : "integer"
         }
       }
     },
@@ -5891,6 +6097,105 @@
       "properties" : {
         "processor" : {
           "$ref" : "#/definitions/AudioDynamicsProcessor"
+        }
+      }
+    },
+    "TimeFormat" : {
+      "type" : "object",
+      "properties" : {
+        "format" : {
+          "enum" : [ "hh_mm_24", "hh_mm_12" ]
+        }
+      }
+    },
+    "DateFormat" : {
+      "type" : "object",
+      "properties" : {
+        "format" : {
+          "enum" : [ "yyyy_mm_dd", "mm_dd_yyyy", "dd_mm_yyyy" ]
+        }
+      }
+    },
+    "TimeFormatChanged" : {
+      "type" : "object",
+      "properties" : {
+        "format" : {
+          "$ref" : "#/definitions/TimeFormat"
+        }
+      }
+    },
+    "DateFormatChanged" : {
+      "type" : "object",
+      "properties" : {
+        "format" : {
+          "$ref" : "#/definitions/DateFormat"
+        }
+      }
+    },
+    "DateTime" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "RoomDateTimeChanged" : {
+      "type" : "object",
+      "properties" : {
+        "dateTime" : {
+          "$ref" : "#/definitions/DateTime"
+        }
+      }
+    },
+    "IpConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "hostName" : {
+          "description" : "Hostname",
+          "type" : "string"
+        },
+        "addressMode" : {
+          "description" : "Address mode",
+          "enum" : [ "static", "dhcp" ]
+        },
+        "ipAddress" : {
+          "description" : "IP address (empty when using dhcp)",
+          "type" : "string"
+        },
+        "subnetMask" : {
+          "description" : "Subnet mask (empty when using dhcp)",
+          "type" : "string"
+        },
+        "gateway" : {
+          "description" : "Gateway (empty when using dhcp)",
+          "type" : "string"
+        },
+        "firstDnsServer" : {
+          "description" : "First DNS Server (empty when using dhcp)",
+          "type" : "string"
+        },
+        "secondDnsServer" : {
+          "description" : "Second DNS server (empty when using dhcp)",
+          "type" : "string"
+        }
+      }
+    },
+    "IpConfigurationChanged" : {
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "$ref" : "#/definitions/IpConfiguration"
+        }
+      }
+    },
+    "AutoGainReductionChanged" : {
+      "description" : "Event for audio auto gain reduction changes",
+      "type" : "object",
+      "properties" : {
+        "reduction" : {
+          "$ref" : "#/definitions/AutoGainReduction"
         }
       }
     }
