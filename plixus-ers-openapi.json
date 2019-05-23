@@ -2666,20 +2666,6 @@
         }
       }
     },
-    "/api/v1/room" : {
-      "get" : {
-        "tags" : [ "Room" ],
-        "summary" : "Get info about the room",
-        "responses" : {
-          "200" : {
-            "description" : "Room details",
-            "schema" : {
-              "$ref" : "#/definitions/Room"
-            }
-          }
-        }
-      }
-    },
     "/api/v1/room/seats/{seat}/units" : {
       "post" : {
         "tags" : [ "Room" ],
@@ -2989,103 +2975,6 @@
             "schema" : {
               "$ref" : "#/definitions/BoothRemoved"
             }
-          }
-        }
-      }
-    },
-    "/api/v2/resources" : {
-      "get" : {
-        "tags" : [ "Resources" ],
-        "summary" : "Get a list of all resources",
-        "operationId" : "Resources_GetAllResources",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/ResourceInfo"
-              }
-            }
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "Resources" ],
-        "summary" : "Upload a resource",
-        "operationId" : "Resources_UploadResource",
-        "consumes" : [ "multipart/form-data" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "Resource",
-          "in" : "formData",
-          "description" : "Upload a resource",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "type" : "object"
-            }
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      }
-    },
-    "/api/v2/resources/{id}" : {
-      "get" : {
-        "tags" : [ "Resources" ],
-        "summary" : "Get a resource by id",
-        "operationId" : "Resources_GetResource",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "Id of resource that was generated when uploading",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "type" : "object"
-            }
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Resources" ],
-        "summary" : "Delete a resource",
-        "operationId" : "Resources_DeleteResource",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "Id of resource to delete",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
           }
         }
       }
@@ -3614,99 +3503,163 @@
         }
       }
     },
-    "/api/v1/room/regionalsettings/timeformat" : {
-      "get" : {
-        "tags" : [ "Room" ],
-        "summary" : "Get the current time format for the room",
-        "responses" : {
-          "200" : {
-            "description" : "Time format",
-            "schema" : {
-              "$ref" : "#/definitions/TimeFormat"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Room" ],
-        "summary" : "Change the time format for the room",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/TimeFormat"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/room/regionalsettings/dateformat" : {
-      "get" : {
-        "tags" : [ "Room" ],
-        "summary" : "Get the current date format for the room",
-        "responses" : {
-          "200" : {
-            "description" : "Date format",
-            "schema" : {
-              "$ref" : "#/definitions/DateFormat"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Room" ],
-        "summary" : "Change the date format for the room",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/DateFormat"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/events/room/timeformatchanged" : {
+    "/api/events/audio/autogainreductionchanged" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Event when time format was changed",
+        "summary" : "Event when audio auto gain reduction has changed",
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/TimeFormatChanged"
+              "$ref" : "#/definitions/AutoGainReductionChanged"
             }
           }
         }
       }
     },
-    "/api/events/room/dateformatchanged" : {
+    "/api/v1/resources" : {
       "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when date format was changed",
+        "tags" : [ "Resources" ],
+        "summary" : "Get a list of all resources",
+        "operationId" : "Resources_GetAllResources",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/DateFormatChanged"
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ResourceInfo"
+              }
             }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Upload a resource",
+        "operationId" : "Resources_UploadResource",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "Resource",
+          "in" : "formData",
+          "description" : "Upload a resource",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
           }
         }
       }
     },
-    "/api/v1/room/datetime" : {
+    "/api/v1/resources/{id}" : {
       "get" : {
-        "tags" : [ "Room" ],
+        "tags" : [ "Resources" ],
+        "summary" : "Get a resource by id",
+        "operationId" : "Resources_GetResource",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of resource that was generated when uploading",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Delete a resource",
+        "operationId" : "Resources_DeleteResource",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of resource to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/system/license" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get info about the current license",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/LicenseInformation"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload a license",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "Resource",
+          "in" : "formData",
+          "description" : "Upload a resource",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/system/datetime" : {
+      "get" : {
+        "tags" : [ "System" ],
         "summary" : "Get current date and time of the room",
         "responses" : {
           "200" : {
@@ -3718,7 +3671,7 @@
         }
       },
       "put" : {
-        "tags" : [ "Room" ],
+        "tags" : [ "System" ],
         "summary" : "Change current date and time in the room",
         "parameters" : [ {
           "name" : "body",
@@ -3735,23 +3688,9 @@
         }
       }
     },
-    "/api/events/room/datetimechanged" : {
+    "/api/v1/system/ipconfiguration" : {
       "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when date and time of the room has changed",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/RoomDateTimeChanged"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/room/ipconfiguration" : {
-      "get" : {
-        "tags" : [ "Room" ],
+        "tags" : [ "System" ],
         "summary" : "Get the current ip configuration of the room",
         "responses" : {
           "200" : {
@@ -3763,7 +3702,7 @@
         }
       },
       "put" : {
-        "tags" : [ "Room" ],
+        "tags" : [ "System" ],
         "summary" : "Change the ip configuration of the room",
         "parameters" : [ {
           "name" : "body",
@@ -3780,7 +3719,83 @@
         }
       }
     },
-    "/api/events/room/ipconfigurationchanged" : {
+    "/api/v1/system/dateformat" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current date format for the room",
+        "responses" : {
+          "200" : {
+            "description" : "Date format",
+            "schema" : {
+              "$ref" : "#/definitions/DateFormat"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the date format for the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DateFormat"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/timeformat" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current time format for the room",
+        "responses" : {
+          "200" : {
+            "description" : "Time format",
+            "schema" : {
+              "$ref" : "#/definitions/TimeFormat"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the time format for the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TimeFormat"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/events/system/dateformatchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when date format was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DateFormatChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/system/ipconfigurationchanged" : {
       "get" : {
         "tags" : [ "Events" ],
         "summary" : "Event when ip configuration has changed",
@@ -3794,16 +3809,156 @@
         }
       }
     },
-    "/api/events/audio/autogainreductionchanged" : {
+    "/api/events/system/datetimechanged" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Event when audio auto gain reduction has changed",
+        "summary" : "Event when date and time of the room has changed",
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/AutoGainReductionChanged"
+              "$ref" : "#/definitions/RoomDateTimeChanged"
             }
+          }
+        }
+      }
+    },
+    "/api/events/system/timeformatchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when time format was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/TimeFormatChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/system/loglevel" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current loglevel",
+        "responses" : {
+          "200" : {
+            "description" : "Date format",
+            "schema" : {
+              "$ref" : "#/definitions/LogLevel"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the log level",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LogLevel"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/events/system/loglevelchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when log level has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/LogLevelChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/system/update" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Reboot the system",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/reboot" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Update the system",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/info" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get information about the system",
+        "responses" : {
+          "200" : {
+            "description" : "System info",
+            "schema" : {
+              "$ref" : "#/definitions/SystemInfo"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/info" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get info about the room",
+        "responses" : {
+          "200" : {
+            "description" : "Room details",
+            "schema" : {
+              "$ref" : "#/definitions/Room"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/system/camerasettings" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current camera settings",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/CameraSettings"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the camera settings",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CameraSettings"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
           }
         }
       }
@@ -5514,14 +5669,6 @@
       "description" : "Details about the room",
       "type" : "object",
       "properties" : {
-        "ip" : {
-          "description" : "IP address of the room",
-          "type" : "string"
-        },
-        "mac" : {
-          "description" : "Mac address of the CU",
-          "type" : "string"
-        },
         "state" : {
           "description" : "State of the room",
           "enum" : [ "meeting", "init", "test" ]
@@ -6198,6 +6345,118 @@
           "type" : "string"
         }
       }
+    },
+    "LicenseInformation" : {
+      "description" : "Information about the current license",
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "description" : "Validity state of the license",
+          "enum" : [ "valid", "invalid", "nearlyExpired" ]
+        },
+        "expiryDate" : {
+          "format" : "date-time",
+          "description" : "Date and time when license expires",
+          "type" : "string"
+        },
+        "parameters" : {
+          "description" : "Parameters with info about license",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LicenseParameter"
+          }
+        },
+        "modules" : {
+          "description" : "List of license modules",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LicenseModule"
+          }
+        }
+      }
+    },
+    "LicenseParameter" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the parameter",
+          "type" : "string"
+        },
+        "value" : {
+          "description" : "Value of the parameter",
+          "type" : "string"
+        }
+      }
+    },
+    "LicenseModule" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the module",
+          "type" : "string"
+        },
+        "state" : {
+          "description" : "Validity state of the module",
+          "enum" : [ "valid", "invalid", "nearlyExpired" ]
+        },
+        "parameters" : {
+          "description" : "Parameters with info about module",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LicenseParameter"
+          }
+        }
+      }
+    },
+    "LogLevel" : {
+      "type" : "object",
+      "properties" : {
+        "level" : {
+          "enum" : [ "trace", "debug", "info", "warning", "error", "fatal" ]
+        }
+      }
+    },
+    "LogLevelChanged" : {
+      "type" : "object",
+      "properties" : {
+        "level" : {
+          "$ref" : "#/definitions/LogLevel"
+        }
+      }
+    },
+    "SystemInfo" : {
+      "type" : "object",
+      "properties" : {
+        "macAddress" : {
+          "description" : "MAC Address of the system",
+          "type" : "string"
+        },
+        "ipConfiguration" : {
+          "$ref" : "#/definitions/SystemInfo",
+          "description" : "IP configuration of the system"
+        },
+        "dnsName" : {
+          "description" : "DNS name of the system",
+          "type" : "string"
+        }
+      }
+    },
+    "CameraSettings" : {
+      "type" : "object",
+      "properties" : {
+        "cameraProtocol" : {
+          "description" : "Camera protocol to use",
+          "enum" : [ "tlvcam1", "tlvcam2" ]
+        },
+        "networkProtocol" : {
+          "description" : "Network protocol to use",
+          "enum" : [ "tcp", "udp" ]
+        },
+        "port" : {
+          "description" : "Port number to use",
+          "type" : "integer"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -6210,11 +6469,11 @@
     "name" : "Resources",
     "description" : "Description about resources module"
   }, {
+    "name" : "System",
+    "description" : "Description about the system module"
+  }, {
     "name" : "Room",
     "description" : "Description about the room module"
-  }, {
-    "name" : "Discussion",
-    "description" : "Description about discussion module"
   }, {
     "name" : "Audio",
     "description" : "Description about audio module"
@@ -6237,25 +6496,28 @@
     "name" : "InterpretationConfigurations",
     "description" : "Description about interpretation configurations module"
   }, {
+    "name" : "Discussion",
+    "description" : "Description about discussion module"
+  }, {
+    "name" : "Intercom",
+    "description" : "Description about intercom module"
+  }, {
     "name" : "Recording",
     "description" : "Description about recording module"
   }, {
     "name" : "Messaging",
     "description" : "Description about messaging module"
   }, {
-    "name" : "Intercom",
-    "description" : "Description about intercom module"
+    "name" : "Meeting",
+    "description" : "Description about meeting module"
+  }, {
+    "name" : "Voting",
+    "description" : "Description about voting module"
   }, {
     "name" : "Buttons",
     "description" : "Description about buttons module"
   }, {
     "name" : "Leds",
     "description" : "Description about leds module"
-  }, {
-    "name" : "Meeting",
-    "description" : "Description about meeting module"
-  }, {
-    "name" : "Voting",
-    "description" : "Description about voting module"
   } ]
 }
