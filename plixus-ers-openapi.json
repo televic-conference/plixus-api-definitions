@@ -3962,6 +3962,31 @@
           }
         }
       }
+    },
+    "/api/v1/users/authenticate" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Authenticate a user",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UserLoginRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User authenticated",
+            "schema" : {
+              "$ref" : "#/definitions/UserLoginResponse"
+            }
+          },
+          "401" : {
+            "description" : "Login failed"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -6457,6 +6482,51 @@
           "type" : "integer"
         }
       }
+    },
+    "UserLoginResponse" : {
+      "title" : "Root Type for UserLoginResponse",
+      "description" : "The root of the UserLoginResponse type's schema.",
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "Id of the user",
+          "type" : "string"
+        },
+        "user" : {
+          "description" : "User name",
+          "type" : "string"
+        },
+        "role" : {
+          "description" : "Role of the user",
+          "type" : "string"
+        },
+        "permissions" : {
+          "description" : "Permissions of the user",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "token" : {
+          "description" : "JWT token",
+          "type" : "string"
+        }
+      }
+    },
+    "UserLoginRequest" : {
+      "title" : "Root Type for UserLoginRequest",
+      "description" : "The root of the UserLoginRequest type's schema.",
+      "type" : "object",
+      "properties" : {
+        "user" : {
+          "description" : "User name to login with",
+          "type" : "string"
+        },
+        "password" : {
+          "description" : "Password to login with",
+          "type" : "string"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -6468,6 +6538,9 @@
   }, {
     "name" : "Resources",
     "description" : "Description about resources module"
+  }, {
+    "name" : "Users",
+    "description" : "Description about users module"
   }, {
     "name" : "System",
     "description" : "Description about the system module"
@@ -6519,5 +6592,8 @@
   }, {
     "name" : "Leds",
     "description" : "Description about leds module"
+  }, {
+    "name" : "Users",
+    "description" : "Description about users module"
   } ]
 }
