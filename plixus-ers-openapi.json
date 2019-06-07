@@ -4009,7 +4009,7 @@
           "in" : "body",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/UserRole"
+            "$ref" : "#/definitions/UserRoleList"
           }
         } ],
         "responses" : {
