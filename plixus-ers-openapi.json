@@ -3987,6 +3987,37 @@
           }
         }
       }
+    },
+    "/api/v1/users/roles" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "summary" : "Get list of user roles",
+        "responses" : {
+          "200" : {
+            "description" : "List of user roles",
+            "schema" : {
+              "$ref" : "#/definitions/UserRoleList"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Users" ],
+        "summary" : "Change role permissions",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UserRole"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -6497,15 +6528,8 @@
           "type" : "string"
         },
         "role" : {
-          "description" : "Role of the user",
-          "type" : "string"
-        },
-        "permissions" : {
-          "description" : "Permissions of the user",
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
+          "$ref" : "#/definitions/UserRole",
+          "description" : "Role of the user"
         },
         "token" : {
           "description" : "JWT token",
@@ -6525,6 +6549,35 @@
         "password" : {
           "description" : "Password to login with",
           "type" : "string"
+        }
+      }
+    },
+    "UserRole" : {
+      "description" : "Role of a user with its permissions",
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the role",
+          "type" : "string"
+        },
+        "permissions" : {
+          "description" : "List of permissions assigned to the role",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "UserRoleList" : {
+      "description" : "List of user roles",
+      "type" : "object",
+      "properties" : {
+        "roles" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/UserRole"
+          }
         }
       }
     }
@@ -6592,8 +6645,5 @@
   }, {
     "name" : "Leds",
     "description" : "Description about leds module"
-  }, {
-    "name" : "Users",
-    "description" : "Description about users module"
   } ]
 }
