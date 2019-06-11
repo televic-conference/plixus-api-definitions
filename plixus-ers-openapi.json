@@ -4015,9 +4015,41 @@
         "responses" : {
           "204" : {
             "description" : "OK"
+          },
+          "401" : {
+            "description" : "Current user is not allowed to change user roles"
           }
         }
       }
+    },
+    "/api/v1/users/{id}/password" : {
+      "put" : {
+        "tags" : [ "Users" ],
+        "summary" : "Change or set the password of a user",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UserPassword"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "401" : {
+            "description" : "Current user is not allowed to change this user's password"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "Id of the user",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -6178,7 +6210,8 @@
       "type" : "object",
       "properties" : {
         "title" : {
-          "description" : "Title of the voting session"
+          "description" : "Title of the voting session",
+          "type" : "string"
         },
         "options" : {
           "description" : "Voting options available for voting session",
@@ -6578,6 +6611,14 @@
           "items" : {
             "$ref" : "#/definitions/UserRole"
           }
+        }
+      }
+    },
+    "UserPassword" : {
+      "type" : "object",
+      "properties" : {
+        "password" : {
+          "type" : "string"
         }
       }
     }
