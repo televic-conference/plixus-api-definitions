@@ -3098,6 +3098,13 @@
       "post" : {
         "tags" : [ "Voting" ],
         "summary" : "Start the voting session",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Unique identifier of the voting session",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -3109,6 +3116,13 @@
       "post" : {
         "tags" : [ "Voting" ],
         "summary" : "Stop the voting session",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Unique identifier of the voting session",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -3120,6 +3134,13 @@
       "post" : {
         "tags" : [ "Voting" ],
         "summary" : "Pause the voting session",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Unique identifier of the voting session",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -3131,6 +3152,13 @@
       "post" : {
         "tags" : [ "Voting" ],
         "summary" : "Resume the voting session",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Unique identifier of the voting session",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -3142,6 +3170,13 @@
       "post" : {
         "tags" : [ "Voting" ],
         "summary" : "Reschedule the voting session",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Unique identifier of the voting session",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -3153,6 +3188,13 @@
       "get" : {
         "tags" : [ "Voting" ],
         "summary" : "Get the results of a voting session",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Unique identifier of the voting session",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
             "description" : "Results of voting session",
@@ -4050,6 +4092,17 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/v1/system/reset" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Reset the system to factory defaults",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
