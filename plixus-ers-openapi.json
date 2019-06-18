@@ -989,7 +989,7 @@
         "summary" : "Event when the discussion state of a seat has changed",
         "responses" : {
           "200" : {
-            "description" : "Metadata for SeatMicrophoneStateChanged event",
+            "description" : "Metadata for SeatDiscussionStateChanged event",
             "schema" : {
               "$ref" : "#/definitions/SeatDiscussionStateChanged"
             }
@@ -1053,10 +1053,7 @@
           "200" : {
             "description" : "ordered list of seats which are currently speaking.",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "type" : "integer"
-              }
+              "$ref" : "#/definitions/SpeakerListChanged"
             }
           }
         }
@@ -1070,10 +1067,7 @@
           "200" : {
             "description" : "ordered list of seats which are currently requesting to speak.",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "type" : "integer"
-              }
+              "$ref" : "#/definitions/RequestListChanged"
             }
           }
         }
@@ -1087,10 +1081,7 @@
           "200" : {
             "description" : "ordered list of seats which are currently requesting to reply.",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "type" : "integer"
-              }
+              "$ref" : "#/definitions/ReplyListChanged"
             }
           }
         }
@@ -2344,7 +2335,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/RecordingSettingsChanged"
+              "$ref" : "#/definitions/RecordingStateChanged"
             }
           }
         }
@@ -2358,7 +2349,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/RecordingStateChanged"
+              "$ref" : "#/definitions/RecordingSettingsChanged"
             }
           }
         }
@@ -6672,6 +6663,46 @@
       "properties" : {
         "password" : {
           "type" : "string"
+        }
+      }
+    },
+    "SpeakerListChanged" : {
+      "description" : "Speaker list has changed",
+      "required" : [ ],
+      "type" : "object",
+      "properties" : {
+        "seat_ids" : {
+          "description" : "The seat ids that are currently in the speaker list",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "RequestListChanged" : {
+      "description" : "Request list has changed",
+      "type" : "object",
+      "properties" : {
+        "seat_ids" : {
+          "description" : "The seat ids that are currently in the request list",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "ReplyListChanged" : {
+      "description" : "Reply list has changed",
+      "type" : "object",
+      "properties" : {
+        "seat_ids" : {
+          "description" : "The seat ids that are currently in the reply list",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
         }
       }
     }
