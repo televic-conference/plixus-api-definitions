@@ -117,7 +117,7 @@
       },
       "put" : {
         "tags" : [ "Video" ],
-        "summary" : "Uses the configuration passed with this call as the active configuration",
+        "summary" : "Modify the active video configuration",
         "operationId" : "Video_SaveActiveVideoConfiguration",
         "consumes" : [ ],
         "produces" : [ ],
@@ -216,6 +216,7 @@
     "/api/v1/videoconfigurations" : {
       "get" : {
         "tags" : [ "VideoConfigurations" ],
+        "summary" : "Get a list of all video configurations of the room",
         "operationId" : "VideoConfigurations_GetVideoConfigurations",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -264,6 +265,7 @@
     "/api/v1/videoconfigurations/{id}" : {
       "get" : {
         "tags" : [ "VideoConfigurations" ],
+        "summary" : "Get details of a specific video configuration",
         "operationId" : "VideoConfigurations_GetVideoConfiguration",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -1702,7 +1704,7 @@
     "/api/v1/interpretationconfigurations" : {
       "get" : {
         "tags" : [ "InterpretationConfigurations" ],
-        "summary" : "Get a list of interpretation configurations for the room",
+        "summary" : "Get a list of all interpretation configurations of the room",
         "operationId" : "InterpretationConfigurations_GetInterpretationConfigurations",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -1749,7 +1751,7 @@
     "/api/v1/interpretationconfigurations/{id}" : {
       "get" : {
         "tags" : [ "InterpretationConfigurations" ],
-        "summary" : "Get the details of a specific interpretation configuration in the room",
+        "summary" : "Get details of a specific interpretation configuration",
         "operationId" : "InterpretationConfigurations_GetInterpretationConfiguration",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -1995,7 +1997,7 @@
     "/api/v1/audioroutingconfigurations" : {
       "get" : {
         "tags" : [ "AudioRoutingConfigurations" ],
-        "summary" : "Get a list of audio routing configurations defined in the room",
+        "summary" : "Get a list of all audio routing configurations of the room",
         "operationId" : "AudioRoutingConfigurations_GetAudioRoutingConfigurations",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -2042,7 +2044,7 @@
     "/api/v1/audioroutingconfigurations/{id}" : {
       "get" : {
         "tags" : [ "AudioRoutingConfigurations" ],
-        "summary" : "Get the details of an audio routing configuration by id",
+        "summary" : "Get details of a specific audio routing configuration",
         "operationId" : "AudioRoutingConfigurations_GetAudioRoutingConfiguration",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
@@ -2194,7 +2196,7 @@
       },
       "put" : {
         "tags" : [ "AudioRouting" ],
-        "summary" : "Save the active audio routing configuration",
+        "summary" : "Modify the active audio routing configuration",
         "operationId" : "AudioRouting_SaveActiveConfiguration",
         "consumes" : [ ],
         "produces" : [ ],
@@ -2646,12 +2648,12 @@
     "/api/v1/room/seats" : {
       "get" : {
         "tags" : [ "Room" ],
-        "summary" : "Get all booths in the room",
+        "summary" : "Get all seats in the room",
         "responses" : {
           "200" : {
             "description" : "Seats in the room",
             "schema" : {
-              "$ref" : "#/definitions/BoothList"
+              "$ref" : "#/definitions/SeatList"
             }
           }
         }
@@ -2869,12 +2871,12 @@
     "/api/v1/room/booths" : {
       "get" : {
         "tags" : [ "Room" ],
-        "summary" : "Get all seats in the room",
+        "summary" : "Get all booths in the room",
         "responses" : {
           "200" : {
             "description" : "Seats in the room",
             "schema" : {
-              "$ref" : "#/definitions/SeatList"
+              "$ref" : "#/definitions/BoothList"
             }
           }
         }
@@ -5896,7 +5898,7 @@
       "properties" : {
         "name" : {
           "description" : "Name of the capability",
-          "type" : "string"
+          "enum" : [ "discussion", "audio_routing", "video", "interpretation", "record", "nameplate", "voting", "intercom" ]
         },
         "enabled" : {
           "description" : "True when capability is enabled",
