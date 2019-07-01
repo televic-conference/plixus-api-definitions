@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "title" : "Plixus ERS API 1.0",
-    "description" : "REST API for the Embedded Room Server on the CU.\n\n# Introduction\n\nHere comes a small introduction text about the API\n",
+    "description" : "REST API for the Embedded Room Server on the CU.\n\n# Introduction\n\nWith Televic Conference's Plixus API (for the central unit), you can manage meetings using your own database.\n",
     "version" : "1.0",
     "x-logo" : {
       "url" : "https://www.televic.com/themes/televic/images/logos/televic-group.svg",
@@ -290,7 +290,7 @@
       },
       "put" : {
         "tags" : [ "VideoConfigurations" ],
-        "summary" : "Overwrite an existing configuration",
+        "summary" : "Update the details of an existing configuration",
         "operationId" : "VideoConfigurations_UpdateVideoConfiguration",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ ],
@@ -319,6 +319,7 @@
       },
       "delete" : {
         "tags" : [ "VideoConfigurations" ],
+        "summary" : "Delete an existing video configuration from the room",
         "operationId" : "VideoConfigurations_DeleteVideoConfiguration",
         "consumes" : [ ],
         "produces" : [ ],
@@ -6711,66 +6712,66 @@
   },
   "tags" : [ {
     "name" : "Notification",
-    "description" : "Description about notification module\n"
+    "description" : "With the Notification module you can subscribe to or unscribe from one or more events. By default you are *subscribed to all events*.\n\nThe REST API does not allow to send messages from the server-side to the client-side by default. Therefore the Plixus ERS API uses **long polling** to send messages. This creates a connection between client and server that is kept open for a longer period of time. Over this connection, the server can then send information when and if it is available. When an event occurs this results in a **HTTP 200 OK**, when there is no event this results in a **HTTP 408 Request-Timeout**.\n"
   }, {
     "name" : "Events",
-    "description" : "Description about events module\n"
+    "description" : "This is an exhaustive list of all events that can occur across all modules. All these events\ngenerate metadata. With the Notification module you can subscribe to these events.\n"
   }, {
     "name" : "Resources",
-    "description" : "Description about resources module"
+    "description" : "With the resources module you can manage all your resources, you can get an overview of all\nresources or upload and remove resources. A typical example of a resource is the background image\nyou use for the room layout.\n"
   }, {
     "name" : "Users",
-    "description" : "Description about users module"
+    "description" : "The User module contains basic user management features. The user model consists of three different **user roles**:\n* Technician\n* Operator\n* Chairman\n\nEach role has specific **permissions** that determine what the user can do in the conference system. Each user can have one or more user roles. For example a technician has to permission to create and edit room layouts, while an operator or chairman only has the permission to view the room layout.\n\nBesides the user roles and permissions, you can use this module to **authenticate** users by assigning a password to this user.\n"
   }, {
     "name" : "System",
-    "description" : "Description about the system module"
+    "description" : "Use the System module to configure system wide settings such as:\n* IP settigns\n* Date and time format\n* Loglevel\n\nIn the System module you can also find the calls to manage your software licenses to activate one or more features.\n"
   }, {
     "name" : "Room",
-    "description" : "Description about the room module"
+    "description" : "With the room module you can manage your meeting room. This module contains calls to initialize the units, create and remove desks in booths. \n\nYou can also set the **capabilities** of a seat. A capability is a functionality that is possible and active on that seat. The capability is defined by the type of unit. A couple of examples of capabilities are *voting, discussion, interpretation and video*. Besides the capabilities, you can also set the **role** of the seat. A seat can have a:\n* Delegate\n* Chairman\n* VIP role. \n\nThe chairman and VIP role have additional functionalities:\n* Chairman: can always activate its microphone and has prior/next and start/stop vote function\n* VIP: has the same speech priority as a chairman but without the prior/next and start/stop vote function\n\n\n![alt text](https://raw.githubusercontent.com/televic-conference/plixus-api-docs/master/img/RoomModule.jpg \"Room elements\")\n"
   }, {
     "name" : "Audio",
-    "description" : "Description about audio module"
+    "description" : "With the Audio module you can **set**, **edit** and **retrieve** all **general (sytem wide) audio settings**. In the Audio module you can for example find a call to change the default volume of all channel selectors, present in the room. \nUse the Audio module to retrieve the details of the active DSP configuration and use the *Change the active dsp configuration for the room* call to change these DSP settings.\n"
   }, {
     "name" : "AudioRouting",
-    "description" : "Description about audiorouting module"
+    "description" : "Use the Audiorouting module for all runtime modifications of your active audio routing configuration. With the calls in this module you can modify the settings of the active configuration, change the state of a node in the routing matrix or change the maximum number of language channels.\n\n> Note that changes made to the configuration are not saved by default, you need to invoke the save call for this.\nThe AudioRouting module is indepent of the storage of the routing configurations, for managing configurations you can use the AudioRoutingConfigurations module or your own module.\n"
   }, {
     "name" : "AudioRoutingConfigurations",
-    "description" : "Description about audiorouting configurations module"
+    "description" : "The AudioRoutingConfigurations module is resposible for creating, editing and storing audio routing configurations. You can also use this module to set the active audio routing configuration. Audio configurations have the following parameters:\n* **Name**: the name of the configuration\n* **Description**: a short description of the configuration\n* **Input groups**: a collection of different audio inputs. There are different types of input groups\n\n * *Floor*: audio from all the active microphones in th room\n\n * *Ambiance*: enabled Dante audio input when no microphone is active\n\n * *Language*: the audio coming from the interpreter booths\n\n * *User*: audio originating from seats defined by the API user\n\n* **Channels**: the routing of the audio (links the input groups to an output group)\n* **Output groups**: a collection of audio outputs where you want to route the audio input to. There are different types of output groups available:\n\n * *Floor*: route audio to speakers of all units present in the room\n\n * *Language*: route audio to the interpreter booths\n\n * *User*: route audio to specific seats defined by the API\n\n* **Locked**: protect configuration by locking it with a password\n* **Multiple floor**: enable multiple floors to split the Floor out up into two seperate mixes:\n\n *  a mix for the loudspeakers\n\n *  a mix for the channel selectors and relays\n"
   }, {
     "name" : "Video",
-    "description" : "Description about video module"
+    "description" : "Use the Video module to route the video inputs and outputs to one of the 6 available **video streams**.  To route a video stream you need to set the video input onto one of the video stream and the link a video output group to the same video stream.\n\nWith this module you can also make video streams (un)available for delegates. Delegates can only select the streams that are made availalable for delegates on their multimedia unit.\n"
   }, {
     "name" : "VideoConfigurations",
-    "description" : "Description about video configurations module"
+    "description" : "The VideoConfigurations module is resposible for creating, editing and storing video routing configurations. You can create new configurations providing the input groups, video streams and output groups. Video configurations have the following parameters:\n* **Name**: the name of the video configuration\n* **Description**: a short description of the configuration\n* **Locked**: protect configuration by locking it. You cannot edit locked configurations. \n* **Input groups**: a group of video input that is available in your Plixus system. There are three types of video input:\n * *Normal* : assign a Video-IN box to one of the available video streams. The content is then always available on the multimedia units.\n \n * *Request* : this group contains the video input from Video-IN boxes combined with a Video-REQUEST panel. The video of the person who presses the request button on their Video-REQUEST (V-REQ)panel is then routed to the video stream. When no one presses the V-REQ, the backup video source is shown. You can only have **one Request group**\n \n * *Talking heads* : contains the video input from units with a webcam. The webcam of the unit becomes active when the delegate activates the microphone. The assigned video stream then displays the video content of the webcam. When no microphone is active you can set a backup video source.\n \n* **Video streams**: the 6 available video streams with its routed input and output groups and whether it is enabled or not.  \n* **Output groups** (selectorGroups): displays the video source from the routed video input group.\n"
   }, {
     "name" : "Interpretation",
-    "description" : "Description about interpretation module"
+    "description" : "Use the Interpretation module to retrieve settings from the active configuration, such as the list of listereners per language channel or the current state of all desks. There is also an option to change some settings such as the name of the floor channel or the language list of the room.\n"
   }, {
     "name" : "InterpretationConfigurations",
-    "description" : "Description about interpretation configurations module"
+    "description" : "The InterpretationConfigurations module manages the interpretation configurations. With this module you can create new configurations, update exisitng configurations or delete configurations. An interpretation configuration contains the following parameters:\n* **Name**: name of the configuration \n\n* **Description**: a short description of the configuration\n* **Locked**: lock a confguration. You cannot modify channels, properties and desk configurations of the locked configuration\n* **Enable Audience Indication**: show the amount of units listening to the interpretation \n* **Audience Indication Update Interval**: time interval to update the audience indication \n* **IntraBoothConfiguration**: the desk configuration with the microphoen mode between the desks \n* **interBoothInterpretationMode**: the microphone mode between booths \n* **Enable Slow down**: activate the *Slow down* function  \n* **Channels**: the languages contained in this configuration with the routing and the booths \n* **deskConfigurations**: configuration of each desk inside the booth, states the relays and the B and C channel of that desk\n"
   }, {
     "name" : "Discussion",
-    "description" : "Description about discussion module"
+    "description" : "The Discussion module contains the operator functionality of the API. You can:\n* Retrieve the **microphone state** of every microphone\n\n* Manage the **default conference settings** of the room such as the microphone mode, microphone activation type and the color of the microphone LED for different microphone states\n\n* View and manage **speaker and request lists**\n"
   }, {
     "name" : "Intercom",
-    "description" : "Description about intercom module"
+    "description" : "With the Intercom module you can use the Intercom functionality of your conference system. In this module you can find calls to: * See which seats and booth have intercom enabled\n* Enable and disable intertcom\n* Request, accept, start and end the intercom conversation using the seat id\n"
   }, {
     "name" : "Recording",
-    "description" : "Description about recording module"
+    "description" : "Use the Recording module to manage the recording on your central unit. This module contains calls to:\n* **Start**, **pause**, **resume** and **stop** the recording\n\n* View and change the **recording settings**\n * Where to store the recording\n \n * Automatically **split** the recording in seperate files after a defined amount of time\n \n * **Prefix** and **suffix** for the file name\n \n * A list of the **recorded channels**\n"
   }, {
     "name" : "Messaging",
-    "description" : "Description about messaging module"
+    "description" : "With the Message module you can **send messages** to seats and booths. For each message you need to define:\n* The message itself\n\n* If you want to play a sound for new messages\n\n* Which seats and booths to send the messages to\n"
   }, {
     "name" : "Meeting",
-    "description" : "Description about meeting module"
+    "description" : "With the Meeting module you can manage some basic meetings functions of your conference system. For the actual creation and configuration of your meeting such as the agenda items, you need an external device. The Meeting module contains calls to: \n* Change **meeting states** (Schedule, Prepare, Start, Pause, Resule and End)\n* Add and remove **delegates** from the meeting\n\n\n\n![alt text](https://raw.githubusercontent.com/televic-conference/plixus-api-docs/master/img/MeetingStates.jpg \"Meeting States\")\n"
   }, {
     "name" : "Voting",
-    "description" : "Description about voting module"
+    "description" : "With the Voting module you can do some basic management of voting session. A voting session has the following parameters:\n\n* **Id**: unique identifier\n\n* **State**: state of the voting session, this can be **scheduled**, **running**, **paused** or **ended**\n* **Start time**: the start date and time of the session\n* **End time**: the end date and time of the session\n* **Votes**: the voting results for each seat\n* **Voting options**: the different options the meeting participants can choose from. For each voting option you can define the number (defines where the option is shown on the unit), give a description, define a color and select wheter it is possible to abstain\n* **Title**: the title of the voting session\n"
   }, {
     "name" : "Buttons",
-    "description" : "Description about buttons module"
+    "description" : "You can use the Buttons module to manage all the buttons inside your room.\n\n**Warning: changing buttons using the API happens independent of the system logic, therefore this could affect meetings that are running.**\n"
   }, {
     "name" : "Leds",
-    "description" : "Description about leds module"
+    "description" : "You can use the Buttons module to manage all the buttons inside your room.\n\n**Warning: changing buttons using the API happens independent of the system logic, therefore this could affect meetings that are running.**\n"
   } ]
 }
