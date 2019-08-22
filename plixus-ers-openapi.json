@@ -1,8 +1,8 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "title" : "Plixus ERS API 1.0",
-    "description" : "REST API for the Embedded Room Server on the CU.\n\n# Introduction\n\nWith Televic Conference's Plixus API (for the central unit), you can manage meetings using your own database.\n",
+    "title" : "Plixus Core API 1.0",
+    "description" : "\n\n\n# Introduction\nThis introduction describes the basics of the REST API for Plixus Core on the Central Unit (CU).\n## Before you start\nTelevic Conference's Plixus Core API (for the central unit) was created to create custom solutions and integrate with your own API.  With the Plixus API you can perform two types of functions:\n* **Publication** of events occuring in the meeting room   \n* **External control** of the meeting room\n\n## Event notifications\nThe Plixus Core API uses a **Publish/Subscribe** mechanism, this means that external clients that connect to the API can choose to which events they subscribe and get information from. The API contains commands to subscribe or unsubscribe from each of the modules. Each module contains specific functionality to manage and configure meetings. The following modules are available:\n\n* **Resources**: module to manage all resources present in your setup\n* **Users**: module for user management with authentication, user roles and permissions\n\n* **System**: module for general system wide settings such as licensing and date and time format\n* **Room**: module to manage the meeting room, initialize units, create booths and manage the room layout\n* **Audio**: module to configure general, system wide audio settings\n* **AudioRouting**: module for all runtime modifications of your active audio routing configuration\n* **AudioRoutingConfigurations**: module to create, edit and delete audio routing configurations\n* **Video**: module for runtime modifications of video configuration to route the video inputs and outputs to one of the 6 available video streams\n* **VideoConfigurations**: module to create, edit and delete video configurations\n* **Interpretation**: module for runtime modifications and information of the active interpretation configuration\n* **InterpretationConfigurations**: module to create, edit and delete interpretation configurations\n* **Discussion**: module with operator functionality. Change and retrieve microphone states or change conference settings\n* **Intercom**: module to set up calls between microphone units\n* **Recording**: module to manage recording on the Central Unit\n* **Messaging**: module to send messages to seats and booths\n* **Meeting**: module to manage general meeting functions such as meeting state\n* **Voting**: module for basic management of voting sessions\n* **Buttons**: module to manage all buttons events in your meeting room\n> Button events may not always take place, because certain operations in CoCon such as voting sessions, use specific buttons. Only when the session is ended the buttons become available again.\n* **Leds**: module to manage all LED events in your meeting room\n> LED events may not always take place, because certain operations in CoCon such as voting sessions use certain LEDs. Only when the voting session is ended, LED events become available.\n\n# Set up and use the Plixus Core API\n## General\nThe Plixus Core API consists of a number of URI's (*Uniform Resource Indentifier*) which are exchanged between the API client and the Plixus engine over a TCP/IP-connection. The Plixus Central Unit hosts the API and is available on the IP address of the Central Unit.\nThe API uses two (or more) parallel HTTP-connections:\n* A **Notification** connection that the client and the CU keep open in case any information needs to be transferred from the CU to the client.\n\n\n* Any other connection that is used to transfer **information from the client to the CU**.\n\nThe client needs to initialize the notification connection and it is kept open by both sides. Two scenarios can occur:\n* The CU has information to send to the client and therefore uses the notification connection. When the information is transferred, the connection is closed (as per the HTTP standard). Therefore, the client needs to create a new notification connection. The CU guarantees that no information is lost during this time period where the client is not connected to the CU. \n> Note that you need to create a new notification connection within 60 seconds. If not, the CU discards the client data.\n* The HTTP-connection times out before the CU has any information to send to the client. At this point, the client needs to create a new notification connection. Also in this scenario, the CU guarantees that no information is lost.\n## REST/JSON example\nBelow you can find a short description and example how to create and use the API connection with the CU using the **REST/JSON format**. \nThe first URI you need to send to the Plixus API is the **connect URI**, which you can find in the Notification module (/api/notification/connect). This returns a JSON string as reply, which looks like the following example:\n\n``` *{\"connectionId\":\"3f5b8afe-6efb-4428-8762-e39d42a0762d\"}*  ```\n    \nThis returns the **Id** of the connection that you need to use to open the notification connection and make a new polling request. When the connection is established, the CU can send updates to the client. After the client receives information from the CU, it must re-establish the connection with the CU.\n\n## Server return values\nFor feedback of the API communication between the client and the CU, the API uses **HTTP response codes**.\n",
     "version" : "1.0",
     "x-logo" : {
       "url" : "https://www.televic.com/themes/televic/images/logos/televic-group.svg",
@@ -664,6 +664,372 @@
         }
       }
     },
+    "/api/events/diagnostics/deviceadded" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeviceAdded event",
+            "schema" : {
+              "$ref" : "#/definitions/DeviceAdded"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/diagnostics/devicedeleted" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeviceDeleted event",
+            "schema" : {
+              "$ref" : "#/definitions/DeviceDeleted"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/diagnostics/healthStateChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for HealthStateChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/HealthStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/diagnostics/neighboursChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for NeighboursChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/NeighboursChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/devices/types" : {
+      "get" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Get a translation of device firmware type to commercial names",
+        "operationId" : "ApiV1DevicesTypesGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DeviceNameInfo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/devices" : {
+      "get" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Get a list of devices detected in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DeviceInfo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/devices/details" : {
+      "get" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Get a list of the details of each device detected in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesDetailsGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DeviceDetails"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/devices/{serial}" : {
+      "get" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Get details about a device in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesBySerialGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain" ],
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/DeviceDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/devices/{serial}/errors" : {
+      "delete" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Clear error counters of a device in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesBySerialErrorsDelete",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "description" : "Unique serial number of the device",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/devices/errors" : {
+      "delete" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Clear error counters of all devices in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesErrorsDelete",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/devices/{serial}/highlightstate" : {
+      "get" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Get the highlight state of a device",
+        "operationId" : "ApiV1DiagnosticsDevicesBySerialHighlightstateGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain" ],
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "description" : "Unique serial number of the device",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/HighlightState"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Change the highlight state of a device",
+        "operationId" : "ApiV1DiagnosticsDevicesBySerialHighlightstatePut",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "description" : "Unique serial number of the device",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "state",
+          "in" : "body",
+          "description" : "New state to apply",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/HighlightState"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Stop highlighting a device",
+        "operationId" : "ApiV1DiagnosticsDevicesBySerialHighlightstateDelete",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/devices/highlightstate" : {
+      "put" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Change the highlight state of all devices in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesHighlightstatePut",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "state",
+          "in" : "body",
+          "description" : "New state to apply",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/HighlightState"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Stop highlighting all devices in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesHighlightstateDelete",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/devices/{serial}/test" : {
+      "post" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Test a device in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesBySerialTestPost",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "description" : "Unique serial number of the device",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "req",
+          "in" : "body",
+          "description" : "Request with information about the test to execute",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeviceTestRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Stop testing a device in the system",
+        "operationId" : "ApiV1DiagnosticsDevicesBySerialTestDelete",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "description" : "Unique serial number of the device",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/test/enabled" : {
+      "get" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Get test mode status",
+        "operationId" : "ApiV1DiagnosticsTestGet",
+        "consumes" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/TestEnabled"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Enable test mode in the CU",
+        "operationId" : "ApiV1DiagnosticsTestPost",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Diagnostics" ],
+        "summary" : "Disable test mode in the CU",
+        "operationId" : "ApiV1DiagnosticsTestDelete",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
     "/api/notification/connect" : {
       "post" : {
         "tags" : [ "Notification" ],
@@ -726,11 +1092,7 @@
           "200" : {
             "description" : "Success",
             "schema" : {
-              "uniqueItems" : false,
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/NotificationModule"
-              }
+              "$ref" : "#/definitions/NotificationModuleList"
             }
           }
         }
@@ -789,6 +1151,122 @@
           }
         }
       }
+    },
+    "/api/v1/devicelicenses/{devicetype}" : {
+      "get" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Get a mapping of the serial numbers and applied licenses of all ConfideaNG devices",
+        "operationId" : "ApiV1DeviceLicensesDeviceTypeGet",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/ConfideaLicenseWithSerialList"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Make changes to the existing configuration",
+        "operationId" : "ApiV1DeviceLicensesDeviceTypePut",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "license",
+          "in" : "body",
+          "description" : "List of devices who's licenses should specifically be modified. Only these device will be affected by this call.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ConfideaLicenseWithSerialList"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Create a completely new configuration",
+        "operationId" : "ApiV1DeviceLicensesDeviceTypePost",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The complete configuration that should be applied. Any devices that are not present in this list will be set to a default license with only a single microphone button enabled.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ConfideaLicenseWithSerialList"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "devicetype",
+        "in" : "path",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "confidea" ]
+      } ]
+    },
+    "/api/v1/devicelicenses/{devicetype}/left" : {
+      "get" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Get an overview of the available Confidea licenses and how many are still available",
+        "operationId" : "ApiV1DeviceLicensesLeftGet",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/ConfideaLicensesLeft"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "devicetype",
+        "in" : "path",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "confidea" ]
+      } ]
+    },
+    "/api/v1/devicelicenses/{devicetype}/{serial}" : {
+      "get" : {
+        "tags" : [ "DeviceLicensing" ],
+        "summary" : "Get the license that has been applied to a specific device",
+        "operationId" : "ApiV1DeviceLicensesDeviceTypeSerialGet",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Licenses applied to Confidea device with specific serial",
+            "schema" : {
+              "$ref" : "#/definitions/ConfideaLicense"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "devicetype",
+        "in" : "path",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "confidea" ]
+      }, {
+        "name" : "serial",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
     },
     "/api/events/discussion/conferencesettingschanged" : {
       "get" : {
@@ -3921,7 +4399,7 @@
     "/api/v1/system/update" : {
       "post" : {
         "tags" : [ "System" ],
-        "summary" : "Reboot the system",
+        "summary" : "Update the system",
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -3932,7 +4410,7 @@
     "/api/v1/system/reboot" : {
       "post" : {
         "tags" : [ "System" ],
-        "summary" : "Update the system",
+        "summary" : "Reboot the system",
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -4097,9 +4575,507 @@
           }
         }
       }
+    },
+    "/api/notification/{client}/modules/subscribe" : {
+      "post" : {
+        "tags" : [ "Notification" ],
+        "summary" : "Subscribe to a list of modules",
+        "parameters" : [ {
+          "name" : "client",
+          "in" : "path",
+          "description" : "Unique id of the client",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "body",
+          "in" : "body",
+          "description" : "List of modules to subscribe to",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/NotificationModuleList"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
+    "ConfideaLicenseWithSerial" : {
+      "description" : "Mapping of a confidea license with the serial of the device it has been applied to",
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "The serial of the device formatted as hex string",
+          "type" : "string"
+        },
+        "license" : {
+          "$ref" : "#/definitions/ConfideaLicense"
+        }
+      }
+    },
+    "ConfideaLicense" : {
+      "description" : "Licenses that should be applied to a ConfideaNG device",
+      "type" : "object",
+      "properties" : {
+        "dualDelegate" : {
+          "description" : "Type of dual delegate license requested",
+          "enum" : [ "1D1I", "2D2I", "1D2I" ],
+          "type" : "string"
+        },
+        "interpretation" : {
+          "description" : "Is an interpretation license requested (uses 2 licenses if dualDelegate != 1D1I)",
+          "type" : "boolean"
+        },
+        "badge" : {
+          "description" : "Is a badge license requested (uses 2 licenses if dualDelegate != 1D1I)",
+          "type" : "boolean"
+        },
+        "voting" : {
+          "description" : "Is a voting license requested (uses 2 licenses if dualDelegate != 1D1I)",
+          "type" : "boolean"
+        },
+        "bluetooth" : {
+          "description" : "Is a bluetooth audio license requested (mutually exclusive with dualdelegate other than 1D1I)",
+          "type" : "boolean"
+        }
+      }
+    },
+    "ConfideaLicensesLeft" : {
+      "description" : "Overview of maximum available confidea licenses and how many are still free",
+      "type" : "object",
+      "properties" : {
+        "badgeLicensesMax" : {
+          "format" : "int32",
+          "description" : "The maximum amount of badge licenses available",
+          "type" : "integer"
+        },
+        "badgeLicenseLeft" : {
+          "format" : "int32",
+          "description" : "The amount of badge licenses currently available",
+          "type" : "integer"
+        },
+        "bluetoothLicensesMax" : {
+          "format" : "int32",
+          "description" : "The maximum amount of bluetooth audio licenses available",
+          "type" : "integer"
+        },
+        "bluetoothLicenseLeft" : {
+          "format" : "int32",
+          "description" : "The amount of bluetooth audio licenses currently available",
+          "type" : "integer"
+        },
+        "dualDelegateLicensesMax" : {
+          "format" : "int32",
+          "description" : "The maximum amount of dual elegate licenses available",
+          "type" : "integer"
+        },
+        "dualDelegateLicenseLeft" : {
+          "format" : "int32",
+          "description" : "The amount of dual elegate licenses currently available",
+          "type" : "integer"
+        },
+        "interpretationLicensesMax" : {
+          "format" : "int32",
+          "description" : "The maximum amount of interpretation licenses available",
+          "type" : "integer"
+        },
+        "interpretationLicenseLeft" : {
+          "format" : "int32",
+          "description" : "The amount of interpretation licenses currently available",
+          "type" : "integer"
+        },
+        "votingLicensesMax" : {
+          "format" : "int32",
+          "description" : "The maximum amount of voting licenses available",
+          "type" : "integer"
+        },
+        "votingLicenseLeft" : {
+          "format" : "int32",
+          "description" : "The amount of voting licenses currently available",
+          "type" : "integer"
+        }
+      }
+    },
+    "DeviceNameInfo" : {
+      "description" : "Translation from hardware type to commercial name of device",
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "description" : "Id of the device as integer",
+          "type" : "integer"
+        },
+        "type" : {
+          "description" : "Id of the device formatted as hex string",
+          "type" : "string"
+        },
+        "name" : {
+          "description" : "Commercial name of the device",
+          "type" : "string"
+        },
+        "family" : {
+          "description" : "Commercial name of the device's family",
+          "type" : "string"
+        }
+      }
+    },
+    "DeviceInfo" : {
+      "description" : "Summary information about a device",
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Unique serial number of the device",
+          "type" : "string"
+        },
+        "firmwareType" : {
+          "description" : "Type of device",
+          "type" : "string"
+        },
+        "bootStatus" : {
+          "description" : "Boot status of the device",
+          "enum" : [ "Offline", "Golden", "Application" ],
+          "type" : "string"
+        },
+        "healthStatus" : {
+          "description" : "Health status of the device",
+          "enum" : [ "Offline", "Error", "Warning", "Online" ],
+          "type" : "string"
+        },
+        "testStatus" : {
+          "description" : "True if the device is being tested",
+          "type" : "boolean"
+        },
+        "neighbours" : {
+          "description" : "Serial number of neighbour devices",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "highlightState" : {
+          "$ref" : "#/definitions/HighlightState"
+        }
+      }
+    },
+    "HighlightState" : {
+      "description" : "Highlight state of a device",
+      "type" : "object",
+      "properties" : {
+        "ledState" : {
+          "description" : "State of the led that should be highlighted",
+          "enum" : [ "Off", "On", "Blinking" ],
+          "type" : "string"
+        },
+        "ledColor" : {
+          "description" : "Color of the led that should be highlighted",
+          "enum" : [ "Green", "Red" ],
+          "type" : "string"
+        }
+      }
+    },
+    "DeviceDetails" : {
+      "description" : "Detailed information about a device",
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Unique serial number of the device",
+          "type" : "string"
+        },
+        "bootStatus" : {
+          "description" : "Booth status of the devie",
+          "enum" : [ "Offline", "Golden", "Application" ],
+          "type" : "string"
+        },
+        "healthStatus" : {
+          "description" : "Health status of the device",
+          "enum" : [ "Offline", "Error", "Warning", "Online" ],
+          "type" : "string"
+        },
+        "testStatus" : {
+          "description" : "True if the device is being tested",
+          "type" : "boolean"
+        },
+        "bootErrorStatus" : {
+          "description" : "Booth error status of the devie",
+          "enum" : [ "NoError", "WatchDog", "CRCError", "ExternalReconfiguration", "ExternalStatusAssertion" ],
+          "type" : "string"
+        },
+        "firmwareType" : {
+          "description" : "Firmware type of device",
+          "type" : "string"
+        },
+        "firmwareVersionGolden" : {
+          "description" : "Firmware version of golden",
+          "type" : "string"
+        },
+        "firmwareVersionApplication" : {
+          "description" : "Firmware version of application",
+          "type" : "string"
+        },
+        "softwareVersionApplication" : {
+          "description" : "Software version of application",
+          "type" : "string"
+        },
+        "neighbours" : {
+          "description" : "Serial number of neighbour devices",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "ports" : {
+          "description" : "Information about device network ports",
+          "uniqueItems" : false,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/NetworkPort"
+          }
+        },
+        "childDevices" : {
+          "description" : "List of child devices that are part of this device",
+          "uniqueItems" : false,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DeviceDetails"
+          }
+        },
+        "hardwareUnits" : {
+          "description" : "List of hardware units",
+          "uniqueItems" : false,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/HardwareUnit"
+          }
+        },
+        "highlightState" : {
+          "$ref" : "#/definitions/HighlightState"
+        }
+      }
+    },
+    "NetworkPort" : {
+      "description" : "Details about a device network port",
+      "type" : "object",
+      "properties" : {
+        "number" : {
+          "format" : "int32",
+          "description" : "Number of the network port",
+          "type" : "integer"
+        },
+        "voltage" : {
+          "format" : "double",
+          "description" : "Voltage of the port",
+          "type" : "number"
+        },
+        "current" : {
+          "format" : "double",
+          "description" : "Current of the port",
+          "type" : "number"
+        },
+        "linkErrorCount" : {
+          "format" : "int32",
+          "description" : "Number of link errors counted on the port",
+          "type" : "integer"
+        },
+        "packetErrorCount" : {
+          "format" : "int32",
+          "description" : "Number of packet errors counted on the port",
+          "type" : "integer"
+        },
+        "isConnected" : {
+          "description" : "True when this port is currently connected to another device",
+          "type" : "boolean"
+        },
+        "isNetworkExtender" : {
+          "description" : "True when this port is used for extending the network",
+          "type" : "boolean"
+        }
+      }
+    },
+    "HardwareUnit" : {
+      "description" : "Details about a hardware unit",
+      "type" : "object",
+      "properties" : {
+        "extensions" : {
+          "description" : "List of unit extensions defining this hardware unit",
+          "uniqueItems" : false,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/UnitExtension"
+          }
+        }
+      }
+    },
+    "UnitExtension" : {
+      "description" : "Details about a unit extension defining a hardware unit",
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "description" : "Type of the unit extension",
+          "type" : "string"
+        },
+        "properties" : {
+          "description" : "List of properties of the unit extension",
+          "uniqueItems" : false,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/UnitExtensionProperty"
+          }
+        }
+      }
+    },
+    "UnitExtensionProperty" : {
+      "description" : "Property of a single unit extension",
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the property",
+          "type" : "string"
+        },
+        "value" : {
+          "description" : "Value of the property",
+          "type" : "string"
+        }
+      }
+    },
+    "DeviceTestRequest" : {
+      "description" : "Request for testing a device",
+      "type" : "object",
+      "properties" : {
+        "testMicrophone" : {
+          "description" : "True when microphone should be tested",
+          "type" : "boolean"
+        },
+        "testSpeakers" : {
+          "description" : "True when speakers should be tested",
+          "type" : "boolean"
+        },
+        "testLED" : {
+          "description" : "True when LED's should be tested",
+          "type" : "boolean"
+        }
+      }
+    },
+    "TestEnabled" : {
+      "properties" : {
+        "testModeEnabled" : {
+          "description" : "True if test mode is enabled",
+          "type" : "boolean"
+        }
+      }
+    },
+    "NotificationId" : {
+      "properties" : {
+        "connectionId" : {
+          "description" : "The client id for notifications",
+          "type" : "string"
+        }
+      }
+    },
+    "Notification" : {
+      "description" : "Notification with event information",
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the event",
+          "type" : "string"
+        },
+        "moduleName" : {
+          "description" : "Name of the module where the event occurred",
+          "type" : "string"
+        },
+        "timestamp" : {
+          "format" : "date-time",
+          "description" : "Date and time when the event occurred",
+          "type" : "string"
+        },
+        "data" : {
+          "description" : "Information about the event",
+          "type" : "object"
+        }
+      }
+    },
+    "NotificationModule" : {
+      "description" : "Module that exposes notifications",
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the module",
+          "type" : "string"
+        },
+        "isSubscribed" : {
+          "description" : "True when the client is subscribed to this module",
+          "type" : "boolean"
+        }
+      }
+    },
+    "DeviceAdded" : {
+      "description" : "Event when device is detected in the room",
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Device serial of newly added device",
+          "type" : "string"
+        }
+      }
+    },
+    "DeviceDeleted" : {
+      "description" : "Event when device was deleted from room",
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Device serial",
+          "type" : "string"
+        }
+      }
+    },
+    "HealthStateChanged" : {
+      "description" : "Event when the HealthState of a device changed",
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Unique serial number of the device",
+          "type" : "string"
+        },
+        "healthStatus" : {
+          "description" : "Health status of the device",
+          "enum" : [ "Offline", "Error", "Warning", "Online" ],
+          "type" : "string"
+        }
+      }
+    },
+    "NeighboursChanged" : {
+      "description" : "Event when the neighbours of a device changed",
+      "properties" : {
+        "serial" : {
+          "description" : "Unique serial number of the device",
+          "type" : "string"
+        },
+        "neighbours" : {
+          "description" : "Serial number of neighbour device",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "ConfideaLicenseWithSerialList" : {
+      "description" : "List of ConfideaLicenses with mapped serial",
+      "type" : "object",
+      "properties" : {
+        "list" : {
+          "description" : "The list of Licenses mapped with serials",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ConfideaLicenseWithSerial"
+          }
+        }
+      }
+    },
     "ConferenceSettingsChanged" : {
       "type" : "object",
       "properties" : {
@@ -4399,51 +5375,6 @@
         }
       }
     },
-    "NotificationId" : {
-      "properties" : {
-        "connectionId" : {
-          "description" : "The client id for notifications",
-          "type" : "string"
-        }
-      }
-    },
-    "Notification" : {
-      "description" : "Notification with event information",
-      "type" : "object",
-      "properties" : {
-        "name" : {
-          "description" : "Name of the event",
-          "type" : "string"
-        },
-        "moduleName" : {
-          "description" : "Name of the module where the event occurred",
-          "type" : "string"
-        },
-        "timestamp" : {
-          "format" : "date-time",
-          "description" : "Date and time when the event occurred",
-          "type" : "string"
-        },
-        "data" : {
-          "description" : "Information about the event",
-          "type" : "object"
-        }
-      }
-    },
-    "NotificationModule" : {
-      "description" : "Module that exposes notifications",
-      "type" : "object",
-      "properties" : {
-        "name" : {
-          "description" : "Name of the module",
-          "type" : "string"
-        },
-        "isSubscribed" : {
-          "description" : "True when the client is subscribed to this module",
-          "type" : "boolean"
-        }
-      }
-    },
     "RoomConferenceSettings" : {
       "type" : "object",
       "properties" : {
@@ -4462,9 +5393,6 @@
           "type" : "boolean"
         },
         "canSpeakerCancelRequest" : {
-          "type" : "boolean"
-        },
-        "lowHeadphoneEabled" : {
           "type" : "boolean"
         },
         "canSwitchOff" : {
@@ -4495,6 +5423,13 @@
         "ledStateNextInLine" : {
           "enum" : [ "on", "off" ],
           "type" : "string"
+        },
+        "lowHeadphoneEnabled" : {
+          "type" : "boolean"
+        },
+        "closeRequestSession" : {
+          "description" : "Disable further requests while in request mode (needed for temporary request session)\nDefault is false",
+          "type" : "boolean"
         }
       }
     },
@@ -4616,46 +5551,6 @@
         "value" : {
           "description" : "Hex RGB value of the color",
           "type" : "string"
-        }
-      }
-    },
-    "DeskState" : {
-      "required" : [ ],
-      "type" : "object",
-      "properties" : {
-        "booth" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "desk" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "activeRelay" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "activeOutput" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "currentRelayChannelPresets" : {
-          "type" : "array",
-          "items" : {
-            "format" : "int32",
-            "type" : "integer"
-          }
-        },
-        "currentOutputChannelPresets" : {
-          "type" : "array",
-          "items" : {
-            "format" : "int32",
-            "type" : "integer"
-          }
-        },
-        "isSlowdownActive" : {
-          "description" : "True when someone has requested to slow down",
-          "type" : "boolean"
         }
       }
     },
@@ -6669,20 +7564,6 @@
         }
       }
     },
-    "SpeakerListChanged" : {
-      "description" : "Speaker list has changed",
-      "required" : [ ],
-      "type" : "object",
-      "properties" : {
-        "seat_ids" : {
-          "description" : "The seat ids that are currently in the speaker list",
-          "type" : "array",
-          "items" : {
-            "type" : "integer"
-          }
-        }
-      }
-    },
     "RequestListChanged" : {
       "description" : "Request list has changed",
       "type" : "object",
@@ -6708,11 +7589,75 @@
           }
         }
       }
+    },
+    "SpeakerListChanged" : {
+      "description" : "Speaker list has changed",
+      "type" : "object",
+      "properties" : {
+        "seat_ids" : {
+          "description" : "The seat ids that are currently in the speaker list",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "DeskState" : {
+      "type" : "object",
+      "properties" : {
+        "booth" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "desk" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "activeRelay" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "activeOutput" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "currentRelayChannelPresets" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "currentOutputChannelPresets" : {
+          "type" : "array",
+          "items" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "isSlowdownActive" : {
+          "description" : "True when someone has requested to slow down",
+          "type" : "boolean"
+        }
+      }
+    },
+    "NotificationModuleList" : {
+      "description" : "List of notification modules",
+      "type" : "object",
+      "properties" : {
+        "modules" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/NotificationModule"
+          }
+        }
+      }
     }
   },
   "tags" : [ {
     "name" : "Notification",
-    "description" : "With the Notification module you can subscribe to or unscribe from one or more events. By default you are *subscribed to all events*.\n\nThe REST API does not allow to send messages from the server-side to the client-side by default. Therefore the Plixus ERS API uses **long polling** to send messages. This creates a connection between client and server that is kept open for a longer period of time. Over this connection, the server can then send information when and if it is available. When an event occurs this results in a **HTTP 200 OK**, when there is no event this results in a **HTTP 408 Request-Timeout**.\n"
+    "description" : "With the Notification module you can subscribe to or unscribe from one or more events. By default you are *subscribed to all events*. If some event information is not relevant for your system, you can unsubscribe from these modules using the unsubscribe command.\n\nThe REST API does not allow to send messages from the server-side to the client-side by default. Therefore the Plixus ERS API uses **long polling** to send messages. This creates a connection between client and server that is kept open for a longer period of time. Over this connection, the server can then send information when and if it is available. When an event occurs this results in a **HTTP 200 OK**, when there is no event this results in a **HTTP 408 Request-Timeout**.\n"
   }, {
     "name" : "Events",
     "description" : "This is an exhaustive list of all events that can occur across all modules. All these events\ngenerate metadata. With the Notification module you can subscribe to these events.\n"
@@ -6754,7 +7699,7 @@
     "description" : "The Discussion module contains the operator functionality of the API. You can:\n* Retrieve the **microphone state** of every microphone\n\n* Manage the **default conference settings** of the room such as the microphone mode, microphone activation type and the color of the microphone LED for different microphone states\n\n* View and manage **speaker and request lists**\n"
   }, {
     "name" : "Intercom",
-    "description" : "With the Intercom module you can use the Intercom functionality of your conference system. In this module you can find calls to: * See which seats and booth have intercom enabled\n* Enable and disable intertcom\n* Request, accept, start and end the intercom conversation using the seat id\n"
+    "description" : "With the Intercom module you can use the Intercom functionality of your conference system. In this module you can find calls to: \n* See which seats and booth have intercom enabled\n* Enable and disable intertcom\n* Request, accept, start and end the intercom conversation using the seat id\n"
   }, {
     "name" : "Recording",
     "description" : "Use the Recording module to manage the recording on your central unit. This module contains calls to:\n* **Start**, **pause**, **resume** and **stop** the recording\n\n* View and change the **recording settings**\n * Where to store the recording\n \n * Automatically **split** the recording in seperate files after a defined amount of time\n \n * **Prefix** and **suffix** for the file name\n \n * A list of the **recorded channels**\n"
@@ -6769,9 +7714,18 @@
     "description" : "With the Voting module you can do some basic management of voting session. A voting session has the following parameters:\n\n* **Id**: unique identifier\n\n* **State**: state of the voting session, this can be **scheduled**, **running**, **paused** or **ended**\n* **Start time**: the start date and time of the session\n* **End time**: the end date and time of the session\n* **Votes**: the voting results for each seat\n* **Voting options**: the different options the meeting participants can choose from. For each voting option you can define the number (defines where the option is shown on the unit), give a description, define a color and select wheter it is possible to abstain\n* **Title**: the title of the voting session\n"
   }, {
     "name" : "Buttons",
-    "description" : "You can use the Buttons module to manage all the buttons inside your room.\n\n**Warning: changing buttons using the API happens independent of the system logic, therefore this could affect meetings that are running.**\n"
+    "description" : "You can use the Buttons module to manage all the buttons inside your room.\n\n> **Warning: changing buttons using the API happens independent of the system logic, therefore API calls may not always be executed.** This is because CoCon controls certain buttons during specific operations such as voting sessions. When the session is finished the button becomes available.\n"
   }, {
     "name" : "Leds",
-    "description" : "You can use the Buttons module to manage all the buttons inside your room.\n\n**Warning: changing buttons using the API happens independent of the system logic, therefore this could affect meetings that are running.**\n"
+    "description" : "You can use the Buttons module to manage all the buttons inside your room.\n\n> **Warning: changing buttons using the API happens independent of the system logic, therefore API calls may not always be executed.** This is because CoCon controls certain LEDs during specific operations such as voting sessions. When the session is finished the LEDs become available.\n"
+  }, {
+    "name" : "Diagnostics",
+    "description" : "Description about diagnostics module"
+  }, {
+    "name" : "Devices",
+    "description" : "Description about devices module"
+  }, {
+    "name" : "DeviceLicenses",
+    "description" : "Description about devicelicenses module"
   } ]
 }
