@@ -5375,64 +5375,6 @@
         }
       }
     },
-    "RoomConferenceSettings" : {
-      "type" : "object",
-      "properties" : {
-        "maximumNumberOfSpeakers" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "microphoneMode" : {
-          "enum" : [ "directAccess", "request", "group", "other" ]
-        },
-        "microphoneActivationType" : {
-          "enum" : [ "toggle", "push", "vox" ],
-          "type" : "string"
-        },
-        "canSpeakerOverrideOtherSpeaker" : {
-          "type" : "boolean"
-        },
-        "canSpeakerCancelRequest" : {
-          "type" : "boolean"
-        },
-        "canSwitchOff" : {
-          "type" : "boolean"
-        },
-        "enableReply" : {
-          "type" : "boolean"
-        },
-        "buttonReply" : {
-          "enum" : [ "prior", "next" ]
-        },
-        "ledColorOn" : {
-          "enum" : [ "red", "green" ],
-          "type" : "string"
-        },
-        "ledColorRequest" : {
-          "enum" : [ "red", "green" ],
-          "type" : "string"
-        },
-        "ledColorReply" : {
-          "enum" : [ "red", "green" ],
-          "type" : "string"
-        },
-        "ledInactive" : {
-          "enum" : [ "off", "red", "green" ],
-          "type" : "string"
-        },
-        "ledStateNextInLine" : {
-          "enum" : [ "on", "off" ],
-          "type" : "string"
-        },
-        "lowHeadphoneEnabled" : {
-          "type" : "boolean"
-        },
-        "closeRequestSession" : {
-          "description" : "Disable further requests while in request mode (needed for temporary request session)\nDefault is false",
-          "type" : "boolean"
-        }
-      }
-    },
     "SeatDiscussionState" : {
       "type" : "object",
       "properties" : {
@@ -7651,6 +7593,65 @@
           "items" : {
             "$ref" : "#/definitions/NotificationModule"
           }
+        }
+      }
+    },
+    "RoomConferenceSettings" : {
+      "type" : "object",
+      "properties" : {
+        "maximumNumberOfSpeakers" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "microphoneMode" : {
+          "enum" : [ "directAccess", "request", "group", "other" ],
+          "type" : "string"
+        },
+        "microphoneActivationType" : {
+          "enum" : [ "toggle", "push", "vox" ],
+          "type" : "string"
+        },
+        "canSpeakerOverrideOtherSpeaker" : {
+          "type" : "boolean"
+        },
+        "canSpeakerCancelRequest" : {
+          "type" : "boolean"
+        },
+        "canSwitchOff" : {
+          "type" : "boolean"
+        },
+        "enableReply" : {
+          "type" : "boolean"
+        },
+        "buttonReply" : {
+          "enum" : [ "prior", "next" ]
+        },
+        "ledColorOn" : {
+          "enum" : [ "red", "green" ],
+          "type" : "string"
+        },
+        "ledColorRequest" : {
+          "enum" : [ "red", "green" ],
+          "type" : "string"
+        },
+        "ledColorReply" : {
+          "enum" : [ "red", "green" ],
+          "type" : "string"
+        },
+        "ledInactive" : {
+          "enum" : [ "off", "red", "green" ],
+          "type" : "string"
+        },
+        "ledStateNextInLine" : {
+          "enum" : [ "on", "off" ],
+          "type" : "string"
+        },
+        "lowHeadphoneEnabled" : {
+          "type" : "boolean"
+        },
+        "closeRequestSession" : {
+          "description" : "Disable further requests while in request mode (needed for temporary request session)\nDefault is false",
+          "type" : "boolean"
         }
       }
     }
