@@ -9,7 +9,7 @@
       "altText" : "Televic logo"
     }
   },
-  "host" : "localhost:9111",
+  "host" : "localhost:9012",
   "schemes" : [ "http" ],
   "paths" : {
     "/api/events/intercom/conversationrequested" : {
@@ -4597,6 +4597,46 @@
         } ],
         "responses" : {
           "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/seats/reorder" : {
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Start reordering seats inside the room.",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Room" ],
+        "summary" : "Stop reordering seats inside the room.",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/booths/reorder" : {
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Starts reordering interpreter desks into booths in the room.",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Room" ],
+        "summary" : "Stops reordering interpreter desks into booths in the room.",
+        "responses" : {
+          "200" : {
             "description" : "OK"
           }
         }
