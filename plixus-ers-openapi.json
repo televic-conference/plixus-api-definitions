@@ -3050,7 +3050,7 @@
       },
       "put" : {
         "tags" : [ "Meeting" ],
-        "summary" : "Add some delegates in the meeting",
+        "summary" : "Change the delegates in the meeting",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
@@ -3067,7 +3067,7 @@
       },
       "post" : {
         "tags" : [ "Meeting" ],
-        "summary" : "Change list of delegates in the meeting",
+        "summary" : "Add some delegates to the meeting",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
@@ -3102,6 +3102,24 @@
             "schema" : {
               "$ref" : "#/definitions/MeetingDelegate"
             }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Puts a delegate on a seat",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Delegate info",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/MeetingDelegate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
           }
         }
       },
