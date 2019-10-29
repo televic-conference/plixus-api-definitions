@@ -2928,9 +2928,21 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "Prepare the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Meeting info",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PrepareMeetingRequest"
+          }
+        } ],
         "responses" : {
           "204" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Meeting"
+            }
           }
         }
       }
@@ -6525,6 +6537,10 @@
         "title" : {
           "description" : "Title of the meeting",
           "type" : "string"
+        },
+        "isRecorded" : {
+          "description" : "Indicates if the meeting is being recorded.",
+          "type" : "boolean"
         }
       }
     },
@@ -7691,6 +7707,31 @@
         },
         "closeRequestSession" : {
           "description" : "Disable further requests while in request mode (needed for temporary request session)\nDefault is false",
+          "type" : "boolean"
+        }
+      }
+    },
+    "PrepareMeetingRequest" : {
+      "description" : "Details about current meeting",
+      "type" : "object",
+      "properties" : {
+        "delegates" : {
+          "description" : "Delegates participating in meeting",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingDelegate"
+          }
+        },
+        "title" : {
+          "description" : "Title of the meeting",
+          "type" : "string"
+        },
+        "isRecorded" : {
+          "description" : "Should the meeting be recorded",
+          "type" : "boolean"
+        },
+        "usePreviousDelegates" : {
+          "description" : "This boolean indicates if the delegates of the previous meeting should be reused for the new meeting.",
           "type" : "boolean"
         }
       }
