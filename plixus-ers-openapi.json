@@ -4660,10 +4660,7 @@
           "200" : {
             "description" : "Ok.",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/InterpreterDesk"
-              }
+              "$ref" : "#/definitions/InterpreterDeskList"
             }
           }
         }
@@ -7798,6 +7795,20 @@
         "state" : {
           "description" : "State of the interpreter desk.",
           "enum" : [ "normal", "broken" ]
+        }
+      }
+    },
+    "InterpreterDeskList" : {
+      "description" : "List of InterpreterDesk",
+      "required" : [ "desks" ],
+      "type" : "object",
+      "properties" : {
+        "desks" : {
+          "description" : "array of interpreter desks.",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/InterpreterDesk"
+          }
         }
       }
     }
