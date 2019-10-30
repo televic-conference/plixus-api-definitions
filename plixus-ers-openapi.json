@@ -3157,7 +3157,7 @@
     "/api/v1/room/seats" : {
       "get" : {
         "tags" : [ "Room" ],
-        "summary" : "Get all seats in the room",
+        "summary" : "Get all seats in the room, excluding interpreter desks.",
         "responses" : {
           "200" : {
             "description" : "Seats in the room",
@@ -4652,22 +4652,39 @@
         }
       }
     },
-    "/api/v1/room/booths/reorder" : {
+    "/api/v1/room/interpreterdesks" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get a list of all interpreter desks in the room.",
+        "responses" : {
+          "200" : {
+            "description" : "Ok.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/InterpreterDesk"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/interpreterdesks/reorder" : {
       "post" : {
         "tags" : [ "Room" ],
         "summary" : "Starts reordering interpreter desks into booths in the room.",
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "Ok."
           }
         }
       },
       "delete" : {
         "tags" : [ "Room" ],
-        "summary" : "Stops reordering interpreter desks into booths in the room.",
+        "summary" : "Stop reordering interpreter desks.",
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "Ok."
           }
         }
       }
@@ -7751,6 +7768,36 @@
         "usePreviousDelegates" : {
           "description" : "This boolean indicates if the delegates of the previous meeting should be reused for the new meeting.",
           "type" : "boolean"
+        }
+      }
+    },
+    "InterpreterDesk" : {
+      "description" : "Interpreter desk type.",
+      "required" : [ "seat", "units" ],
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "description" : "Seat ID of the interpreter desk.",
+          "type" : "integer"
+        },
+        "booth" : {
+          "description" : "Booth ID of the interpreter desk.",
+          "type" : "integer"
+        },
+        "desk" : {
+          "description" : "Desk ID within the booth.",
+          "type" : "integer"
+        },
+        "units" : {
+          "description" : "Units placed on the interpreter desk.",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SeatUnit"
+          }
+        },
+        "state" : {
+          "description" : "State of the interpreter desk.",
+          "enum" : [ "normal", "broken" ]
         }
       }
     }
