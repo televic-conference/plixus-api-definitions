@@ -3540,7 +3540,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/VotingSession"
+              "$ref" : "#/definitions/VotingSessionId"
             }
           }
         }
@@ -7831,6 +7831,17 @@
           "items" : {
             "$ref" : "#/definitions/InterpreterDesk"
           }
+        }
+      }
+    },
+    "VotingSessionId" : {
+      "description" : "id of a voting session",
+      "required" : [ "id" ],
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "ID of a voting session.",
+          "type" : "string"
         }
       }
     }
