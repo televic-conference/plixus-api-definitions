@@ -4685,6 +4685,24 @@
           }
         }
       }
+    },
+    "/api/v1/voting/sessions/{id}/close" : {
+      "post" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Close the voting session",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Unique identifier of the voting session",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -7191,6 +7209,10 @@
           "items" : {
             "$ref" : "#/definitions/VotingOption"
           }
+        },
+        "isSecret" : {
+          "description" : "Indicates if the voting should be secret or not.",
+          "type" : "boolean"
         }
       }
     },
