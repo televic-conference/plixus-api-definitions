@@ -3541,6 +3541,28 @@
             "description" : "OK",
             "schema" : {
               "$ref" : "#/definitions/VotingSessionId"
+            },
+            "examples" : {
+              "application/json" : {
+                "title" : "Start to vote!",
+                "options" : [ {
+                  "number" : 2,
+                  "description" : "yes",
+                  "color" : "green",
+                  "abstain" : false
+                }, {
+                  "number" : 3,
+                  "description" : "abstain",
+                  "color" : "yellow",
+                  "abstain" : true
+                }, {
+                  "number" : 4,
+                  "description" : "no",
+                  "color" : "red",
+                  "abstain" : false
+                } ],
+                "isSecret" : false
+              }
             }
           }
         }
@@ -4100,7 +4122,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "type" : "object"
+              "$ref" : "#/definitions/ResourceInfo"
             }
           },
           "400" : {
@@ -4115,7 +4137,7 @@
         "summary" : "Get a resource by id",
         "operationId" : "Resources_GetResource",
         "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
+        "produces" : [ "text/json", "application/json", "multipart/form-data" ],
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
