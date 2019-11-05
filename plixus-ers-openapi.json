@@ -3528,6 +3528,7 @@
       "post" : {
         "tags" : [ "Voting" ],
         "summary" : "Schedule a voting session",
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
@@ -3738,20 +3739,6 @@
             "description" : "OK",
             "schema" : {
               "$ref" : "#/definitions/VotingSessionStateChanged"
-            }
-          }
-        }
-      }
-    },
-    "/api/events/voting/votingparticipantvoted" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when participant of voting session has voted",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/VotingParticipantVoted"
             }
           }
         }
@@ -4722,6 +4709,20 @@
           },
           "400" : {
             "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/events/voting/votingresults" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Voting results event",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VotingResults"
+            }
           }
         }
       }
@@ -7162,6 +7163,13 @@
           "items" : {
             "$ref" : "#/definitions/VotingOptionResult"
           }
+        },
+        "participantOptions" : {
+          "description" : "Lists which option every participant has voted on. Only available when the voting is not secret.",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ParticipantOption"
+          }
         }
       }
     },
@@ -7865,6 +7873,27 @@
           "description" : "ID of a voting session.",
           "type" : "string"
         }
+      }
+    },
+    "ParticipantOption" : {
+      "title" : "Root Type for VotingOptionResult",
+      "description" : "Option a particular participant voted on.",
+      "type" : "object",
+      "properties" : {
+        "option" : {
+          "format" : "int32",
+          "description" : "Number of the voting option",
+          "type" : "integer"
+        },
+        "seat" : {
+          "format" : "int32",
+          "description" : "Seat number of the participant",
+          "type" : "integer"
+        }
+      },
+      "example" : {
+        "option" : 1,
+        "seat" : 10
       }
     }
   },
