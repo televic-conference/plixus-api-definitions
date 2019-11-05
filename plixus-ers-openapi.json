@@ -4131,55 +4131,6 @@
         }
       }
     },
-    "/api/v1/resources/{id}" : {
-      "get" : {
-        "tags" : [ "Resources" ],
-        "summary" : "Get a resource by id",
-        "operationId" : "Resources_GetResource",
-        "consumes" : [ ],
-        "produces" : [ "text/json", "application/json", "multipart/form-data" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "Id of resource that was generated when uploading",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "type" : "object"
-            }
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Resources" ],
-        "summary" : "Delete a resource",
-        "operationId" : "Resources_DeleteResource",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "Id of resource to delete",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      }
-    },
     "/api/v1/system/license" : {
       "get" : {
         "tags" : [ "System" ],
@@ -4722,6 +4673,55 @@
         "responses" : {
           "204" : {
             "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/resources/{id}" : {
+      "get" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Get a resource by id",
+        "operationId" : "Resources_GetResource",
+        "consumes" : [ ],
+        "produces" : [ "image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf", "application/json", "text/xml", "text/plain", "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of resource that was generated when uploading",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Delete a resource",
+        "operationId" : "Resources_DeleteResource",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of resource to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
           }
         }
       }
