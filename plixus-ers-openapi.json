@@ -7210,6 +7210,10 @@
         "abstain" : {
           "description" : "True when this counts as abstain vote",
           "type" : "boolean"
+        },
+        "ledColor" : {
+          "description" : "Color of the voting button LED",
+          "enum" : [ "red", "green", "blue", "yellow", "white", "cyan", "magenta" ]
         }
       }
     },
