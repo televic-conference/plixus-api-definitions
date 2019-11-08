@@ -6832,9 +6832,13 @@
       "description" : "Label of a seat has changed",
       "type" : "object",
       "properties" : {
-        "seat" : {
-          "$ref" : "#/definitions/Seat",
-          "description" : "Seat that has changed"
+        "id" : {
+          "description" : "Seat that has changed",
+          "type" : "integer"
+        },
+        "label" : {
+          "description" : "New label of the seat",
+          "type" : "string"
         }
       }
     },
@@ -6842,9 +6846,13 @@
       "description" : "Role of a seat has changed",
       "type" : "object",
       "properties" : {
-        "seat" : {
-          "$ref" : "#/definitions/Seat",
-          "description" : "Seat that has changed"
+        "id" : {
+          "description" : "Seat id that has changed",
+          "type" : "integer"
+        },
+        "role" : {
+          "description" : "New role of the seat",
+          "enum" : [ "chairman", "vip", "delegate" ]
         }
       }
     },
