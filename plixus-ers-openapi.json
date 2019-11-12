@@ -7662,7 +7662,7 @@
       "description" : "Request list has changed",
       "type" : "object",
       "properties" : {
-        "seat_ids" : {
+        "seatIds" : {
           "description" : "The seat ids that are currently in the request list",
           "type" : "array",
           "items" : {
@@ -7675,7 +7675,7 @@
       "description" : "Reply list has changed",
       "type" : "object",
       "properties" : {
-        "seat_ids" : {
+        "seatIds" : {
           "description" : "The seat ids that are currently in the reply list",
           "type" : "array",
           "items" : {
@@ -7688,7 +7688,7 @@
       "description" : "Speaker list has changed",
       "type" : "object",
       "properties" : {
-        "seat_ids" : {
+        "seatIds" : {
           "description" : "The seat ids that are currently in the speaker list",
           "type" : "array",
           "items" : {
