@@ -7103,7 +7103,7 @@
         },
         "state" : {
           "description" : "State of the voting session",
-          "enum" : [ "scheduled", "running", "paused", "ended" ]
+          "enum" : [ "scheduled", "starting", "running", "paused", "ending", "closed" ]
         },
         "startTime" : {
           "format" : "date-time",
