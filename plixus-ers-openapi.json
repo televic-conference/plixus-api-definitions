@@ -3274,62 +3274,6 @@
         }
       }
     },
-    "/api/events/room/seatunitschanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when units on a seat have changed",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SeatUnitsChanged"
-            }
-          }
-        }
-      }
-    },
-    "/api/events/room/seatlabelchanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when label of a seat has changed",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SeatLabelChanged"
-            }
-          }
-        }
-      }
-    },
-    "/api/events/room/seatrolechanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when role of a seat has changed",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SeatRoleChanged"
-            }
-          }
-        }
-      }
-    },
-    "/api/events/room/seatstatechanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when state of a seat has changed",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SeatStateChanged"
-            }
-          }
-        }
-      }
-    },
     "/api/v1/room/seats/{seat}/capabilities/{capability}/enabled" : {
       "put" : {
         "tags" : [ "Room" ],
@@ -3362,20 +3306,6 @@
         "required" : true,
         "type" : "string"
       } ]
-    },
-    "/api/events/room/seatcapabilitieschanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when capabilities of a seat have changed",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SeatCapabilitiesChanged"
-            }
-          }
-        }
-      }
     },
     "/api/v1/room/booths" : {
       "get" : {
@@ -4722,6 +4652,62 @@
             "description" : "OK",
             "schema" : {
               "$ref" : "#/definitions/VotingResults"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/seatchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when capabilities of a seat have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/interpreterdeskadded/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when interpreter desk was added to the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InterpreterDeskAdded"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/interpreterdeskremoved/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when interpreter desk was added to the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InterpreterDeskRemoved"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/interpreterdeskchanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when interpreter desk was added to the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InterpreterDeskChanged"
             }
           }
         }
@@ -6882,15 +6868,6 @@
       },
       "example" : "{\n    \"name\": \"discussion\",\n    \"enabled\": true\n}"
     },
-    "SeatCapabilitiesChanged" : {
-      "type" : "object",
-      "properties" : {
-        "seat" : {
-          "$ref" : "#/definitions/Seat",
-          "description" : "Seat that has changed"
-        }
-      }
-    },
     "Desk" : {
       "title" : "Root Type for Desk",
       "description" : "The root of the Desk type's schema.",
@@ -7906,6 +7883,42 @@
       "example" : {
         "option" : 1,
         "seat" : 10
+      }
+    },
+    "SeatChanged" : {
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "$ref" : "#/definitions/Seat",
+          "description" : "Seat that has changed"
+        }
+      }
+    },
+    "InterpreterDeskAdded" : {
+      "required" : [ "interpreterDesk" ],
+      "type" : "object",
+      "properties" : {
+        "interpreterDesk" : {
+          "$ref" : "#/definitions/InterpreterDesk"
+        }
+      }
+    },
+    "InterpreterDeskChanged" : {
+      "required" : [ "interpreterDesk" ],
+      "type" : "object",
+      "properties" : {
+        "interpreterDesk" : {
+          "$ref" : "#/definitions/InterpreterDesk"
+        }
+      }
+    },
+    "InterpreterDeskRemoved" : {
+      "required" : [ "seat" ],
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "$ref" : "#/definitions/InterpreterDesk"
+        }
       }
     }
   },
