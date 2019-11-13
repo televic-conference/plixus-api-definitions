@@ -7917,7 +7917,7 @@
       "type" : "object",
       "properties" : {
         "seat" : {
-          "$ref" : "#/definitions/InterpreterDesk"
+          "type" : "integer"
         }
       }
     }
