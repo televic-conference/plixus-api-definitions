@@ -4058,7 +4058,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/LicenseInformation"
+              "$ref" : "#/definitions/LicenseList"
             }
           },
           "400" : {
@@ -7450,6 +7450,7 @@
     },
     "LicenseInformation" : {
       "description" : "Information about the current license",
+      "required" : [ "productName" ],
       "type" : "object",
       "properties" : {
         "state" : {
@@ -7474,6 +7475,10 @@
           "items" : {
             "$ref" : "#/definitions/LicenseModule"
           }
+        },
+        "productName" : {
+          "description" : "Product name of the license",
+          "enum" : [ "Cocos", "ConFlex", "Confero" ]
         }
       }
     },
@@ -7918,6 +7923,19 @@
       "properties" : {
         "seat" : {
           "type" : "integer"
+        }
+      }
+    },
+    "LicenseList" : {
+      "description" : "List of all licenses, grouped by product name.",
+      "required" : [ "licenses" ],
+      "type" : "object",
+      "properties" : {
+        "licenses" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LicenseInformation"
+          }
         }
       }
     }
