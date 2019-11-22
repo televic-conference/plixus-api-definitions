@@ -7540,7 +7540,7 @@
           "type" : "string"
         },
         "ipConfiguration" : {
-          "$ref" : "#/definitions/SystemInfo",
+          "$ref" : "#/definitions/IpConfiguration",
           "description" : "IP configuration of the system"
         },
         "dnsName" : {
