@@ -4271,37 +4271,6 @@
         }
       }
     },
-    "/api/v1/system/loglevel" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current loglevel",
-        "responses" : {
-          "200" : {
-            "description" : "Date format",
-            "schema" : {
-              "$ref" : "#/definitions/LogLevel"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the log level",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/LogLevel"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
     "/api/events/system/loglevelchanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -4710,6 +4679,60 @@
           },
           "400" : {
             "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/system/log/level" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current loglevel",
+        "responses" : {
+          "200" : {
+            "description" : "Date format",
+            "schema" : {
+              "$ref" : "#/definitions/LogLevel"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the log level",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LogLevel"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/log/" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get a url to download all log files",
+        "responses" : {
+          "200" : {
+            "description" : "Date format",
+            "schema" : {
+              "$ref" : "#/definitions/Download"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "System" ],
+        "summary" : "Delete all log files",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
           }
         }
       }
@@ -7937,6 +7960,17 @@
           "items" : {
             "$ref" : "#/definitions/LicenseInformation"
           }
+        }
+      }
+    },
+    "Download" : {
+      "description" : "url for downloading a file from the system",
+      "required" : [ "url" ],
+      "type" : "object",
+      "properties" : {
+        "url" : {
+          "description" : "url that can be used to download the file",
+          "type" : "string"
         }
       }
     }
