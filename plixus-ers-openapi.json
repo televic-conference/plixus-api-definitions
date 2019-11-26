@@ -4720,9 +4720,20 @@
         "summary" : "Get a url to download all log files",
         "responses" : {
           "200" : {
-            "description" : "Date format",
+            "description" : "Ok. Event will be sent with download url from the moment the achive is ready to be downloaded."
+          }
+        }
+      }
+    },
+    "/api/events/system/logarchiveready" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when log archive is ready for download",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/Download"
+              "$ref" : "#/definitions/LogArchiveReady"
             }
           }
         }
@@ -7954,8 +7965,8 @@
         }
       }
     },
-    "Download" : {
-      "description" : "url for downloading a file from the system",
+    "LogArchiveReady" : {
+      "description" : "url for downloading a log file from the system",
       "required" : [ "url" ],
       "type" : "object",
       "properties" : {
