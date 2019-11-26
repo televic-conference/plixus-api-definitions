@@ -4289,6 +4289,15 @@
       "post" : {
         "tags" : [ "System" ],
         "summary" : "Update the system",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Update file name",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateFileName"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -7972,6 +7981,17 @@
       "properties" : {
         "url" : {
           "description" : "url that can be used to download the file",
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateFileName" : {
+      "description" : "update file name",
+      "required" : [ "fileName" ],
+      "type" : "object",
+      "properties" : {
+        "fileName" : {
+          "description" : "fileName of the update file.",
           "type" : "string"
         }
       }
