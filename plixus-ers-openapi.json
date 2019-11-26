@@ -4726,15 +4726,6 @@
             }
           }
         }
-      },
-      "delete" : {
-        "tags" : [ "System" ],
-        "summary" : "Delete all log files",
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          }
-        }
       }
     }
   },
