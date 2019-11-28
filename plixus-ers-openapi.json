@@ -4747,6 +4747,41 @@
           }
         }
       }
+    },
+    "/api/events/system/updateprogress" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event that informs about the update progress",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/UpdateProgress"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/devices/{serial}" : {
+      "delete" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Delete a device, which is offline",
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "description" : "serial number of the device which needs to be deleted",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Unable to delete device"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -7992,6 +8027,36 @@
       "properties" : {
         "fileName" : {
           "description" : "fileName of the update file.",
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateProgress" : {
+      "description" : "info about the update progress",
+      "required" : [ "status", "progressId", "step", "error", "maxSteps", "message" ],
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "description" : "Status of the update process",
+          "type" : "string"
+        },
+        "progressId" : {
+          "type" : "integer"
+        },
+        "step" : {
+          "description" : "step in the update progress",
+          "type" : "integer"
+        },
+        "maxSteps" : {
+          "description" : "maximum number of steps in the update process",
+          "type" : "integer"
+        },
+        "error" : {
+          "description" : "error boolean",
+          "type" : "boolean"
+        },
+        "message" : {
+          "description" : "description of the update progress step",
           "type" : "string"
         }
       }
