@@ -4782,6 +4782,20 @@
           }
         }
       }
+    },
+    "/api/v1/room/seats/discussion" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get all discussion capable seats in the room",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/SeatList"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
