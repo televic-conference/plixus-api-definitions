@@ -4295,7 +4295,7 @@
           "description" : "Update file name",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/UpdateFileName"
+            "$ref" : "#/definitions/UpdateFileNameList"
           }
         } ],
         "responses" : {
@@ -4793,6 +4793,74 @@
             "schema" : {
               "$ref" : "#/definitions/SeatList"
             }
+          }
+        }
+      }
+    },
+    "/api/v1/system/update/files" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get all update files which are currently on the system",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/UpdateFileList"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload an update file to the system",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "update file",
+          "in" : "formData",
+          "description" : "The update file to upload",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "platform",
+          "in" : "formData",
+          "description" : "platform info",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "platformVersion",
+          "in" : "formData",
+          "description" : "platform version",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "target",
+          "in" : "formData",
+          "description" : "target info",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "formData",
+          "description" : "offset info",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "version",
+          "in" : "formData",
+          "description" : "version info",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "force",
+          "in" : "formData",
+          "description" : "force update boolean",
+          "required" : true,
+          "type" : "boolean"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
           }
         }
       }
@@ -8072,6 +8140,60 @@
         "message" : {
           "description" : "description of the update progress step",
           "type" : "string"
+        }
+      }
+    },
+    "UpdateFileInfo" : {
+      "description" : "Update file info",
+      "required" : [ "platform", "platformVersion", "target", "offset", "name", "force" ],
+      "type" : "object",
+      "properties" : {
+        "platform" : {
+          "type" : "string"
+        },
+        "platformVersion" : {
+          "type" : "string"
+        },
+        "target" : {
+          "type" : "string"
+        },
+        "offset" : {
+          "type" : "string"
+        },
+        "name" : {
+          "description" : "file name",
+          "type" : "string"
+        },
+        "force" : {
+          "description" : "force update if version is below current version",
+          "type" : "boolean"
+        }
+      }
+    },
+    "UpdateFileList" : {
+      "description" : "list of update files",
+      "required" : [ "files" ],
+      "type" : "object",
+      "properties" : {
+        "files" : {
+          "description" : "list of update file info",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/UpdateFileInfo"
+          }
+        }
+      }
+    },
+    "UpdateFileNameList" : {
+      "description" : "list of update file names",
+      "required" : [ "files" ],
+      "type" : "object",
+      "properties" : {
+        "files" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/UpdateFileName"
+          }
         }
       }
     }
