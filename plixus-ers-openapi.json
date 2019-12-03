@@ -4816,7 +4816,7 @@
         "consumes" : [ "multipart/form-data" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "update file",
+          "name" : "file",
           "in" : "formData",
           "description" : "The update file to upload",
           "required" : true,
@@ -4861,6 +4861,27 @@
         "responses" : {
           "200" : {
             "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/resources/{id}/info" : {
+      "get" : {
+        "tags" : [ "Resources" ],
+        "summary" : "Get info about a given resource file.",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of resource that was generated when uploading\n",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ResourceInfo"
+            }
           }
         }
       }
