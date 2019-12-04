@@ -4288,7 +4288,7 @@
     "/api/v1/system/update" : {
       "post" : {
         "tags" : [ "System" ],
-        "summary" : "Update the system",
+        "summary" : "Update the system with the files specified in the body",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
@@ -4821,42 +4821,6 @@
           "description" : "The update file to upload",
           "required" : true,
           "type" : "file"
-        }, {
-          "name" : "platform",
-          "in" : "formData",
-          "description" : "platform info",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "platformVersion",
-          "in" : "formData",
-          "description" : "platform version",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "target",
-          "in" : "formData",
-          "description" : "target info",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "offset",
-          "in" : "formData",
-          "description" : "offset info",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "version",
-          "in" : "formData",
-          "description" : "version info",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "force",
-          "in" : "formData",
-          "description" : "force update boolean",
-          "required" : true,
-          "type" : "boolean"
         } ],
         "responses" : {
           "200" : {
@@ -4885,6 +4849,39 @@
           }
         }
       }
+    },
+    "/api/v1/system/update/files/{fileName}" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Update file info",
+        "parameters" : [ {
+          "name" : "fileName",
+          "in" : "path",
+          "description" : "file name",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Info of the file indicated by fileName.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateFileInfo"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "fileName",
+        "in" : "path",
+        "description" : "file name",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -8166,7 +8163,7 @@
     },
     "UpdateFileInfo" : {
       "description" : "Update file info",
-      "required" : [ "platform", "platformVersion", "target", "offset", "name", "force" ],
+      "required" : [ "platform", "platformVersion", "target", "offset", "name", "force", "version" ],
       "type" : "object",
       "properties" : {
         "platform" : {
@@ -8188,6 +8185,9 @@
         "force" : {
           "description" : "force update if version is below current version",
           "type" : "boolean"
+        },
+        "version" : {
+          "type" : "string"
         }
       }
     },
