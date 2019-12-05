@@ -7991,7 +7991,7 @@
     },
     "InterpreterDesk" : {
       "description" : "Interpreter desk type.",
-      "required" : [ "seat", "units" ],
+      "required" : [ "seat", "units", "reordered" ],
       "type" : "object",
       "properties" : {
         "seat" : {
@@ -8016,6 +8016,10 @@
         "state" : {
           "description" : "State of the interpreter desk.",
           "enum" : [ "normal", "broken" ]
+        },
+        "reordered" : {
+          "description" : "Specifies if the interpreter desk has been reordered (given a specific seat id)",
+          "type" : "boolean"
         }
       }
     },
