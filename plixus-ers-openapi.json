@@ -6862,6 +6862,7 @@
       }
     },
     "Seat" : {
+      "required" : [ "reordered" ],
       "type" : "object",
       "properties" : {
         "id" : {
@@ -6893,6 +6894,10 @@
           "items" : {
             "$ref" : "#/definitions/SeatCapability"
           }
+        },
+        "reordered" : {
+          "description" : "Indicates if the seat has already been reordered (given a specific seat id).",
+          "type" : "boolean"
         }
       }
     },
