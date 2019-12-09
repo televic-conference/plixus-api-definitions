@@ -4882,6 +4882,20 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/events/room/layoutchanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the room layout has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RoomLayoutChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8224,6 +8238,16 @@
           "items" : {
             "$ref" : "#/definitions/UpdateFileName"
           }
+        }
+      }
+    },
+    "RoomLayoutChanged" : {
+      "description" : "Room layout changed event",
+      "required" : [ "layout" ],
+      "type" : "object",
+      "properties" : {
+        "layout" : {
+          "$ref" : "#/definitions/RoomLayout"
         }
       }
     }
