@@ -7806,6 +7806,10 @@
           "items" : {
             "type" : "string"
           }
+        },
+        "enabled" : {
+          "description" : "Is the role enabled",
+          "type" : "boolean"
         }
       }
     },
