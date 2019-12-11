@@ -8093,7 +8093,7 @@
       }
     },
     "InterpreterDeskAdded" : {
-      "required" : [ "interpreterDesk" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "interpreterDesk" : {
@@ -8102,7 +8102,7 @@
       }
     },
     "InterpreterDeskChanged" : {
-      "required" : [ "interpreterDesk" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "interpreterDesk" : {
@@ -8111,7 +8111,7 @@
       }
     },
     "InterpreterDeskRemoved" : {
-      "required" : [ "seat" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "seat" : {
