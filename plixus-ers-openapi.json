@@ -4896,6 +4896,20 @@
           }
         }
       }
+    },
+    "/api/events/interpretation/languageschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the languages list has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for FloorNameChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/LanguagesChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8252,6 +8266,19 @@
       "properties" : {
         "layout" : {
           "$ref" : "#/definitions/RoomLayout"
+        }
+      }
+    },
+    "LanguagesChanged" : {
+      "description" : "Event when languages list has changed",
+      "required" : [ "languages" ],
+      "type" : "object",
+      "properties" : {
+        "languages" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Language"
+          }
         }
       }
     }
