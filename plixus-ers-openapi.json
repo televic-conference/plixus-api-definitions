@@ -3313,10 +3313,19 @@
         "summary" : "Get all booths in the room",
         "responses" : {
           "200" : {
-            "description" : "Seats in the room",
+            "description" : "Booths in the room",
             "schema" : {
               "$ref" : "#/definitions/BoothList"
             }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Add a new booth",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
           }
         }
       }
@@ -4910,6 +4919,27 @@
           }
         }
       }
+    },
+    "/api/v1/room/booths/{booth}" : {
+      "delete" : {
+        "tags" : [ "Room" ],
+        "summary" : "Deletes a booth",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "booth does not exist"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "booth",
+        "in" : "path",
+        "description" : "Number of the booth",
+        "required" : true,
+        "type" : "integer"
+      } ]
     }
   },
   "definitions" : {
