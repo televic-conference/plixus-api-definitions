@@ -8236,7 +8236,7 @@
     },
     "UpdateFileInfo" : {
       "description" : "Update file info",
-      "required" : [ "platform", "platformVersion", "target", "offset", "name", "force", "version" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "platform" : {
@@ -8261,6 +8261,12 @@
         },
         "version" : {
           "type" : "string"
+        },
+        "devices" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
