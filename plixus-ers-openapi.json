@@ -4948,6 +4948,9 @@
         "responses" : {
           "200" : {
             "description" : "OK"
+          },
+          "400" : {
+            "description" : "seat not found"
           }
         }
       },
@@ -5016,6 +5019,27 @@
           }
         }
       }
+    },
+    "/api/v1/room/interpreterdesks/{desk}/reorder/" : {
+      "delete" : {
+        "tags" : [ "Room" ],
+        "summary" : "Set interpreter desk as not reordered",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "desk not found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "desk",
+        "in" : "path",
+        "description" : "seat ID of the interpreter desk",
+        "required" : true,
+        "type" : "integer"
+      } ]
     }
   },
   "definitions" : {
