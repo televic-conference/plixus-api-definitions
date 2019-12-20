@@ -4940,6 +4940,82 @@
         "required" : true,
         "type" : "integer"
       } ]
+    },
+    "/api/v1/room/seats/{seat}/reorder" : {
+      "delete" : {
+        "tags" : [ "Room" ],
+        "summary" : "Set seat as not reordered",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "Number of seat",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/room/booths/{booth}/move/{newbooth}" : {
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Move a booth to another position.",
+        "description" : "This effectively changes the booth ID of this booth, but possibly of all the booths ordered after the new booth ID (insert)",
+        "parameters" : [ {
+          "name" : "booth",
+          "in" : "path",
+          "description" : "current booth id",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "newbooth",
+          "in" : "path",
+          "description" : "new booth id",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "booth not found"
+          }
+        }
+      }
+    },
+    "/api/v1/room/seats/reorder/clear" : {
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Clears the reordering",
+        "description" : "This means the reordering will start from scratch.",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Not allowed to clear reordering"
+          }
+        }
+      }
+    },
+    "/api/v1/room/interpreterdesks/reorder/clear/" : {
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Clears the reordering",
+        "description" : "This means the reordering will start from scratch.",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Not allowed to clear reordering"
+          }
+        }
+      }
     }
   },
   "definitions" : {
