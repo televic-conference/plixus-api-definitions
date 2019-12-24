@@ -4640,7 +4640,7 @@
     "/api/events/room/interpreterdeskchanged/" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Event when interpreter desk was added to the room",
+        "summary" : "Event when interpreter desk has changed",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -5040,6 +5040,34 @@
         "required" : true,
         "type" : "integer"
       } ]
+    },
+    "/api/events/room/seatschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when various seats have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SeatChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/room/interpreterdeskschanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when various interpreter desks have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InterpreterDeskChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
