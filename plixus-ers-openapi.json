@@ -8447,6 +8447,26 @@
           }
         }
       }
+    },
+    "SeatsChanged" : {
+      "description" : "event when various seats have changed",
+      "required" : [ "seats" ],
+      "type" : "object",
+      "properties" : {
+        "seats" : {
+          "$ref" : "#/definitions/SeatList"
+        }
+      }
+    },
+    "InterpreterDesksChanged" : {
+      "description" : "event when various interpreter deks have changed",
+      "required" : [ "desks" ],
+      "type" : "object",
+      "properties" : {
+        "desks" : {
+          "$ref" : "#/definitions/InterpreterDeskList"
+        }
+      }
     }
   },
   "tags" : [ {
