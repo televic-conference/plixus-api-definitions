@@ -5068,6 +5068,23 @@
           }
         }
       }
+    },
+    "/api/v1/system/update/progress" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Gets the current update progress",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/FullUpdateProgress"
+            }
+          },
+          "400" : {
+            "description" : "System is not updating"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8469,6 +8486,15 @@
       "properties" : {
         "desks" : {
           "$ref" : "#/definitions/InterpreterDeskList"
+        }
+      }
+    },
+    "FullUpdateProgress" : {
+      "description" : "progress info about all files which are being updated.",
+      "type" : "object",
+      "properties" : {
+        "files" : {
+          "$ref" : "#/definitions/UpdateProgress"
         }
       }
     }
