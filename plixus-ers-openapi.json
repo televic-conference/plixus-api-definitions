@@ -5085,6 +5085,55 @@
           }
         }
       }
+    },
+    "/api/v1/system/operatingmode" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current operating mode.",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/OperatingMode"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the operating mode",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Operating mode to be set",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OperatingMode"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Unable to change operating mode."
+          }
+        }
+      }
+    },
+    "/api/events/system/operatingmodechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event that informs about operating mode changes",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/OperatingMode"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8498,6 +8547,14 @@
           "items" : {
             "$ref" : "#/definitions/UpdateProgress"
           }
+        }
+      }
+    },
+    "OperatingMode" : {
+      "type" : "object",
+      "properties" : {
+        "mode" : {
+          "enum" : [ "normal", "reorderSeats", "reorderInterpreterDesks", "update", "golden", "testing" ]
         }
       }
     }
