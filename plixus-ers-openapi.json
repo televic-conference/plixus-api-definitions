@@ -8359,6 +8359,10 @@
         "message" : {
           "description" : "description of the update progress step",
           "type" : "string"
+        },
+        "fileName" : {
+          "description" : "file name of the file which is being updated",
+          "type" : "string"
         }
       }
     },
