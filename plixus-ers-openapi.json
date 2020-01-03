@@ -8400,7 +8400,7 @@
     },
     "UpdateProgress" : {
       "description" : "info about the update progress",
-      "required" : [ "status", "progressId", "step", "error", "maxSteps", "message" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "status" : {
