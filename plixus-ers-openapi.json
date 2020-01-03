@@ -2763,6 +2763,15 @@
       "put" : {
         "tags" : [ "Recording" ],
         "summary" : "Change the recording settings",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "settings that should be applied",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RecordingSettings"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -2778,7 +2787,7 @@
           "200" : {
             "description" : "Storage info",
             "schema" : {
-              "$ref" : "#/definitions/RecordingStorageInfo"
+              "$ref" : "#/definitions/RecordingFilesInfo"
             }
           }
         }
@@ -2853,7 +2862,7 @@
     "/api/v1/recording/storage/{type}" : {
       "get" : {
         "tags" : [ "Recording" ],
-        "summary" : "Get storage files",
+        "summary" : "Get info about the recording storage medium",
         "responses" : {
           "200" : {
             "description" : "Storage info",
@@ -6921,7 +6930,7 @@
         },
         "bitRate" : {
           "description" : "The bit rate to be used for recording",
-          "enum" : [ "64", "128", "192", "256" ]
+          "enum" : [ "rate64", "rate128", "rate192", "rate256" ]
         },
         "autoDelete" : {
           "description" : "Auto delete oldest files when no space left",
@@ -6933,7 +6942,7 @@
         },
         "autoSplitTime" : {
           "description" : "Time (in seconds) after which an audio recording will be split into a new file",
-          "type" : "boolean"
+          "type" : "integer"
         },
         "prefix" : {
           "description" : "File name prefix",
