@@ -8563,7 +8563,7 @@
       "type" : "object",
       "properties" : {
         "mode" : {
-          "enum" : [ "normal", "reorderSeats", "reorderInterpreterDesks", "update", "golden", "testing" ]
+          "enum" : [ "Normal", "ReorderSeats", "ReorderInterpreterDesks", "Update", "Golden", "Testing" ]
         }
       }
     }
