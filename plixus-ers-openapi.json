@@ -5143,6 +5143,77 @@
           }
         }
       }
+    },
+    "/api/v1/system/splashscreen" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the resource ID of the splashscreen image",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ResourceId"
+            }
+          },
+          "204" : {
+            "description" : "No splashscreen was defined yet."
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Update the splashscreen resource ID",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ResourceId"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "System" ],
+        "summary" : "Deleted the resource ID of the splashscreen",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/api/events/system/splashscreenchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when splash screen resource  was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DateFormatChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/system/splashscreenremoved" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when splash screen resource ID was removed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DateFormatChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8414,7 +8485,7 @@
       "properties" : {
         "status" : {
           "description" : "Status of the update process",
-          "type" : "string"
+          "enum" : [ "Idle", "Started", "Busy", "Completed" ]
         },
         "progressId" : {
           "type" : "integer"
@@ -8564,6 +8635,15 @@
       "properties" : {
         "mode" : {
           "enum" : [ "Normal", "ReorderSeats", "ReorderInterpreterDesks", "Update", "Golden", "Testing" ]
+        }
+      }
+    },
+    "ResourceId" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "resource ID",
+          "type" : "string"
         }
       }
     }
