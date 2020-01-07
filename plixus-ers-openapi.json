@@ -5144,49 +5144,6 @@
         }
       }
     },
-    "/api/v1/system/splashscreen" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the resource ID of the splashscreen image",
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "$ref" : "#/definitions/ResourceId"
-            }
-          },
-          "204" : {
-            "description" : "No splashscreen was defined yet."
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Update the splashscreen resource ID",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/ResourceId"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "System" ],
-        "summary" : "Deleted the resource ID of the splashscreen",
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          }
-        }
-      }
-    },
     "/api/events/system/splashscreenchanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -5211,6 +5168,51 @@
             "schema" : {
               "$ref" : "#/definitions/DateFormatChanged"
             }
+          }
+        }
+      }
+    },
+    "/api/v1/system/splashscreen" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the resource of the splash screen",
+        "produces" : [ "image/png", "image/jpg", "image/jpeg" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "format" : "binary",
+              "type" : "string"
+            }
+          },
+          "204" : {
+            "description" : "No splashscreen was defined yet."
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload a splash screen resource",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "Resource",
+          "in" : "formData",
+          "description" : "Upload a resource",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "System" ],
+        "summary" : "Deleted the resource of the splash screen",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
           }
         }
       }
