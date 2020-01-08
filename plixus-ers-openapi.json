@@ -5210,6 +5210,20 @@
           }
         }
       }
+    },
+    "/api/events/users/userroleschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when user roles have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/UserRoleList"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
