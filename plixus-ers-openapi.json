@@ -5150,10 +5150,7 @@
         "summary" : "Event when splash screen resource  was changed",
         "responses" : {
           "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/DateFormatChanged"
-            }
+            "description" : "Ok"
           }
         }
       }
@@ -5164,10 +5161,7 @@
         "summary" : "Event when splash screen resource ID was removed",
         "responses" : {
           "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/DateFormatChanged"
-            }
+            "description" : "Ok"
           }
         }
       }
