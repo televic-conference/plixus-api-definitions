@@ -5224,6 +5224,68 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/archive" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get a list of past meetings, stored in the meeting archive",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingArchiveList"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/archive/{archiveName}/info" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get general meeting info of the archived meeting.",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/Meeting"
+            }
+          },
+          "400" : {
+            "description" : "Meeting archive folder not found."
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "archiveName",
+        "in" : "path",
+        "description" : "name of the archive folder on the system.",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/archive/{archiveName}/votingsessions" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get voting sessions info of the archived meeting.",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingArchiveVotingSessionList"
+            }
+          },
+          "400" : {
+            "description" : "Meeting archive folder not found."
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "archiveName",
+        "in" : "path",
+        "description" : "name of the archive folder on the system.",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -7609,13 +7671,6 @@
           "description" : "End date and time of the voting session",
           "type" : "string"
         },
-        "votes" : {
-          "description" : "Votes that were cast during voting session",
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Vote"
-          }
-        },
         "options" : {
           "description" : "Voting options that are available during voting session",
           "type" : "array",
@@ -7626,20 +7681,6 @@
         "title" : {
           "description" : "Title of the voting session",
           "type" : "string"
-        }
-      }
-    },
-    "Vote" : {
-      "description" : "Vate cast during a voting session",
-      "type" : "object",
-      "properties" : {
-        "seat" : {
-          "description" : "Seat that has casted the vote",
-          "type" : "integer"
-        },
-        "votingOption" : {
-          "description" : "Voting option that was selected",
-          "type" : "integer"
         }
       }
     },
@@ -8654,6 +8695,58 @@
         "id" : {
           "description" : "resource ID",
           "type" : "string"
+        }
+      }
+    },
+    "MeetingArchiveList" : {
+      "description" : "list of meetings in the meeting archive",
+      "type" : "object",
+      "properties" : {
+        "info" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingArchiveInfo"
+          }
+        }
+      }
+    },
+    "MeetingArchiveInfo" : {
+      "type" : "object",
+      "properties" : {
+        "title" : {
+          "description" : "Meeting title",
+          "type" : "string"
+        },
+        "startTime" : {
+          "format" : "date-time",
+          "description" : "Start date and time of the meeting",
+          "type" : "string"
+        },
+        "archiveName" : {
+          "description" : "Archive name that is used on the system to identify the archived meeting.",
+          "type" : "string"
+        }
+      }
+    },
+    "MeetingArchiveVotingSessionList" : {
+      "type" : "object",
+      "properties" : {
+        "sessions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingArchiveVotingSession"
+          }
+        }
+      }
+    },
+    "MeetingArchiveVotingSession" : {
+      "type" : "object",
+      "properties" : {
+        "info" : {
+          "$ref" : "#/definitions/VotingSession"
+        },
+        "results" : {
+          "$ref" : "#/definitions/VotingResults"
         }
       }
     }
