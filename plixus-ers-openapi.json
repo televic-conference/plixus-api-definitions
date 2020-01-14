@@ -7174,6 +7174,13 @@
         "isRecorded" : {
           "description" : "Indicates if the meeting is being recorded.",
           "type" : "boolean"
+        },
+        "audioFiles" : {
+          "description" : "List of recorded audio files, associated to the meeting.",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
