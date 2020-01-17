@@ -5286,6 +5286,40 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/v1/system/defaultinterfacelanguage" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the default interface language",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultInterfaceLanguage"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the default interface language",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DefaultInterfaceLanguage"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Unsupported language"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8754,6 +8788,14 @@
         },
         "results" : {
           "$ref" : "#/definitions/VotingResults"
+        }
+      }
+    },
+    "DefaultInterfaceLanguage" : {
+      "type" : "object",
+      "properties" : {
+        "language" : {
+          "enum" : [ "English", "Finnish", "Italian", "Russian", "German", "Arabic", "Chinese", "French", "Japanese", "Korean", "Vietnamese", "Portuguese", "Dutch", "ChineseT", "Belarussian", "Danish", "Spanish", "Persian", "Hebrew", "Kazakh", "Norwagian", "Polish", "Romanian", "Thai", "Turkish", "Ukrainian", "Uzbek", "Swedish" ]
         }
       }
     }
