@@ -4264,12 +4264,12 @@
     "/api/events/system/datetimechanged" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Event when date and time of the room has changed",
+        "summary" : "Event when the default interface language has changed",
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/RoomDateTimeChanged"
+              "$ref" : "#/definitions/DefaultInterfaceLanguage"
             }
           }
         }
@@ -5317,6 +5317,20 @@
           },
           "400" : {
             "description" : "Unsupported language"
+          }
+        }
+      }
+    },
+    "/api/events/system/defaultinterfacelanguagechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when date and time of the room has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RoomDateTimeChanged"
+            }
           }
         }
       }
