@@ -7768,6 +7768,10 @@
           "items" : {
             "$ref" : "#/definitions/ParticipantOption"
           }
+        },
+        "id" : {
+          "description" : "Voting session ID",
+          "type" : "string"
         }
       }
     },
