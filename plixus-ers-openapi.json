@@ -4264,7 +4264,7 @@
     "/api/events/system/datetimechanged" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Event when the default interface language has changed",
+        "summary" : "Event when date and time of the room has changed",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -5324,7 +5324,7 @@
     "/api/events/system/defaultinterfacelanguagechanged" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Event when date and time of the room has changed",
+        "summary" : "Event when the default interface language has changed.",
         "responses" : {
           "200" : {
             "description" : "OK",
