@@ -5334,6 +5334,17 @@
           }
         }
       }
+    },
+    "/api/v1/devices/" : {
+      "delete" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Delete all offline devices",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
     }
   },
   "definitions" : {
