@@ -4269,7 +4269,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/DefaultInterfaceLanguage"
+              "$ref" : "#/definitions/RoomDateTimeChanged"
             }
           }
         }
@@ -5329,7 +5329,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/RoomDateTimeChanged"
+              "$ref" : "#/definitions/DefaultInterfaceLanguage"
             }
           }
         }
