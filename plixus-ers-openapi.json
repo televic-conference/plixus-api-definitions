@@ -5375,6 +5375,31 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/events/meeting/meetingarchivedeleted" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when a meeting archive was deleted",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingArchiveDeleted"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/meeting/meetingarchivesdeleted/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when all meeting archives were deleted",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8855,6 +8880,14 @@
       "properties" : {
         "language" : {
           "enum" : [ "English", "Finnish", "Italian", "Russian", "German", "Arabic", "Chinese", "French", "Japanese", "Korean", "Vietnamese", "Portuguese", "Dutch", "ChineseT", "Belarussian", "Danish", "Spanish", "Persian", "Hebrew", "Kazakh", "Norwagian", "Polish", "Romanian", "Thai", "Turkish", "Ukrainian", "Uzbek", "Swedish" ]
+        }
+      }
+    },
+    "MeetingArchiveDeleted" : {
+      "type" : "object",
+      "properties" : {
+        "archiveName" : {
+          "type" : "string"
         }
       }
     }
