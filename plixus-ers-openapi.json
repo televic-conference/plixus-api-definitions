@@ -5237,6 +5237,15 @@
             }
           }
         }
+      },
+      "delete" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Delete all meetings from the meeting archive, including the corresponding recorded audio files",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
       }
     },
     "/api/v1/meeting/archive/{archiveName}/info" : {
@@ -5345,6 +5354,27 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/archive/{archiveName}" : {
+      "delete" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Delete the meeting archive, including the corresponding recorded audio files",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "Meeting archive not found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "archiveName",
+        "in" : "path",
+        "description" : "name of the archive folder on the system.",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
