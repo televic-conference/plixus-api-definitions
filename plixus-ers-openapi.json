@@ -7272,12 +7272,10 @@
           }
         },
         "startTime" : {
-          "format" : "date-time",
           "description" : "Time when meeting has started",
           "type" : "string"
         },
         "endTime" : {
-          "format" : "date-time",
           "description" : "Time when meeting has ended",
           "type" : "string"
         },
@@ -8843,7 +8841,6 @@
           "type" : "string"
         },
         "startTime" : {
-          "format" : "date-time",
           "description" : "Start date and time of the meeting",
           "type" : "string"
         },
