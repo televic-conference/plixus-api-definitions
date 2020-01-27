@@ -7836,6 +7836,13 @@
         "id" : {
           "description" : "Voting session ID",
           "type" : "string"
+        },
+        "participantsVoted" : {
+          "description" : "LIst of seat IDs that have voted",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
         }
       }
     },
