@@ -2039,6 +2039,26 @@
             }
           }
         }
+      },
+      "put" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Change the active interpretation configuration",
+        "operationId" : "Interpretation_SetActiveConfiguration",
+        "produces" : [ "text/json", "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "config",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InterpretationConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
       }
     },
     "/api/v1/interpretation/channels/listeners" : {
@@ -7838,7 +7858,7 @@
           "type" : "string"
         },
         "participantsVoted" : {
-          "description" : "LIst of seat IDs that have voted",
+          "description" : "List of seat IDs that have voted",
           "type" : "array",
           "items" : {
             "type" : "integer"
