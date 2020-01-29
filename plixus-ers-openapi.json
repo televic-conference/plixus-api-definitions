@@ -2114,7 +2114,7 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/DeskState"
+                "$ref" : "#/definitions/InterpreterDeskState"
               }
             }
           }
@@ -5420,6 +5420,20 @@
           }
         }
       }
+    },
+    "/api/events/interpretation/deskstatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the state (relay, output channel, mic state) of a desk has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for DeskActiveOutputChannelChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/InterpreterDeskState"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8393,45 +8407,6 @@
         }
       }
     },
-    "DeskState" : {
-      "type" : "object",
-      "properties" : {
-        "booth" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "desk" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "activeRelay" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "activeOutput" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "currentRelayChannelPresets" : {
-          "type" : "array",
-          "items" : {
-            "format" : "int32",
-            "type" : "integer"
-          }
-        },
-        "currentOutputChannelPresets" : {
-          "type" : "array",
-          "items" : {
-            "format" : "int32",
-            "type" : "integer"
-          }
-        },
-        "isSlowdownActive" : {
-          "description" : "True when someone has requested to slow down",
-          "type" : "boolean"
-        }
-      }
-    },
     "NotificationModuleList" : {
       "description" : "List of notification modules",
       "type" : "object",
@@ -8912,6 +8887,53 @@
       "properties" : {
         "archiveName" : {
           "type" : "string"
+        }
+      }
+    },
+    "InterpreterDeskState" : {
+      "type" : "object",
+      "properties" : {
+        "booth" : {
+          "description" : "Booth ID",
+          "type" : "integer"
+        },
+        "desk" : {
+          "description" : "Desk ID",
+          "type" : "integer"
+        },
+        "seat" : {
+          "description" : "Seat ID",
+          "type" : "integer"
+        },
+        "relayChannelPresets" : {
+          "description" : "Relay presets",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        },
+        "outputChannelPresets" : {
+          "description" : "Outgoing channel presets",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        },
+        "activeRelayChannel" : {
+          "description" : "Index in relayChannelPreset list indicating the currently selected relay.",
+          "type" : "integer"
+        },
+        "activeOutputChannel" : {
+          "description" : "Index in outputChannelPreset list indicating the currently selected output channel.",
+          "type" : "integer"
+        },
+        "microphoneState" : {
+          "description" : "State of the microphone",
+          "enum" : [ "off", "on", "mute", "multiple_on" ]
+        },
+        "slowdown" : {
+          "description" : "Indicates if slowdown was requested",
+          "type" : "boolean"
         }
       }
     }
