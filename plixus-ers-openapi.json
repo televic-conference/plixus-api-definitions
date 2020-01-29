@@ -8901,10 +8901,6 @@
           "description" : "Desk ID",
           "type" : "integer"
         },
-        "seat" : {
-          "description" : "Seat ID",
-          "type" : "integer"
-        },
         "relayChannelPresets" : {
           "description" : "Relay presets",
           "type" : "array",
