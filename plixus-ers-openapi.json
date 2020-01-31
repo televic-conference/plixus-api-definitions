@@ -1495,6 +1495,26 @@
           }
         }
       },
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Change the request list",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RequestList"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Not ok"
+          }
+        }
+      },
       "delete" : {
         "tags" : [ "Discussion" ],
         "summary" : "Clear the seats that are currently requesting to speak",
@@ -8930,6 +8950,19 @@
         "slowdown" : {
           "description" : "Indicates if slowdown was requested",
           "type" : "boolean"
+        }
+      }
+    },
+    "RequestList" : {
+      "description" : "Request list has changed",
+      "type" : "object",
+      "properties" : {
+        "seatIds" : {
+          "description" : "The seat ids that are currently in the request list",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
         }
       }
     }
