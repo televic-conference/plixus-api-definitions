@@ -8878,7 +8878,7 @@
       "type" : "object",
       "properties" : {
         "language" : {
-          "enum" : [ "English", "Finnish", "Italian", "Russian", "German", "Arabic", "Chinese", "French", "Japanese", "Korean", "Vietnamese", "Portuguese", "Dutch", "ChineseT", "Belarussian", "Danish", "Spanish", "Persian", "Hebrew", "Kazakh", "Norwagian", "Polish", "Romanian", "Thai", "Turkish", "Ukrainian", "Uzbek", "Swedish" ]
+          "enum" : [ "en_GB", "fi_FI", "it_IT", "ru_RU", "de_DE", "ar_AE", "zh_CN", "fr_FR", "ja_JP", "ko_KR", "vi_VN", "pt_PT", "nl_NL", "zh_TW", "be_BY", "da_DK", "es_ES", "fa_IR", "he_IL", "kk_KZ", "no_NO", "pl_PL", "ro_RO", "th_TH", "tr_TR", "uk_UA", "uz_UZ", "sv_SE", "lv_LV" ]
         }
       }
     },
