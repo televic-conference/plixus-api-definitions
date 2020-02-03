@@ -8813,7 +8813,7 @@
     },
     "SeatsChanged" : {
       "description" : "event when various seats have changed",
-      "required" : [ "seats" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "seats" : {
