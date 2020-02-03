@@ -1544,6 +1544,23 @@
             }
           }
         }
+      },
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Change the reply list",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ReplyList"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
       }
     },
     "/api/events/discussion/speakerlistchanged" : {
@@ -8959,6 +8976,19 @@
       "properties" : {
         "seatIds" : {
           "description" : "The seat ids that are currently in the request list",
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "ReplyList" : {
+      "description" : "Reply list",
+      "type" : "object",
+      "properties" : {
+        "seatIds" : {
+          "description" : "The seat ids that are currently in the reply list",
           "type" : "array",
           "items" : {
             "type" : "integer"
