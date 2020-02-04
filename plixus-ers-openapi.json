@@ -8823,7 +8823,7 @@
     },
     "InterpreterDesksChanged" : {
       "description" : "event when various interpreter deks have changed",
-      "required" : [ "desks" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "desks" : {
