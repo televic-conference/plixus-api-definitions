@@ -8671,7 +8671,7 @@
     },
     "LogArchiveReady" : {
       "description" : "url for downloading a log file from the system",
-      "required" : [ "url" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "url" : {
