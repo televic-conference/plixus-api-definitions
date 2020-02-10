@@ -5472,7 +5472,21 @@
         }
       }
     },
-    "/api/v1/room/seats/{seat}/microphonesensitivityoffset" : { }
+    "/api/v1/room/seats/{seat}/microphonesensitivityoffset" : { },
+    "/api/events/system/camerasettingschanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event that informs about camera settings changes",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/CameraSettings"
+            }
+          }
+        }
+      }
+    }
   },
   "definitions" : {
     "ConfideaLicenseWithSerial" : {
