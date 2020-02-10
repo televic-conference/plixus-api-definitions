@@ -5471,7 +5471,8 @@
           }
         }
       }
-    }
+    },
+    "/api/v1/room/seats/{seat}/microphonesensitivityoffset" : { }
   },
   "definitions" : {
     "ConfideaLicenseWithSerial" : {
@@ -8323,6 +8324,14 @@
         "port" : {
           "description" : "Port number to use",
           "type" : "integer"
+        },
+        "ipAddress" : {
+          "description" : "IP address",
+          "type" : "string"
+        },
+        "enabled" : {
+          "description" : "Is the camera protocol enabled?",
+          "type" : "boolean"
         }
       }
     },
