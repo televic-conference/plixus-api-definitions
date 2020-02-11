@@ -5525,6 +5525,20 @@
           }
         }
       }
+    },
+    "/api/events/system/licensechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when license was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/LicenseList"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
