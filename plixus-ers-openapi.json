@@ -8734,7 +8734,7 @@
     },
     "LicenseList" : {
       "description" : "List of all licenses, grouped by product name.",
-      "required" : [ "licenses" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "licenses" : {
