@@ -5486,6 +5486,44 @@
           }
         }
       }
+    },
+    "/api/v1/system/configuration" : {
+      "get" : {
+        "tags" : [ ],
+        "summary" : "Get the current system configuration",
+        "operationId" : "System_GetConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "multipart/form-data" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "format" : "binary",
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Upload the new system configuration",
+        "operationId" : "System_UploadConfiguration",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "Configuration",
+          "in" : "formData",
+          "description" : "Upload the configuration",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Wrong format"
+          }
+        }
+      }
     }
   },
   "definitions" : {
