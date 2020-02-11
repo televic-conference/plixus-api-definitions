@@ -5505,6 +5505,7 @@
         }
       },
       "post" : {
+        "tags" : [ "System" ],
         "summary" : "Upload the new system configuration",
         "operationId" : "System_UploadConfiguration",
         "consumes" : [ "multipart/form-data" ],
