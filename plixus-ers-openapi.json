@@ -5539,6 +5539,117 @@
           }
         }
       }
+    },
+    "/api/v1/services/{name}" : {
+      "get" : {
+        "tags" : [ "Services" ],
+        "summary" : "Get the state of the given service",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Name of the service",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "Core", "LegacyRestApi" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceState"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/services/{name}/restart" : {
+      "post" : {
+        "tags" : [ "Services" ],
+        "summary" : "Restart the specified service",
+        "operationId" : "Services_RestartService",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "The name of the service",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "Core", "LegacyRestApi" ]
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/services/{name}/start" : {
+      "post" : {
+        "tags" : [ "Services" ],
+        "summary" : "Start the specified service",
+        "operationId" : "Services_StartService",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "The name of the service",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "Core", "LegacyRestApi" ]
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/services/{name}/stop" : {
+      "post" : {
+        "tags" : [ "Services" ],
+        "summary" : "Stop the specified service",
+        "operationId" : "Services_StopService",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "The name of the service",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "Core", "LegacyRestApi" ]
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/events/services/servicestatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the state of a service was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceState"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9068,6 +9179,19 @@
           "items" : {
             "type" : "integer"
           }
+        }
+      }
+    },
+    "ServiceState" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the service",
+          "enum" : [ "Core", "LegacyRestApi" ]
+        },
+        "state" : {
+          "description" : "State of the service",
+          "enum" : [ "Running", "Stopped" ]
         }
       }
     }
