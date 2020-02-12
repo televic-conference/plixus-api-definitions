@@ -8287,7 +8287,6 @@
           "enum" : [ "valid", "invalid", "nearlyExpired" ]
         },
         "expiryDate" : {
-          "format" : "date-time",
           "description" : "Date and time when license expires",
           "type" : "string"
         },
