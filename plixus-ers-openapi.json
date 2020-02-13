@@ -7002,7 +7002,7 @@
     },
     "AudioRoutingConfigurationData" : {
       "description" : "Audio routing configuration data",
-      "required" : [ "name" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "name" : {
