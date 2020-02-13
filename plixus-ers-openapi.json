@@ -5487,45 +5487,6 @@
         }
       }
     },
-    "/api/v1/system/configuration" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current system configuration",
-        "operationId" : "System_GetConfiguration",
-        "consumes" : [ ],
-        "produces" : [ "multipart/form-data" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "format" : "binary",
-              "type" : "string"
-            }
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Upload the new system configuration",
-        "operationId" : "System_UploadConfiguration",
-        "consumes" : [ "multipart/form-data" ],
-        "parameters" : [ {
-          "name" : "Configuration",
-          "in" : "formData",
-          "description" : "Upload the configuration",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          },
-          "400" : {
-            "description" : "Wrong format"
-          }
-        }
-      }
-    },
     "/api/events/system/licensechanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -5540,9 +5501,9 @@
         }
       }
     },
-    "/api/v1/services/{name}" : {
+    "/api/v1/system/services/{name}" : {
       "get" : {
-        "tags" : [ "Services" ],
+        "tags" : [ "System" ],
         "summary" : "Get the state of the given service",
         "parameters" : [ {
           "name" : "name",
@@ -5562,9 +5523,9 @@
         }
       }
     },
-    "/api/v1/services/{name}/restart" : {
+    "/api/v1/system/services/{name}/restart" : {
       "post" : {
-        "tags" : [ "Services" ],
+        "tags" : [ "System" ],
         "summary" : "Restart the specified service",
         "operationId" : "Services_RestartService",
         "consumes" : [ ],
@@ -5587,9 +5548,9 @@
         }
       }
     },
-    "/api/v1/services/{name}/start" : {
+    "/api/v1/system/services/{name}/start" : {
       "post" : {
-        "tags" : [ "Services" ],
+        "tags" : [ "System" ],
         "summary" : "Start the specified service",
         "operationId" : "Services_StartService",
         "consumes" : [ ],
@@ -5612,9 +5573,9 @@
         }
       }
     },
-    "/api/v1/services/{name}/stop" : {
+    "/api/v1/system/services/{name}/stop" : {
       "post" : {
-        "tags" : [ "Services" ],
+        "tags" : [ "System" ],
         "summary" : "Stop the specified service",
         "operationId" : "Services_StopService",
         "consumes" : [ ],
@@ -5637,7 +5598,7 @@
         }
       }
     },
-    "/api/events/services/servicestatechanged" : {
+    "/api/events/system/servicestatechanged" : {
       "get" : {
         "tags" : [ "Events" ],
         "summary" : "Event when the state of a service was changed",
@@ -5647,6 +5608,45 @@
             "schema" : {
               "$ref" : "#/definitions/ServiceState"
             }
+          }
+        }
+      }
+    },
+    "/api/v1/system/configuration" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current system configuration",
+        "operationId" : "System_GetConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "multipart/form-data" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "format" : "binary",
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload the new system configuration",
+        "operationId" : "System_UploadConfiguration",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "Configuration",
+          "in" : "formData",
+          "description" : "Upload the configuration",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Wrong format"
           }
         }
       }
