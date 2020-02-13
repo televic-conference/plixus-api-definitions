@@ -2691,7 +2691,7 @@
           "200" : {
             "description" : "Metadata for ActiveAudioConfigurationChanged event",
             "schema" : {
-              "$ref" : "#/definitions/ActiveAudioConfigurationChanged"
+              "$ref" : "#/definitions/AudioRoutingConfigurationData"
             }
           }
         }
@@ -7237,14 +7237,6 @@
         },
         "channel" : {
           "description" : "Channel of the node",
-          "type" : "string"
-        }
-      }
-    },
-    "ActiveAudioConfigurationChanged" : {
-      "type" : "object",
-      "properties" : {
-        "configurationId" : {
           "type" : "string"
         }
       }
