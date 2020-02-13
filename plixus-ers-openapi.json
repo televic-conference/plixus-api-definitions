@@ -5650,6 +5650,20 @@
           }
         }
       }
+    },
+    "/api/events/video/activeconfigurationchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the active video configuration has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for ActiveConfigurationChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/VideoConfigurationData"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
