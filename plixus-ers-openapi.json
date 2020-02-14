@@ -5535,7 +5535,6 @@
         }
       }
     },
-    "/api/v1/room/seats/{seat}/microphonesensitivityoffset" : { },
     "/api/events/system/camerasettingschanged/" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -5770,6 +5769,74 @@
           },
           "405" : {
             "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/v1/room/seats/{seat}/inputsensitivityoffset" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get the active input sensitivity offset",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InputSensitivityOffset"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Set input sensitivity offset of the seat, temporarily (not saved to config).",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InputSensitivityOffset"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/room/seats/{seat}/defaultinputsensitivityoffset/" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get the active input sensitivity offset",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultInputSensitivityOffset"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Set input sensitivity offset of the seat, temporarily (not saved to config).",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DefaultInputSensitivityOffset"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Bad request"
           }
         }
       }
@@ -9406,6 +9473,24 @@
         },
         "description" : {
           "type" : "string"
+        }
+      }
+    },
+    "InputSensitivityOffset" : {
+      "type" : "object",
+      "properties" : {
+        "offset" : {
+          "description" : "Input sensitivity offset, expressed in 0.1 dB. Example: for an offset of 1.4 dB, the provided value should be set to 14 dB",
+          "type" : "integer"
+        }
+      }
+    },
+    "DefaultInputSensitivityOffset" : {
+      "type" : "object",
+      "properties" : {
+        "offset" : {
+          "description" : "Input sensitivity offset, expressed in 0.1 dB. Example: for an offset of 1.4 dB, the provided value should be set to 14 dB",
+          "type" : "integer"
         }
       }
     }
