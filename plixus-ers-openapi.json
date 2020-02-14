@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "title" : "Plixus Core API 1.0",
-    "description" : "\n\n\n# Introduction\nThis introduction describes the basics of the REST API for Plixus Core on the Central Unit (CU).\n## Before you start\nTelevic Conference's Plixus Core API (for the central unit) was created to create custom solutions and integrate with your own API.  With the Plixus API you can perform two types of functions:\n* **Publication** of events occuring in the meeting room   \n* **External control** of the meeting room\n\n## Event notifications\nThe Plixus Core API uses a **Publish/Subscribe** mechanism, this means that external clients that connect to the API can choose to which events they subscribe and get information from. The API contains commands to subscribe or unsubscribe from each of the modules. Each module contains specific functionality to manage and configure meetings. The following modules are available:\n\n* **Resources**: module to manage all resources present in your setup\n* **Users**: module for user management with authentication, user roles and permissions\n\n* **System**: module for general system wide settings such as licensing and date and time format\n* **Room**: module to manage the meeting room, initialize units, create booths and manage the room layout\n* **Audio**: module to configure general, system wide audio settings\n* **AudioRouting**: module for all runtime modifications of your active audio routing configuration\n* **AudioRoutingConfigurations**: module to create, edit and delete audio routing configurations\n* **Video**: module for runtime modifications of video configuration to route the video inputs and outputs to one of the 6 available video streams\n* **VideoConfigurations**: module to create, edit and delete video configurations\n* **Interpretation**: module for runtime modifications and information of the active interpretation configuration\n* **InterpretationConfigurations**: module to create, edit and delete interpretation configurations\n* **Discussion**: module with operator functionality. Change and retrieve microphone states or change conference settings\n* **Intercom**: module to set up calls between microphone units\n* **Recording**: module to manage recording on the Central Unit\n* **Messaging**: module to send messages to seats and booths\n* **Meeting**: module to manage general meeting functions such as meeting state\n* **Voting**: module for basic management of voting sessions\n* **Buttons**: module to manage all buttons events in your meeting room\n> Button events may not always take place, because certain operations in CoCon such as voting sessions, use specific buttons. Only when the session is ended the buttons become available again.\n* **Leds**: module to manage all LED events in your meeting room\n> LED events may not always take place, because certain operations in CoCon such as voting sessions use certain LEDs. Only when the voting session is ended, LED events become available.\n\n# Set up and use the Plixus Core API\n## General\nThe Plixus Core API consists of a number of URI's (*Uniform Resource Indentifier*) which are exchanged between the API client and the Plixus engine over a TCP/IP-connection. The Plixus Central Unit hosts the API and is available on the IP address of the Central Unit.\nThe API uses two (or more) parallel HTTP-connections:\n* A **Notification** connection that the client and the CU keep open in case any information needs to be transferred from the CU to the client.\n\n\n* Any other connection that is used to transfer **information from the client to the CU**.\n\nThe client needs to initialize the notification connection and it is kept open by both sides. Two scenarios can occur:\n* The CU has information to send to the client and therefore uses the notification connection. When the information is transferred, the connection is closed (as per the HTTP standard). Therefore, the client needs to create a new notification connection. The CU guarantees that no information is lost during this time period where the client is not connected to the CU. \n> Note that you need to create a new notification connection within 60 seconds. If not, the CU discards the client data.\n* The HTTP-connection times out before the CU has any information to send to the client. At this point, the client needs to create a new notification connection. Also in this scenario, the CU guarantees that no information is lost.\n## REST/JSON example\nBelow you can find a short description and example how to create and use the API connection with the CU using the **REST/JSON format**. \nThe first URI you need to send to the Plixus API is the **connect URI**, which you can find in the Notification module (/api/notification/connect). This returns a JSON string as reply, which looks like the following example:\n\n``` *{\"connectionId\":\"3f5b8afe-6efb-4428-8762-e39d42a0762d\"}*  ```\n    \nThis returns the **Id** of the connection that you need to use to open the notification connection and make a new polling request. When the connection is established, the CU can send updates to the client. After the client receives information from the CU, it must re-establish the connection with the CU.\n\n## Server return values\nFor feedback of the API communication between the client and the CU, the API uses **HTTP response codes**.\n",
+    "description" : "\n\n\n# Introduction\nThis introduction describes the basics of the REST API for Plixus Core on the Central Unit (CU).\n## Before you start\nTelevic Conference's Plixus Core API (for the central unit) was created to create custom solutions and integrate with your own API.  With the Plixus API you can perform two types of functions:\n* **Publication** of events occuring in the meeting room   \n* **External control** of the meeting room\n\n## Event notifications\nThe Plixus Core API uses a **Publish/Subscribe** mechanism, this means that external clients that connect to the API can choose to which events they subscribe and get information from. The API contains commands to subscribe or unsubscribe from each of the modules. Each module contains specific functionality to manage and configure meetings. The following modules are available:\n\n* **Resources**: module to manage all resources present in your setup\n* **Users**: module for user management with authentication, user roles and permissions\n\n* **System**: module for general system wide settings such as licensing and date and time format\n* **Room**: module to manage the meeting room, initialize units, create booths and manage the room layout\n* **Audio**: module to configure general, system wide audio settings\n* **AudioDynamicsProcessor**: module for all runtime modifications of your active audio dynamics processor configuration\n* **AudioDynamicsProcessorConfigurations**: module to create, edit audio dynamics processor configurations\n* **AudioRouting**: module for all runtime modifications of your active audio routing configuration\n* **AudioRoutingConfigurations**: module to create, edit and delete audio routing configurations\n* **Video**: module for runtime modifications of video configuration to route the video inputs and outputs to one of the 6 available video streams\n* **VideoConfigurations**: module to create, edit and delete video configurations\n* **Interpretation**: module for runtime modifications and information of the active interpretation configuration\n* **InterpretationConfigurations**: module to create, edit and delete interpretation configurations\n* **Discussion**: module with operator functionality. Change and retrieve microphone states or change conference settings\n* **Intercom**: module to set up calls between microphone units\n* **Recording**: module to manage recording on the Central Unit\n* **Messaging**: module to send messages to seats and booths\n* **Meeting**: module to manage general meeting functions such as meeting state\n* **Voting**: module for basic management of voting sessions\n* **Buttons**: module to manage all buttons events in your meeting room\n> Button events may not always take place, because certain operations in CoCon such as voting sessions, use specific buttons. Only when the session is ended the buttons become available again.\n* **Leds**: module to manage all LED events in your meeting room\n> LED events may not always take place, because certain operations in CoCon such as voting sessions use certain LEDs. Only when the voting session is ended, LED events become available.\n\n# Set up and use the Plixus Core API\n## General\nThe Plixus Core API consists of a number of URI's (*Uniform Resource Indentifier*) which are exchanged between the API client and the Plixus engine over a TCP/IP-connection. The Plixus Central Unit hosts the API and is available on the IP address of the Central Unit.\nThe API uses two (or more) parallel HTTP-connections:\n* A **Notification** connection that the client and the CU keep open in case any information needs to be transferred from the CU to the client.\n\n\n* Any other connection that is used to transfer **information from the client to the CU**.\n\nThe client needs to initialize the notification connection and it is kept open by both sides. Two scenarios can occur:\n* The CU has information to send to the client and therefore uses the notification connection. When the information is transferred, the connection is closed (as per the HTTP standard). Therefore, the client needs to create a new notification connection. The CU guarantees that no information is lost during this time period where the client is not connected to the CU. \n> Note that you need to create a new notification connection within 60 seconds. If not, the CU discards the client data.\n* The HTTP-connection times out before the CU has any information to send to the client. At this point, the client needs to create a new notification connection. Also in this scenario, the CU guarantees that no information is lost.\n## REST/JSON example\nBelow you can find a short description and example how to create and use the API connection with the CU using the **REST/JSON format**. \nThe first URI you need to send to the Plixus API is the **connect URI**, which you can find in the Notification module (/api/notification/connect). This returns a JSON string as reply, which looks like the following example:\n\n``` *{\"connectionId\":\"3f5b8afe-6efb-4428-8762-e39d42a0762d\"}*  ```\n    \nThis returns the **Id** of the connection that you need to use to open the notification connection and make a new polling request. When the connection is established, the CU can send updates to the client. After the client receives information from the CU, it must re-establish the connection with the CU.\n\n## Server return values\nFor feedback of the API communication between the client and the CU, the API uses **HTTP response codes**.\n",
     "version" : "1.0",
     "x-logo" : {
       "url" : "https://www.televic.com/themes/televic/images/logos/televic-group.svg",
@@ -2757,6 +2757,113 @@
         }
       }
     },
+    "/api/v1/audiodynamicsprocessorconfigurations" : {
+      "get" : {
+        "tags" : [ "AudioDynamicsProcessorConfigurations" ],
+        "summary" : "Get a list of all audio dynamics processor configurations of the room",
+        "operationId" : "AudioDynamicsProcessorConfigurations_GetAudioDynamicsProcessorConfigurations",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationList"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AudioDynamicsProcessorConfigurations" ],
+        "summary" : "Create a new audio dynamics processor configuration for the room",
+        "operationId" : "AudioDynamicsProcessorConfigurations_CreateAudioDynamicsProcessorConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "data",
+          "in" : "body",
+          "description" : "Data about audio routing configuration to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/audiodynamicsprocessorconfigurations/{id}/" : {
+      "get" : {
+        "tags" : [ "AudioDynamicsProcessorConfigurations" ],
+        "summary" : "Get details of a specific audio dynamics processor configuration",
+        "operationId" : "AudioDynamicsProcessorConfigurations_GetAudioDynamicsProcessorConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the audio dynamics processor configuration",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioDynamicsProcessorConfigurations" ],
+        "summary" : "Update the details of an existing audio dynamics processor configuration",
+        "operationId" : "AudioDynamicsProcessorConfigurations_UpdateAudioDynamicsProcessorConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id of the audio dynamics processor configuration to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "data",
+          "in" : "body",
+          "description" : "Data about the audio routing configuration to update",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
     "/api/v1/recording/state" : {
       "get" : {
         "tags" : [ "Recording" ],
@@ -4013,7 +4120,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/AudioDynamicsProcessor"
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
             }
           },
           "405" : {
@@ -4031,7 +4138,7 @@
           "in" : "body",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/AudioDynamicsProcessor"
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
           }
         } ],
         "responses" : {
@@ -5661,6 +5768,52 @@
             "schema" : {
               "$ref" : "#/definitions/VideoConfigurationData"
             }
+          }
+        }
+      }
+    },
+    "/api/v1/audiodynamicsprocessor/activeconfiguration" : {
+      "get" : {
+        "tags" : [ "AudioDynamicsProcessor" ],
+        "summary" : "Get the active configuration data",
+        "operationId" : "AudioDynamicsProcessor_GetActiveConfiguration",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioDynamicsProcessor" ],
+        "summary" : "Modify the active audio dynamics processor configuration",
+        "operationId" : "AudioDynamicsProcessor_SaveActiveConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
           }
         }
       }
@@ -8228,68 +8381,11 @@
         }
       }
     },
-    "AudioDynamicsProcessor" : {
-      "type" : "object",
-      "properties" : {
-        "compressorThreshold" : {
-          "description" : "compressor threshold [unit 0.1dBFS]",
-          "type" : "integer"
-        },
-        "compressorRatio" : {
-          "description" : "compressor ratio [unit 0.01]",
-          "type" : "integer"
-        },
-        "compressorAttackTime" : {
-          "description" : "compressor attack time [unit µs]",
-          "type" : "integer"
-        },
-        "compressorReleaseTime" : {
-          "description" : "compressor release time [unit µs]",
-          "type" : "integer"
-        },
-        "limiterTreshold" : {
-          "description" : "limiter threshold [unit 0.1 dBFS]",
-          "type" : "integer"
-        },
-        "limiterAttackTime" : {
-          "description" : "limiter attack time [unit µs]",
-          "type" : "integer"
-        },
-        "limiterReleaseTime" : {
-          "description" : "limiter release time [unit µs]",
-          "type" : "integer"
-        },
-        "noiseGateThreshold" : {
-          "description" : "noise gate threshold [unit 0.1 dBFS]",
-          "type" : "integer"
-        },
-        "noiseGateMinimumGain" : {
-          "description" : "noise gate minimum gain [unit 0.1 dB]",
-          "type" : "integer"
-        },
-        "noiseGateAttackTime" : {
-          "description" : "noise gate attack time [unit µs]",
-          "type" : "integer"
-        },
-        "noiseGateHoldTime" : {
-          "description" : "noise gate hold time [unit µs]",
-          "type" : "integer"
-        },
-        "makeUpGain" : {
-          "description" : "make up gain [unit 0.1 dB]",
-          "type" : "integer"
-        },
-        "noiseGateReleaseTime" : {
-          "description" : "noise gate release time [unit µs]",
-          "type" : "integer"
-        }
-      }
-    },
     "AudioDynamicsProcessorChanged" : {
       "type" : "object",
       "properties" : {
         "processor" : {
-          "$ref" : "#/definitions/AudioDynamicsProcessor"
+          "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
         }
       }
     },
@@ -9200,6 +9296,162 @@
           "enum" : [ "Running", "Stopped" ]
         }
       }
+    },
+    "AudioDynamicsProcessorConfigurationDescription" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AudioDynamicsProcessorConfigurationList" : {
+      "type" : "object",
+      "properties" : {
+        "configurations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationDescription"
+          }
+        }
+      }
+    },
+    "AudioDynamicsProcessorConfigurationData" : {
+      "type" : "object",
+      "properties" : {
+        "compressorThreshold" : {
+          "description" : "compressor threshold [unit 0.1dBFS]",
+          "type" : "integer"
+        },
+        "compressorRatio" : {
+          "description" : "compressor ratio [unit 0.01]",
+          "type" : "integer"
+        },
+        "compressorAttackTime" : {
+          "description" : "compressor attack time [unit µs]",
+          "type" : "integer"
+        },
+        "compressorReleaseTime" : {
+          "description" : "compressor release time [unit µs]",
+          "type" : "integer"
+        },
+        "limiterTreshold" : {
+          "description" : "limiter threshold [unit 0.1 dBFS]",
+          "type" : "integer"
+        },
+        "limiterAttackTime" : {
+          "description" : "limiter attack time [unit µs]",
+          "type" : "integer"
+        },
+        "limiterReleaseTime" : {
+          "description" : "limiter release time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateThreshold" : {
+          "description" : "noise gate threshold [unit 0.1 dBFS]",
+          "type" : "integer"
+        },
+        "noiseGateMinimumGain" : {
+          "description" : "noise gate minimum gain [unit 0.1 dB]",
+          "type" : "integer"
+        },
+        "noiseGateAttackTime" : {
+          "description" : "noise gate attack time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateHoldTime" : {
+          "description" : "noise gate hold time [unit µs]",
+          "type" : "integer"
+        },
+        "makeUpGain" : {
+          "description" : "make up gain [unit 0.1 dB]",
+          "type" : "integer"
+        },
+        "noiseGateReleaseTime" : {
+          "description" : "noise gate release time [unit µs]",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AudioDynamicsProcessorConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "compressorThreshold" : {
+          "description" : "compressor threshold [unit 0.1dBFS]",
+          "type" : "integer"
+        },
+        "compressorRatio" : {
+          "description" : "compressor ratio [unit 0.01]",
+          "type" : "integer"
+        },
+        "compressorAttackTime" : {
+          "description" : "compressor attack time [unit µs]",
+          "type" : "integer"
+        },
+        "compressorReleaseTime" : {
+          "description" : "compressor release time [unit µs]",
+          "type" : "integer"
+        },
+        "limiterTreshold" : {
+          "description" : "limiter threshold [unit 0.1 dBFS]",
+          "type" : "integer"
+        },
+        "limiterAttackTime" : {
+          "description" : "limiter attack time [unit µs]",
+          "type" : "integer"
+        },
+        "limiterReleaseTime" : {
+          "description" : "limiter release time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateThreshold" : {
+          "description" : "noise gate threshold [unit 0.1 dBFS]",
+          "type" : "integer"
+        },
+        "noiseGateMinimumGain" : {
+          "description" : "noise gate minimum gain [unit 0.1 dB]",
+          "type" : "integer"
+        },
+        "noiseGateAttackTime" : {
+          "description" : "noise gate attack time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateHoldTime" : {
+          "description" : "noise gate hold time [unit µs]",
+          "type" : "integer"
+        },
+        "makeUpGain" : {
+          "description" : "make up gain [unit 0.1 dB]",
+          "type" : "integer"
+        },
+        "noiseGateReleaseTime" : {
+          "description" : "noise gate release time [unit µs]",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "description" : {
+          "type" : "string"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -9223,6 +9475,12 @@
   }, {
     "name" : "Audio",
     "description" : "With the Audio module you can **set**, **edit** and **retrieve** all **general (sytem wide) audio settings**. In the Audio module you can for example find a call to change the default volume of all channel selectors, present in the room. \nUse the Audio module to retrieve the details of the active DSP configuration and use the *Change the active dsp configuration for the room* call to change these DSP settings.\n"
+  }, {
+    "name" : "AudioDynamicsProcessor",
+    "description" : "Use the AudioDynamicsProcessor module for all runtime modifications of your active audio dynamics processor configuration."
+  }, {
+    "name" : "AudioDynamicsProcessorConfigurations",
+    "description" : "The AudioDynamicsProcessorConfigurations module is responsible for creating, editing and storing audio dynamics processor configurations."
   }, {
     "name" : "AudioRouting",
     "description" : "Use the Audiorouting module for all runtime modifications of your active audio routing configuration. With the calls in this module you can modify the settings of the active configuration, change the state of a node in the routing matrix or change the maximum number of language channels.\n\n> Note that changes made to the configuration are not saved by default, you need to invoke the save call for this.\nThe AudioRouting module is indepent of the storage of the routing configurations, for managing configurations you can use the AudioRoutingConfigurations module or your own module.\n"
