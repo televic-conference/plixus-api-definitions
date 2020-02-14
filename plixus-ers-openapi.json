@@ -5805,7 +5805,14 @@
             "description" : "Bad request"
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "seat id",
+        "required" : true,
+        "type" : "integer"
+      } ]
     },
     "/api/v1/room/seats/{seat}/defaultinputsensitivityoffset/" : {
       "get" : {
@@ -5839,7 +5846,14 @@
             "description" : "Bad request"
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "seat id",
+        "required" : true,
+        "type" : "integer"
+      } ]
     }
   },
   "definitions" : {
