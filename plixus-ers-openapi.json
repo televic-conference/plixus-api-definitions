@@ -4110,20 +4110,6 @@
         }
       }
     },
-    "/api/events/audio/audiodynamicsprocessorchanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when audio dynamics processor has changed",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioDynamicsProcessorChanged"
-            }
-          }
-        }
-      }
-    },
     "/api/events/audio/autogainreductionchanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -5854,6 +5840,20 @@
         "required" : true,
         "type" : "integer"
       } ]
+    },
+    "/api/events/audiodynamicsprocessor/activeconfigurationchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when active audio dynamics processor configuration has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -8415,14 +8415,6 @@
       "properties" : {
         "gain" : {
           "type" : "integer"
-        }
-      }
-    },
-    "AudioDynamicsProcessorChanged" : {
-      "type" : "object",
-      "properties" : {
-        "processor" : {
-          "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
         }
       }
     },
