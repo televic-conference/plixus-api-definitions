@@ -5803,7 +5803,7 @@
     "/api/v1/room/seats/{seat}/defaultinputsensitivityoffset/" : {
       "get" : {
         "tags" : [ "Room" ],
-        "summary" : "Get the active input sensitivity offset",
+        "summary" : "Get the default input sensitivity offset",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -5815,7 +5815,7 @@
       },
       "put" : {
         "tags" : [ "Room" ],
-        "summary" : "Set input sensitivity offset of the seat, temporarily (not saved to config).",
+        "summary" : "Set default input sensitivity offset of the seat",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
@@ -9371,10 +9371,6 @@
           "description" : "compressor release time [unit µs]",
           "type" : "integer"
         },
-        "limiterTreshold" : {
-          "description" : "limiter threshold [unit 0.1 dBFS]",
-          "type" : "integer"
-        },
         "limiterAttackTime" : {
           "description" : "limiter attack time [unit µs]",
           "type" : "integer"
@@ -9412,6 +9408,10 @@
         },
         "description" : {
           "type" : "string"
+        },
+        "limiterThreshold" : {
+          "description" : "limiter threshold [unit 0.1 dBFS]",
+          "type" : "integer"
         }
       }
     },
@@ -9432,10 +9432,6 @@
         },
         "compressorReleaseTime" : {
           "description" : "compressor release time [unit µs]",
-          "type" : "integer"
-        },
-        "limiterTreshold" : {
-          "description" : "limiter threshold [unit 0.1 dBFS]",
           "type" : "integer"
         },
         "limiterAttackTime" : {
@@ -9479,6 +9475,10 @@
         },
         "description" : {
           "type" : "string"
+        },
+        "limiterThreshold" : {
+          "description" : "limiter threshold [unit 0.1 dBFS]",
+          "type" : "integer"
         }
       }
     },
