@@ -9620,35 +9620,17 @@
           "type" : "boolean"
         },
         "delegates" : {
-          "$ref" : "#/definitions/DelegateIdList",
-          "description" : "delegates which participate in the meeting"
-        },
-        "seating" : {
-          "$ref" : "#/definitions/DelegateSeatingList",
-          "description" : "fixed seating of delegates"
-        }
-      }
-    },
-    "DelegateSeatingList" : {
-      "description" : "fixed seating of delegates",
-      "type" : "object",
-      "properties" : {
-        "seating" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/DelegateSeating"
-          }
-        }
-      }
-    },
-    "DelegateIdList" : {
-      "description" : "list of delegate IDs which are participating in the meeting",
-      "type" : "object",
-      "properties" : {
-        "delegates" : {
+          "description" : "delegates which participate in the meeting",
           "type" : "array",
           "items" : {
             "type" : "string"
+          }
+        },
+        "seating" : {
+          "description" : "fixed seating of delegates",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DelegateSeating"
           }
         }
       }
