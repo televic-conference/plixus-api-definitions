@@ -5885,6 +5885,51 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/template" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get the current default meeting template",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingTemplate"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Set default meeting template",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/MeetingTemplate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/api/events/meeting/meetingtemplatechanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the default meeting template was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingTemplate"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9560,6 +9605,62 @@
           "items" : {
             "$ref" : "#/definitions/Delegate"
           }
+        }
+      }
+    },
+    "MeetingTemplate" : {
+      "type" : "object",
+      "properties" : {
+        "title" : {
+          "description" : "meeting title",
+          "type" : "string"
+        },
+        "recording" : {
+          "description" : "meeting with or without recording",
+          "type" : "boolean"
+        },
+        "delegates" : {
+          "$ref" : "#/definitions/DelegateIdList",
+          "description" : "delegates which participate in the meeting"
+        },
+        "seating" : {
+          "$ref" : "#/definitions/DelegateSeatingList",
+          "description" : "fixed seating of delegates"
+        }
+      }
+    },
+    "DelegateSeatingList" : {
+      "description" : "fixed seating of delegates",
+      "type" : "object",
+      "properties" : {
+        "seating" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DelegateSeating"
+          }
+        }
+      }
+    },
+    "DelegateIdList" : {
+      "description" : "list of delegate IDs which are participating in the meeting",
+      "type" : "object",
+      "properties" : {
+        "delegates" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "DelegateSeating" : {
+      "type" : "object",
+      "properties" : {
+        "delegateId" : {
+          "type" : "string"
+        },
+        "seatId" : {
+          "type" : "integer"
         }
       }
     }
