@@ -5854,6 +5854,37 @@
           }
         }
       }
+    },
+    "/api/v1/delegates" : {
+      "get" : {
+        "tags" : [ "Delegates" ],
+        "summary" : "Get the list of all delegates",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/DelegateList"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Delegates" ],
+        "summary" : "Sets new delegate list",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DelegateList"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9497,6 +9528,38 @@
         "offset" : {
           "description" : "Input sensitivity offset, expressed in 0.1 dB. Example: for an offset of 1.4 dB, the provided value should be set to 14 dB",
           "type" : "integer"
+        }
+      }
+    },
+    "Delegate" : {
+      "type" : "object",
+      "properties" : {
+        "firstName" : {
+          "description" : "first name of the delegate",
+          "type" : "string"
+        },
+        "lastName" : {
+          "description" : "last name of the delegate",
+          "type" : "string"
+        },
+        "badgeId" : {
+          "description" : "badge ID of badge associated with this delegate",
+          "type" : "string"
+        },
+        "id" : {
+          "description" : "delegate id",
+          "type" : "string"
+        }
+      }
+    },
+    "DelegateList" : {
+      "type" : "object",
+      "properties" : {
+        "delegates" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Delegate"
+          }
         }
       }
     }
