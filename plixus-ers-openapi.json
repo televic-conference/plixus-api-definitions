@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "title" : "Plixus Core API 1.0",
-    "description" : "\n\n\n# Introduction\nThis introduction describes the basics of the REST API for Plixus Core on the Central Unit (CU).\n## Before you start\nTelevic Conference's Plixus Core API (for the central unit) was created to create custom solutions and integrate with your own API.  With the Plixus API you can perform two types of functions:\n* **Publication** of events occuring in the meeting room   \n* **External control** of the meeting room\n\n## Event notifications\nThe Plixus Core API uses a **Publish/Subscribe** mechanism, this means that external clients that connect to the API can choose to which events they subscribe and get information from. The API contains commands to subscribe or unsubscribe from each of the modules. Each module contains specific functionality to manage and configure meetings. The following modules are available:\n\n* **Resources**: module to manage all resources present in your setup\n* **Users**: module for user management with authentication, user roles and permissions\n\n* **System**: module for general system wide settings such as licensing and date and time format\n* **Room**: module to manage the meeting room, initialize units, create booths and manage the room layout\n* **Audio**: module to configure general, system wide audio settings\n* **AudioDynamicsProcessor**: module for all runtime modifications of your active audio dynamics processor configuration\n* **AudioDynamicsProcessorConfigurations**: module to create, edit audio dynamics processor configurations\n* **AudioRouting**: module for all runtime modifications of your active audio routing configuration\n* **AudioRoutingConfigurations**: module to create, edit and delete audio routing configurations\n* **Video**: module for runtime modifications of video configuration to route the video inputs and outputs to one of the 6 available video streams\n* **VideoConfigurations**: module to create, edit and delete video configurations\n* **Interpretation**: module for runtime modifications and information of the active interpretation configuration\n* **InterpretationConfigurations**: module to create, edit and delete interpretation configurations\n* **Discussion**: module with operator functionality. Change and retrieve microphone states or change conference settings\n* **Intercom**: module to set up calls between microphone units\n* **Recording**: module to manage recording on the Central Unit\n* **Messaging**: module to send messages to seats and booths\n* **Meeting**: module to manage general meeting functions such as meeting state\n* **Voting**: module for basic management of voting sessions\n* **Buttons**: module to manage all buttons events in your meeting room\n> Button events may not always take place, because certain operations in CoCon such as voting sessions, use specific buttons. Only when the session is ended the buttons become available again.\n* **Leds**: module to manage all LED events in your meeting room\n> LED events may not always take place, because certain operations in CoCon such as voting sessions use certain LEDs. Only when the voting session is ended, LED events become available.\n\n# Set up and use the Plixus Core API\n## General\nThe Plixus Core API consists of a number of URI's (*Uniform Resource Indentifier*) which are exchanged between the API client and the Plixus engine over a TCP/IP-connection. The Plixus Central Unit hosts the API and is available on the IP address of the Central Unit.\nThe API uses two (or more) parallel HTTP-connections:\n* A **Notification** connection that the client and the CU keep open in case any information needs to be transferred from the CU to the client.\n\n\n* Any other connection that is used to transfer **information from the client to the CU**.\n\nThe client needs to initialize the notification connection and it is kept open by both sides. Two scenarios can occur:\n* The CU has information to send to the client and therefore uses the notification connection. When the information is transferred, the connection is closed (as per the HTTP standard). Therefore, the client needs to create a new notification connection. The CU guarantees that no information is lost during this time period where the client is not connected to the CU. \n> Note that you need to create a new notification connection within 60 seconds. If not, the CU discards the client data.\n* The HTTP-connection times out before the CU has any information to send to the client. At this point, the client needs to create a new notification connection. Also in this scenario, the CU guarantees that no information is lost.\n## REST/JSON example\nBelow you can find a short description and example how to create and use the API connection with the CU using the **REST/JSON format**. \nThe first URI you need to send to the Plixus API is the **connect URI**, which you can find in the Notification module (/api/notification/connect). This returns a JSON string as reply, which looks like the following example:\n\n``` *{\"connectionId\":\"3f5b8afe-6efb-4428-8762-e39d42a0762d\"}*  ```\n    \nThis returns the **Id** of the connection that you need to use to open the notification connection and make a new polling request. When the connection is established, the CU can send updates to the client. After the client receives information from the CU, it must re-establish the connection with the CU.\n\n## Server return values\nFor feedback of the API communication between the client and the CU, the API uses **HTTP response codes**.\n",
+    "description" : "\n\n\n# Introduction\nThis introduction describes the basics of the REST API for Plixus Core on the Central Unit (CU).\n## Before you start\nTelevic Conference's Plixus Core API (for the central unit) was created to create custom solutions and integrate with your own API.  With the Plixus API you can perform two types of functions:\n* **Publication** of events occuring in the meeting room   \n* **External control** of the meeting room\n\n## Event notifications\nThe Plixus Core API uses a **Publish/Subscribe** mechanism, this means that external clients that connect to the API can choose to which events they subscribe and get information from. The API contains commands to subscribe or unsubscribe from each of the modules. Each module contains specific functionality to manage and configure meetings. The following modules are available:\n\n* **Resources**: module to manage all resources present in your setup\n* **Users**: module for user management with authentication, user roles and permissions\n\n* **System**: module for general system wide settings such as licensing and date and time format\n* **Room**: module to manage the meeting room, initialize units, create booths and manage the room layout\n* **Audio**: module to configure general, system wide audio settings\n* **AudioDynamicsProcessor**: module for all runtime modifications of your active audio dynamics processor configuration\n* **AudioDynamicsProcessorConfigurations**: module to create, edit audio dynamics processor configurations\n* **AudioRouting**: module for all runtime modifications of your active audio routing configuration\n* **AudioRoutingConfigurations**: module to create, edit and delete audio routing configurations\n* **Video**: module for runtime modifications of video configuration to route the video inputs and outputs to one of the 6 available video streams\n* **VideoConfigurations**: module to create, edit and delete video configurations\n* **Interpretation**: module for runtime modifications and information of the active interpretation configuration\n* **InterpretationConfigurations**: module to create, edit and delete interpretation configurations\n* **Discussion**: module with operator functionality. Change and retrieve microphone states or change conference settings\n* **Intercom**: module to set up calls between microphone units\n* **Recording**: module to manage recording on the Central Unit\n* **Messaging**: module to send messages to seats and booths\n* **Meeting**: module to manage general meeting functions such as meeting state\n* **Voting**: module for basic management of voting sessions\n* **Buttons**: module to manage all buttons events in your meeting room\n> Button events may not always take place, because certain operations in CoCon such as voting sessions, use specific buttons. Only when the session is ended the buttons become available again.\n* **Leds**: module to manage all LED events in your meeting room\n> LED events may not always take place, because certain operations in CoCon such as voting sessions use certain LEDs. Only when the voting session is ended, LED events become available.\n* **WirelessAccessPoints**: module to manage the wireless access points that are connected to the system\n\n# Set up and use the Plixus Core API\n## General\nThe Plixus Core API consists of a number of URI's (*Uniform Resource Indentifier*) which are exchanged between the API client and the Plixus engine over a TCP/IP-connection. The Plixus Central Unit hosts the API and is available on the IP address of the Central Unit.\nThe API uses two (or more) parallel HTTP-connections:\n* A **Notification** connection that the client and the CU keep open in case any information needs to be transferred from the CU to the client.\n\n\n* Any other connection that is used to transfer **information from the client to the CU**.\n\nThe client needs to initialize the notification connection and it is kept open by both sides. Two scenarios can occur:\n* The CU has information to send to the client and therefore uses the notification connection. When the information is transferred, the connection is closed (as per the HTTP standard). Therefore, the client needs to create a new notification connection. The CU guarantees that no information is lost during this time period where the client is not connected to the CU. \n> Note that you need to create a new notification connection within 60 seconds. If not, the CU discards the client data.\n* The HTTP-connection times out before the CU has any information to send to the client. At this point, the client needs to create a new notification connection. Also in this scenario, the CU guarantees that no information is lost.\n## REST/JSON example\nBelow you can find a short description and example how to create and use the API connection with the CU using the **REST/JSON format**. \nThe first URI you need to send to the Plixus API is the **connect URI**, which you can find in the Notification module (/api/notification/connect). This returns a JSON string as reply, which looks like the following example:\n\n``` *{\"connectionId\":\"3f5b8afe-6efb-4428-8762-e39d42a0762d\"}*  ```\n    \nThis returns the **Id** of the connection that you need to use to open the notification connection and make a new polling request. When the connection is established, the CU can send updates to the client. After the client receives information from the CU, it must re-establish the connection with the CU.\n\n## Server return values\nFor feedback of the API communication between the client and the CU, the API uses **HTTP response codes**.\n",
     "version" : "1.0",
     "x-logo" : {
       "url" : "https://www.televic.com/themes/televic/images/logos/televic-group.svg",
@@ -5930,6 +5930,197 @@
           }
         }
       }
+    },
+    "/api/v1/wirelessaccesspoints" : {
+      "get" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Get a list of all wireless access points connected to the system",
+        "operationId" : "WirelessAccessPoints_GetWirelessAccessPoints",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/WirelessAccessPoint"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessaccesspoints/{serial}/couple" : {
+      "post" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Couple the wireless access point",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Uncouple the wireless access point",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "serial",
+        "in" : "path",
+        "description" : "Device serial",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/wirelessaccesspoints/{serial}/operatingmode" : {
+      "put" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Change the operating mode of the wireless access point",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Operating mode",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WirelessOperatingMode"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "serial",
+        "in" : "path",
+        "description" : "Device serial",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/wirelessaccesspoints/defaultoperatingmode" : {
+      "get" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Get the default operating mode of wireless access points in the system",
+        "operationId" : "WirelessAccessPoints_GetDefaultOperatingMode",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessOperatingMode"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Change the default operating mode of wireless access points in the system",
+        "operationId" : "WirelessAccessPoints_ChangeDefaultOperatingMode",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Default operating mode",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WirelessOperatingMode"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessaccesspoints/{serial}/takeover/{newSerial}" : {
+      "post" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Take-over the wireless access point",
+        "parameters" : [ {
+          "name" : "newSerial",
+          "in" : "path",
+          "description" : "Serial of device that will take-over the wireless units",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "serial",
+        "in" : "path",
+        "description" : "Device serial",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/events/wirelessaccesspoints/wirelessaccesspointadded" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when a wireless access point was added",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessAccessPointAdded"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/wirelessaccesspoints/wirelessaccesspointchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when a wireless access point was changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessAccessPointChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/wirelessaccesspoints/wirelessaccesspointremoved" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when a wireless access point was removed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessAccessPointRemoved"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/wirelessaccesspoints/defaultoperatingmodechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the default operating mode of wireless access points has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessOperatingMode"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9645,6 +9836,110 @@
           "type" : "integer"
         }
       }
+    },
+    "WirelessAccessPoint" : {
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Device serial number",
+          "type" : "integer"
+        },
+        "coupled" : {
+          "description" : "Is the wireless access point coupled or not?",
+          "type" : "boolean"
+        },
+        "hostName" : {
+          "description" : "Host name of the wireless access point",
+          "type" : "string"
+        },
+        "ipAddress" : {
+          "description" : "IP address of the wireless access point (on LAN port)",
+          "type" : "string"
+        },
+        "subnetMask" : {
+          "description" : "Subnet mask of the wireless access point (on LAN port)",
+          "type" : "string"
+        },
+        "gateway" : {
+          "description" : "Gateway of the wireless access point (on LAN port)",
+          "type" : "string"
+        },
+        "macAddress" : {
+          "description" : "MAC address of the wireless access point",
+          "type" : "string"
+        },
+        "devices" : {
+          "description" : "List of serial numbers of wireless units that connect to this wireless access point",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "channels" : {
+          "description" : "List of channels that can be used by this wireless access point",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WirelessChannel"
+          }
+        },
+        "operatingMode" : {
+          "$ref" : "#/definitions/WirelessOperatingMode",
+          "description" : "Current operating mode of the wireless access point"
+        }
+      }
+    },
+    "WirelessChannel" : {
+      "type" : "object",
+      "properties" : {
+        "frequency" : {
+          "description" : "The center frequency of this wireless channel expressed in MHz",
+          "type" : "integer"
+        },
+        "quality" : {
+          "description" : "Quality number",
+          "type" : "integer"
+        },
+        "enabled" : {
+          "description" : "Is this channel current enabled or not?",
+          "type" : "boolean"
+        },
+        "active" : {
+          "description" : "Is this channel currently active or not?",
+          "type" : "boolean"
+        }
+      }
+    },
+    "WirelessOperatingMode" : {
+      "type" : "object",
+      "properties" : {
+        "mode" : {
+          "enum" : [ "closed", "closedRFID", "open" ]
+        }
+      }
+    },
+    "WirelessAccessPointAdded" : {
+      "type" : "object",
+      "properties" : {
+        "wirelessAccessPoint" : {
+          "$ref" : "#/definitions/WirelessAccessPoint"
+        }
+      }
+    },
+    "WirelessAccessPointChanged" : {
+      "type" : "object",
+      "properties" : {
+        "wirelessAccessPoint" : {
+          "$ref" : "#/definitions/WirelessAccessPoint"
+        }
+      }
+    },
+    "WirelessAccessPointRemoved" : {
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "type" : "string"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -9725,5 +10020,8 @@
   }, {
     "name" : "DeviceLicenses",
     "description" : "Description about devicelicenses module"
+  }, {
+    "name" : "WirelessAccessPoints",
+    "description" : "This module can be used to retrieve information from and control the behavior of the Wireless Access Points that are connected to the system."
   } ]
 }
