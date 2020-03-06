@@ -5975,7 +5975,7 @@
         "in" : "path",
         "description" : "Device serial",
         "required" : true,
-        "type" : "integer"
+        "type" : "string"
       } ]
     },
     "/api/v1/wirelessaccesspoints/{serial}/operatingmode" : {
@@ -6002,7 +6002,7 @@
         "in" : "path",
         "description" : "Device serial",
         "required" : true,
-        "type" : "integer"
+        "type" : "string"
       } ]
     },
     "/api/v1/wirelessaccesspoints/defaultoperatingmode" : {
@@ -6050,7 +6050,7 @@
           "in" : "path",
           "description" : "Serial of device that will take-over the wireless units",
           "required" : true,
-          "type" : "integer"
+          "type" : "string"
         } ],
         "responses" : {
           "204" : {
@@ -6063,7 +6063,13 @@
         "in" : "path",
         "description" : "Device serial",
         "required" : true,
-        "type" : "integer"
+        "type" : "string"
+      }, {
+        "name" : "newSerial",
+        "in" : "path",
+        "description" : "Serial of device that will take-over the wireless units",
+        "required" : true,
+        "type" : "string"
       } ]
     },
     "/api/events/wirelessaccesspoints/wirelessaccesspointadded" : {
@@ -9842,7 +9848,7 @@
       "properties" : {
         "serial" : {
           "description" : "Device serial number",
-          "type" : "integer"
+          "type" : "string"
         },
         "coupled" : {
           "description" : "Is the wireless access point coupled or not?",
