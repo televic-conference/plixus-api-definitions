@@ -9919,7 +9919,7 @@
       "type" : "object",
       "properties" : {
         "mode" : {
-          "enum" : [ "closed", "closedRFID", "open" ]
+          "enum" : [ "closed", "rfid", "open" ]
         }
       }
     },
