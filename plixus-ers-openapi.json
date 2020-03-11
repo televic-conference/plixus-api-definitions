@@ -5952,18 +5952,17 @@
       }
     },
     "/api/v1/wirelessaccesspoints/{serial}/couple" : {
-      "post" : {
+      "put" : {
         "tags" : [ "WirelessAccessPoints" ],
-        "summary" : "Couple the wireless access point",
-        "responses" : {
-          "204" : {
-            "description" : "OK"
+        "summary" : "Set the coupled state of the wireless access point",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WirelessAccessPointCoupleRequest"
           }
-        }
-      },
-      "delete" : {
-        "tags" : [ "WirelessAccessPoints" ],
-        "summary" : "Uncouple the wireless access point",
+        } ],
         "responses" : {
           "204" : {
             "description" : "OK"
@@ -6041,37 +6040,6 @@
         }
       }
     },
-    "/api/v1/wirelessaccesspoints/{serial}/takeover/{newSerial}" : {
-      "post" : {
-        "tags" : [ "WirelessAccessPoints" ],
-        "summary" : "Take-over the wireless access point",
-        "parameters" : [ {
-          "name" : "newSerial",
-          "in" : "path",
-          "description" : "Serial of device that will take-over the wireless units",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "serial",
-        "in" : "path",
-        "description" : "Device serial",
-        "required" : true,
-        "type" : "string"
-      }, {
-        "name" : "newSerial",
-        "in" : "path",
-        "description" : "Serial of device that will take-over the wireless units",
-        "required" : true,
-        "type" : "string"
-      } ]
-    },
     "/api/events/wirelessaccesspoints/wirelessaccesspointadded" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -6124,6 +6092,25 @@
             "schema" : {
               "$ref" : "#/definitions/WirelessOperatingMode"
             }
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessaccesspoints/takeover" : {
+      "post" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Take-over the wireless access point",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WirelessTakeoverRequest"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
           }
         }
       }
@@ -9912,6 +9899,10 @@
         "active" : {
           "description" : "Is this channel currently active or not?",
           "type" : "boolean"
+        },
+        "channel" : {
+          "description" : "Channel number",
+          "type" : "integer"
         }
       }
     },
@@ -9944,6 +9935,28 @@
       "properties" : {
         "serial" : {
           "type" : "string"
+        }
+      }
+    },
+    "WirelessTakeoverRequest" : {
+      "type" : "object",
+      "properties" : {
+        "fromWirelessAccessPoint" : {
+          "description" : "Serial number",
+          "type" : "string"
+        },
+        "toWirelessAccessPoint" : {
+          "description" : "Serial number",
+          "type" : "string"
+        }
+      }
+    },
+    "WirelessAccessPointCoupleRequest" : {
+      "type" : "object",
+      "properties" : {
+        "couple" : {
+          "description" : "Is the wireless access point coupled or not?",
+          "type" : "boolean"
         }
       }
     }
