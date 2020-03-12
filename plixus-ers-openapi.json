@@ -3075,39 +3075,19 @@
             }
           }
         }
-      },
-      "post" : {
-        "tags" : [ "Meeting" ],
-        "summary" : "Schedule a meeting",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/ScheduleMeetingRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Meeting info",
-            "schema" : {
-              "$ref" : "#/definitions/Meeting"
-            }
-          }
-        }
       }
     },
     "/api/v1/meeting/prepare" : {
       "post" : {
         "tags" : [ "Meeting" ],
-        "summary" : "Prepare the meeting",
+        "summary" : "Prepare a meeting from a template",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
           "description" : "Meeting info",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/PrepareMeetingRequest"
+            "$ref" : "#/definitions/MeetingTemplate"
           }
         } ],
         "responses" : {
@@ -3123,7 +3103,7 @@
     "/api/v1/meeting/start" : {
       "post" : {
         "tags" : [ "Meeting" ],
-        "summary" : "Start the meeting",
+        "summary" : "Start the currently prepared meeting",
         "responses" : {
           "204" : {
             "description" : "OK"
