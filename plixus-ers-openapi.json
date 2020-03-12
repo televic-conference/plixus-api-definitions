@@ -6115,7 +6115,7 @@
         }
       }
     },
-    "/api/events/badge" : {
+    "/api/events/meeting/badge" : {
       "get" : {
         "tags" : [ "Events" ],
         "summary" : "Event when badge is inserted/removed from a device",
