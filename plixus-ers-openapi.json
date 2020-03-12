@@ -3316,7 +3316,7 @@
     "/api/events/meeting/meetingdelegateschanged" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Event when delegates list has changed",
+        "summary" : "Event when delegates list in the meeting  has changed",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -6132,7 +6132,7 @@
     "/api/events/delegates/delegateschanged/" : {
       "get" : {
         "tags" : [ "Events" ],
-        "summary" : "Event when delegates participating in the meeting has changed",
+        "summary" : "Event when delegates list has changed",
         "responses" : {
           "200" : {
             "description" : "OK",
