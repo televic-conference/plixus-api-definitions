@@ -2788,15 +2788,12 @@
           "description" : "Data about audio routing configuration to create",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
           }
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
-            }
+            "description" : "Ok"
           },
           "400" : {
             "description" : "An invalid or missing input parameter will result in a bad request"
