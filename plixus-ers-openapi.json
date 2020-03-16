@@ -9951,6 +9951,10 @@
         "event" : {
           "description" : "Event type: can be up or down",
           "enum" : [ "up", "down" ]
+        },
+        "seat" : {
+          "description" : "Seat ID of seat that generated the badge event",
+          "type" : "integer"
         }
       }
     }
