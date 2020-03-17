@@ -2757,50 +2757,6 @@
         }
       }
     },
-    "/api/v1/audiodynamicsprocessorconfigurations" : {
-      "get" : {
-        "tags" : [ "AudioDynamicsProcessorConfigurations" ],
-        "summary" : "Get a list of all audio dynamics processor configurations of the room",
-        "operationId" : "AudioDynamicsProcessorConfigurations_GetAudioDynamicsProcessorConfigurations",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationList"
-            }
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "AudioDynamicsProcessorConfigurations" ],
-        "summary" : "Create a new audio dynamics processor configuration for the room",
-        "operationId" : "AudioDynamicsProcessorConfigurations_CreateAudioDynamicsProcessorConfiguration",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "data",
-          "in" : "body",
-          "description" : "Data about audio routing configuration to create",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      }
-    },
     "/api/v1/recording/state" : {
       "get" : {
         "tags" : [ "Recording" ],
@@ -5630,52 +5586,6 @@
         }
       }
     },
-    "/api/v1/audiodynamicsprocessor/activeconfiguration" : {
-      "get" : {
-        "tags" : [ "AudioDynamicsProcessor" ],
-        "summary" : "Get the active configuration data",
-        "operationId" : "AudioDynamicsProcessor_GetActiveConfiguration",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
-            }
-          },
-          "405" : {
-            "description" : "Invalid license"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "AudioDynamicsProcessor" ],
-        "summary" : "Modify the active audio dynamics processor configuration",
-        "operationId" : "AudioDynamicsProcessor_SaveActiveConfiguration",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          },
-          "405" : {
-            "description" : "Invalid license"
-          }
-        }
-      }
-    },
     "/api/v1/room/seats/{seat}/inputsensitivityoffset" : {
       "get" : {
         "tags" : [ "Room" ],
@@ -5766,7 +5676,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
             }
           }
         }
@@ -6060,11 +5970,55 @@
         }
       }
     },
-    "/api/v1/audiodynamicsprocessorconfigurations/{name}/" : {
+    "/api/v1/audiodynamicsprocessor/configurations" : {
       "get" : {
-        "tags" : [ "AudioDynamicsProcessorConfigurations" ],
-        "summary" : "Get details of a specific audio dynamics processor configuration",
-        "operationId" : "AudioDynamicsProcessorConfigurations_GetAudioDynamicsProcessorConfiguration",
+        "tags" : [ "AudioDynamicsProcessor" ],
+        "summary" : "Get a list of all audio dynamics processor configurations of the room",
+        "operationId" : "AudioDynamicsProcessorConfigurations_GetAudioDynamicsProcessorConfigurations",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationList"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AudioDynamicsProcessor" ],
+        "summary" : "Create a new audio dynamics processor configuration for the room",
+        "operationId" : "AudioDynamicsProcessorConfigurations_CreateAudioDynamicsProcessorConfiguration",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "data",
+          "in" : "body",
+          "description" : "Data about audio routing configuration to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/audiodynamicsprocessor" : {
+      "get" : {
+        "tags" : [ "AudioDynamicsProcessor" ],
+        "summary" : "Get the active configuration",
+        "operationId" : "AudioDynamicsProcessor_GetActiveConfiguration",
         "consumes" : [ ],
         "produces" : [ "application/json", "text/json" ],
         "responses" : {
@@ -6074,44 +6028,37 @@
               "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
             }
           },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
+          "405" : {
+            "description" : "Invalid license"
           }
         }
       },
       "put" : {
-        "tags" : [ "AudioDynamicsProcessorConfigurations" ],
-        "summary" : "Update the details of an existing audio dynamics processor configuration",
-        "operationId" : "AudioDynamicsProcessorConfigurations_UpdateAudioDynamicsProcessorConfiguration",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
+        "tags" : [ "AudioDynamicsProcessor" ],
+        "summary" : "Set the active audio dynamics processor configuration",
+        "operationId" : "AudioDynamicsProcessor_SaveActiveConfiguration",
+        "consumes" : [ ],
+        "produces" : [ ],
         "parameters" : [ {
-          "name" : "data",
+          "name" : "body",
           "in" : "body",
-          "description" : "Data about the audio routing configuration to update",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationData"
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
           }
         } ],
         "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
-            }
+          "204" : {
+            "description" : "No Content"
           },
           "400" : {
             "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
           }
         }
-      },
-      "parameters" : [ {
-        "name" : "name",
-        "in" : "path",
-        "required" : true,
-        "type" : "string"
-      } ]
+      }
     }
   },
   "definitions" : {
@@ -9600,63 +9547,6 @@
           "items" : {
             "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationDescription"
           }
-        }
-      }
-    },
-    "AudioDynamicsProcessorConfigurationData" : {
-      "type" : "object",
-      "properties" : {
-        "compressorThreshold" : {
-          "description" : "compressor threshold [unit 0.1dBFS]",
-          "type" : "integer"
-        },
-        "compressorRatio" : {
-          "description" : "compressor ratio [unit 0.01]",
-          "type" : "integer"
-        },
-        "compressorAttackTime" : {
-          "description" : "compressor attack time [unit µs]",
-          "type" : "integer"
-        },
-        "compressorReleaseTime" : {
-          "description" : "compressor release time [unit µs]",
-          "type" : "integer"
-        },
-        "limiterAttackTime" : {
-          "description" : "limiter attack time [unit µs]",
-          "type" : "integer"
-        },
-        "limiterReleaseTime" : {
-          "description" : "limiter release time [unit µs]",
-          "type" : "integer"
-        },
-        "noiseGateThreshold" : {
-          "description" : "noise gate threshold [unit 0.1 dBFS]",
-          "type" : "integer"
-        },
-        "noiseGateMinimumGain" : {
-          "description" : "noise gate minimum gain [unit 0.1 dB]",
-          "type" : "integer"
-        },
-        "noiseGateAttackTime" : {
-          "description" : "noise gate attack time [unit µs]",
-          "type" : "integer"
-        },
-        "noiseGateHoldTime" : {
-          "description" : "noise gate hold time [unit µs]",
-          "type" : "integer"
-        },
-        "makeUpGain" : {
-          "description" : "make up gain [unit 0.1 dB]",
-          "type" : "integer"
-        },
-        "noiseGateReleaseTime" : {
-          "description" : "noise gate release time [unit µs]",
-          "type" : "integer"
-        },
-        "limiterThreshold" : {
-          "description" : "limiter threshold [unit 0.1 dBFS]",
-          "type" : "integer"
         }
       }
     },
