@@ -9531,21 +9531,13 @@
         }
       }
     },
-    "AudioDynamicsProcessorConfigurationDescription" : {
-      "type" : "object",
-      "properties" : {
-        "name" : {
-          "type" : "string"
-        }
-      }
-    },
     "AudioDynamicsProcessorConfigurationList" : {
       "type" : "object",
       "properties" : {
         "configurations" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/AudioDynamicsProcessorConfigurationDescription"
+            "$ref" : "#/definitions/AudioDynamicsProcessorConfiguration"
           }
         }
       }
