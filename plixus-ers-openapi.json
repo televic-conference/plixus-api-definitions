@@ -6059,6 +6059,66 @@
           }
         }
       }
+    },
+    "/api/v1/audiorouting/languagestodante" : {
+      "get" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Get the option interpretation languages to dante",
+        "operationId" : "AudioRouting_GetLanguagesToDante",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingLanguagesToDante"
+            }
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioRouting" ],
+        "summary" : "Modify the option interpretation languages to dante",
+        "operationId" : "AudioRouting_SetLanguagesToDante",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioRoutingLanguagesToDante"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          },
+          "405" : {
+            "description" : "Invalid license"
+          }
+        }
+      }
+    },
+    "/api/events/audiorouting/languagestodantechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the option interpretation languages to dante has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for LanguagesToDanteChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/AudioRoutingLanguagesToDante"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9837,6 +9897,16 @@
         "seat" : {
           "description" : "Seat ID of seat that generated the badge event",
           "type" : "integer"
+        }
+      }
+    },
+    "AudioRoutingLanguagesToDante" : {
+      "description" : "Audio routing interpretation languages to dante",
+      "type" : "object",
+      "properties" : {
+        "isActive" : {
+          "description" : "Route interpretation languages to dante?",
+          "type" : "boolean"
         }
       }
     }
