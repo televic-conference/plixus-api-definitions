@@ -6119,6 +6119,33 @@
           }
         }
       }
+    },
+    "/api/v1/devices/{serial}/replace" : {
+      "put" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Replace the device with the given serial number by another device",
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DeviceReplaceRequest"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Ok, no content"
+          },
+          "400" : {
+            "description" : "bad request"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9907,6 +9934,15 @@
         "isActive" : {
           "description" : "Route interpretation languages to dante?",
           "type" : "boolean"
+        }
+      }
+    },
+    "DeviceReplaceRequest" : {
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "serial of the device that will replace the existing device",
+          "type" : "string"
         }
       }
     }
