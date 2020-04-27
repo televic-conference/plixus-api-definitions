@@ -6146,6 +6146,40 @@
           }
         }
       }
+    },
+    "/api/v1/system/setupwizard" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the setup wizard state",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SetupWizard"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the setup wizard state",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SetupWizard"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad request"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9951,6 +9985,14 @@
       "properties" : {
         "configurationId" : {
           "type" : "string"
+        }
+      }
+    },
+    "SetupWizard" : {
+      "type" : "object",
+      "properties" : {
+        "show" : {
+          "type" : "boolean"
         }
       }
     }
