@@ -3085,6 +3085,7 @@
       "get" : {
         "tags" : [ "Meeting" ],
         "summary" : "Get list of delegates in the meeting",
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "List of meeting delegates",
@@ -3142,6 +3143,7 @@
       "get" : {
         "tags" : [ "Meeting" ],
         "summary" : "Get delegate info for seat",
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "Delegate info",
@@ -3501,6 +3503,7 @@
       "get" : {
         "tags" : [ "Voting" ],
         "summary" : "Get list of voting sessions in current meeting",
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -3558,6 +3561,7 @@
       "get" : {
         "tags" : [ "Voting" ],
         "summary" : "Get voting session details",
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "Details about voting session",
@@ -3698,6 +3702,7 @@
       "get" : {
         "tags" : [ "Voting" ],
         "summary" : "Get the results of a voting session",
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -5686,6 +5691,7 @@
       "get" : {
         "tags" : [ "Delegates" ],
         "summary" : "Get the list of all delegates",
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "Ok",
