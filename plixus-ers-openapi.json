@@ -5446,7 +5446,13 @@
             }
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "required" : true,
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+      } ]
     },
     "/api/v1/system/services/{name}/restart" : {
       "post" : {
@@ -5460,8 +5466,7 @@
           "in" : "path",
           "description" : "The name of the service",
           "required" : true,
-          "type" : "string",
-          "enum" : [ "Core", "LegacyRestApi" ]
+          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
         } ],
         "responses" : {
           "204" : {
@@ -5471,7 +5476,13 @@
             "description" : "An invalid or missing input parameter will result in a bad request"
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "required" : true,
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+      } ]
     },
     "/api/v1/system/services/{name}/start" : {
       "post" : {
@@ -5485,8 +5496,7 @@
           "in" : "path",
           "description" : "The name of the service",
           "required" : true,
-          "type" : "string",
-          "enum" : [ "Core", "LegacyRestApi" ]
+          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
         } ],
         "responses" : {
           "204" : {
@@ -5496,7 +5506,13 @@
             "description" : "An invalid or missing input parameter will result in a bad request"
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "required" : true,
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+      } ]
     },
     "/api/v1/system/services/{name}/stop" : {
       "post" : {
@@ -5510,8 +5526,7 @@
           "in" : "path",
           "description" : "The name of the service",
           "required" : true,
-          "type" : "string",
-          "enum" : [ "Core", "LegacyRestApi" ]
+          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
         } ],
         "responses" : {
           "204" : {
@@ -5521,7 +5536,13 @@
             "description" : "An invalid or missing input parameter will result in a bad request"
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "required" : true,
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+      } ]
     },
     "/api/events/system/servicestatechanged" : {
       "get" : {
