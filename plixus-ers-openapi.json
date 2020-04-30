@@ -5436,8 +5436,7 @@
           "in" : "path",
           "description" : "Name of the service",
           "required" : true,
-          "type" : "string",
-          "enum" : [ "Core", "LegacyRestApi" ]
+          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
         } ],
         "responses" : {
           "200" : {
