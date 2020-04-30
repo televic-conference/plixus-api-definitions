@@ -5431,13 +5431,6 @@
       "get" : {
         "tags" : [ "System" ],
         "summary" : "Get the state of the given service",
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "description" : "Name of the service",
-          "required" : true,
-          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
-        } ],
         "responses" : {
           "200" : {
             "description" : "Ok",
@@ -5461,13 +5454,6 @@
         "operationId" : "Services_RestartService",
         "consumes" : [ ],
         "produces" : [ ],
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "description" : "The name of the service",
-          "required" : true,
-          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
-        } ],
         "responses" : {
           "204" : {
             "description" : "No Content"
@@ -5491,43 +5477,6 @@
         "operationId" : "Services_StartService",
         "consumes" : [ ],
         "produces" : [ ],
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "description" : "The name of the service",
-          "required" : true,
-          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "name",
-        "in" : "path",
-        "required" : true,
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
-      } ]
-    },
-    "/api/v1/system/services/{name}/stop" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Stop the specified service",
-        "operationId" : "Services_StopService",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "description" : "The name of the service",
-          "required" : true,
-          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
-        } ],
         "responses" : {
           "204" : {
             "description" : "No Content"
@@ -6206,6 +6155,29 @@
           }
         }
       }
+    },
+    "/api/v1/system/services/{name}/stop" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Stop the specified service",
+        "operationId" : "Services_StopService",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "required" : true,
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+      } ]
     }
   },
   "definitions" : {
