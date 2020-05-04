@@ -6196,7 +6196,7 @@
       "get" : {
         "tags" : [ "System" ],
         "summary" : "Get the configuration archive",
-        "produces" : [ "application/x-tgz" ],
+        "produces" : [ "application/x-compressed-tar" ],
         "responses" : {
           "200" : {
             "description" : "OK",
