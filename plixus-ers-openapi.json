@@ -5447,14 +5447,9 @@
         "summary" : "Get the current system configuration",
         "operationId" : "System_GetConfiguration",
         "consumes" : [ ],
-        "produces" : [ "multipart/form-data" ],
         "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "format" : "binary",
-              "type" : "string"
-            }
+          "204" : {
+            "description" : "configuration archive is being created"
           }
         }
       },
@@ -6182,6 +6177,38 @@
         "type" : "string",
         "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
       } ]
+    },
+    "/api/events/system/configarchiveready/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when config archive is ready for download",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ConfigArchiveReady"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/system/configuration/download" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the configuration archive",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "format" : "binary",
+              "type" : "string"
+            }
+          },
+          "400" : {
+            "description" : "will occur when a request for the config archive was not made before this call."
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9995,6 +10022,17 @@
       "properties" : {
         "show" : {
           "type" : "boolean"
+        }
+      }
+    },
+    "ConfigArchiveReady" : {
+      "description" : "url for downloading a log file from the system",
+      "required" : [ ],
+      "type" : "object",
+      "properties" : {
+        "url" : {
+          "description" : "url that can be used to download the file",
+          "type" : "string"
         }
       }
     }
