@@ -10027,15 +10027,8 @@
       }
     },
     "ConfigArchiveReady" : {
-      "description" : "url for downloading a log file from the system",
-      "required" : [ ],
-      "type" : "object",
-      "properties" : {
-        "url" : {
-          "description" : "url that can be used to download the file",
-          "type" : "string"
-        }
-      }
+      "description" : "event when the config archive is ready for download.",
+      "type" : "object"
     }
   },
   "tags" : [ {
