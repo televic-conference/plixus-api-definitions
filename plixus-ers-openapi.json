@@ -2849,23 +2849,6 @@
           }
         }
       },
-      "delete" : {
-        "tags" : [ "Recording" ],
-        "summary" : "Remove a number of recorded files",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/RecordingFilesInfo"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      },
       "parameters" : [ {
         "name" : "type",
         "in" : "path",
@@ -6207,6 +6190,25 @@
           },
           "400" : {
             "description" : "will occur when a request for the config archive was not made before this call."
+          }
+        }
+      }
+    },
+    "/api/v1/recording/storage/{type}/files/remove" : {
+      "post" : {
+        "tags" : [ "Recording" ],
+        "summary" : "Remove the specified audio recording files.",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RecordingFilesInfo"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Ok"
           }
         }
       }
