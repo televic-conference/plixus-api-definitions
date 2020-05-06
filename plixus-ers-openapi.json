@@ -6205,13 +6205,26 @@
           "schema" : {
             "$ref" : "#/definitions/RecordingFilesInfo"
           }
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "internal", "external" ]
         } ],
         "responses" : {
           "204" : {
             "description" : "Ok"
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "type",
+        "in" : "path",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "internal", "external" ]
+      } ]
     }
   },
   "definitions" : {
