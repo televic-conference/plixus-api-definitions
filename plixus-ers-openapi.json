@@ -8655,10 +8655,10 @@
           "type" : "string"
         },
         "participantsVoted" : {
-          "description" : "List of seat IDs that have voted",
+          "description" : "List of delegates (IDs) that have voted",
           "type" : "array",
           "items" : {
-            "type" : "integer"
+            "type" : "string"
           }
         }
       }
@@ -9297,15 +9297,14 @@
           "description" : "Number of the voting option",
           "type" : "integer"
         },
-        "seat" : {
-          "format" : "int32",
-          "description" : "Seat number of the participant",
-          "type" : "integer"
+        "delegate" : {
+          "description" : "Delegate ID of the participant",
+          "type" : "string"
         }
       },
       "example" : {
         "option" : 1,
-        "seat" : 10
+        "delegate" : 10
       }
     },
     "SeatChanged" : {
