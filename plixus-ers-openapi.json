@@ -8130,9 +8130,18 @@
           "format" : "int32",
           "description" : "Number of seat where delegate is seated",
           "type" : "integer"
+        },
+        "id" : {
+          "description" : "Delegate ID",
+          "type" : "string"
         }
       },
-      "example" : "{\n    \"firstName\": \"Pieter\",\n    \"lastName\": \"Deparcq\",\n    \"seatNumber\": 3\n}"
+      "example" : {
+        "firstName" : "Pieter",
+        "lastName" : "Deparcq",
+        "seatNumber" : 3,
+        "id" : "1"
+      }
     },
     "ScheduleMeetingRequest" : {
       "title" : "Root Type for ScheduleMeetingRequest",
