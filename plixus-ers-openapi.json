@@ -6225,6 +6225,37 @@
         "type" : "string",
         "enum" : [ "internal", "external" ]
       } ]
+    },
+    "/api/v1/room/seats/external" : {
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Create an external seat",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/Seat"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/room/seats/external/{seat}" : {
+      "delete" : {
+        "tags" : [ "Room" ],
+        "responses" : {
+          "204" : {
+            "description" : "Ok"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "Seat ID of external seat",
+        "required" : true,
+        "type" : "integer"
+      } ]
     }
   },
   "definitions" : {
