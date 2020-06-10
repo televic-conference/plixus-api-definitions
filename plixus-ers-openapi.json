@@ -6277,7 +6277,14 @@
             "description" : "Vote not possible."
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "voting session id",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
