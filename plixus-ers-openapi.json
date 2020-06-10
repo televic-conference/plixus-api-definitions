@@ -6256,6 +6256,28 @@
         "required" : true,
         "type" : "integer"
       } ]
+    },
+    "/api/v1/voting/sessions/{id}/externalvote" : {
+      "put" : {
+        "tags" : [ "Voting" ],
+        "summary" : "Inject an external vote (from an external delegate) into the voting session",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ExternalVote"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Vote not possible."
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -10083,6 +10105,19 @@
     "ConfigArchiveReady" : {
       "description" : "event when the config archive is ready for download.",
       "type" : "object"
+    },
+    "ExternalVote" : {
+      "type" : "object",
+      "properties" : {
+        "seat" : {
+          "description" : "Seat id of the external seat that wants to vote.",
+          "type" : "integer"
+        },
+        "option" : {
+          "description" : "Number of the voting option",
+          "type" : "integer"
+        }
+      }
     }
   },
   "tags" : [ {
