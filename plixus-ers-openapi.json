@@ -7650,6 +7650,46 @@
                     "type": "string"
                 }
             ]
+        },
+        "/api/v1/delegates/cloud": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Delegates"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "$ref": "#/definitions/CloudDelegateList"
+                        }
+                    }
+                },
+                "summary": "Get the list of all cloud delegates"
+            },
+            "put": {
+                "tags": [
+                    "Delegates"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/CloudDelegateList"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                },
+                "summary": "Sets new cloud delegate list"
+            }
         }
     },
     "definitions": {
@@ -11846,6 +11886,42 @@
                 "option": {
                     "description": "Number of the voting option",
                     "type": "integer"
+                }
+            }
+        },
+        "CloudDelegate": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "description": "first name of the delegate",
+                    "type": "string"
+                },
+                "lastName": {
+                    "description": "last name of the delegate",
+                    "type": "string"
+                },
+                "badgeId": {
+                    "description": "badge ID of badge associated with this delegate",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "delegate id",
+                    "type": "string"
+                },
+                "externalId": {
+                    "description": "",
+                    "type": "string"
+                }
+            }
+        },
+        "CloudDelegateList": {
+            "type": "object",
+            "properties": {
+                "delegates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CloudDelegate"
+                    }
                 }
             }
         }
