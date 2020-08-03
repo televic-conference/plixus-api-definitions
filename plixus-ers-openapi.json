@@ -7663,7 +7663,7 @@
                     "200": {
                         "description": "Ok",
                         "schema": {
-                            "$ref": "#/definitions/CloudDelegateList"
+                            "$ref": "#/definitions/DelegateList"
                         }
                     }
                 },
@@ -7677,7 +7677,7 @@
                     {
                         "name": "body",
                         "schema": {
-                            "$ref": "#/definitions/CloudDelegateList"
+                            "$ref": "#/definitions/DelegateList"
                         },
                         "in": "body",
                         "required": true
@@ -7689,6 +7689,53 @@
                     }
                 },
                 "summary": "Sets new cloud delegate list"
+            }
+        },
+        "/api/v1/meeting/published/{meetingId}/prepare/": {
+            "post": {
+                "tags": [
+                    "Meeting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Meeting"
+                        }
+                    }
+                },
+                "summary": "Prepare a cloud meeting"
+            },
+            "parameters": [
+                {
+                    "name": "meetingId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/api/v1/meeting/published": {
+            "post": {
+                "tags": [
+                    "Meeting"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/PublishedMeeting"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ok"
+                    }
+                },
+                "summary": "publish a meeting"
             }
         }
     },
@@ -11889,39 +11936,29 @@
                 }
             }
         },
-        "CloudDelegate": {
+        "PublishedMeeting": {
+            "description": "Details about current meeting",
             "type": "object",
             "properties": {
-                "firstName": {
-                    "description": "first name of the delegate",
-                    "type": "string"
-                },
-                "lastName": {
-                    "description": "last name of the delegate",
-                    "type": "string"
-                },
-                "badgeId": {
-                    "description": "badge ID of badge associated with this delegate",
-                    "type": "string"
-                },
                 "id": {
-                    "description": "delegate id",
+                    "description": "meeting id",
                     "type": "string"
                 },
-                "externalId": {
-                    "description": "",
+                "location": {
+                    "description": "meeting room location",
                     "type": "string"
-                }
-            }
-        },
-        "CloudDelegateList": {
-            "type": "object",
-            "properties": {
-                "delegates": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CloudDelegate"
-                    }
+                },
+                "startTime": {
+                    "description": "start date and time of the meeting",
+                    "type": "string"
+                },
+                "endTime": {
+                    "description": "end date and time of the meeting",
+                    "type": "string"
+                },
+                "template": {
+                    "$ref": "#/definitions/MeetingTemplate",
+                    "description": "meeting template"
                 }
             }
         }
