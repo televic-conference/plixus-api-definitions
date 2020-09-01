@@ -10257,7 +10257,7 @@
         "subItems" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/DiscussionItem"
+            "$ref" : "#/definitions/AgendaItem"
           }
         }
       }
