@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "title" : "Plixus Core API 1.0",
-    "description" : "\n\n\n# Introduction\nThis introduction describes the basics of the REST API for Plixus Core on the Central Unit (CU).\n## Before you start\nTelevic Conference's Plixus Core API (for the central unit) was created to create custom solutions and integrate with your own API.  With the Plixus API you can perform two types of functions:\n* **Publication** of events occuring in the meeting room   \n* **External control** of the meeting room\n\n## Event notifications\nThe Plixus Core API uses a **Publish/Subscribe** mechanism, this means that external clients that connect to the API can choose to which events they subscribe and get information from. The API contains commands to subscribe or unsubscribe from each of the modules. Each module contains specific functionality to manage and configure meetings. The following modules are available:\n\n* **Resources**: module to manage all resources present in your setup\n* **Users**: module for user management with authentication, user roles and permissions\n\n* **System**: module for general system wide settings such as licensing and date and time format\n* **Room**: module to manage the meeting room, initialize units, create booths and manage the room layout\n* **Audio**: module to configure general, system wide audio settings\n* **AudioDynamicsProcessor**: module for all runtime modifications of your active audio dynamics processor configuration\n* **AudioDynamicsProcessorConfigurations**: module to create, edit audio dynamics processor configurations\n* **AudioRouting**: module for all runtime modifications of your active audio routing configuration\n* **AudioRoutingConfigurations**: module to create, edit and delete audio routing configurations\n* **Video**: module for runtime modifications of video configuration to route the video inputs and outputs to one of the 6 available video streams\n* **VideoConfigurations**: module to create, edit and delete video configurations\n* **Interpretation**: module for runtime modifications and information of the active interpretation configuration\n* **InterpretationConfigurations**: module to create, edit and delete interpretation configurations\n* **Discussion**: module with operator functionality. Change and retrieve microphone states or change conference settings\n* **Intercom**: module to set up calls between microphone units\n* **Recording**: module to manage recording on the Central Unit\n* **Messaging**: module to send messages to seats and booths\n* **Meeting**: module to manage general meeting functions such as meeting state\n* **Voting**: module for basic management of voting sessions\n* **Buttons**: module to manage all buttons events in your meeting room\n> Button events may not always take place, because certain operations in CoCon such as voting sessions, use specific buttons. Only when the session is ended the buttons become available again.\n* **Leds**: module to manage all LED events in your meeting room\n> LED events may not always take place, because certain operations in CoCon such as voting sessions use certain LEDs. Only when the voting session is ended, LED events become available.\n* **WirelessAccessPoints**: module to manage the wireless access points that are connected to the system\n\n# Set up and use the Plixus Core API\n## General\nThe Plixus Core API consists of a number of URI's (*Uniform Resource Indentifier*) which are exchanged between the API client and the Plixus engine over a TCP/IP-connection. The Plixus Central Unit hosts the API and is available on the IP address of the Central Unit.\nThe API uses two (or more) parallel HTTP-connections:\n* A **Notification** connection that the client and the CU keep open in case any information needs to be transferred from the CU to the client.\n\n\n* Any other connection that is used to transfer **information from the client to the CU**.\n\nThe client needs to initialize the notification connection and it is kept open by both sides. Two scenarios can occur:\n* The CU has information to send to the client and therefore uses the notification connection. When the information is transferred, the connection is closed (as per the HTTP standard). Therefore, the client needs to create a new notification connection. The CU guarantees that no information is lost during this time period where the client is not connected to the CU. \n> Note that you need to create a new notification connection within 60 seconds. If not, the CU discards the client data.\n* The HTTP-connection times out before the CU has any information to send to the client. At this point, the client needs to create a new notification connection. Also in this scenario, the CU guarantees that no information is lost.\n## REST/JSON example\nBelow you can find a short description and example how to create and use the API connection with the CU using the **REST/JSON format**. \nThe first URI you need to send to the Plixus API is the **connect URI**, which you can find in the Notification module (/api/notification/connect). This returns a JSON string as reply, which looks like the following example:\n\n``` *{\"connectionId\":\"3f5b8afe-6efb-4428-8762-e39d42a0762d\"}*  ```\n    \nThis returns the **Id** of the connection that you need to use to open the notification connection and make a new polling request. When the connection is established, the CU can send updates to the client. After the client receives information from the CU, it must re-establish the connection with the CU.\n\n## Server return values\nFor feedback of the API communication between the client and the CU, the API uses **HTTP response codes**.\n",
+    "description" : "\n\n\n# Introduction\nThis introduction describes the basics of the REST API for Plixus Core on the Central Unit (CU).\n## Before you start\nTelevic Conference's Plixus Core API (for the central unit) was created to create custom solutions and integrate with your own API.  With the Plixus API you can perform two types of functions:\n* **Publication** of events occuring in the meeting room   \n* **External control** of the meeting room\n\n## Event notifications\nThe Plixus Core API uses a **Publish/Subscribe** mechanism, this means that external clients that connect to the API can choose to which events they subscribe and get information from. The API contains commands to subscribe or unsubscribe from each of the modules. Each module contains specific functionality to manage and configure meetings. The following modules are available:\n\n* **Audio**: module to configure general, system wide audio settings\n* **AudioDynamicsProcessor**: module for all runtime modifications of your active audio dynamics processor configuration\n* **AudioDynamicsProcessorConfigurations**: module to create, edit audio dynamics processor configurations\n* **AudioRouting**: module for all runtime modifications of your active audio routing configuration\n* **AudioRoutingConfigurations**: module to create, edit and delete audio routing configurations\n* **Buttons**: module to manage all buttons events in your meeting room\n> Button events may not always take place, because certain operations in CoCon such as voting sessions, use specific buttons. Only when the session is ended the buttons become available again.\n* **Discussion**: module with operator functionality. Change and retrieve microphone states or change conference settings\n* **Intercom**: module to set up calls between microphone units\n* **Interpretation**: module for runtime modifications and information of the active interpretation configuration\n* **InterpretationConfigurations**: module to create, edit and delete interpretation configurations\n* **InterpretationExternal**: module for runtime modifications and information of the active external interpretation configuration\n* **Leds**: module to manage all LED events in your meeting room\n> LED events may not always take place, because certain operations in CoCon such as voting sessions use certain LEDs. Only when the voting session is ended, LED events become available.\n* **Meeting**: module to manage general meeting functions such as meeting state\n* **Messaging**: module to send messages to seats and booths\n* **Recording**: module to manage recording on the Central Unit\n* **Resources**: module to manage all resources present in your setup\n* **Room**: module to manage the meeting room, initialize units, create booths and manage the room layout\n* **System**: module for general system wide settings such as licensing and date and time format\n* **Users**: module for user management with authentication, user roles and permissions\n* **Video**: module for runtime modifications of video configuration to route the video inputs and outputs to one of the 6 available video streams\n* **VideoConfigurations**: module to create, edit and delete video configurations\n* **Voting**: module for basic management of voting sessions\n* **WirelessAccessPoints**: module to manage the wireless access points that are connected to the system\n* **WirelessAuthentication**: module to manage the wireless authentication method used by the wireless access point\n* **WirelessChannels**: module to manage the wireless channels used by the wireless access point\n\n# Set up and use the Plixus Core API\n## General\nThe Plixus Core API consists of a number of URI's (*Uniform Resource Indentifier*) which are exchanged between the API client and the Plixus engine over a TCP/IP-connection. The Plixus Central Unit hosts the API and is available on the IP address of the Central Unit.\nThe API uses two (or more) parallel HTTP-connections:\n* A **Notification** connection that the client and the CU keep open in case any information needs to be transferred from the CU to the client.\n\n\n* Any other connection that is used to transfer **information from the client to the CU**.\n\nThe client needs to initialize the notification connection and it is kept open by both sides. Two scenarios can occur:\n* The CU has information to send to the client and therefore uses the notification connection. When the information is transferred, the connection is closed (as per the HTTP standard). Therefore, the client needs to create a new notification connection. The CU guarantees that no information is lost during this time period where the client is not connected to the CU. \n> Note that you need to create a new notification connection within 60 seconds. If not, the CU discards the client data.\n* The HTTP-connection times out before the CU has any information to send to the client. At this point, the client needs to create a new notification connection. Also in this scenario, the CU guarantees that no information is lost.\n## REST/JSON example\nBelow you can find a short description and example how to create and use the API connection with the CU using the **REST/JSON format**. \nThe first URI you need to send to the Plixus API is the **connect URI**, which you can find in the Notification module (/api/notification/connect). This returns a JSON string as reply, which looks like the following example:\n\n``` *{\"connectionId\":\"3f5b8afe-6efb-4428-8762-e39d42a0762d\"}*  ```\n    \nThis returns the **Id** of the connection that you need to use to open the notification connection and make a new polling request. When the connection is established, the CU can send updates to the client. After the client receives information from the CU, it must re-establish the connection with the CU.\n\n## Server return values\nFor feedback of the API communication between the client and the CU, the API uses **HTTP response codes**.\n",
     "version" : "1.0",
     "x-logo" : {
       "url" : "https://www.televic.com/themes/televic/images/logos/televic-group.svg",
@@ -6356,6 +6356,150 @@
           }
         }
       }
+    },
+    "/api/v1/wirelesschannels" : {
+      "get" : {
+        "tags" : [ "WirelessChannels" ],
+        "summary" : "Get the list of all available wireless channels",
+        "operationId" : "WirelessChannels_GetWirelessChannels",
+        "produces" : [ "text/json", "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/WirelessChannel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wirelesschannels/{ChannelNumber}/enabled" : {
+      "put" : {
+        "tags" : [ "WirelessChannels" ],
+        "summary" : "Enable or disable a channel",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Enable or disable a channel",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WirelessChannelEnableRequest"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "ChannelNumber",
+        "in" : "path",
+        "description" : "Channel number to enable or disable",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/wirelesschannels/region" : {
+      "get" : {
+        "tags" : [ "WirelessChannels" ],
+        "summary" : "Get the region setting of the access point",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessRegion"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/wirelesschannels/channelsChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the properties of a wireless channel changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessChannel"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessauthentication/authenticationMode" : {
+      "get" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Get the wireless authentication mode currently in use",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessOperatingMode"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Set the wireless authentication mode",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The authentication mode to be set",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WirelessOperatingMode"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/interpretationexternal" : {
+      "get" : {
+        "tags" : [ "InterpretationExternal" ],
+        "summary" : "Get the current external interpretation configuration",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ExternalLanguageChannel"
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "InterpretationExternal" ],
+        "summary" : "Set the current external interpretation configuration",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The external interpretation configuration to be applied",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/ExternalLanguageChannel"
+            }
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -6608,6 +6752,14 @@
         },
         "highlightState" : {
           "$ref" : "#/definitions/HighlightState"
+        },
+        "batteryStatus" : {
+          "$ref" : "#/definitions/BatteryStatus",
+          "description" : "Status of the batteries present in the device"
+        },
+        "wirelessLinkStatus" : {
+          "$ref" : "#/definitions/WirelessLinkStatus",
+          "description" : "The wireless link status reported by the device"
         }
       }
     },
@@ -10071,6 +10223,14 @@
         "channel" : {
           "description" : "Channel number",
           "type" : "integer"
+        },
+        "isDfs" : {
+          "description" : "Is this channel a DFS channel or not",
+          "type" : "boolean"
+        },
+        "dfsScanningState" : {
+          "description" : "Enum representing the DFS scanning state of a wireless DFS channel",
+          "enum" : [ "notScanned", "scanning", "scannedOk", "scannedNotOk" ]
         }
       }
     },
@@ -10261,6 +10421,114 @@
           }
         }
       }
+    },
+    "WirelessChannelEnableRequest" : {
+      "description" : "Is the wireless channel enabled or not?",
+      "required" : [ "enabled" ],
+      "type" : "object",
+      "properties" : {
+        "enabled" : {
+          "description" : "Is the wireless channel enabled or not?",
+          "type" : "boolean"
+        }
+      }
+    },
+    "WirelessRegion" : {
+      "description" : "Region setting of the access point",
+      "required" : [ "region" ],
+      "type" : "object",
+      "properties" : {
+        "region" : {
+          "description" : "Region setting of the access point",
+          "enum" : [ "europe", "northAmerica", "japan" ]
+        }
+      }
+    },
+    "BatteryStatus" : {
+      "description" : "Status of the batteries in a device",
+      "required" : [ "runtimeToEmpty", "details" ],
+      "type" : "object",
+      "properties" : {
+        "runtimeToEmpty" : {
+          "description" : "The estimated remaining runtime in minutes until the battery will be empty",
+          "type" : "integer"
+        },
+        "details" : {
+          "description" : "Details of the batteries (possibly) present in the device",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/BatteryDetails"
+          }
+        }
+      }
+    },
+    "BatteryDetails" : {
+      "description" : "Details of an individual battery in a device with (possibly) multiple batteries",
+      "required" : [ "present" ],
+      "type" : "object",
+      "properties" : {
+        "percentage" : {
+          "description" : "Percentage of charge left in the battery",
+          "type" : "integer"
+        },
+        "cycles" : {
+          "description" : "Number of charge / discharge cycles the battery has been through",
+          "type" : "integer"
+        },
+        "health" : {
+          "description" : "Health status indication of the battery",
+          "type" : "integer"
+        },
+        "temperature" : {
+          "description" : "Temperature of the battery in degrees celcius",
+          "type" : "integer"
+        },
+        "present" : {
+          "description" : "Is this battery present in the device or not?",
+          "type" : "boolean"
+        }
+      }
+    },
+    "WirelessLinkStatus" : {
+      "description" : "The status of the wireless link of a device",
+      "type" : "object",
+      "properties" : {
+        "packetLoss" : {
+          "description" : "The amount of packetLoss reported by the device, in percent",
+          "type" : "integer"
+        },
+        "rssi" : {
+          "description" : "The RSSI reported by the device",
+          "type" : "integer"
+        }
+      }
+    },
+    "ExternalLanguageChannel" : {
+      "description" : "Represents an interpretation channel on a system only supporting external inputs as a source for interpretation channels",
+      "required" : [ "language", "displayText", "inputType", "inputNumber", "gain" ],
+      "type" : "object",
+      "properties" : {
+        "language" : {
+          "description" : "Full name of the language on the channel",
+          "type" : "string"
+        },
+        "displayText" : {
+          "description" : "Short name of the language on the channel, to be shown on the displays of the devices in the room",
+          "type" : "string"
+        },
+        "inputType" : {
+          "description" : "The type of the input which should be used as source for the channel",
+          "enum" : [ ]
+        },
+        "inputNumber" : {
+          "description" : "The number of the input which should be used as a source for the channel",
+          "type" : "integer"
+        },
+        "gain" : {
+          "description" : "The gain to be applied on the input, expressed in 0.1dB",
+          "type" : "integer"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -10344,5 +10612,14 @@
   }, {
     "name" : "WirelessAccessPoints",
     "description" : "This module can be used to retrieve information from and control the behavior of the Wireless Access Points that are connected to the system."
+  }, {
+    "name" : "WirelessChannels",
+    "description" : "This module can be used to retrieve information about the available wireless channels, as well as to enable and disable these channels"
+  }, {
+    "name" : "WirelessAuthentication",
+    "description" : "The WirelessAuthentication module allows to configure the authentication method used by the wireless access point"
+  }, {
+    "name" : "InterpretationExternal",
+    "description" : "Module for configuration of systems which only support interpretation coming from external sources"
   } ]
 }
