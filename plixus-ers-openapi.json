@@ -6425,7 +6425,10 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/WirelessChannel"
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/WirelessChannel"
+              }
             }
           }
         }
@@ -6500,6 +6503,67 @@
           }
         }
       }
+    },
+    "/api/events/wirelessauthentication/authenticationModeChanged" : {
+      "get" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Event when the authentication mode of a wireless access point has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessOperatingMode"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessauthentication/{serial}/remove" : {
+      "post" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Remove a device from the authenticated devices list",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "serial",
+        "in" : "path",
+        "description" : "Device serial",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/wirelessauthentication/removeAll" : {
+      "post" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Remove all authenticated devices",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessauthentication/{serial}/add" : {
+      "post" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Add a device to the list of authenticated devices",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "serial",
+        "in" : "path",
+        "description" : "Device serial",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -10491,14 +10555,11 @@
     },
     "WirelessLinkStatus" : {
       "description" : "The status of the wireless link of a device",
+      "required" : [ "quality" ],
       "type" : "object",
       "properties" : {
-        "packetLoss" : {
-          "description" : "The amount of packetLoss reported by the device, in percent",
-          "type" : "integer"
-        },
-        "rssi" : {
-          "description" : "The RSSI reported by the device",
+        "quality" : {
+          "description" : "The RF quality reported by the device",
           "type" : "integer"
         }
       }
