@@ -6286,59 +6286,19 @@
         "type" : "string"
       } ]
     },
-    "/api/v1/delegates/cloud" : {
-      "get" : {
-        "tags" : [ "Delegates" ],
-        "summary" : "Get the list of all cloud delegates",
-        "produces" : [ "application/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "$ref" : "#/definitions/DelegateList"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Delegates" ],
-        "summary" : "Sets new cloud delegate list",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/DelegateList"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          }
-        }
-      }
-    },
-    "/api/v1/meeting/published/{meetingId}/prepare/" : {
-      "post" : {
-        "tags" : [ "Meeting" ],
-        "summary" : "Prepare a cloud meeting",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Meeting"
-            }
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "meetingId",
-        "in" : "path",
-        "required" : true,
-        "type" : "string"
-      } ]
-    },
     "/api/v1/meeting/published" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get a list of published meetings",
+        "responses" : {
+          "200" : {
+            "description" : "ok",
+            "schema" : {
+              "$ref" : "#/definitions/PublishedMeetingInfoList"
+            }
+          }
+        }
+      },
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "publish a meeting",
@@ -6561,6 +6521,43 @@
         "name" : "serial",
         "in" : "path",
         "description" : "Device serial",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/published/{meetingId}" : {
+      "delete" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "delete a published meeting",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "meetingId",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/published/{meetingId}/prepare" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Prepare a cloud meeting",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Meeting"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "meetingId",
+        "in" : "path",
         "required" : true,
         "type" : "string"
       } ]
@@ -10075,19 +10072,19 @@
           "type" : "integer"
         },
         "compressorAttackTime" : {
-          "description" : "compressor attack time [unit Âµs]",
+          "description" : "compressor attack time [unit µs]",
           "type" : "integer"
         },
         "compressorReleaseTime" : {
-          "description" : "compressor release time [unit Âµs]",
+          "description" : "compressor release time [unit µs]",
           "type" : "integer"
         },
         "limiterAttackTime" : {
-          "description" : "limiter attack time [unit Âµs]",
+          "description" : "limiter attack time [unit µs]",
           "type" : "integer"
         },
         "limiterReleaseTime" : {
-          "description" : "limiter release time [unit Âµs]",
+          "description" : "limiter release time [unit µs]",
           "type" : "integer"
         },
         "noiseGateThreshold" : {
@@ -10099,11 +10096,11 @@
           "type" : "integer"
         },
         "noiseGateAttackTime" : {
-          "description" : "noise gate attack time [unit Âµs]",
+          "description" : "noise gate attack time [unit µs]",
           "type" : "integer"
         },
         "noiseGateHoldTime" : {
-          "description" : "noise gate hold time [unit Âµs]",
+          "description" : "noise gate hold time [unit µs]",
           "type" : "integer"
         },
         "makeUpGain" : {
@@ -10111,7 +10108,7 @@
           "type" : "integer"
         },
         "noiseGateReleaseTime" : {
-          "description" : "noise gate release time [unit Âµs]",
+          "description" : "noise gate release time [unit µs]",
           "type" : "integer"
         },
         "name" : {
@@ -10429,27 +10426,41 @@
           "description" : "meeting id",
           "type" : "string"
         },
-        "location" : {
-          "description" : "meeting room location",
-          "type" : "string"
-        },
-        "startTime" : {
-          "description" : "start date and time of the meeting",
-          "type" : "string"
-        },
-        "endTime" : {
-          "description" : "end date and time of the meeting",
-          "type" : "string"
-        },
-        "template" : {
-          "$ref" : "#/definitions/MeetingTemplate",
-          "description" : "meeting template"
-        },
         "agendaItems" : {
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/AgendaItem"
           }
+        },
+        "roomName" : {
+          "description" : "meeting room name",
+          "type" : "string"
+        },
+        "endDateTime" : {
+          "description" : "end date and time of the meeting",
+          "type" : "string"
+        },
+        "startDateTime" : {
+          "description" : "start date and time of the meeting",
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "delegates" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PublishedMeetingDelegate"
+          }
+        },
+        "seating" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DelegateSeating"
+          }
+        },
+        "audioRecordingEnabled" : {
+          "type" : "boolean"
         }
       }
     },
@@ -10588,6 +10599,51 @@
         "gain" : {
           "description" : "The gain to be applied on the input, expressed in 0.1dB",
           "type" : "integer"
+        }
+      }
+    },
+    "PublishedMeetingInfo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "contentId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PublishedMeetingInfoList" : {
+      "type" : "object",
+      "properties" : {
+        "meetings" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PublishedMeetingInfo"
+          }
+        }
+      }
+    },
+    "PublishedMeetingDelegate" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "badgeId" : {
+          "type" : "string"
         }
       }
     }
