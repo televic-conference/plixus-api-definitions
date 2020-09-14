@@ -6290,6 +6290,7 @@
       "get" : {
         "tags" : [ "Meeting" ],
         "summary" : "Get a list of published meetings",
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "ok",
