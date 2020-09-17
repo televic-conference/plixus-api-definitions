@@ -6562,6 +6562,20 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/events/meeting/publishedmeetingsupdate" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the list of published meetings has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for PublishedMeetingsUpdate event",
+            "schema" : {
+              "$ref" : "#/definitions/PublishedMeetingInfoList"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
