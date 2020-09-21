@@ -6576,6 +6576,23 @@
           }
         }
       }
+    },
+    "/api/events/interpretationexternal/changed" : {
+      "get" : {
+        "tags" : [ "InterpretationExternal" ],
+        "summary" : "Event when the external interpretation settings changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ExternalLanguageChannel"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
