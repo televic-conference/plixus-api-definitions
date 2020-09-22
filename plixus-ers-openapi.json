@@ -6353,6 +6353,9 @@
         "responses" : {
           "204" : {
             "description" : "OK"
+          },
+          "406" : {
+            "description" : "Returned when trying to disable the last enabled channel"
           }
         }
       },
@@ -6380,7 +6383,7 @@
     },
     "/api/events/wirelesschannels/channelsChanged" : {
       "get" : {
-        "tags" : [ "Events" ],
+        "tags" : [ "WirelessChannels" ],
         "summary" : "Event when the properties of a wireless channel changed",
         "responses" : {
           "200" : {
@@ -6391,38 +6394,6 @@
                 "$ref" : "#/definitions/WirelessChannel"
               }
             }
-          }
-        }
-      }
-    },
-    "/api/v1/wirelessauthentication/authenticationMode" : {
-      "get" : {
-        "tags" : [ "WirelessAuthentication" ],
-        "summary" : "Get the wireless authentication mode currently in use",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/WirelessOperatingMode"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "WirelessAuthentication" ],
-        "summary" : "Set the wireless authentication mode",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "description" : "The authentication mode to be set",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/WirelessOperatingMode"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
           }
         }
       }
@@ -6464,67 +6435,6 @@
           }
         }
       }
-    },
-    "/api/events/wirelessauthentication/authenticationModeChanged" : {
-      "get" : {
-        "tags" : [ "WirelessAuthentication" ],
-        "summary" : "Event when the authentication mode of a wireless access point has changed",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/WirelessOperatingMode"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/wirelessauthentication/{serial}/remove" : {
-      "post" : {
-        "tags" : [ "WirelessAuthentication" ],
-        "summary" : "Remove a device from the authenticated devices list",
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "serial",
-        "in" : "path",
-        "description" : "Device serial",
-        "required" : true,
-        "type" : "string"
-      } ]
-    },
-    "/api/v1/wirelessauthentication/removeAll" : {
-      "post" : {
-        "tags" : [ "WirelessAuthentication" ],
-        "summary" : "Remove all authenticated devices",
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/wirelessauthentication/{serial}/add" : {
-      "post" : {
-        "tags" : [ "WirelessAuthentication" ],
-        "summary" : "Add a device to the list of authenticated devices",
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "serial",
-        "in" : "path",
-        "description" : "Device serial",
-        "required" : true,
-        "type" : "string"
-      } ]
     },
     "/api/v1/meeting/published/{meetingId}" : {
       "delete" : {
@@ -6577,7 +6487,7 @@
         }
       }
     },
-    "/api/events/interpretationexternal/changed" : {
+    "/api/events/interpretationexternal/configurationchanged" : {
       "get" : {
         "tags" : [ "InterpretationExternal" ],
         "summary" : "Event when the external interpretation settings changed",
@@ -6588,6 +6498,131 @@
               "type" : "array",
               "items" : {
                 "$ref" : "#/definitions/ExternalLanguageChannel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessauthentication/operatingMode" : {
+      "get" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Get the wireless operating mode currently in use",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessOperatingMode"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Set the wireless authentication mode",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The authentication mode to be set",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WirelessOperatingMode"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessauthentication/authenticateddevices" : {
+      "get" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Get the list of authenticated devices",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Add a device to the list of authenticated devices",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Serial number of the device to add",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Remove the complete list of authenticated devices",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/wirelessauthentication/authenticateddevices/{serial}" : {
+      "delete" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Remove a device from the authenticated devices list",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "serial",
+        "in" : "path",
+        "description" : "Device serial",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/events/wirelessauthentication/operatingModeChanged" : {
+      "get" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Event when the operating mode of a wireless access point has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessOperatingMode"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/wirelessauthentication/authenticatedDevicesChanged" : {
+      "get" : {
+        "tags" : [ "WirelessAuthentication" ],
+        "summary" : "Event when the list of authenticated devices changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
               }
             }
           }
@@ -6846,13 +6881,13 @@
         "highlightState" : {
           "$ref" : "#/definitions/HighlightState"
         },
-        "batteryStatus" : {
-          "$ref" : "#/definitions/BatteryStatus",
-          "description" : "Status of the batteries present in the device"
-        },
         "wirelessLinkStatus" : {
           "$ref" : "#/definitions/WirelessLinkStatus",
           "description" : "The wireless link status reported by the device"
+        },
+        "powerStatus" : {
+          "$ref" : "#/definitions/PowerStatus",
+          "description" : "General power status of the device"
         }
       }
     },
@@ -10317,10 +10352,6 @@
           "description" : "Channel number",
           "type" : "integer"
         },
-        "isDfs" : {
-          "description" : "Is this channel a DFS channel or not",
-          "type" : "boolean"
-        },
         "dfsScanningState" : {
           "description" : "Enum representing the DFS scanning state of a wireless DFS channel",
           "enum" : [ "notScanned", "scanning", "scannedOk", "scannedNotOk" ]
@@ -10574,7 +10605,7 @@
     },
     "BatteryDetails" : {
       "description" : "Details of an individual battery in a device with (possibly) multiple batteries",
-      "required" : [ "present" ],
+      "required" : [ "slotName" ],
       "type" : "object",
       "properties" : {
         "percentage" : {
@@ -10593,9 +10624,9 @@
           "description" : "Temperature of the battery in degrees celcius",
           "type" : "integer"
         },
-        "present" : {
-          "description" : "Is this battery present in the device or not?",
-          "type" : "boolean"
+        "slotName" : {
+          "description" : "The name of the slot in which the battery is plugged",
+          "enum" : [ "slotA", "slotB" ]
         }
       }
     },
@@ -10606,7 +10637,7 @@
       "properties" : {
         "quality" : {
           "description" : "The RF quality reported by the device",
-          "type" : "integer"
+          "enum" : [ "good", "medium", "bad" ]
         }
       }
     },
@@ -10679,6 +10710,21 @@
         },
         "badgeId" : {
           "type" : "string"
+        }
+      }
+    },
+    "PowerStatus" : {
+      "description" : "Power status of a device",
+      "required" : [ "powerSource" ],
+      "type" : "object",
+      "properties" : {
+        "powerSource" : {
+          "description" : "The power source through which the device is powered",
+          "enum" : [ "usb", "battery", "poe", "plixus" ]
+        },
+        "batteryStatus" : {
+          "$ref" : "#/definitions/BatteryStatus",
+          "description" : "Status of the batteries present in the device"
         }
       }
     }
