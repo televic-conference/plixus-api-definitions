@@ -6354,7 +6354,7 @@
           "204" : {
             "description" : "OK"
           },
-          "406" : {
+          "403" : {
             "description" : "Returned when trying to disable the last enabled channel"
           }
         }
