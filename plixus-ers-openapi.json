@@ -10710,6 +10710,12 @@
         },
         "badgeId" : {
           "type" : "string"
+        },
+        "memberId" : {
+          "type" : "string"
+        },
+        "organizationRole" : {
+          "enum" : [ "OPERATOR", "DELEGATE" ]
         }
       }
     },
