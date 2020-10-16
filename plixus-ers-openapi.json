@@ -6552,24 +6552,6 @@
           }
         }
       },
-      "post" : {
-        "tags" : [ "WirelessAuthentication" ],
-        "summary" : "Add a device to the list of authenticated devices",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "description" : "Serial number of the device to add",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      },
       "delete" : {
         "tags" : [ "WirelessAuthentication" ],
         "summary" : "Remove the complete list of authenticated devices",
