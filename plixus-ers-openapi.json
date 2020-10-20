@@ -6337,36 +6337,6 @@
         }
       }
     },
-    "/api/v1/wirelesschannels/{ChannelNumber}/enabled" : {
-      "put" : {
-        "tags" : [ "WirelessChannels" ],
-        "summary" : "Enable or disable a channel",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "description" : "Enable or disable a channel",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/WirelessChannelEnableRequest"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          },
-          "403" : {
-            "description" : "Returned when trying to disable the last enabled channel"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "ChannelNumber",
-        "in" : "path",
-        "description" : "Channel number to enable or disable",
-        "required" : true,
-        "type" : "integer"
-      } ]
-    },
     "/api/v1/wirelesschannels/region" : {
       "get" : {
         "tags" : [ "WirelessChannels" ],
@@ -6610,6 +6580,36 @@
           }
         }
       }
+    },
+    "/api/v1/wirelesschannels/{channelNumber}/enabled" : {
+      "put" : {
+        "tags" : [ "WirelessChannels" ],
+        "summary" : "Enable or disable a channel",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Enable or disable a channel",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WirelessChannelEnableRequest"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "403" : {
+            "description" : "Returned when trying to disable the last enabled channel"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "channelNumber",
+        "in" : "path",
+        "description" : "Channel number to enable or disable",
+        "required" : true,
+        "type" : "integer"
+      } ]
     }
   },
   "definitions" : {
