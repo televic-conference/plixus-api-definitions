@@ -10311,35 +10311,6 @@
         }
       }
     },
-    "WirelessChannel" : {
-      "type" : "object",
-      "properties" : {
-        "frequency" : {
-          "description" : "The center frequency of this wireless channel expressed in MHz",
-          "type" : "integer"
-        },
-        "quality" : {
-          "description" : "Quality number",
-          "type" : "integer"
-        },
-        "enabled" : {
-          "description" : "Is this channel current enabled or not?",
-          "type" : "boolean"
-        },
-        "active" : {
-          "description" : "Is this channel currently active or not?",
-          "type" : "boolean"
-        },
-        "channel" : {
-          "description" : "Channel number",
-          "type" : "integer"
-        },
-        "dfsScanningState" : {
-          "description" : "Enum representing the DFS scanning state of a wireless DFS channel",
-          "enum" : [ "notScanned", "scanning", "scannedOk", "scannedNotOk" ]
-        }
-      }
-    },
     "WirelessOperatingMode" : {
       "type" : "object",
       "properties" : {
@@ -10713,6 +10684,39 @@
         "batteryStatus" : {
           "$ref" : "#/definitions/BatteryStatus",
           "description" : "Status of the batteries present in the device"
+        }
+      }
+    },
+    "WirelessChannel" : {
+      "type" : "object",
+      "properties" : {
+        "frequency" : {
+          "description" : "The center frequency of this wireless channel expressed in MHz",
+          "type" : "integer"
+        },
+        "quality" : {
+          "description" : "Quality number",
+          "type" : "integer"
+        },
+        "enabled" : {
+          "description" : "Is this channel current enabled or not?",
+          "type" : "boolean"
+        },
+        "active" : {
+          "description" : "Is this channel currently active or not?",
+          "type" : "boolean"
+        },
+        "channel" : {
+          "description" : "Channel number",
+          "type" : "integer"
+        },
+        "dfs" : {
+          "description" : "Is this channel a DFS channel or not?",
+          "type" : "boolean"
+        },
+        "dfsScanningState" : {
+          "description" : "Enum representing the DFS scanning state of a wireless DFS channel",
+          "enum" : [ "notScanned", "scanning", "scannedOk", "scannedNotOk" ]
         }
       }
     }
