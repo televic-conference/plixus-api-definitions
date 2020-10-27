@@ -10717,6 +10717,10 @@
         "dfsScanningState" : {
           "description" : "Enum representing the DFS scanning state of a wireless DFS channel",
           "enum" : [ "notScanned", "scanning", "scannedOk", "scannedNotOk" ]
+        },
+        "range" : {
+          "description" : "The range the channel is operating in:\n- 2 for 2.4GHz\n- 5 for 5Ghz",
+          "type" : "integer"
         }
       }
     }
