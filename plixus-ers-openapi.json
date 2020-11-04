@@ -10246,6 +10246,13 @@
           "items" : {
             "$ref" : "#/definitions/DelegateSeating"
           }
+        },
+        "votingRights" : {
+          "description" : "delegate voting rights",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DelegateVotingRight"
+          }
         }
       }
     },
@@ -10721,6 +10728,17 @@
         "range" : {
           "description" : "The range the channel is operating in:\n- 2 for 2.4GHz\n- 5 for 5Ghz",
           "type" : "integer"
+        }
+      }
+    },
+    "DelegateVotingRight" : {
+      "type" : "object",
+      "properties" : {
+        "delegateId" : {
+          "type" : "string"
+        },
+        "votingRight" : {
+          "type" : "boolean"
         }
       }
     }
