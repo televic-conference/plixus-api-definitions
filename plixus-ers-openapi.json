@@ -6084,9 +6084,9 @@
       "parameters" : [ {
         "name" : "name",
         "in" : "path",
+        "description" : "Name of the service to get the state from. Only services listed by /api/v1/system/services/ will work.",
         "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We" ]
       } ]
     },
     "/api/v1/system/services/{name}/restart" : {
@@ -6108,9 +6108,9 @@
       "parameters" : [ {
         "name" : "name",
         "in" : "path",
+        "description" : "Name of the service to restart. Only services listed by /api/v1/system/services/ will work.",
         "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We" ]
       } ]
     },
     "/api/v1/system/services/{name}/start" : {
@@ -6132,9 +6132,9 @@
       "parameters" : [ {
         "name" : "name",
         "in" : "path",
+        "description" : "Name of the service to start. Only services listed by /api/v1/system/services/ will work.",
         "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We" ]
       } ]
     },
     "/api/v1/system/services/{name}/stop" : {
@@ -6156,9 +6156,9 @@
       "parameters" : [ {
         "name" : "name",
         "in" : "path",
+        "description" : "Name of the service to stop. Only services listed by /api/v1/system/services/ will work.",
         "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera" ]
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We" ]
       } ]
     },
     "/api/events/system/configarchiveready/" : {
@@ -6610,6 +6610,24 @@
         "required" : true,
         "type" : "integer"
       } ]
+    },
+    "/api/v1/system/services/" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Retrieve a list of services available on the system",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "examples" : { }
+          }
+        }
+      }
     }
   },
   "definitions" : {
