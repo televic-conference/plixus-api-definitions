@@ -10774,6 +10774,70 @@
           }
         }
       }
+    },
+    "MeetingSpeakers" : {
+      "description" : "Contains lists of current speakers, next speakers in the active meeting",
+      "type" : "object",
+      "properties" : {
+        "currentSpeakers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingParticipant"
+          }
+        },
+        "nextSpeakers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingParticipant"
+          }
+        }
+      }
+    },
+    "MeetingParticipant" : {
+      "type" : "object",
+      "properties" : {
+        "kind" : {
+          "description" : "Kind of the participant: remote, local or anonymous",
+          "enum" : [ "local", "remote", "anonymous" ]
+        },
+        "presence" : {
+          "enum" : [ "local", "remote", "absent" ]
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "label" : {
+          "description" : "label used to display the speaking participant in case the participant is anonymous",
+          "type" : "string"
+        },
+        "cloudParticipantId" : {
+          "description" : "Participant ID in the context of the cloud.",
+          "type" : "string"
+        },
+        "participantId" : {
+          "description" : "Participant ID in the context of the room (Central Unit)",
+          "type" : "string"
+        },
+        "role" : {
+          "description" : "Role of the participant in the meeting: delegate, vip, chairperson.",
+          "enum" : [ "delegate", "chairperson", "vip" ]
+        }
+      }
+    },
+    "MeetingParticipants" : {
+      "type" : "object",
+      "properties" : {
+        "participants" : {
+          "description" : "list of all meeting participants: present (local, remote) or absent",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingParticipant"
+          }
+        }
+      }
     }
   },
   "tags" : [ {
