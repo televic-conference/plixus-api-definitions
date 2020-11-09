@@ -6629,6 +6629,34 @@
         "type" : "string",
         "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We" ]
       } ]
+    },
+    "/api/events/meeting/meetingspeakerschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when speakers of the active meeting are changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for MeetingSpeakersChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingSpeakers"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/meeting/meetingparticipantschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when participants of the active meeting are changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for MeetingParticipantsChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingParticipants"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
