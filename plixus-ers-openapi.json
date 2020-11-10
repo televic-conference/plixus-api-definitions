@@ -10826,7 +10826,7 @@
       "properties" : {
         "kind" : {
           "description" : "Kind of the participant: remote, local or anonymous",
-          "enum" : [ "local", "remote", "anonymous" ]
+          "enum" : [ "local", "cloud", "anonymous" ]
         },
         "presence" : {
           "enum" : [ "local", "remote", "absent" ]
