@@ -6657,6 +6657,32 @@
           }
         }
       }
+    },
+    "/api/events/diagnostics/powerStatusChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for powerStatusChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/PowerStatusChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/diagnostics/wirelessLinkStatusChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for wirelessLinkStatusChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessLinkStatusChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -10864,6 +10890,36 @@
           "items" : {
             "$ref" : "#/definitions/MeetingParticipant"
           }
+        }
+      }
+    },
+    "PowerStatusChanged" : {
+      "description" : "Event when the powerStatus of a device changed",
+      "required" : [ "serial", "powerStatus" ],
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Unique serial number of the device",
+          "type" : "string"
+        },
+        "powerStatus" : {
+          "$ref" : "#/definitions/PowerStatus",
+          "description" : "Updated powerStatus of the device"
+        }
+      }
+    },
+    "WirelessLinkStatusChanged" : {
+      "description" : "Event when the wirelessLinkStatus of a device changed",
+      "required" : [ "serial", "wirelessLinkStatus" ],
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Unique serial number of the device",
+          "type" : "string"
+        },
+        "wirelessLinkStatus" : {
+          "$ref" : "#/definitions/WirelessLinkStatus",
+          "description" : "Updated wirelessLinkStatus of the device"
         }
       }
     }
