@@ -6683,6 +6683,38 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/participants" : {
+      "get" : {
+        "summary" : "Get the participants of the current meeting",
+        "responses" : {
+          "200" : {
+            "description" : "ok",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingParticipants"
+            }
+          },
+          "404" : {
+            "description" : "no meeting ongoing"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/speakers" : {
+      "get" : {
+        "summary" : "Get the speakers of the current meeting",
+        "responses" : {
+          "200" : {
+            "description" : "ok",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingSpeakers"
+            }
+          },
+          "404" : {
+            "description" : "no meeting ongoing"
+          }
+        }
+      }
     }
   },
   "definitions" : {
