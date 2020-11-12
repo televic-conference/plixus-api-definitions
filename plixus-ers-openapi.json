@@ -6686,6 +6686,7 @@
     },
     "/api/v1/meeting/participants" : {
       "get" : {
+        "tags" : [ "Meeting" ],
         "summary" : "Get the participants of the current meeting",
         "responses" : {
           "200" : {
@@ -6702,6 +6703,7 @@
     },
     "/api/v1/meeting/speakers" : {
       "get" : {
+        "tags" : [ "Meeting" ],
         "summary" : "Get the speakers of the current meeting",
         "responses" : {
           "200" : {
