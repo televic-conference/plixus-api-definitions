@@ -3533,7 +3533,10 @@
                   "color" : "red",
                   "abstain" : false
                 } ],
-                "isSecret" : false
+                "settings" : {
+                  "hideIndividualVotingResults" : true,
+                  "hideVotingResultsForParticipantsDuringVote" : false
+                }
               }
             }
           }
@@ -9126,6 +9129,10 @@
         "title" : {
           "description" : "Title of the voting session",
           "type" : "string"
+        },
+        "settings" : {
+          "$ref" : "#/definitions/VotingSettings",
+          "description" : "various settings related to showing or hiding the voting results during the vote."
         }
       }
     },
@@ -9243,9 +9250,9 @@
             "$ref" : "#/definitions/VotingOption"
           }
         },
-        "isSecret" : {
-          "description" : "Indicates if the voting should be secret or not.",
-          "type" : "boolean"
+        "settings" : {
+          "$ref" : "#/definitions/VotingSettings",
+          "description" : "various settings related to showing or hiding the voting results during the vote."
         }
       }
     },
@@ -10954,6 +10961,20 @@
         "wirelessLinkStatus" : {
           "$ref" : "#/definitions/WirelessLinkStatus",
           "description" : "Updated wirelessLinkStatus of the device"
+        }
+      }
+    },
+    "VotingSettings" : {
+      "description" : "Voting settings for instant voting sessions",
+      "type" : "object",
+      "properties" : {
+        "hideIndividualVotingResults" : {
+          "description" : "If checked, individual voting results are not visible anywhere (UI, signage, report, logs...).\nIf unchecked; the operator or chairperson UI dashboards and meeting report show the individual voting results.",
+          "type" : "boolean"
+        },
+        "hideVotingResultsForParticipantsDuringVote" : {
+          "description" : "If checked, the discussion signage is shown (no voting results at all), while a vote is in progress.\nIf checked, the units also don't show any voting results while a vote is in progress.\nIf unchecked, the voting results are shown during a vote (by means of a bar chart) > current functionality).\nIf unchecked, the voting results are shown on the units > current functionality.",
+          "type" : "boolean"
         }
       }
     }
