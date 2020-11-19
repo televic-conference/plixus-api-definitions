@@ -6720,6 +6720,111 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/requesttospeak" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant requests to speak",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "400" : {
+            "description" : "unable to process command"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/cancelrequesttospeak" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant cancels request to speak",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "400" : {
+            "description" : "unable to process command"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/leavemeeting" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to leave the meeting",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "400" : {
+            "description" : "unable to process command"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/joinmeeting" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant want to join the meeting",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "400" : {
+            "description" : "unable to process command"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/stopspeaking" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to stop speaking",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "400" : {
+            "description" : "unable to process command"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
