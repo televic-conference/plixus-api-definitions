@@ -8718,6 +8718,10 @@
           "items" : {
             "type" : "string"
           }
+        },
+        "id" : {
+          "description" : "Id of meeting, in the context of the central unit.",
+          "type" : "string"
         }
       }
     },
