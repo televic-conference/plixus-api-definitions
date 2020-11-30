@@ -10764,7 +10764,7 @@
       "properties" : {
         "region" : {
           "description" : "Region setting of the access point",
-          "enum" : [ "europe", "northAmerica", "japan" ]
+          "enum" : [ "africa", "apac", "emea", "japan", "north_america", "south_america" ]
         }
       }
     },
