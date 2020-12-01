@@ -6825,6 +6825,17 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/v1/devices/wireless/shutdown" : {
+      "post" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Shutdown all connected wireless devices",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
