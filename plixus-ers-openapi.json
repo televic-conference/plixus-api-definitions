@@ -6872,6 +6872,7 @@
         }
       },
       "put" : {
+        "tags" : [ "WirelessChannels" ],
         "summary" : "Set the current country for the access point",
         "operationId" : "WirelessChannels_PutCountry",
         "consumes" : [ "application/json" ],
