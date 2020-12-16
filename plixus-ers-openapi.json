@@ -6836,6 +6836,59 @@
           }
         }
       }
+    },
+    "/api/v1/wirelesschannels/countries" : {
+      "get" : {
+        "tags" : [ "WirelessChannels" ],
+        "summary" : "Get a list of all available countries for the region of the device",
+        "operationId" : "WirelessChannels_GetCountries",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Country"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wirelesschannels/country" : {
+      "get" : {
+        "tags" : [ "WirelessChannels" ],
+        "summary" : "Get the configured country for the access point",
+        "operationId" : "WirelessChannels_GetCountry",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Country"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Set the current country for the access point",
+        "operationId" : "WirelessChannels_PutCountry",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Country"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -11095,6 +11148,19 @@
         "hideVotingResultsForParticipantsDuringVote" : {
           "description" : "If checked, the discussion signage is shown (no voting results at all), while a vote is in progress.\nIf checked, the units also don't show any voting results while a vote is in progress.\nIf unchecked, the voting results are shown during a vote (by means of a bar chart) > current functionality).\nIf unchecked, the voting results are shown on the units > current functionality.",
           "type" : "boolean"
+        }
+      }
+    },
+    "Country" : {
+      "required" : [ "code" ],
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "code" : {
+          "description" : "ISO 3166-1 alpha-2 country code",
+          "enum" : [ "AD", "AE", "AL", "AM", "AT", "BA", "BE", "BG", "BH", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GE", "GR", "HR", "HU", "IE", "IL", "IS", "IT", "KZ", "LI", "LT", "LV", "LU", "MC", "MD", "ME", "MK", "MT", "NL", "NO", "OM", "PL", "PT", "QA", "RO", "RS", "SA", "SE", "SI", "SK", "TR", "RU", "BY", "UA", "CA", "US", "JP", "AU", "BD", "CN", "HK", "IN", "ID", "KR", "MY", "NZ", "PH", "SG", "TW", "TH", "VN", "PK", "MX", "AR", "BR", "CL", "CO", "CR", "EC", "DO", "HN", "JM", "GT", "NI", "PA", "PE", "PR", "PY", "SV", "VE", "UY", "CI", "DZ", "EG", "ET", "KE", "MA", "MU", "NG", "SN", "TN", "TZ", "UG", "ZA" ]
         }
       }
     }
