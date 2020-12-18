@@ -9676,6 +9676,15 @@
         "dnsName" : {
           "description" : "DNS name of the system",
           "type" : "string"
+        },
+        "version" : {
+          "description" : "Version of the system",
+          "type" : "string"
+        },
+        "buildDate" : {
+          "format" : "date-time",
+          "description" : "Build date of the system software",
+          "type" : "string"
         }
       }
     },
