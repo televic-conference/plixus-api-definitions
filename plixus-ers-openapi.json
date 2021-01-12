@@ -9685,6 +9685,10 @@
           "format" : "date-time",
           "description" : "Build date of the system software",
           "type" : "string"
+        },
+        "firmwareType" : {
+          "description" : "Firmware type of the device",
+          "type" : "string"
         }
       }
     },
