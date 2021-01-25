@@ -6890,6 +6890,37 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/agenda" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get the agenda of the current meeting",
+        "responses" : {
+          "200" : {
+            "description" : "ok",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingAgenda"
+            }
+          },
+          "404" : {
+            "description" : "no meeting ongoing"
+          }
+        }
+      }
+    },
+    "/api/events/meeting/meetingagendachanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when agenda of the active meeting has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for MeetingAgendaChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/MeetingAgenda"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -10821,6 +10852,9 @@
           "items" : {
             "$ref" : "#/definitions/AgendaItem"
           }
+        },
+        "showResultsDuringVoting" : {
+          "type" : "boolean"
         }
       }
     },
@@ -11175,6 +11209,23 @@
         "code" : {
           "description" : "ISO 3166-1 alpha-2 country code",
           "enum" : [ "AD", "AE", "AL", "AM", "AT", "BA", "BE", "BG", "BH", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GE", "GR", "HR", "HU", "IE", "IL", "IS", "IT", "KZ", "LI", "LT", "LV", "LU", "MC", "MD", "ME", "MK", "MT", "NL", "NO", "OM", "PL", "PT", "QA", "RO", "RS", "SA", "SE", "SI", "SK", "TR", "RU", "BY", "UA", "CA", "US", "JP", "AU", "BD", "CN", "HK", "IN", "ID", "KR", "MY", "NZ", "PH", "SG", "TW", "TH", "VN", "PK", "MX", "AR", "BR", "CL", "CO", "CR", "EC", "DO", "HN", "JM", "GT", "NI", "PA", "PE", "PR", "PY", "SV", "VE", "UY", "CI", "DZ", "EG", "ET", "KE", "MA", "MU", "NG", "SN", "TN", "TZ", "UG", "ZA" ]
+        }
+      }
+    },
+    "MeetingAgenda" : {
+      "required" : [ "agendaItems" ],
+      "type" : "object",
+      "properties" : {
+        "activeAgendaItemId" : {
+          "description" : "Active agenda item id. If the root agenda item is active (= no active agenda item), this will not be available.",
+          "type" : "string"
+        },
+        "agendaItems" : {
+          "description" : "Array of agenda items",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AgendaItem"
+          }
         }
       }
     }
