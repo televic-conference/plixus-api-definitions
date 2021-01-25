@@ -10913,6 +10913,10 @@
         },
         "showResultsDuringVoting" : {
           "type" : "boolean"
+        },
+        "id" : {
+          "description" : "id of the agenda item",
+          "type" : "string"
         }
       }
     },
