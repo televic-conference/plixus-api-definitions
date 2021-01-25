@@ -6977,7 +6977,7 @@
         "in" : "path",
         "description" : "The type of standby screen being addressed",
         "required" : true,
-        "enum" : [ "confideaflex", "unicos7", "unicos10", "unibox" ]
+        "type" : "string"
       } ]
     }
   },
