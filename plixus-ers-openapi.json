@@ -6921,6 +6921,64 @@
           }
         }
       }
+    },
+    "/api/v1/devices/standbyscreen/types" : {
+      "get" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Get the types of standby screens which the system supports",
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/StandbyScreenTypeDescription"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/devices/standbyscreen/{type}" : {
+      "get" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Get the standby screen configuration",
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/StandbyScreenSettings"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Set the standby screen configuration",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The standby screen configuration to be applied",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/StandbyScreenSettings"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "type",
+        "in" : "path",
+        "description" : "The type of standby screen being addressed",
+        "required" : true,
+        "enum" : [ "confideaflex", "unicos7", "unicos10", "unibox" ]
+      } ]
     }
   },
   "definitions" : {
@@ -11226,6 +11284,87 @@
           "items" : {
             "$ref" : "#/definitions/AgendaItem"
           }
+        }
+      }
+    },
+    "StandbyScreenTypeDescription" : {
+      "description" : "Description of a standby screen type",
+      "required" : [ "type", "textColorSupport", "backgroundColorSupport", "videoSupport", "dateSupport", "timeSupport", "scaleSupport", "alignSupport" ],
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "description" : "The type of standby screen",
+          "enum" : [ "confideaflex", "unicos7", "unicos10", "unibox" ]
+        },
+        "textColorSupport" : {
+          "description" : "Does the standby screen type support changing the text color",
+          "type" : "boolean"
+        },
+        "backgroundColorSupport" : {
+          "description" : "Does the standby screen type support changing the background color",
+          "type" : "boolean"
+        },
+        "videoSupport" : {
+          "description" : "Does the standby screen type support showing a video stream",
+          "type" : "boolean"
+        },
+        "dateSupport" : {
+          "description" : "Does the standby screen type support showing the date",
+          "type" : "boolean"
+        },
+        "timeSupport" : {
+          "description" : "Does the standby screen type support showing the time",
+          "type" : "boolean"
+        },
+        "scaleSupport" : {
+          "description" : "Does the standby screen type support scaling the standby image",
+          "type" : "boolean"
+        },
+        "alignSupport" : {
+          "description" : "Does the standby screen type support aligning the standby image",
+          "type" : "boolean"
+        }
+      }
+    },
+    "StandbyScreenSettings" : {
+      "description" : "Settings of the standby screen",
+      "type" : "object",
+      "properties" : {
+        "textColor" : {
+          "description" : "Color of the text on the standby screen (#rgb hex format)",
+          "type" : "string"
+        },
+        "imageResourceId" : {
+          "description" : "Id of the resource containing the custom standby screen image",
+          "type" : "string"
+        },
+        "backgroundColor" : {
+          "description" : "Color of the background of the standby screen (#rgb hex format)",
+          "type" : "string"
+        },
+        "videoStreamId" : {
+          "description" : "Id of the video stream to show on the standby screen",
+          "type" : "integer"
+        },
+        "showDate" : {
+          "description" : "Show date on the standby screen or not",
+          "type" : "boolean"
+        },
+        "showTime" : {
+          "description" : "Show time on the standby screen or not",
+          "type" : "boolean"
+        },
+        "scaleImage" : {
+          "description" : "Scale the background image to fill the screen or not",
+          "type" : "boolean"
+        },
+        "horizontalImageAlignment" : {
+          "description" : "Horizontal alignment of the standby image",
+          "enum" : [ "left", "center", "right" ]
+        },
+        "verticalImageAlginment" : {
+          "description" : "Vertical alignment of the standby image",
+          "enum" : [ "top", "center", "bottom" ]
         }
       }
     }
