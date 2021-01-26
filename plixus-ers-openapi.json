@@ -10938,7 +10938,7 @@
       "properties" : {
         "region" : {
           "description" : "Region setting of the access point",
-          "enum" : [ "africa", "apac", "emea", "japan", "north_america", "south_america" ]
+          "enum" : [ "africa", "apac", "eme", "japan", "north_america", "south_america" ]
         }
       }
     },
@@ -11293,20 +11293,12 @@
     },
     "StandbyScreenTypeDescription" : {
       "description" : "Description of a standby screen type",
-      "required" : [ "type", "textColorSupport", "backgroundColorSupport", "videoSupport", "dateSupport", "timeSupport", "scaleSupport", "alignSupport" ],
+      "required" : [ "type", "colorTextSupport", "colorBackgroundSupport", "videoSupport", "dateSupport", "timeSupport", "scaleSupport", "alignSupport", "imageVerticalResolution", "imageHorizontalResolution" ],
       "type" : "object",
       "properties" : {
         "type" : {
           "description" : "The type of standby screen",
           "enum" : [ "confideaflex", "unicos7", "unicos10", "unibox" ]
-        },
-        "textColorSupport" : {
-          "description" : "Does the standby screen type support changing the text color",
-          "type" : "boolean"
-        },
-        "backgroundColorSupport" : {
-          "description" : "Does the standby screen type support changing the background color",
-          "type" : "boolean"
         },
         "videoSupport" : {
           "description" : "Does the standby screen type support showing a video stream",
@@ -11327,23 +11319,36 @@
         "alignSupport" : {
           "description" : "Does the standby screen type support aligning the standby image",
           "type" : "boolean"
+        },
+        "colorBackgroundSupport" : {
+          "description" : "Does the standby screen type support changing the background color",
+          "type" : "boolean"
+        },
+        "colorTextSupport" : {
+          "description" : "Does the standby screen type support changing the text color",
+          "type" : "boolean"
+        },
+        "imageVerticalResolution" : {
+          "description" : "Maximum vertical resolution of the standby image",
+          "type" : "integer"
+        },
+        "imageHorizontalResolution" : {
+          "description" : "Maximum horizontal resolution of the standby image",
+          "type" : "integer"
+        },
+        "imageAspectRatio" : {
+          "description" : "Preferred aspect ratio of the standby image",
+          "type" : "string"
         }
       }
     },
     "StandbyScreenSettings" : {
       "description" : "Settings of the standby screen",
+      "required" : [ ],
       "type" : "object",
       "properties" : {
-        "textColor" : {
-          "description" : "Color of the text on the standby screen (#rgb hex format)",
-          "type" : "string"
-        },
         "imageResourceId" : {
           "description" : "Id of the resource containing the custom standby screen image",
-          "type" : "string"
-        },
-        "backgroundColor" : {
-          "description" : "Color of the background of the standby screen (#rgb hex format)",
           "type" : "string"
         },
         "videoStreamId" : {
@@ -11358,17 +11363,45 @@
           "description" : "Show time on the standby screen or not",
           "type" : "boolean"
         },
-        "scaleImage" : {
-          "description" : "Scale the background image to fill the screen or not",
-          "type" : "boolean"
+        "colorText" : {
+          "description" : "Color of the text on the standby screen (#rgb hex format)",
+          "type" : "string"
         },
-        "horizontalImageAlignment" : {
+        "colorBackground" : {
+          "description" : "Color of the background of the standby screen (#rgb hex format)",
+          "type" : "string"
+        },
+        "imageHorizontalAlignment" : {
           "description" : "Horizontal alignment of the standby image",
           "enum" : [ "left", "center", "right" ]
         },
-        "verticalImageAlginment" : {
+        "imageDoScale" : {
+          "description" : "Scale the background image to fill the screen or not",
+          "type" : "boolean"
+        },
+        "imageVerticalAlginment" : {
           "description" : "Vertical alignment of the standby image",
           "enum" : [ "top", "center", "bottom" ]
+        },
+        "originalImageResourceId" : {
+          "description" : "Resource ID of the original standby screen image",
+          "type" : "string"
+        },
+        "originalImageCropX" : {
+          "description" : "X position of the top left corner where the crop starts",
+          "type" : "integer"
+        },
+        "originalImageCropY" : {
+          "description" : "Y position of the top left corner where the crop starts",
+          "type" : "integer"
+        },
+        "originalImageCropWidth" : {
+          "description" : "The width of the crop",
+          "type" : "integer"
+        },
+        "originalImageCropHeight" : {
+          "description" : "The height of the crop",
+          "type" : "integer"
         }
       }
     }
