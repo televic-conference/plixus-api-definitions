@@ -6902,7 +6902,7 @@
               "$ref" : "#/definitions/MeetingAgenda"
             }
           },
-          "404" : {
+          "204" : {
             "description" : "no meeting ongoing"
           }
         }
@@ -10917,6 +10917,9 @@
         "id" : {
           "description" : "id of the agenda item",
           "type" : "string"
+        },
+        "votingStatus" : {
+          "$ref" : "#/definitions/CloudVotingStatus"
         }
       }
     },
@@ -11402,6 +11405,15 @@
         "originalImageCropHeight" : {
           "description" : "The height of the crop",
           "type" : "integer"
+        }
+      }
+    },
+    "CloudVotingStatus" : {
+      "type" : "object",
+      "properties" : {
+        "kind" : {
+          "description" : "pre, during or post voting",
+          "enum" : [ "prevoting", "voting", "postvoting" ]
         }
       }
     }
