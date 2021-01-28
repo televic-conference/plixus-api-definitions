@@ -9512,6 +9512,10 @@
         "ledColor" : {
           "description" : "Color of the voting button LED",
           "enum" : [ "red", "green", "blue", "yellow", "white", "cyan", "magenta" ]
+        },
+        "id" : {
+          "description" : "voting option ID",
+          "type" : "string"
         }
       }
     },
