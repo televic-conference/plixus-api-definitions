@@ -11453,6 +11453,9 @@
           "items" : {
             "$ref" : "#/definitions/CloudAcceptedVotingBallotReference"
           }
+        },
+        "result" : {
+          "$ref" : "#/definitions/CloudVotingResult"
         }
       }
     },
@@ -11487,6 +11490,34 @@
         },
         "ballotId" : {
           "type" : "string"
+        }
+      }
+    },
+    "CloudVotingResult" : {
+      "type" : "object",
+      "properties" : {
+        "kind" : {
+          "enum" : [ "PollingResult" ]
+        },
+        "counters" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CloudVotingCounter"
+          }
+        }
+      }
+    },
+    "CloudVotingCounter" : {
+      "type" : "object",
+      "properties" : {
+        "votingChoiceId" : {
+          "type" : "string"
+        },
+        "votingChoiceContentId" : {
+          "type" : "string"
+        },
+        "count" : {
+          "type" : "integer"
         }
       }
     }
