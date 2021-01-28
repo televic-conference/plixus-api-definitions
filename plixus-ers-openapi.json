@@ -6979,6 +6979,35 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/votingballot" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to vote",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudVotingBallot"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "400" : {
+            "description" : "unable to process command"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -11414,6 +11443,43 @@
         "kind" : {
           "description" : "pre, during or post voting",
           "enum" : [ "prevoting", "voting", "postvoting" ]
+        },
+        "acceptedBallots" : {
+          "$ref" : "#/definitions/CloudAcceptedVotingBallotReference"
+        }
+      }
+    },
+    "CloudVotingBallot" : {
+      "type" : "object",
+      "properties" : {
+        "cloudParticipantId" : {
+          "type" : "string"
+        },
+        "votingContentId" : {
+          "type" : "string"
+        },
+        "votingChoiceId" : {
+          "type" : "string"
+        },
+        "votingChoiceContentId" : {
+          "type" : "string"
+        },
+        "votingId" : {
+          "type" : "string"
+        },
+        "ballotId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CloudAcceptedVotingBallotReference" : {
+      "type" : "object",
+      "properties" : {
+        "participantId" : {
+          "type" : "string"
+        },
+        "ballotId" : {
+          "type" : "string"
         }
       }
     }
