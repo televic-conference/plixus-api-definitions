@@ -11449,7 +11449,10 @@
           "enum" : [ "prevoting", "voting", "postvoting" ]
         },
         "acceptedBallots" : {
-          "$ref" : "#/definitions/CloudAcceptedVotingBallotReference"
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CloudAcceptedVotingBallotReference"
+          }
         }
       }
     },
