@@ -6945,6 +6945,13 @@
         "tags" : [ "Devices" ],
         "summary" : "Get the standby screen configuration",
         "produces" : [ "text/plain" ],
+        "parameters" : [ {
+          "name" : "type",
+          "in" : "path",
+          "description" : "The device type to get the standbyscreen settings from (\"confideaflex\", \"unicos7\", \"unicos10\", \"unibox\")",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -6965,20 +6972,19 @@
           "schema" : {
             "$ref" : "#/definitions/StandbyScreenSettings"
           }
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "description" : "The device type to set the standbyscreen settings for (\"confideaflex\", \"unicos7\", \"unicos10\", \"unibox\")",
+          "required" : true,
+          "type" : "string"
         } ],
         "responses" : {
           "204" : {
             "description" : "OK"
           }
         }
-      },
-      "parameters" : [ {
-        "name" : "type",
-        "in" : "path",
-        "description" : "The type of standby screen being addressed",
-        "required" : true,
-        "type" : "string"
-      } ]
+      }
     },
     "/api/v1/meeting/participants/cloud/{cloudParticipantId}/votingballot" : {
       "post" : {
