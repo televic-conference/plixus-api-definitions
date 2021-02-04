@@ -6995,7 +6995,7 @@
           "in" : "body",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/CloudVotingBallot"
+            "$ref" : "#/definitions/CloudVotingBallotCommand"
           }
         } ],
         "responses" : {
@@ -11465,29 +11465,6 @@
         }
       }
     },
-    "CloudVotingBallot" : {
-      "type" : "object",
-      "properties" : {
-        "cloudParticipantId" : {
-          "type" : "string"
-        },
-        "votingContentId" : {
-          "type" : "string"
-        },
-        "votingChoiceId" : {
-          "type" : "string"
-        },
-        "votingChoiceContentId" : {
-          "type" : "string"
-        },
-        "votingId" : {
-          "type" : "string"
-        },
-        "ballotId" : {
-          "type" : "string"
-        }
-      }
-    },
     "CloudAcceptedVotingBallotReference" : {
       "type" : "object",
       "properties" : {
@@ -11510,6 +11487,9 @@
           "items" : {
             "$ref" : "#/definitions/CloudVotingCounter"
           }
+        },
+        "batch" : {
+          "$ref" : "#/definitions/CloudVotingBatch"
         }
       }
     },
@@ -11524,6 +11504,66 @@
         },
         "count" : {
           "type" : "integer"
+        }
+      }
+    },
+    "CloudVotingBatch" : {
+      "type" : "object",
+      "properties" : {
+        "kind" : {
+          "enum" : [ "PublicVotingBatch" ]
+        },
+        "ballots" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CloudVotingBallot"
+          }
+        }
+      }
+    },
+    "CloudVotingBallotCommand" : {
+      "type" : "object",
+      "properties" : {
+        "votingContentId" : {
+          "type" : "string"
+        },
+        "votingChoiceId" : {
+          "type" : "string"
+        },
+        "votingChoiceContentId" : {
+          "type" : "string"
+        },
+        "votingId" : {
+          "type" : "string"
+        },
+        "ballotId" : {
+          "type" : "string"
+        },
+        "CloudParticipantId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CloudVotingBallot" : {
+      "type" : "object",
+      "properties" : {
+        "votingContentId" : {
+          "type" : "string"
+        },
+        "votingChoiceId" : {
+          "type" : "string"
+        },
+        "votingChoiceContentId" : {
+          "type" : "string"
+        },
+        "votingId" : {
+          "type" : "string"
+        },
+        "ballotId" : {
+          "type" : "string"
+        },
+        "NamedParticipantId" : {
+          "type" : "string"
         }
       }
     }
