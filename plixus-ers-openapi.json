@@ -11539,7 +11539,7 @@
         "ballotId" : {
           "type" : "string"
         },
-        "CloudParticipantId" : {
+        "cloudParticipantId" : {
           "type" : "string"
         }
       }
@@ -11562,7 +11562,7 @@
         "ballotId" : {
           "type" : "string"
         },
-        "NamedParticipantId" : {
+        "namedParticipantId" : {
           "type" : "string"
         }
       }
