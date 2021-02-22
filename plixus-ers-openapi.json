@@ -9825,7 +9825,7 @@
       "properties" : {
         "cameraProtocol" : {
           "description" : "Camera protocol to use",
-          "enum" : [ "tlvcam1", "tlvcam2" ]
+          "enum" : [ "tlvcam1", "tlvcam2", "tlvg3cam" ]
         },
         "networkProtocol" : {
           "description" : "Network protocol to use",
