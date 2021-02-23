@@ -9817,6 +9817,10 @@
         "firmwareType" : {
           "description" : "Firmware type of the device",
           "type" : "string"
+        },
+        "boardType" : {
+          "description" : "Board type of the engine",
+          "enum" : [ "AudioEngine", "MultimediaEngineAMD", "MultimediaEngineIMX", "WirelessEngineG4", "Unknown" ]
         }
       }
     },
