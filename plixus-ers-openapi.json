@@ -7014,6 +7014,36 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/v1/batteryChargingDiagnostics/batteries" : {
+      "get" : {
+        "tags" : [ "BatteryChargingDiagnostics" ],
+        "summary" : "Get the charging batteries",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/BatteryChargingDetails"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events/batteryChargingDiagnostics/batteryStateChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for BatteryStateChanged",
+            "schema" : {
+              "$ref" : "#/definitions/BatteryChargingDetails"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -11568,6 +11598,37 @@
         },
         "namedParticipantId" : {
           "type" : "string"
+        }
+      }
+    },
+    "BatteryChargingDetails" : {
+      "description" : "Information of a single battery that is charging",
+      "required" : [ "SlotName" ],
+      "type" : "object",
+      "properties" : {
+        "cycles" : {
+          "description" : "Number of charge / discharge cycles the battery has been through",
+          "type" : "integer"
+        },
+        "health" : {
+          "description" : "Health status indication of the battery",
+          "type" : "integer"
+        },
+        "percentage" : {
+          "description" : "Percentage of charge left in the battery",
+          "type" : "integer"
+        },
+        "temperature" : {
+          "description" : "Temperature of the battery in degrees celcius",
+          "type" : "integer"
+        },
+        "SlotName" : {
+          "description" : "The name of the slot in which the battery is plugged",
+          "enum" : [ "slotA", "slotB", "slotC", "slotD", "slotE", "slotF", "slotG", "slotH", "slotI", "slotJ" ]
+        },
+        "remainingChargeTime" : {
+          "description" : "Time remaining until battery is fully charged in minutes",
+          "type" : "integer"
         }
       }
     }
