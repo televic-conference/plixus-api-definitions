@@ -11629,6 +11629,10 @@
         "remainingChargeTime" : {
           "description" : "Time remaining until battery is fully charged in minutes",
           "type" : "integer"
+        },
+        "batterySlotState" : {
+          "description" : "Status of the carger slot",
+          "enum" : [ "NoBatteryPresent", "NotCharging", "ChargingLow", "ChargingHigh", "FullyCharged", "Error" ]
         }
       }
     }
