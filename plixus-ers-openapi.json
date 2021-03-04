@@ -11603,7 +11603,7 @@
     },
     "BatteryChargingDetails" : {
       "description" : "Information of a single battery that is charging",
-      "required" : [ "SlotName" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "cycles" : {
