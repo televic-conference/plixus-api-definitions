@@ -7044,6 +7044,130 @@
           }
         }
       }
+    },
+    "/api/v1/network/8021x" : {
+      "get" : {
+        "summary" : "Get current 802.1X settings",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/Network8021XSettings"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update 802.1X settings",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Network8021XSettings"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/network/8021x/ca" : {
+      "post" : {
+        "tags" : [ "8021x" ],
+        "summary" : "Upload a CA certificate",
+        "consumes" : [ "application/x-pem-file" ],
+        "responses" : {
+          "201" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "Invalid certificate content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "8021x" ],
+        "summary" : "Delete CA certificate",
+        "responses" : {
+          "204" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/network/8021x/certificate" : {
+      "post" : {
+        "tags" : [ "8021x" ],
+        "summary" : "Upload client certificate",
+        "consumes" : [ "application/x-pem-file" ],
+        "responses" : {
+          "201" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "Invalid certificate content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "8021x" ],
+        "summary" : "Delete client certificate",
+        "responses" : {
+          "204" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/network/8021x/privateKey" : {
+      "post" : {
+        "tags" : [ "8021x" ],
+        "summary" : "Upload client private key",
+        "consumes" : [ "application/x-pem-file" ],
+        "responses" : {
+          "201" : {
+            "description" : "Success"
+          },
+          "202" : {
+            "description" : "Indicates the PEM file was accepted, but needs unlocking. Password is required."
+          },
+          "400" : {
+            "description" : "Invalid key content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "8021x" ],
+        "summary" : "Delete client key",
+        "responses" : {
+          "204" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/network/8021x/privateKeyPassword" : {
+      "post" : {
+        "tags" : [ "8021x" ],
+        "summary" : "Submit a private key password",
+        "consumes" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "No private key to unlock"
+          },
+          "401" : {
+            "description" : "Invalid password"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -11603,7 +11727,7 @@
     },
     "BatteryChargingDetails" : {
       "description" : "Information of a single battery that is charging",
-      "required" : [ ],
+      "required" : [ "SlotName" ],
       "type" : "object",
       "properties" : {
         "cycles" : {
@@ -11633,6 +11757,35 @@
         "batterySlotState" : {
           "description" : "Status of the carger slot",
           "enum" : [ "NoBatteryPresent", "NotCharging", "ChargingLow", "ChargingHigh", "FullyCharged", "Error" ]
+        }
+      }
+    },
+    "Network8021XSettings" : {
+      "type" : "object",
+      "properties" : {
+        "identity" : {
+          "description" : "Username for authentication\nOnly valid for MD5 and PEAP",
+          "type" : "string"
+        },
+        "password" : {
+          "description" : "Password for authentication\nOnly valid for MD5 and PEAP",
+          "type" : "string"
+        },
+        "authenticationType" : {
+          "description" : "Select the type of authentication",
+          "enum" : [ "None", "MD5", "TLS", "PEAP" ]
+        },
+        "ca" : {
+          "description" : "Indicates a ca certificate is present\nOnly valid for TLS and PEAP",
+          "type" : "boolean"
+        },
+        "certificate" : {
+          "description" : "Indicates a certificate is present\nOnly valid for TLS",
+          "type" : "boolean"
+        },
+        "privateKey" : {
+          "description" : "Indicates a private key is present\nOnly valid for TLS",
+          "type" : "boolean"
         }
       }
     }
