@@ -7047,6 +7047,7 @@
     },
     "/api/v1/network/8021x" : {
       "get" : {
+        "tags" : [ "Network8021X" ],
         "summary" : "Get current 802.1X settings",
         "produces" : [ "application/json" ],
         "responses" : {
@@ -7078,7 +7079,7 @@
     },
     "/api/v1/network/8021x/ca" : {
       "post" : {
-        "tags" : [ "8021x" ],
+        "tags" : [ "Network8021X" ],
         "summary" : "Upload a CA certificate",
         "consumes" : [ "application/x-pem-file" ],
         "responses" : {
@@ -7102,7 +7103,7 @@
     },
     "/api/v1/network/8021x/certificate" : {
       "post" : {
-        "tags" : [ "8021x" ],
+        "tags" : [ "Network8021X" ],
         "summary" : "Upload client certificate",
         "consumes" : [ "application/x-pem-file" ],
         "responses" : {
@@ -7126,7 +7127,7 @@
     },
     "/api/v1/network/8021x/privateKey" : {
       "post" : {
-        "tags" : [ "8021x" ],
+        "tags" : [ "Network8021X" ],
         "summary" : "Upload client private key",
         "consumes" : [ "application/x-pem-file" ],
         "responses" : {
@@ -7153,7 +7154,7 @@
     },
     "/api/v1/network/8021x/privateKeyPassword" : {
       "post" : {
-        "tags" : [ "8021x" ],
+        "tags" : [ "Network8021X" ],
         "summary" : "Submit a private key password",
         "consumes" : [ "text/plain" ],
         "responses" : {
