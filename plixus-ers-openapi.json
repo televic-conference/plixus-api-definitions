@@ -7060,6 +7060,7 @@
         }
       },
       "put" : {
+        "tags" : [ "Network8021X" ],
         "summary" : "Update 802.1X settings",
         "consumes" : [ "application/json" ],
         "parameters" : [ {
@@ -7092,7 +7093,7 @@
         }
       },
       "delete" : {
-        "tags" : [ "8021x" ],
+        "tags" : [ "Network8021X" ],
         "summary" : "Delete CA certificate",
         "responses" : {
           "204" : {
@@ -7116,7 +7117,7 @@
         }
       },
       "delete" : {
-        "tags" : [ "8021x" ],
+        "tags" : [ "Network8021X" ],
         "summary" : "Delete client certificate",
         "responses" : {
           "204" : {
@@ -7143,7 +7144,7 @@
         }
       },
       "delete" : {
-        "tags" : [ "8021x" ],
+        "tags" : [ "Network8021X" ],
         "summary" : "Delete client key",
         "responses" : {
           "204" : {
