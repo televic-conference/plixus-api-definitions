@@ -7083,6 +7083,14 @@
         "tags" : [ "Network8021X" ],
         "summary" : "Upload a CA certificate",
         "consumes" : [ "application/x-pem-file" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "201" : {
             "description" : "Success"
@@ -7107,6 +7115,14 @@
         "tags" : [ "Network8021X" ],
         "summary" : "Upload client certificate",
         "consumes" : [ "application/x-pem-file" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "201" : {
             "description" : "Success"
@@ -7131,6 +7147,14 @@
         "tags" : [ "Network8021X" ],
         "summary" : "Upload client private key",
         "consumes" : [ "application/x-pem-file" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "201" : {
             "description" : "Success"
@@ -7158,6 +7182,14 @@
         "tags" : [ "Network8021X" ],
         "summary" : "Submit a private key password",
         "consumes" : [ "text/plain" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "Success"
