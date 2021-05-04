@@ -7078,11 +7078,11 @@
         }
       }
     },
-    "/api/v1/network/8021x/ca" : {
+    "/api/v1/network/8021x/privateKeyPassword" : {
       "post" : {
         "tags" : [ "Network8021X" ],
-        "summary" : "Upload a CA certificate",
-        "consumes" : [ "application/x-pem-file" ],
+        "summary" : "Submit a private key password",
+        "consumes" : [ "text/plain" ],
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
@@ -7090,6 +7090,31 @@
           "schema" : {
             "type" : "string"
           }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "No private key to unlock"
+          },
+          "401" : {
+            "description" : "Invalid password"
+          }
+        }
+      }
+    },
+    "/api/v1/network/8021x/ca" : {
+      "post" : {
+        "tags" : [ "Network8021X" ],
+        "summary" : "Upload a CA certificate",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "ca",
+          "in" : "formData",
+          "description" : "Upload a CA certificate",
+          "required" : true,
+          "type" : "file"
         } ],
         "responses" : {
           "201" : {
@@ -7110,50 +7135,17 @@
         }
       }
     },
-    "/api/v1/network/8021x/certificate" : {
-      "post" : {
-        "tags" : [ "Network8021X" ],
-        "summary" : "Upload client certificate",
-        "consumes" : [ "application/x-pem-file" ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "Success"
-          },
-          "400" : {
-            "description" : "Invalid certificate content"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Network8021X" ],
-        "summary" : "Delete client certificate",
-        "responses" : {
-          "204" : {
-            "description" : "Success"
-          }
-        }
-      }
-    },
     "/api/v1/network/8021x/privateKey" : {
       "post" : {
         "tags" : [ "Network8021X" ],
         "summary" : "Upload client private key",
-        "consumes" : [ "application/x-pem-file" ],
+        "consumes" : [ "multipart/form-data" ],
         "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
+          "name" : "key",
+          "in" : "formData",
+          "description" : "Upload a private key",
           "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
+          "type" : "file"
         } ],
         "responses" : {
           "201" : {
@@ -7177,28 +7169,33 @@
         }
       }
     },
-    "/api/v1/network/8021x/privateKeyPassword" : {
+    "/api/v1/network/8021x/certificate" : {
       "post" : {
         "tags" : [ "Network8021X" ],
-        "summary" : "Submit a private key password",
-        "consumes" : [ "text/plain" ],
+        "summary" : "Upload client certificate",
+        "consumes" : [ "multipart/form-data" ],
         "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
+          "name" : "cert",
+          "in" : "formData",
+          "description" : "Upload a certificate",
           "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
+          "type" : "file"
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "Success"
           },
           "400" : {
-            "description" : "No private key to unlock"
-          },
-          "401" : {
-            "description" : "Invalid password"
+            "description" : "Invalid certificate content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Network8021X" ],
+        "summary" : "Delete client certificate",
+        "responses" : {
+          "204" : {
+            "description" : "Success"
           }
         }
       }
