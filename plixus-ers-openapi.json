@@ -7199,6 +7199,120 @@
           }
         }
       }
+    },
+    "/api/v1/system/certificate/certificate" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload server certificate",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "cert",
+          "in" : "formData",
+          "description" : "Upload a certificate",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "Invalid certificate content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "System" ],
+        "summary" : "Delete client certificate",
+        "responses" : {
+          "204" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "head" : {
+        "tags" : [ "System" ],
+        "summary" : "Check if a certificate is present",
+        "responses" : {
+          "200" : {
+            "description" : "Certificate exists"
+          },
+          "404" : {
+            "description" : "Certificate does not exist"
+          }
+        }
+      }
+    },
+    "/api/v1/system/certificate/privateKey" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload system private key",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "key",
+          "in" : "formData",
+          "description" : "Upload a private key",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Success"
+          },
+          "202" : {
+            "description" : "Indicates the PEM file was accepted, but needs unlocking. Password is required."
+          },
+          "400" : {
+            "description" : "Invalid key content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "System" ],
+        "summary" : "Delete system private key",
+        "responses" : {
+          "204" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "head" : {
+        "tags" : [ "System" ],
+        "responses" : {
+          "200" : {
+            "description" : "Private key exists"
+          },
+          "404" : {
+            "description" : "Private key does not exist"
+          }
+        }
+      }
+    },
+    "/api/v1/system/certificate/privateKeyPassword" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Submit a private key password",
+        "consumes" : [ "text/plain" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "No private key to unlock"
+          },
+          "401" : {
+            "description" : "Invalid password"
+          }
+        }
+      }
     }
   },
   "definitions" : {
