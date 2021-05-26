@@ -7313,6 +7313,222 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/startaudiorecording" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to start audio recording",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - no recording capable central unit\n - no recording space (left)\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/stopaudiorecording" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to stop audio recording",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - no recording capable central unit\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/activatenextspeaker" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants activate a next speaker",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudNextSpeakerCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/activatenextreply" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants activate a next reply",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudNextReplyCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/activateagendaitem" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants activate an agenda item",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudAgendaItemIdCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/startvoting" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants start a voting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudAgendaItemIdCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - agenda item not active\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/stopvoting" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants stop a voting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudAgendaItemIdCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - agenda item not active\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/hidevotingresults" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to hide the voting results",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudAgendaItemIdCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - agenda item not active\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -11931,6 +12147,33 @@
         "privateKey" : {
           "description" : "Indicates a private key is present\nOnly valid for TLS",
           "type" : "boolean"
+        }
+      }
+    },
+    "CloudNextSpeakerCommand" : {
+      "required" : [ "participantId" ],
+      "type" : "object",
+      "properties" : {
+        "participantId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CloudNextReplyCommand" : {
+      "required" : [ "participantId" ],
+      "type" : "object",
+      "properties" : {
+        "participantId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CloudAgendaItemIdCommand" : {
+      "required" : [ "itemId" ],
+      "type" : "object",
+      "properties" : {
+        "itemId" : {
+          "type" : "string"
         }
       }
     }
