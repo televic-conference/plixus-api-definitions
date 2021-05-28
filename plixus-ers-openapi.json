@@ -7529,6 +7529,106 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/events/customerapi/tokenschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for tokenschanged event",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ApiToken"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/customerapi/token/{uuid}" : {
+      "put" : {
+        "tags" : [ "CustomerApi" ],
+        "summary" : "Change name of an API token",
+        "parameters" : [ {
+          "name" : "uuid",
+          "in" : "path",
+          "description" : "uuid of token ",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "body",
+          "in" : "body",
+          "description" : "New name of uuid",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Name changed successfully",
+            "schema" : {
+              "$ref" : "#/definitions/ApiToken"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete an API token",
+        "parameters" : [ {
+          "name" : "uuid",
+          "in" : "path",
+          "description" : "uuid to remove",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Token deleted successfully"
+          },
+          "400" : {
+            "description" : "Token uuid not found"
+          }
+        }
+      }
+    },
+    "/api/v1/customerapi/tokens" : {
+      "get" : {
+        "tags" : [ "CustomerApi" ],
+        "summary" : "Get a list of the existing API tokens",
+        "responses" : {
+          "200" : {
+            "description" : "List of API tokens",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ApiToken"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new API token",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Name of the token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Token created",
+            "schema" : {
+              "$ref" : "#/definitions/ApiToken"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -12173,6 +12273,21 @@
       "type" : "object",
       "properties" : {
         "itemId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ApiToken" : {
+      "description" : "Token used in customer API, consisting of a name and uuid.",
+      "required" : [ "name", "uuid" ],
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the token",
+          "type" : "string"
+        },
+        "uuid" : {
+          "description" : "Uuid of the token",
           "type" : "string"
         }
       }
