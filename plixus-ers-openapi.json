@@ -11735,7 +11735,7 @@
           "type" : "string"
         },
         "organizationRole" : {
-          "enum" : [ "OPERATOR", "DELEGATE", "CHAIRPERSON" ]
+          "enum" : [ "OPERATOR", "DELEGATE" ]
         }
       }
     },
