@@ -7575,6 +7575,7 @@
         }
       },
       "delete" : {
+        "tags" : [ "CustomerApi" ],
         "summary" : "Delete an API token",
         "parameters" : [ {
           "name" : "uuid",
@@ -7610,6 +7611,7 @@
         }
       },
       "post" : {
+        "tags" : [ "CustomerApi" ],
         "summary" : "Create a new API token",
         "parameters" : [ {
           "name" : "body",
@@ -11733,7 +11735,7 @@
           "type" : "string"
         },
         "organizationRole" : {
-          "enum" : [ "OPERATOR", "DELEGATE" ]
+          "enum" : [ "OPERATOR", "DELEGATE", "CHAIRPERSON" ]
         }
       }
     },
