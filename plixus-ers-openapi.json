@@ -11713,32 +11713,6 @@
         }
       }
     },
-    "PublishedMeetingDelegate" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string"
-        },
-        "email" : {
-          "type" : "string"
-        },
-        "firstName" : {
-          "type" : "string"
-        },
-        "lastName" : {
-          "type" : "string"
-        },
-        "badgeId" : {
-          "type" : "string"
-        },
-        "memberId" : {
-          "type" : "string"
-        },
-        "organizationRole" : {
-          "enum" : [ "OPERATOR", "DELEGATE" ]
-        }
-      }
-    },
     "PowerStatus" : {
       "description" : "Power status of a device",
       "required" : [ "powerSource" ],
@@ -12291,6 +12265,32 @@
         "uuid" : {
           "description" : "Uuid of the token",
           "type" : "string"
+        }
+      }
+    },
+    "PublishedMeetingDelegate" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "badgeId" : {
+          "type" : "string"
+        },
+        "memberId" : {
+          "type" : "string"
+        },
+        "role" : {
+          "enum" : [ "delegate", "chairperson", "vip" ]
         }
       }
     }
