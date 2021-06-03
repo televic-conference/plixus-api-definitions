@@ -12085,6 +12085,9 @@
         },
         "batch" : {
           "$ref" : "#/definitions/CloudVotingBatch"
+        },
+        "hideAllResults" : {
+          "type" : "boolean"
         }
       }
     },
