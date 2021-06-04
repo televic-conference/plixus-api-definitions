@@ -7082,13 +7082,13 @@
       "post" : {
         "tags" : [ "Network8021X" ],
         "summary" : "Submit a private key password",
-        "consumes" : [ "text/plain" ],
+        "consumes" : [ "application/json" ],
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
           "required" : true,
           "schema" : {
-            "type" : "string"
+            "$ref" : "#/definitions/PrivateKeyPassword"
           }
         } ],
         "responses" : {
@@ -7292,13 +7292,13 @@
       "post" : {
         "tags" : [ "System" ],
         "summary" : "Submit a private key password",
-        "consumes" : [ "text/plain" ],
+        "consumes" : [ "application/json" ],
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
           "required" : true,
           "schema" : {
-            "type" : "string"
+            "$ref" : "#/definitions/PrivateKeyPassword"
           }
         } ],
         "responses" : {
@@ -12294,6 +12294,14 @@
         },
         "role" : {
           "enum" : [ "delegate", "chairperson", "vip" ]
+        }
+      }
+    },
+    "PrivateKeyPassword" : {
+      "type" : "object",
+      "properties" : {
+        "password" : {
+          "type" : "string"
         }
       }
     }
