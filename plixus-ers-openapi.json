@@ -7631,6 +7631,23 @@
           }
         }
       }
+    },
+    "/api/v1/system/certificate/certificate/info" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Certificate information",
+            "schema" : {
+              "$ref" : "#/definitions/CertificateInfo"
+            }
+          },
+          "404" : {
+            "description" : "No certificate present"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -12226,6 +12243,14 @@
         "privateKey" : {
           "description" : "Indicates a private key is present\nOnly valid for TLS",
           "type" : "boolean"
+        },
+        "certificateInfo" : {
+          "$ref" : "#/definitions/CertificateInfo",
+          "description" : "Information about the certificate"
+        },
+        "caInfo" : {
+          "$ref" : "#/definitions/CertificateInfo",
+          "description" : "Information about the CA certificate"
         }
       }
     },
@@ -12301,6 +12326,19 @@
       "type" : "object",
       "properties" : {
         "password" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CertificateInfo" : {
+      "type" : "object",
+      "properties" : {
+        "notBefore" : {
+          "format" : "date-time",
+          "type" : "string"
+        },
+        "notAfter" : {
+          "format" : "date-time",
           "type" : "string"
         }
       }
