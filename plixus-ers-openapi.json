@@ -7537,10 +7537,7 @@
           "200" : {
             "description" : "Metadata for tokenschanged event",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/ApiToken"
-              }
+              "$ref" : "#/definitions/ApiTokens"
             }
           }
         }
@@ -7559,10 +7556,10 @@
         }, {
           "name" : "body",
           "in" : "body",
-          "description" : "New name of uuid",
+          "description" : "New name of the API token",
           "required" : true,
           "schema" : {
-            "type" : "string"
+            "$ref" : "#/definitions/ApiTokenName"
           }
         } ],
         "responses" : {
@@ -7576,7 +7573,7 @@
       },
       "delete" : {
         "tags" : [ "CustomerApi" ],
-        "summary" : "Delete an API token",
+        "summary" : "Revoke an API token",
         "parameters" : [ {
           "name" : "uuid",
           "in" : "path",
@@ -7597,15 +7594,12 @@
     "/api/v1/customerapi/tokens" : {
       "get" : {
         "tags" : [ "CustomerApi" ],
-        "summary" : "Get a list of the existing API tokens",
+        "summary" : "Get a list of the existing API tokens, active and revoked",
         "responses" : {
           "200" : {
             "description" : "List of API tokens",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/ApiToken"
-              }
+              "$ref" : "#/definitions/ApiTokens"
             }
           }
         }
@@ -7616,10 +7610,10 @@
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
-          "description" : "Name of the token",
+          "description" : "Name of the new API token",
           "required" : true,
           "schema" : {
-            "type" : "string"
+            "$ref" : "#/definitions/ApiTokenName"
           }
         } ],
         "responses" : {
@@ -12339,6 +12333,38 @@
         },
         "notAfter" : {
           "format" : "date-time",
+          "type" : "string"
+        }
+      }
+    },
+    "ApiTokens" : {
+      "description" : "Array of active API tokens and array of revoked API tokens.",
+      "required" : [ "activeTokens", "revokedTokens" ],
+      "type" : "object",
+      "properties" : {
+        "activeTokens" : {
+          "description" : "API Tokens which are currently active on the system ",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ApiToken"
+          }
+        },
+        "revokedTokens" : {
+          "description" : "API Tokens which have been revoked",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ApiToken"
+          }
+        }
+      }
+    },
+    "ApiTokenName" : {
+      "description" : "Name of an API token.",
+      "required" : [ "name" ],
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "name of the API token",
           "type" : "string"
         }
       }
