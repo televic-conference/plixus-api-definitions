@@ -7645,6 +7645,7 @@
     },
     "/api/events/audiobasic/routingconfigurationchanged" : {
       "get" : {
+        "tags" : [ "Events" ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -7657,6 +7658,7 @@
     },
     "/api/events/audiobasic/dynamicspresetchanged" : {
       "get" : {
+        "tags" : [ "Events" ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -7669,6 +7671,7 @@
     },
     "/api/events/audiobasic/dynamicsconfigurationchanged" : {
       "get" : {
+        "tags" : [ "Events" ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -7693,7 +7696,7 @@
         }
       },
       "put" : {
-        "tags" : [ "Room" ],
+        "tags" : [ "Audio" ],
         "summary" : "Set default input sensitivity offset of the seat",
         "parameters" : [ {
           "name" : "body",
@@ -7734,7 +7737,7 @@
         }
       },
       "put" : {
-        "tags" : [ "Room" ],
+        "tags" : [ "Audio" ],
         "summary" : "Set input sensitivity offset of the seat, temporarily (not saved to config).",
         "parameters" : [ {
           "name" : "body",
