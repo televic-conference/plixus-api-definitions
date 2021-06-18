@@ -7642,6 +7642,324 @@
           }
         }
       }
+    },
+    "/api/events/audiobasic/routingconfigurationchanged" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioBasicDynamicsConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiobasic/dynamicspresetchanged" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioBasicRoutingConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiobasic/dynamicsconfigurationchanged" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioBasicDynamicsPreset"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audio/seats/{seat}/defaultinputsensitivityoffset/" : {
+      "get" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Get the default input sensitivity offset",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultInputSensitivityOffset"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Set default input sensitivity offset of the seat",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DefaultInputSensitivityOffset"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Bad request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "seat id",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/audio/seats/{seat}/inputsensitivityoffset/" : {
+      "get" : {
+        "tags" : [ "Audio" ],
+        "summary" : "Get the active input sensitivity offset",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InputSensitivityOffset"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Set input sensitivity offset of the seat, temporarily (not saved to config).",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InputSensitivityOffset"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Bad request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "seat id",
+        "required" : true,
+        "type" : "integer"
+      } ]
+    },
+    "/api/v1/audiobasic/routing/configuration" : {
+      "get" : {
+        "tags" : [ "AudioBasic" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioBasicRoutingConfiguration"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioBasic" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioBasicRoutingConfiguration"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audiobasic/routing/bassCutOff/" : {
+      "get" : {
+        "tags" : [ "AudioBasic" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioBasic" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SwitchValue"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audiobasic/routing/microphonesAlwaysActive" : {
+      "get" : {
+        "tags" : [ "AudioBasic" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioBasic" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SwitchValue"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audiobasic/routing/loudspeakersAlwaysActive" : {
+      "get" : {
+        "tags" : [ "AudioBasic" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioBasic" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SwitchValue"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audiobasic/routing/mixMinus" : {
+      "get" : {
+        "tags" : [ "AudioBasic" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioBasic" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SwitchValue"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audiobasic/dynamics/preset" : {
+      "get" : {
+        "tags" : [ "AudioBasic" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioBasicDynamicsPreset"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioBasic" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioBasicDynamicsPreset"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/audiobasic/dynamics/configuration" : {
+      "get" : {
+        "tags" : [ "AudioBasic" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioBasicDynamicsConfiguration"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -9295,11 +9613,15 @@
         "value" : {
           "format" : "int32",
           "type" : "integer"
+        },
+        "mute" : {
+          "type" : "boolean"
         }
       },
       "example" : {
         "number" : 3,
-        "value" : 43
+        "value" : 43,
+        "mute" : false
       }
     },
     "AuxLevels" : {
@@ -12368,6 +12690,83 @@
           "type" : "string"
         }
       }
+    },
+    "AudioBasicRoutingConfiguration" : {
+      "required" : [ "configuration" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "enum" : [ "normal", "distance", "external", "dsp" ]
+        },
+        "interpretationOnDante" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "SwitchValue" : {
+      "title" : "Root Type for SwitchValue",
+      "description" : "Generic on off switch model",
+      "type" : "object",
+      "properties" : {
+        "active" : {
+          "type" : "boolean"
+        }
+      },
+      "example" : "{ \"active\" : true }"
+    },
+    "AudioBasicDynamicsPreset" : {
+      "required" : [ "preset" ],
+      "type" : "object",
+      "properties" : {
+        "preset" : {
+          "enum" : [ "disabled", "default", "default_no_noisegate", "external_speakers", "external_speaker_no_noisegate" ]
+        }
+      }
+    },
+    "AudioBasicDynamicsConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "compressorThreshold" : {
+          "description" : "compressor threshold [unit 0.1dBFS]",
+          "type" : "integer"
+        },
+        "compressorRatio" : {
+          "description" : "compressor ratio [unit 0.01]",
+          "type" : "integer"
+        },
+        "compressorAttackTime" : {
+          "description" : "compressor attack time [unit µs]",
+          "type" : "integer"
+        },
+        "compressorReleaseTime" : {
+          "description" : "compressor release time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateThreshold" : {
+          "description" : "noise gate threshold [unit 0.1 dBFS]",
+          "type" : "integer"
+        },
+        "noiseGateMinimumGain" : {
+          "description" : "noise gate minimum gain [unit 0.1 dB]",
+          "type" : "integer"
+        },
+        "noiseGateAttackTime" : {
+          "description" : "noise gate attack time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateHoldTime" : {
+          "description" : "noise gate hold time [unit µs]",
+          "type" : "integer"
+        },
+        "noiseGateReleaseTime" : {
+          "description" : "noise gate release time [unit µs]",
+          "type" : "integer"
+        },
+        "compressorMakeUpGain" : {
+          "description" : "make up gain [unit 0.1 dB]",
+          "type" : "integer"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -12460,5 +12859,11 @@
   }, {
     "name" : "InterpretationExternal",
     "description" : "Module for configuration of systems which only support interpretation coming from external sources"
+  }, {
+    "name" : "Network8021X",
+    "description" : "802.1X client support"
+  }, {
+    "name" : "AudioBasic",
+    "description" : "Basic audio configuration"
   } ]
 }
