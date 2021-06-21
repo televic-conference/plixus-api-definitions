@@ -7650,7 +7650,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/AudioBasicDynamicsConfiguration"
+              "$ref" : "#/definitions/AudioBasicRoutingConfiguration"
             }
           }
         }
@@ -7663,7 +7663,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/AudioBasicRoutingConfiguration"
+              "$ref" : "#/definitions/AudioBasicDynamicsPreset"
             }
           }
         }
@@ -7676,7 +7676,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/AudioBasicDynamicsPreset"
+              "$ref" : "#/definitions/AudioBasicDynamicsConfiguration"
             }
           }
         }
