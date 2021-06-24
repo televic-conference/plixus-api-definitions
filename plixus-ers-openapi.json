@@ -12917,7 +12917,7 @@
       }
     },
     "CloudAdHocAgendaItemCommand" : {
-      "required" : [ "cloudParticipantId", "previousAgendaItemId", "addAsChild", "agendaItem" ],
+      "required" : [ "cloudParticipantId", "addAsChild", "agendaItem" ],
       "type" : "object",
       "properties" : {
         "cloudParticipantId" : {
