@@ -12931,6 +12931,9 @@
         },
         "agendaItem" : {
           "$ref" : "#/definitions/AgendaItem"
+        },
+        "toberemoveddummy" : {
+          "type" : "string"
         }
       }
     },
