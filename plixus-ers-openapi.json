@@ -7963,6 +7963,151 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/adhocagendaitem/" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants add an adhoc agenda item",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudAdHocAgendaItemCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/removefromspeakerlist" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to remove a speaker from the speaker list",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericParticipantCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/removefromrequestlist/" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to remove a speaker from the request list",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericParticipantCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/addtospeakerlist" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to add a speaker to the speaker list",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericParticipantCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/meeting/participants/cloud/{cloudParticipantId}/addtorequestlist" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "cloud participant wants to add a speaker to the request list",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericParticipantCommand"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "precondition failed:\n - participant not authorized (no chairperson)"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "cloudParticipantId",
+        "in" : "path",
+        "description" : "cloud id of the participant",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -11889,9 +12034,6 @@
         "description" : {
           "type" : "string"
         },
-        "secretVoting" : {
-          "type" : "boolean"
-        },
         "voteCorrection" : {
           "type" : "boolean"
         },
@@ -11907,15 +12049,18 @@
             "$ref" : "#/definitions/AgendaItem"
           }
         },
-        "showResultsDuringVoting" : {
-          "type" : "boolean"
-        },
         "id" : {
           "description" : "id of the agenda item",
           "type" : "string"
         },
         "votingStatus" : {
           "$ref" : "#/definitions/CloudVotingStatus"
+        },
+        "hideIndividualResults" : {
+          "type" : "boolean"
+        },
+        "hideResultsWhileVoting" : {
+          "type" : "boolean"
         }
       }
     },
@@ -12768,6 +12913,33 @@
         "compressorMakeUpGain" : {
           "description" : "make up gain [unit 0.1 dB]",
           "type" : "integer"
+        }
+      }
+    },
+    "CloudAdHocAgendaItemCommand" : {
+      "required" : [ "cloudParticipantId", "previousAgendaItemId", "addAsChild", "agendaItem" ],
+      "type" : "object",
+      "properties" : {
+        "cloudParticipantId" : {
+          "type" : "string"
+        },
+        "previousAgendaItemId" : {
+          "type" : "string"
+        },
+        "addAsChild" : {
+          "type" : "boolean"
+        },
+        "agendaItem" : {
+          "$ref" : "#/definitions/AgendaItem"
+        }
+      }
+    },
+    "CloudGenericParticipantCommand" : {
+      "required" : [ "participantId" ],
+      "type" : "object",
+      "properties" : {
+        "participantId" : {
+          "type" : "string"
         }
       }
     }
