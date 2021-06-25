@@ -12061,6 +12061,9 @@
         },
         "hideResultsWhileVoting" : {
           "type" : "boolean"
+        },
+        "activated" : {
+          "type" : "boolean"
         }
       }
     },
