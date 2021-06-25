@@ -7973,7 +7973,7 @@
           "in" : "body",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/CloudAdHocAgendaItemCommand"
+            "$ref" : "#/definitions/CloudAddAdHocAgendaItemCommand"
           }
         } ],
         "responses" : {
@@ -12916,8 +12916,17 @@
         }
       }
     },
-    "CloudAdHocAgendaItemCommand" : {
-      "required" : [ "cloudParticipantId", "addAsChild", "agendaItem" ],
+    "CloudGenericParticipantCommand" : {
+      "required" : [ "participantId" ],
+      "type" : "object",
+      "properties" : {
+        "participantId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CloudAddAdHocAgendaItemCommand" : {
+      "required" : [ "cloudParticipantId", "addAsChild" ],
       "type" : "object",
       "properties" : {
         "cloudParticipantId" : {
@@ -12931,15 +12940,6 @@
         },
         "agendaItem" : {
           "$ref" : "#/definitions/AgendaItem"
-        }
-      }
-    },
-    "CloudGenericParticipantCommand" : {
-      "required" : [ "participantId" ],
-      "type" : "object",
-      "properties" : {
-        "participantId" : {
-          "type" : "string"
         }
       }
     }
