@@ -11642,7 +11642,7 @@
       "properties" : {
         "name" : {
           "description" : "Name of the service",
-          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We" ]
+          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "CustomerApi" ]
         },
         "state" : {
           "description" : "State of the service",
@@ -12868,7 +12868,7 @@
       "type" : "object",
       "properties" : {
         "configuration" : {
-          "enum" : [ "normal", "distance", "external", "dsp" ]
+          "enum" : [ "normal_routing", "distance_conferencing", "distance_conferencing_with_speakers", "external_routing", "dsp_routing" ]
         },
         "interpretationOnDante" : {
           "type" : "boolean"
