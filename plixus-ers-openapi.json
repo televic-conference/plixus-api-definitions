@@ -8033,33 +8033,11 @@
         "type" : "string"
       } ]
     },
-    "/api/v1/system/services/{name}" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the state of the given service",
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "$ref" : "#/definitions/ServiceState"
-            }
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "name",
-        "in" : "path",
-        "description" : "Name of the service to get the state from. Only services listed by /api/v1/system/services/ will work.",
-        "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "CustomerApi" ]
-      } ]
-    },
-    "/api/v1/system/services/{name}/restart" : {
+    "/api/v1/system/services/{name}/stop" : {
       "post" : {
         "tags" : [ "System" ],
-        "summary" : "Restart the specified service",
-        "operationId" : "Services_RestartService",
+        "summary" : "Stop the specified service",
+        "operationId" : "Services_StopService",
         "consumes" : [ ],
         "produces" : [ ],
         "responses" : {
@@ -8074,10 +8052,10 @@
       "parameters" : [ {
         "name" : "name",
         "in" : "path",
-        "description" : "Name of the service to restart. Only services listed by /api/v1/system/services/ will work.",
+        "description" : "Name of the service to stop. Only services listed by /api/v1/system/services/ will work.",
         "required" : true,
         "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "CustomerApi" ]
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
       } ]
     },
     "/api/v1/system/services/{name}/start" : {
@@ -8102,14 +8080,14 @@
         "description" : "Name of the service to start. Only services listed by /api/v1/system/services/ will work.",
         "required" : true,
         "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "CustomerApi" ]
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
       } ]
     },
-    "/api/v1/system/services/{name}/stop" : {
+    "/api/v1/system/services/{name}/restart" : {
       "post" : {
         "tags" : [ "System" ],
-        "summary" : "Stop the specified service",
-        "operationId" : "Services_StopService",
+        "summary" : "Restart the specified service",
+        "operationId" : "Services_RestartService",
         "consumes" : [ ],
         "produces" : [ ],
         "responses" : {
@@ -8124,10 +8102,32 @@
       "parameters" : [ {
         "name" : "name",
         "in" : "path",
-        "description" : "Name of the service to stop. Only services listed by /api/v1/system/services/ will work.",
+        "description" : "Name of the service to restart. Only services listed by /api/v1/system/services/ will work.",
         "required" : true,
         "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "CustomerApi" ]
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
+      } ]
+    },
+    "/api/v1/system/services/{name}" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the state of the given service",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceState"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "description" : "Name of the service to get the state from. Only services listed by /api/v1/system/services/ will work.",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
       } ]
     }
   },
