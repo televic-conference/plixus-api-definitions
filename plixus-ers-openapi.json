@@ -11637,19 +11637,6 @@
         }
       }
     },
-    "ServiceState" : {
-      "type" : "object",
-      "properties" : {
-        "name" : {
-          "description" : "Name of the service",
-          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "CustomerApi" ]
-        },
-        "state" : {
-          "description" : "State of the service",
-          "enum" : [ "Running", "Stopped" ]
-        }
-      }
-    },
     "AudioDynamicsProcessorConfigurationList" : {
       "type" : "object",
       "properties" : {
@@ -12964,6 +12951,19 @@
         },
         "agendaItem" : {
           "$ref" : "#/definitions/AgendaItem"
+        }
+      }
+    },
+    "ServiceState" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the service",
+          "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
+        },
+        "state" : {
+          "description" : "State of the service",
+          "enum" : [ "Running", "Stopped" ]
         }
       }
     }
