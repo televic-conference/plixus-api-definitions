@@ -12958,7 +12958,6 @@
       }
     },
     "ExternalLanguageChannelList" : {
-      "required" : [ ],
       "type" : "object",
       "properties" : {
         "channels" : {
