@@ -6286,10 +6286,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/ExternalLanguageChannel"
-              }
+              "$ref" : "#/definitions/ExternalLanguageChannelList"
             }
           }
         }
@@ -6303,10 +6300,7 @@
           "description" : "The external interpretation configuration to be applied",
           "required" : true,
           "schema" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/definitions/ExternalLanguageChannel"
-            }
+            "$ref" : "#/definitions/ExternalLanguageChannelList"
           }
         } ],
         "responses" : {
@@ -6369,7 +6363,7 @@
     },
     "/api/events/interpretationexternal/configurationchanged" : {
       "get" : {
-        "tags" : [ "InterpretationExternal" ],
+        "tags" : [ "Events" ],
         "summary" : "Event when the external interpretation settings changed",
         "responses" : {
           "200" : {
@@ -12155,7 +12149,7 @@
     },
     "ExternalLanguageChannel" : {
       "description" : "Represents an interpretation channel on a system only supporting external inputs as a source for interpretation channels",
-      "required" : [ "language", "displayText", "inputType", "inputNumber", "gain" ],
+      "required" : [ "language", "displayText", "inputType", "inputNumber" ],
       "type" : "object",
       "properties" : {
         "language" : {
@@ -12168,14 +12162,10 @@
         },
         "inputType" : {
           "description" : "The type of the input which should be used as source for the channel",
-          "enum" : [ ]
+          "enum" : [ "dante" ]
         },
         "inputNumber" : {
           "description" : "The number of the input which should be used as a source for the channel",
-          "type" : "integer"
-        },
-        "gain" : {
-          "description" : "The gain to be applied on the input, expressed in 0.1dB",
           "type" : "integer"
         }
       }
@@ -12964,6 +12954,15 @@
         "state" : {
           "description" : "State of the service",
           "enum" : [ "Running", "Stopped" ]
+        }
+      }
+    },
+    "ExternalLanguageChannelList" : {
+      "required" : [ "channels" ],
+      "type" : "object",
+      "properties" : {
+        "channels" : {
+          "$ref" : "#/definitions/ExternalLanguageChannel"
         }
       }
     }
