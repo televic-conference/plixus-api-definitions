@@ -12958,11 +12958,14 @@
       }
     },
     "ExternalLanguageChannelList" : {
-      "required" : [ "channels" ],
+      "required" : [ ],
       "type" : "object",
       "properties" : {
         "channels" : {
-          "$ref" : "#/definitions/ExternalLanguageChannel"
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ExternalLanguageChannel"
+          }
         }
       }
     }
