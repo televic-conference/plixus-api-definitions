@@ -7143,37 +7143,6 @@
         }
       }
     },
-    "/api/v1/audiobasic/routing/bassCutOff/" : {
-      "get" : {
-        "tags" : [ "AudioBasic" ],
-        "produces" : [ "application/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SwitchValue"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "AudioBasic" ],
-        "consumes" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/SwitchValue"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
     "/api/v1/audiobasic/routing/microphonesAlwaysActive" : {
       "get" : {
         "tags" : [ "AudioBasic" ],
@@ -7574,6 +7543,37 @@
         "type" : "string",
         "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
       } ]
+    },
+    "/api/v1/audiobasic/routing/bassCut/" : {
+      "get" : {
+        "tags" : [ "AudioBasic" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AudioBasic" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SwitchValue"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
