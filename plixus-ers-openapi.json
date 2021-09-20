@@ -7574,6 +7574,21 @@
           }
         }
       }
+    },
+    "/api/v1/interpretation/maxchannels" : {
+      "get" : {
+        "tags" : [ "Interpretation" ],
+        "summary" : "Get the maximum number of channels which can be used on the system in its current configuration",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/MaxChannelsData"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -12023,6 +12038,15 @@
           }
         }
       }
+    },
+    "MaxChannelsData" : {
+      "required" : [ "maxChannels" ],
+      "type" : "object",
+      "properties" : {
+        "maxChannels" : {
+          "type" : "integer"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -12046,18 +12070,6 @@
   }, {
     "name" : "Audio",
     "description" : "With the Audio module you can **set**, **edit** and **retrieve** all **general (sytem wide) audio settings**. In the Audio module you can for example find a call to change the default volume of all channel selectors, present in the room. \nUse the Audio module to retrieve the details of the active DSP configuration and use the *Change the active dsp configuration for the room* call to change these DSP settings.\n"
-  }, {
-    "name" : "AudioDynamicsProcessor",
-    "description" : "Use the AudioDynamicsProcessor module for all runtime modifications of your active audio dynamics processor configuration."
-  }, {
-    "name" : "AudioDynamicsProcessorConfigurations",
-    "description" : "The AudioDynamicsProcessorConfigurations module is responsible for creating, editing and storing audio dynamics processor configurations."
-  }, {
-    "name" : "AudioRouting",
-    "description" : "Use the Audiorouting module for all runtime modifications of your active audio routing configuration. With the calls in this module you can modify the settings of the active configuration, change the state of a node in the routing matrix or change the maximum number of language channels.\n\n> Note that changes made to the configuration are not saved by default, you need to invoke the save call for this.\nThe AudioRouting module is indepent of the storage of the routing configurations, for managing configurations you can use the AudioRoutingConfigurations module or your own module.\n"
-  }, {
-    "name" : "AudioRoutingConfigurations",
-    "description" : "The AudioRoutingConfigurations module is resposible for creating, editing and storing audio routing configurations. You can also use this module to set the active audio routing configuration. Audio configurations have the following parameters:\n* **Name**: the name of the configuration\n* **Description**: a short description of the configuration\n* **Input groups**: a collection of different audio inputs. There are different types of input groups\n\n * *Floor*: audio from all the active microphones in th room\n\n * *Ambiance*: enabled Dante audio input when no microphone is active\n\n * *Language*: the audio coming from the interpreter booths\n\n * *User*: audio originating from seats defined by the API user\n\n* **Channels**: the routing of the audio (links the input groups to an output group)\n* **Output groups**: a collection of audio outputs where you want to route the audio input to. There are different types of output groups available:\n\n * *Floor*: route audio to speakers of all units present in the room\n\n * *Language*: route audio to the interpreter booths\n\n * *User*: route audio to specific seats defined by the API\n\n* **Locked**: protect configuration by locking it with a password\n* **Multiple floor**: enable multiple floors to split the Floor out up into two seperate mixes:\n\n *  a mix for the loudspeakers\n\n *  a mix for the channel selectors and relays\n"
   }, {
     "name" : "Video",
     "description" : "Use the Video module to route the video inputs and outputs to one of the 6 available **video streams**.  To route a video stream you need to set the video input onto one of the video stream and the link a video output group to the same video stream.\n\nWith this module you can also make video streams (un)available for delegates. Delegates can only select the streams that are made availalable for delegates on their multimedia unit.\n"
@@ -12100,9 +12112,6 @@
   }, {
     "name" : "Devices",
     "description" : "Description about devices module"
-  }, {
-    "name" : "DeviceLicenses",
-    "description" : "Description about devicelicenses module"
   }, {
     "name" : "WirelessAccessPoints",
     "description" : "This module can be used to retrieve information from and control the behavior of the Wireless Access Points that are connected to the system."
