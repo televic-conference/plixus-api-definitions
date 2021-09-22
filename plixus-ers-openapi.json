@@ -3227,7 +3227,8 @@
     "/api/v1/room/layout" : {
       "get" : {
         "tags" : [ "Room" ],
-        "summary" : "Get the room layout",
+        "summary" : "Get the local room layout",
+        "description" : "The local room layout is used when:\n    - no meetings are active\n    - meetings using the local meeting template",
         "responses" : {
           "200" : {
             "description" : "Details about room layout",
@@ -3239,7 +3240,8 @@
       },
       "put" : {
         "tags" : [ "Room" ],
-        "summary" : "Change the room layout",
+        "summary" : "Change the local room layout",
+        "description" : "The local room layout is used when:\n    - no meetings are active\n    - meetings using the local meeting template",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
@@ -7589,6 +7591,97 @@
           }
         }
       }
+    },
+    "/api/v1/room/layouts" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get the a list of room layout info which can be used in Confero meetings",
+        "description" : "",
+        "responses" : {
+          "200" : {
+            "description" : "Details about room layout",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/RoomLayoutInfo"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Room" ],
+        "summary" : "Add a new room layout which can be used by Confero meetings",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RoomLayout"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "ok"
+          },
+          "428" : {
+            "description" : "can happen when the room layout uses an ID which is already in use by another room layout"
+          }
+        }
+      }
+    },
+    "/api/v1/room/layouts/{id}" : {
+      "get" : {
+        "tags" : [ "Room" ],
+        "summary" : "Get the Confero room layout with the given id",
+        "responses" : {
+          "200" : {
+            "description" : "ok, returns layout",
+            "schema" : {
+              "$ref" : "#/definitions/RoomLayout"
+            }
+          },
+          "412" : {
+            "description" : "room layout with given id does not exist"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "Update the Confero room layout with the given ID",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RoomLayout"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "room layout with the given id does not exist"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Room" ],
+        "summary" : "Delete the Confero roomlayout with given id",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "roomlayout id",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -9678,6 +9771,15 @@
           "items" : {
             "$ref" : "#/definitions/RoomLayoutNode"
           }
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "contentId" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
         }
       }
     },
@@ -12045,6 +12147,22 @@
       "properties" : {
         "maxChannels" : {
           "type" : "integer"
+        }
+      }
+    },
+    "RoomLayoutInfo" : {
+      "required" : [ "id", "contentId", "resourceId" ],
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "unique identifier",
+          "type" : "string"
+        },
+        "contentId" : {
+          "type" : "string"
+        },
+        "resourceId" : {
+          "type" : "string"
         }
       }
     }
