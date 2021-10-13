@@ -3738,173 +3738,6 @@
         }
       }
     },
-    "/api/v1/system/license" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get info about the current license",
-        "consumes" : [ ],
-        "produces" : [ "application/json", "text/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/LicenseList"
-            }
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Upload a license",
-        "consumes" : [ "multipart/form-data" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "Resource",
-          "in" : "formData",
-          "description" : "Upload a resource",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "type" : "object"
-            }
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      }
-    },
-    "/api/v1/system/datetime" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get current date and time of the room",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/RoomDateTime"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change current date and time in the room",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/RoomDateTime"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/system/ipconfiguration" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current ip configuration of the room",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/IpConfiguration"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the ip configuration of the room",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/IpConfiguration"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/system/dateformat" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current date format for the room",
-        "responses" : {
-          "200" : {
-            "description" : "Date format",
-            "schema" : {
-              "$ref" : "#/definitions/DateFormat"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the date format for the room",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/DateFormat"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/system/timeformat" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current time format for the room",
-        "responses" : {
-          "200" : {
-            "description" : "Time format",
-            "schema" : {
-              "$ref" : "#/definitions/TimeFormat"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the time format for the room",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/TimeFormat"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
     "/api/events/system/dateformatchanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -3975,51 +3808,6 @@
         }
       }
     },
-    "/api/v1/system/update" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Update the system with the files specified in the body",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "description" : "Update file name",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateFileNameList"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/system/reboot" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Reboot the system",
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/system/info" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get information about the system",
-        "responses" : {
-          "200" : {
-            "description" : "System info",
-            "schema" : {
-              "$ref" : "#/definitions/SystemInfo"
-            }
-          }
-        }
-      }
-    },
     "/api/v1/room/info" : {
       "get" : {
         "tags" : [ "Room" ],
@@ -4030,37 +3818,6 @@
             "schema" : {
               "$ref" : "#/definitions/Room"
             }
-          }
-        }
-      }
-    },
-    "/api/v1/system/camerasettings" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current camera settings",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/CameraSettings"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the camera settings",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/CameraSettings"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
           }
         }
       }
@@ -4152,17 +3909,6 @@
         "required" : true,
         "type" : "string"
       } ]
-    },
-    "/api/v1/system/reset" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Reset the system to factory defaults",
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
     },
     "/api/notification/{client}/modules/subscribe" : {
       "post" : {
@@ -4382,48 +4128,6 @@
         }
       }
     },
-    "/api/v1/system/log/level" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current loglevel",
-        "responses" : {
-          "200" : {
-            "description" : "Log level",
-            "schema" : {
-              "$ref" : "#/definitions/LogLevel"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the log level",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/LogLevel"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/system/log/" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get a url to download all log files",
-        "responses" : {
-          "200" : {
-            "description" : "Ok. Event will be sent with download url from the moment the achive is ready to be downloaded."
-          }
-        }
-      }
-    },
     "/api/events/system/logarchiveready" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -4487,38 +4191,6 @@
         }
       }
     },
-    "/api/v1/system/update/files" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get all update files which are currently on the system",
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "$ref" : "#/definitions/UpdateFileList"
-            }
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Upload an update file to the system",
-        "consumes" : [ "multipart/form-data" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "file",
-          "in" : "formData",
-          "description" : "The update file to upload",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
     "/api/v1/resources/{id}/info" : {
       "get" : {
         "tags" : [ "Resources" ],
@@ -4539,39 +4211,6 @@
           }
         }
       }
-    },
-    "/api/v1/system/update/files/{fileName}" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Update file info",
-        "parameters" : [ {
-          "name" : "fileName",
-          "in" : "path",
-          "description" : "file name",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "body",
-          "in" : "body",
-          "description" : "Info of the file indicated by fileName.",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateFileInfo"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "fileName",
-        "in" : "path",
-        "description" : "file name",
-        "required" : true,
-        "type" : "string"
-      } ]
     },
     "/api/events/room/layoutchanged/" : {
       "get" : {
@@ -4750,58 +4389,6 @@
         }
       }
     },
-    "/api/v1/system/update/progress" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Gets the current update progress",
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "$ref" : "#/definitions/FullUpdateProgress"
-            }
-          },
-          "400" : {
-            "description" : "System is not updating"
-          }
-        }
-      }
-    },
-    "/api/v1/system/operatingmode" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current operating mode.",
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "$ref" : "#/definitions/OperatingMode"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the operating mode",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "description" : "Operating mode to be set",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/OperatingMode"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          },
-          "400" : {
-            "description" : "Unable to change operating mode."
-          }
-        }
-      }
-    },
     "/api/events/system/operatingmodechanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -4831,51 +4418,6 @@
       "get" : {
         "tags" : [ "Events" ],
         "summary" : "Event when splash screen resource ID was removed",
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          }
-        }
-      }
-    },
-    "/api/v1/system/splashscreen" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the resource of the splash screen",
-        "produces" : [ "image/png", "image/jpg", "image/jpeg" ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "format" : "binary",
-              "type" : "string"
-            }
-          },
-          "204" : {
-            "description" : "No splashscreen was defined yet."
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Upload a splash screen resource",
-        "consumes" : [ "multipart/form-data" ],
-        "parameters" : [ {
-          "name" : "Resource",
-          "in" : "formData",
-          "description" : "Upload a resource",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "System" ],
-        "summary" : "Deleted the resource of the splash screen",
         "responses" : {
           "200" : {
             "description" : "Ok"
@@ -4967,40 +4509,6 @@
         "required" : true,
         "type" : "string"
       } ]
-    },
-    "/api/v1/system/defaultinterfacelanguage" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the default interface language",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/DefaultInterfaceLanguage"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the default interface language",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/DefaultInterfaceLanguage"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          },
-          "400" : {
-            "description" : "Unsupported language"
-          }
-        }
-      }
     },
     "/api/events/system/defaultinterfacelanguagechanged" : {
       "get" : {
@@ -5125,40 +4633,6 @@
             "schema" : {
               "$ref" : "#/definitions/ServiceState"
             }
-          }
-        }
-      }
-    },
-    "/api/v1/system/configuration" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the current system configuration",
-        "operationId" : "System_GetConfiguration",
-        "consumes" : [ ],
-        "responses" : {
-          "204" : {
-            "description" : "configuration archive is being created"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Upload the new system configuration",
-        "operationId" : "System_UploadConfiguration",
-        "consumes" : [ "multipart/form-data" ],
-        "parameters" : [ {
-          "name" : "Configuration",
-          "in" : "formData",
-          "description" : "Upload the configuration",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          },
-          "400" : {
-            "description" : "Wrong format"
           }
         }
       }
@@ -5493,40 +4967,6 @@
         }
       }
     },
-    "/api/v1/system/setupwizard" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the setup wizard state",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SetupWizard"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "System" ],
-        "summary" : "Change the setup wizard state",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/SetupWizard"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
-          },
-          "400" : {
-            "description" : "Bad request"
-          }
-        }
-      }
-    },
     "/api/events/system/configarchiveready/" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -5537,25 +4977,6 @@
             "schema" : {
               "$ref" : "#/definitions/ConfigArchiveReady"
             }
-          }
-        }
-      }
-    },
-    "/api/v1/system/configuration/download" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the configuration archive",
-        "produces" : [ "application/x-compressed-tar" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "format" : "binary",
-              "type" : "string"
-            }
-          },
-          "400" : {
-            "description" : "will occur when a request for the config archive was not made before this call."
           }
         }
       }
@@ -5967,21 +5388,6 @@
         "required" : true,
         "type" : "integer"
       } ]
-    },
-    "/api/v1/system/services/" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Retrieve a list of services available on the system",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/ServiceList"
-            },
-            "examples" : { }
-          }
-        }
-      }
     },
     "/api/events/meeting/meetingspeakerschanged" : {
       "get" : {
@@ -6550,120 +5956,6 @@
         }
       }
     },
-    "/api/v1/system/certificate/certificate" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Upload server certificate",
-        "consumes" : [ "multipart/form-data" ],
-        "parameters" : [ {
-          "name" : "cert",
-          "in" : "formData",
-          "description" : "Upload a certificate",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "Success"
-          },
-          "400" : {
-            "description" : "Invalid certificate content"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "System" ],
-        "summary" : "Delete client certificate",
-        "responses" : {
-          "204" : {
-            "description" : "Success"
-          }
-        }
-      },
-      "head" : {
-        "tags" : [ "System" ],
-        "summary" : "Check if a certificate is present",
-        "responses" : {
-          "200" : {
-            "description" : "Certificate exists"
-          },
-          "404" : {
-            "description" : "Certificate does not exist"
-          }
-        }
-      }
-    },
-    "/api/v1/system/certificate/privateKey" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Upload system private key",
-        "consumes" : [ "multipart/form-data" ],
-        "parameters" : [ {
-          "name" : "key",
-          "in" : "formData",
-          "description" : "Upload a private key",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "Success"
-          },
-          "202" : {
-            "description" : "Indicates the PEM file was accepted, but needs unlocking. Password is required."
-          },
-          "400" : {
-            "description" : "Invalid key content"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "System" ],
-        "summary" : "Delete system private key",
-        "responses" : {
-          "204" : {
-            "description" : "Success"
-          }
-        }
-      },
-      "head" : {
-        "tags" : [ "System" ],
-        "responses" : {
-          "200" : {
-            "description" : "Private key exists"
-          },
-          "404" : {
-            "description" : "Private key does not exist"
-          }
-        }
-      }
-    },
-    "/api/v1/system/certificate/privateKeyPassword" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Submit a private key password",
-        "consumes" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/PrivateKeyPassword"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Success"
-          },
-          "400" : {
-            "description" : "No private key to unlock"
-          },
-          "401" : {
-            "description" : "Invalid password"
-          }
-        }
-      }
-    },
     "/api/v1/meeting/participants/cloud/{cloudParticipantId}/startaudiorecording" : {
       "post" : {
         "tags" : [ "Meeting" ],
@@ -6972,23 +6264,6 @@
             "schema" : {
               "$ref" : "#/definitions/ApiToken"
             }
-          }
-        }
-      }
-    },
-    "/api/v1/system/certificate/certificate/info" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "produces" : [ "application/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "Certificate information",
-            "schema" : {
-              "$ref" : "#/definitions/CertificateInfo"
-            }
-          },
-          "404" : {
-            "description" : "No certificate present"
           }
         }
       }
@@ -7449,103 +6724,6 @@
         "type" : "string"
       } ]
     },
-    "/api/v1/system/services/{name}/stop" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Stop the specified service",
-        "operationId" : "Services_StopService",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "name",
-        "in" : "path",
-        "description" : "Name of the service to stop. Only services listed by /api/v1/system/services/ will work.",
-        "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
-      } ]
-    },
-    "/api/v1/system/services/{name}/start" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Start the specified service",
-        "operationId" : "Services_StartService",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "name",
-        "in" : "path",
-        "description" : "Name of the service to start. Only services listed by /api/v1/system/services/ will work.",
-        "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
-      } ]
-    },
-    "/api/v1/system/services/{name}/restart" : {
-      "post" : {
-        "tags" : [ "System" ],
-        "summary" : "Restart the specified service",
-        "operationId" : "Services_RestartService",
-        "consumes" : [ ],
-        "produces" : [ ],
-        "responses" : {
-          "204" : {
-            "description" : "No Content"
-          },
-          "400" : {
-            "description" : "An invalid or missing input parameter will result in a bad request"
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "name",
-        "in" : "path",
-        "description" : "Name of the service to restart. Only services listed by /api/v1/system/services/ will work.",
-        "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
-      } ]
-    },
-    "/api/v1/system/services/{name}" : {
-      "get" : {
-        "tags" : [ "System" ],
-        "summary" : "Get the state of the given service",
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "$ref" : "#/definitions/ServiceState"
-            }
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "name",
-        "in" : "path",
-        "description" : "Name of the service to get the state from. Only services listed by /api/v1/system/services/ will work.",
-        "required" : true,
-        "type" : "string",
-        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
-      } ]
-    },
     "/api/v1/audiobasic/routing/bassCut/" : {
       "get" : {
         "tags" : [ "AudioBasic" ],
@@ -7682,6 +6860,937 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/v1/system/timezone" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get current timezone.",
+        "responses" : {
+          "200" : {
+            "description" : "Return timezone name.",
+            "schema" : {
+              "$ref" : "#/definitions/RoomTimezone"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Set current timezone name.",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RoomTimezone"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Return current timezone name.",
+            "schema" : {
+              "$ref" : "#/definitions/RoomTimezone"
+            }
+          },
+          "400" : {
+            "description" : "Invalid timezone",
+            "schema" : {
+              "$ref" : "#/definitions/RoomTimezoneError"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/system/camerasettings" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current camera settings",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/CameraSettings"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the camera settings",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CameraSettings"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/certificate/certificate" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload server certificate",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "cert",
+          "in" : "formData",
+          "description" : "Upload a certificate",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "Invalid certificate content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "System" ],
+        "summary" : "Delete client certificate",
+        "responses" : {
+          "204" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "head" : {
+        "tags" : [ "System" ],
+        "summary" : "Check if a certificate is present",
+        "responses" : {
+          "200" : {
+            "description" : "Certificate exists"
+          },
+          "404" : {
+            "description" : "Certificate does not exist"
+          }
+        }
+      }
+    },
+    "/api/v1/system/certificate/certificate/info" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Certificate information",
+            "schema" : {
+              "$ref" : "#/definitions/CertificateInfo"
+            }
+          },
+          "404" : {
+            "description" : "No certificate present"
+          }
+        }
+      }
+    },
+    "/api/v1/system/certificate/privateKey" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload system private key",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "key",
+          "in" : "formData",
+          "description" : "Upload a private key",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Success"
+          },
+          "202" : {
+            "description" : "Indicates the PEM file was accepted, but needs unlocking. Password is required."
+          },
+          "400" : {
+            "description" : "Invalid key content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "System" ],
+        "summary" : "Delete system private key",
+        "responses" : {
+          "204" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "head" : {
+        "tags" : [ "System" ],
+        "responses" : {
+          "200" : {
+            "description" : "Private key exists"
+          },
+          "404" : {
+            "description" : "Private key does not exist"
+          }
+        }
+      }
+    },
+    "/api/v1/system/certificate/privateKeyPassword" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Submit a private key password",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PrivateKeyPassword"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "No private key to unlock"
+          },
+          "401" : {
+            "description" : "Invalid password"
+          }
+        }
+      }
+    },
+    "/api/v1/system/configuration" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current system configuration",
+        "operationId" : "System_GetConfiguration",
+        "consumes" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "configuration archive is being created"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload the new system configuration",
+        "operationId" : "System_UploadConfiguration",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "Configuration",
+          "in" : "formData",
+          "description" : "Upload the configuration",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Wrong format"
+          }
+        }
+      }
+    },
+    "/api/v1/system/configuration/download" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the configuration archive",
+        "produces" : [ "application/x-compressed-tar" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "format" : "binary",
+              "type" : "string"
+            }
+          },
+          "400" : {
+            "description" : "will occur when a request for the config archive was not made before this call."
+          }
+        }
+      }
+    },
+    "/api/v1/system/dateformat" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current date format for the room",
+        "responses" : {
+          "200" : {
+            "description" : "Date format",
+            "schema" : {
+              "$ref" : "#/definitions/DateFormat"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the date format for the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DateFormat"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/datetime" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get current date and time of the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RoomDateTime"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change current date and time in the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RoomDateTime"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/defaultinterfacelanguage" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the default interface language",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DefaultInterfaceLanguage"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the default interface language",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DefaultInterfaceLanguage"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Unsupported language"
+          }
+        }
+      }
+    },
+    "/api/v1/system/info" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get information about the system",
+        "responses" : {
+          "200" : {
+            "description" : "System info",
+            "schema" : {
+              "$ref" : "#/definitions/SystemInfo"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/system/ipconfiguration" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current ip configuration of the room",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/IpConfiguration"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the ip configuration of the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/IpConfiguration"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/license" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get info about the current license",
+        "consumes" : [ ],
+        "produces" : [ "application/json", "text/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/LicenseList"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload a license",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "Resource",
+          "in" : "formData",
+          "description" : "Upload a resource",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/system/log/" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get a url to download all log files",
+        "responses" : {
+          "200" : {
+            "description" : "Ok. Event will be sent with download url from the moment the achive is ready to be downloaded."
+          }
+        }
+      }
+    },
+    "/api/v1/system/log/level" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current loglevel",
+        "responses" : {
+          "200" : {
+            "description" : "Log level",
+            "schema" : {
+              "$ref" : "#/definitions/LogLevel"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the log level",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LogLevel"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/operatingmode" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current operating mode.",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/OperatingMode"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the operating mode",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Operating mode to be set",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OperatingMode"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Unable to change operating mode."
+          }
+        }
+      }
+    },
+    "/api/v1/system/reboot" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Reboot the system",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/reset" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Reset the system to factory defaults",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/services/" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Retrieve a list of services available on the system",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceList"
+            },
+            "examples" : { }
+          }
+        }
+      }
+    },
+    "/api/v1/system/services/{name}/stop" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Stop the specified service",
+        "operationId" : "Services_StopService",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "description" : "Name of the service to stop. Only services listed by /api/v1/system/services/ will work.",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
+      } ]
+    },
+    "/api/v1/system/services/{name}/start" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Start the specified service",
+        "operationId" : "Services_StartService",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "description" : "Name of the service to start. Only services listed by /api/v1/system/services/ will work.",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
+      } ]
+    },
+    "/api/v1/system/services/{name}/restart" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Restart the specified service",
+        "operationId" : "Services_RestartService",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "An invalid or missing input parameter will result in a bad request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "description" : "Name of the service to restart. Only services listed by /api/v1/system/services/ will work.",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
+      } ]
+    },
+    "/api/v1/system/services/{name}" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the state of the given service",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceState"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "name",
+        "in" : "path",
+        "description" : "Name of the service to get the state from. Only services listed by /api/v1/system/services/ will work.",
+        "required" : true,
+        "type" : "string",
+        "enum" : [ "Core", "LegacyRestApi", "PlixusCamera", "We", "PlixusCustomerApi" ]
+      } ]
+    },
+    "/api/v1/system/setupwizard" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the setup wizard state",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SetupWizard"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the setup wizard state",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SetupWizard"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/system/splashscreen" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the resource of the splash screen",
+        "produces" : [ "image/png", "image/jpg", "image/jpeg" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "format" : "binary",
+              "type" : "string"
+            }
+          },
+          "204" : {
+            "description" : "No splashscreen was defined yet."
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload a splash screen resource",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "Resource",
+          "in" : "formData",
+          "description" : "Upload a resource",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "System" ],
+        "summary" : "Deleted the resource of the splash screen",
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/api/v1/system/timeformat" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get the current time format for the room",
+        "responses" : {
+          "200" : {
+            "description" : "Time format",
+            "schema" : {
+              "$ref" : "#/definitions/TimeFormat"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Change the time format for the room",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TimeFormat"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/update" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Update the system with the files specified in the body",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Update file name",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateFileNameList"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/update/files" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get all update files which are currently on the system",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/UpdateFileList"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Upload an update file to the system",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "file",
+          "in" : "formData",
+          "description" : "The update file to upload",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/system/update/files/{fileName}" : {
+      "post" : {
+        "tags" : [ "System" ],
+        "summary" : "Update file info",
+        "parameters" : [ {
+          "name" : "fileName",
+          "in" : "path",
+          "description" : "file name",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Info of the file indicated by fileName.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateFileInfo"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "fileName",
+        "in" : "path",
+        "description" : "file name",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/system/update/progress" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Gets the current update progress",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/FullUpdateProgress"
+            }
+          },
+          "400" : {
+            "description" : "System is not updating"
+          }
+        }
+      }
+    },
+    "/api/events/system/timezonechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Timezone changed event.",
+        "responses" : {
+          "200" : {
+            "description" : "Timezone changed event.",
+            "schema" : {
+              "$ref" : "#/definitions/RoomTimezone"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/system/ntpserver" : {
+      "get" : {
+        "tags" : [ "System" ],
+        "summary" : "Get current ntp server address.",
+        "responses" : {
+          "200" : {
+            "description" : "Ntp server address.",
+            "schema" : {
+              "$ref" : "#/definitions/RoomNtpServer"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "System" ],
+        "summary" : "Set ntp server address.",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Set ntp server address.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RoomNtpServer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ntp server address.",
+            "schema" : {
+              "$ref" : "#/definitions/RoomNtpServer"
+            }
+          },
+          "400" : {
+            "description" : "Invalid ntp server address.",
+            "schema" : {
+              "$ref" : "#/definitions/RoomNtpServerError"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/system/ntpserverchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Ntp server address changed event.",
+        "responses" : {
+          "200" : {
+            "description" : "Ntp server address changed event.",
+            "schema" : {
+              "$ref" : "#/definitions/RoomNtpServer"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -12165,6 +12274,50 @@
           "type" : "string"
         }
       }
+    },
+    "RoomTimezone" : {
+      "title" : "Root Type for RoomTimezone",
+      "description" : "Name of current timezone",
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "string"
+        }
+      },
+      "example" : "{\n    \"value\": \"UTC\"\n}"
+    },
+    "RoomTimezoneError" : {
+      "title" : "Root Type for RoomTimezoneError",
+      "description" : "Invalid timezone",
+      "type" : "object",
+      "properties" : {
+        "error" : {
+          "type" : "string"
+        }
+      },
+      "example" : "{\n    \"error\": \"Invalid timezone.\"\n}"
+    },
+    "RoomNtpServer" : {
+      "title" : "Root Type for RoomNtpServer",
+      "description" : "Ntp server ip address.",
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "string"
+        }
+      },
+      "example" : "{\n    \"value\": \"pool.ntp.org\"\n}"
+    },
+    "RoomNtpServerError" : {
+      "title" : "Root Type for RoomNtpServerError",
+      "description" : "Invalid ntp server address.",
+      "type" : "object",
+      "properties" : {
+        "error" : {
+          "type" : "string"
+        }
+      },
+      "example" : "{\n    \"error\": \"Invalid ntp server address.\"\n}"
     }
   },
   "tags" : [ {
