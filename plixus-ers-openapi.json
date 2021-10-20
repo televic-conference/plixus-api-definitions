@@ -6802,7 +6802,7 @@
           "201" : {
             "description" : "ok"
           },
-          "428" : {
+          "412" : {
             "description" : "can happen when the room layout uses an ID which is already in use by another room layout"
           }
         }
@@ -7731,7 +7731,7 @@
           "200" : {
             "description" : "Timezone changed event.",
             "schema" : {
-              "$ref" : "#/definitions/RoomTimezone"
+              "$ref" : "#/definitions/RoomTimezoneChanged"
             }
           }
         }
@@ -7786,7 +7786,7 @@
           "200" : {
             "description" : "Ntp server address changed event.",
             "schema" : {
-              "$ref" : "#/definitions/RoomNtpServer"
+              "$ref" : "#/definitions/RoomNtpServerChanged"
             }
           }
         }
@@ -12318,6 +12318,28 @@
         }
       },
       "example" : "{\n    \"error\": \"Invalid ntp server address.\"\n}"
+    },
+    "RoomTimezoneChanged" : {
+      "title" : "Root Type for RoomTimezoneChanged",
+      "description" : "Signal that timezone is changed.",
+      "type" : "object",
+      "properties" : {
+        "timezone" : {
+          "type" : "string"
+        }
+      },
+      "example" : "{\n    \"timezone\" : \"UTC\"\n}"
+    },
+    "RoomNtpServerChanged" : {
+      "title" : "Root Type for RoomNtpServerChanged",
+      "description" : "Signal that ntp server is changed",
+      "type" : "object",
+      "properties" : {
+        "ntpserver" : {
+          "type" : "string"
+        }
+      },
+      "example" : "{\n    \"ntpserver\" : \"pool.ntp.org\"\n}"
     }
   },
   "tags" : [ {
