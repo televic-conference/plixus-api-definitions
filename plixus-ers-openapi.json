@@ -7791,6 +7791,287 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/adhoc" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Prepare and start an ad hoc meeting",
+        "responses" : {
+          "200" : {
+            "description" : "OK, meeting ID",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/add-participant" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "add a participant during the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingAddParticipantAction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "412" : {
+            "description" : "no open meeting"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/remove-participant" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "remove a participant during the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingRemoveParticipantAction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "412" : {
+            "description" : "no open meeting"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/set-participant-badge" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "set the participant badge during the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingSetParticipantBadgeAction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "412" : {
+            "description" : "no open meeting, non existing participant"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/remove-participant-badge" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "remove the participant badge during the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingRemoveParticipantBadgeAction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "412" : {
+            "description" : "no open meeting, non existing participant"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/set-participant-name" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "set the participant name during the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingSetParticipantNameAction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "412" : {
+            "description" : "no open meeting, non existing participant"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/start-discussion" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "start a discussion topic in the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingStartDiscussionAction"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK, returns discussion id",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "412" : {
+            "description" : "no open meeting"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/stop-discussion" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "stop a discussion topic in the meeting",
+        "description" : "This effectively removes the discussion title from all devices, websites",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingStopDiscussionAction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "412" : {
+            "description" : "no open meeting"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/set-participant-presence" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "set participant presence in the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingSetParticipantPresenceAction"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK, returns discussion id",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "412" : {
+            "description" : "no open meeting, non existing participant"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/start-voting" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "start a voting in the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingStartVotingAction"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK, returns voting id",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "412" : {
+            "description" : "no open meeting"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/stop-voting" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "stop a voting in the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingStopVotingAction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "412" : {
+            "description" : "no open meeting"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/adhoc/actions/hide-voting-results" : {
+      "post" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "hide voting results in the meeting",
+        "description" : "This effectively removes the voting results, title, etc from all devices, websites",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdhocMeetingHideVotingResultsAction"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          },
+          "412" : {
+            "description" : "no open meeting"
+          }
+        }
+      }
+    },
+    "/api/v1/meeting/voting-results" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get voting result of active voting in the meeting",
+        "responses" : {
+          "200" : {
+            "description" : "Meeting info",
+            "schema" : {
+              "$ref" : "#/definitions/AdhocMeetingVotingResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -12340,6 +12621,275 @@
         }
       },
       "example" : "{\n    \"ntpserver\" : \"pool.ntp.org\"\n}"
+    },
+    "AdhocMeetingParticipantPresence" : {
+      "required" : [ "kind" ],
+      "type" : "object",
+      "properties" : {
+        "kind" : {
+          "enum" : [ "local", "absent" ]
+        },
+        "seatNumber" : {
+          "description" : "only relevant when local kind",
+          "type" : "integer"
+        }
+      }
+    },
+    "NewAdhocMeeting" : {
+      "required" : [ "title", "participants" ],
+      "type" : "object",
+      "properties" : {
+        "title" : {
+          "type" : "string"
+        },
+        "participants" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/NewAdhocMeetingParticipant"
+          }
+        }
+      }
+    },
+    "NewAdhocMeetingParticipant" : {
+      "required" : [ "id", "firstName", "lastName", "presence" ],
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "badgeId" : {
+          "description" : "optional badge id",
+          "type" : "string"
+        },
+        "presence" : {
+          "$ref" : "#/definitions/AdhocMeetingParticipantPresence"
+        }
+      }
+    },
+    "AdhocMeetingAddParticipantAction" : {
+      "required" : [ "meetingId", "participant" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "participant" : {
+          "$ref" : "#/definitions/NewAdhocMeetingParticipant"
+        }
+      }
+    },
+    "AdhocMeetingRemoveParticipantAction" : {
+      "required" : [ "meetingId", "participantId" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "participantId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingSetParticipantBadgeAction" : {
+      "required" : [ "meetingId", "participantId", "badgeId" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "participantId" : {
+          "type" : "string"
+        },
+        "badgeId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingRemoveParticipantBadgeAction" : {
+      "required" : [ "meetingId", "participantId" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "participantId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingSetParticipantNameAction" : {
+      "required" : [ "meetingId", "participantId", "firstName", "lastName" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "participantId" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "description" : "    ",
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingStartDiscussionAction" : {
+      "required" : [ "title", "meetingId" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "title" : {
+          "description" : "    ",
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingStopDiscussionAction" : {
+      "required" : [ "discussionId", "meetingId" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "discussionId" : {
+          "description" : "    ",
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingSetParticipantPresenceAction" : {
+      "required" : [ "participantId", "meetingId", "presence" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "participantId" : {
+          "description" : "    ",
+          "type" : "string"
+        },
+        "presence" : {
+          "$ref" : "#/definitions/AdhocMeetingParticipantPresence"
+        }
+      }
+    },
+    "AdhocMeetingStartVotingAction" : {
+      "required" : [ "title", "meetingId", "options" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "title" : {
+          "description" : "    ",
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "options" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VotingOption"
+          }
+        },
+        "hideIndividualResults" : {
+          "type" : "boolean"
+        },
+        "hideResultsDuringVote" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "AdhocMeetingStopVotingAction" : {
+      "required" : [ "votingId", "meetingId" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "votingId" : {
+          "description" : "    ",
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingHideVotingResultsAction" : {
+      "required" : [ "votingId", "meetingId" ],
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        },
+        "votingId" : {
+          "description" : "    ",
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingVotingResult" : {
+      "required" : [ "votingId", "global", "individual" ],
+      "type" : "object",
+      "properties" : {
+        "votingId" : {
+          "type" : "string"
+        },
+        "global" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AdHocMeetingGlobalVotingOptionResult"
+          }
+        },
+        "individual" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AdHocMeetingIndividualVotingOptionResult"
+          }
+        }
+      }
+    },
+    "AdHocMeetingGlobalVotingOptionResult" : {
+      "required" : [ "optionId", "count" ],
+      "type" : "object",
+      "properties" : {
+        "optionId" : {
+          "type" : "string"
+        },
+        "count" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "AdHocMeetingIndividualVotingOptionResult" : {
+      "required" : [ "kind", "votingId" ],
+      "type" : "object",
+      "properties" : {
+        "kind" : {
+          "enum" : [ "public", "private" ]
+        },
+        "votingId" : {
+          "type" : "string"
+        },
+        "votingChoiceId" : {
+          "description" : "only relevant for public voting result",
+          "type" : "string"
+        }
+      }
     }
   },
   "tags" : [ {
