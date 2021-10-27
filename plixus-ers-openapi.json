@@ -7796,6 +7796,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "Prepare and start an ad hoc meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/NewAdhocMeeting"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK, meeting ID",
