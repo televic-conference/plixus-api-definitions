@@ -12659,7 +12659,7 @@
       }
     },
     "NewAdhocMeetingParticipant" : {
-      "required" : [ "id", "firstName", "lastName" ],
+      "required" : [ "id", "firstName", "lastName", "presence" ],
       "type" : "object",
       "properties" : {
         "id" : {
