@@ -12676,7 +12676,7 @@
           "type" : "string"
         },
         "presence" : {
-          "$ref" : "#/definitions/AdhocMeetingParticipantPresence"
+          "type" : "string"
         }
       }
     },
