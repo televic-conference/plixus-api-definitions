@@ -12659,7 +12659,7 @@
       }
     },
     "NewAdhocMeetingParticipant" : {
-      "required" : [ "id", "firstName", "lastName", "presence" ],
+      "required" : [ "id", "firstName", "lastName" ],
       "type" : "object",
       "properties" : {
         "id" : {
@@ -12676,7 +12676,8 @@
           "type" : "string"
         },
         "presence" : {
-          "$ref" : "#/definitions/AdhocMeetingParticipantPresence"
+          "$ref" : "#/definitions/AdhocMeetingParticipantPresence",
+          "description" : "participant presence in the meeting: absent or local"
         }
       }
     },
