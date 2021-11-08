@@ -12885,17 +12885,17 @@
       }
     },
     "AdHocMeetingIndividualVotingOptionResult" : {
-      "required" : [ "kind", "votingId" ],
+      "required" : [ "kind", "participantId" ],
       "type" : "object",
       "properties" : {
         "kind" : {
           "enum" : [ "public", "private" ]
         },
-        "votingId" : {
-          "type" : "string"
-        },
         "votingChoiceId" : {
           "description" : "only relevant for public voting result",
+          "type" : "string"
+        },
+        "participantId" : {
           "type" : "string"
         }
       }
