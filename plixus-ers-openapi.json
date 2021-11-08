@@ -722,7 +722,7 @@
         "summary" : "Get a translation of device firmware type to commercial names",
         "operationId" : "ApiV1DevicesTypesGet",
         "consumes" : [ ],
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -743,7 +743,7 @@
         "summary" : "Get a list of devices detected in the system",
         "operationId" : "ApiV1DiagnosticsDevicesGet",
         "consumes" : [ ],
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -764,7 +764,7 @@
         "summary" : "Get a list of the details of each device detected in the system",
         "operationId" : "ApiV1DiagnosticsDevicesDetailsGet",
         "consumes" : [ ],
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -785,7 +785,7 @@
         "summary" : "Get details about a device in the system",
         "operationId" : "ApiV1DiagnosticsDevicesBySerialGet",
         "consumes" : [ ],
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "serial",
           "in" : "path",
@@ -844,7 +844,7 @@
         "summary" : "Get the highlight state of a device",
         "operationId" : "ApiV1DiagnosticsDevicesBySerialHighlightstateGet",
         "consumes" : [ ],
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "serial",
           "in" : "path",
@@ -1036,7 +1036,7 @@
         "summary" : "Get a client id for long polling requests",
         "operationId" : "ApiNotificationConnectPost",
         "consumes" : [ ],
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "Success",
@@ -1053,7 +1053,7 @@
         "summary" : "Make a long polling request for the next event",
         "operationId" : "ApiNotificationByClientNexteventGet",
         "consumes" : [ ],
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "client",
           "in" : "path",
@@ -1080,7 +1080,7 @@
         "summary" : "Get list of notification modules for client",
         "operationId" : "ApiNotificationByClientModulesGet",
         "consumes" : [ ],
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "client",
           "in" : "path",
@@ -5682,7 +5682,7 @@
       "get" : {
         "tags" : [ "Devices" ],
         "summary" : "Get the types of standby screens which the system supports",
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -5700,7 +5700,7 @@
       "get" : {
         "tags" : [ "Devices" ],
         "summary" : "Get the standby screen configuration",
-        "produces" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "type",
           "in" : "path",
