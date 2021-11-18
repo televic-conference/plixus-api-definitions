@@ -8080,6 +8080,152 @@
           }
         }
       }
+    },
+    "/api/events/meeting/adhocmeetingparticipantpresencechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the presence of an adhoc meeting participant has changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AdHocMeetingParticipantPresenceChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audioadvanced/configurations" : {
+      "get" : {
+        "tags" : [ "AudioAdvanced" ],
+        "summary" : "Get a list of available advanced audio configurations",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/AudioAdvancedConfiguration"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AudioAdvanced" ],
+        "summary" : "Create a new advanced audio configuration",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns the newly created advanced audio configuration.",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audioadvanced/configurations/{configuration}" : {
+      "get" : {
+        "tags" : [ "AudioAdvanced" ],
+        "summary" : "Get a specific advanced audio configuration",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedConfiguration"
+            }
+          },
+          "404" : {
+            "description" : "The specified configuration was not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AudioAdvanced" ],
+        "summary" : "Delete a specific advanced audio configuration",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "The specified configuration cannot be removed, because it is a default configuration or it is currently active"
+          },
+          "404" : {
+            "description" : "The specified configuration was not found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "configuration",
+        "in" : "path",
+        "description" : "The addressed configuration UUID",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/api/v1/audioadvanced/configurations/active" : {
+      "get" : {
+        "tags" : [ "AudioAdvanced" ],
+        "summary" : "Get the active advanced audio configuration",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/configurationAdded/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that a new advanced audio configuration was added",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/activeConfigurationChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that the active advanced audio configuration changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/configurationRemoved/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that an advanced audio configuration was removed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedConfigurationRemoved"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -12899,6 +13045,53 @@
           "type" : "string"
         }
       }
+    },
+    "AdHocMeetingParticipantPresenceChanged" : {
+      "required" : [ "participantId", "presence" ],
+      "type" : "object",
+      "properties" : {
+        "participantId" : {
+          "type" : "string"
+        },
+        "presence" : {
+          "$ref" : "#/definitions/AdhocMeetingParticipantPresence"
+        }
+      }
+    },
+    "AudioAdvancedConfiguration" : {
+      "description" : "Advanced audio configuration",
+      "required" : [ "id" ],
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "UUID of the advanced audio configuration",
+          "type" : "string"
+        },
+        "default" : {
+          "description" : "Is this a default advanced audio configuration?",
+          "type" : "boolean"
+        },
+        "active" : {
+          "description" : "Is the advanced audio configuration active or not?",
+          "type" : "boolean"
+        }
+      },
+      "example" : {
+        "id" : "1e474c86-93bc-4d9e-9894-42dd0559bf15",
+        "default" : true,
+        "active" : true
+      }
+    },
+    "AudioAdvancedConfigurationRemoved" : {
+      "description" : "Event parameters when an advanced audio configuration was removed",
+      "required" : [ "id" ],
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "UUID of the advanced audio configuration which was removed",
+          "type" : "string"
+        }
+      }
     }
   },
   "tags" : [ {
@@ -12982,5 +13175,8 @@
   }, {
     "name" : "AudioBasic",
     "description" : "Basic audio configuration"
+  }, {
+    "name" : "AudioAdvanced",
+    "description" : "Advanced audio configuration"
   } ]
 }
