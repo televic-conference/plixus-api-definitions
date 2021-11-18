@@ -13067,18 +13067,18 @@
           "description" : "UUID of the advanced audio configuration",
           "type" : "string"
         },
-        "default" : {
-          "description" : "Is this a default advanced audio configuration?",
-          "type" : "boolean"
-        },
         "active" : {
           "description" : "Is the advanced audio configuration active or not?",
+          "type" : "boolean"
+        },
+        "userDefined" : {
+          "description" : "Is this a user-defined advanced audio configuration?",
           "type" : "boolean"
         }
       },
       "example" : {
         "id" : "1e474c86-93bc-4d9e-9894-42dd0559bf15",
-        "default" : true,
+        "userDefined" : true,
         "active" : true
       }
     },
