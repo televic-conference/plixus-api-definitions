@@ -6781,7 +6781,7 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/RoomLayoutInfo"
+                "$ref" : "#/definitions/RoomLayoutId"
               }
             }
           }
@@ -8226,6 +8226,36 @@
           }
         }
       }
+    },
+    "/api/v1/room/layouts/{id}/background-image" : {
+      "put" : {
+        "tags" : [ "Room" ],
+        "summary" : "set background image resource of room layout",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "Resource",
+          "in" : "formData",
+          "description" : "Upload a resource",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "412" : {
+            "description" : "room layout does not exist"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "description" : "RoomLayout ID",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
@@ -12694,22 +12724,6 @@
         }
       }
     },
-    "RoomLayoutInfo" : {
-      "required" : [ "id", "contentId", "resourceId" ],
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "description" : "unique identifier",
-          "type" : "string"
-        },
-        "contentId" : {
-          "type" : "string"
-        },
-        "resourceId" : {
-          "type" : "string"
-        }
-      }
-    },
     "RoomTimezone" : {
       "title" : "Root Type for RoomTimezone",
       "description" : "Name of current timezone",
@@ -13090,6 +13104,31 @@
         "id" : {
           "description" : "UUID of the advanced audio configuration which was removed",
           "type" : "string"
+        }
+      }
+    },
+    "RoomLayoutId" : {
+      "required" : [ "id", "contentId" ],
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "description" : "unique identifier",
+          "type" : "string"
+        },
+        "contentId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Dimensions" : {
+      "required" : [ "width", "height" ],
+      "type" : "object",
+      "properties" : {
+        "width" : {
+          "type" : "integer"
+        },
+        "height" : {
+          "type" : "integer"
         }
       }
     }
