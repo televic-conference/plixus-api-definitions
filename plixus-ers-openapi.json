@@ -8116,6 +8116,15 @@
         "tags" : [ "AudioAdvanced" ],
         "summary" : "Create a new advanced audio configuration",
         "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Properties of the advanced audio configuration to be created",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioAdvancedConfigurationCreate"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "Returns the newly created advanced audio configuration.",
@@ -13147,6 +13156,17 @@
         },
         "height" : {
           "type" : "integer"
+        }
+      }
+    },
+    "AudioAdvancedConfigurationCreate" : {
+      "description" : "Post parameters when creating an advanced audio configuration",
+      "required" : [ "name" ],
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the advanced audio configuration to be created",
+          "type" : "string"
         }
       }
     }
