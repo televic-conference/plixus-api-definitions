@@ -8159,6 +8159,19 @@
           }
         }
       },
+      "patch" : {
+        "tags" : [ "AudioAdvanced" ],
+        "summary" : "Allows to rename or activate a configuration. Note that the \"userDefined\" property cannot be changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "404" : {
+            "description" : "The specified configuration was not found"
+          }
+        }
+      },
       "parameters" : [ {
         "name" : "configuration",
         "in" : "path",
@@ -13088,12 +13101,17 @@
         "userDefined" : {
           "description" : "Is this a user-defined advanced audio configuration?",
           "type" : "boolean"
+        },
+        "name" : {
+          "description" : "Name of the advanced audio configuration",
+          "type" : "string"
         }
       },
       "example" : {
         "id" : "1e474c86-93bc-4d9e-9894-42dd0559bf15",
+        "name" : "Very fancy configuration",
         "userDefined" : true,
-        "active" : true
+        "active" : false
       }
     },
     "AudioAdvancedConfigurationRemoved" : {
