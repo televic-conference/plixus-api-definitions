@@ -9894,6 +9894,10 @@
         "id" : {
           "description" : "Id of meeting, in the context of the central unit.",
           "type" : "string"
+        },
+        "roomlayoutId" : {
+          "description" : "optional room layout ID for Confero Cloud meetings",
+          "type" : "string"
         }
       }
     },
