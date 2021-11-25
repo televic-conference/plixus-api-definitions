@@ -8172,6 +8172,15 @@
         "tags" : [ "AudioAdvanced" ],
         "summary" : "Allows to rename or activate a configuration. Note that the \"userDefined\" property cannot be changed",
         "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The data to be changed",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AudioAdvancedConfiguration"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "No Content"
