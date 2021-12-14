@@ -9922,6 +9922,10 @@
         "id" : {
           "description" : "Delegate ID",
           "type" : "string"
+        },
+        "badgeId" : {
+          "description" : "badge ID of the delegate",
+          "type" : "string"
         }
       },
       "example" : {
