@@ -7793,6 +7793,21 @@
       }
     },
     "/api/v1/meeting/adhoc" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get the current adhoc meeting",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AdhocMeeting"
+            }
+          },
+          "412" : {
+            "description" : "No adhoc meeting ongoing"
+          }
+        }
+      },
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "Prepare and start an ad hoc meeting",
@@ -13183,6 +13198,55 @@
       "properties" : {
         "name" : {
           "description" : "Name of the advanced audio configuration to be created",
+          "type" : "string"
+        }
+      }
+    },
+    "AdhocMeetingParticipant" : {
+      "required" : [ "id", "firstName", "lastName", "presence" ],
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "badgeId" : {
+          "description" : "optional badge id",
+          "type" : "string"
+        },
+        "presence" : {
+          "$ref" : "#/definitions/AdhocMeetingParticipantPresence",
+          "description" : "participant presence in the meeting: absent or local"
+        }
+      }
+    },
+    "AdhocMeetingParticipants" : {
+      "type" : "object",
+      "properties" : {
+        "participants" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AdhocMeetingParticipant"
+          }
+        }
+      }
+    },
+    "AdhocMeeting" : {
+      "required" : [ "title", "participants", "id" ],
+      "type" : "object",
+      "properties" : {
+        "title" : {
+          "type" : "string"
+        },
+        "participants" : {
+          "$ref" : "#/definitions/AdhocMeetingParticipants"
+        },
+        "id" : {
           "type" : "string"
         }
       }
