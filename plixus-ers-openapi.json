@@ -10836,6 +10836,10 @@
         "boardType" : {
           "description" : "Board type of the engine",
           "enum" : [ "AudioEngine", "MultimediaEngineAMD", "MultimediaEngineIMX", "WirelessEngineG4", "Unknown" ]
+        },
+        "hardwareType" : {
+          "description" : "Hardware type of the device",
+          "type" : "string"
         }
       }
     },
@@ -13225,17 +13229,6 @@
         }
       }
     },
-    "AdhocMeetingParticipants" : {
-      "type" : "object",
-      "properties" : {
-        "participants" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/AdhocMeetingParticipant"
-          }
-        }
-      }
-    },
     "AdhocMeeting" : {
       "required" : [ "title", "participants", "id" ],
       "type" : "object",
@@ -13244,7 +13237,10 @@
           "type" : "string"
         },
         "participants" : {
-          "$ref" : "#/definitions/AdhocMeetingParticipants"
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AdhocMeetingParticipant"
+          }
         },
         "id" : {
           "type" : "string"
