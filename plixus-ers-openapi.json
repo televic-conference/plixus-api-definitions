@@ -8302,6 +8302,36 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/v1/wirelesscoupling/couplingState" : {
+      "get" : {
+        "tags" : [ "WirelessCoupling" ],
+        "summary" : "Current coupling state of a WAP",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessCouplingState"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/wirelesscoupling/couplingStateChanged" : {
+      "get" : {
+        "tags" : [ "WirelessCoupling" ],
+        "summary" : "Event when the current coupling state of the WAP with the plixus engine changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/WirelessCouplingState"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -13246,6 +13276,19 @@
           "type" : "string"
         }
       }
+    },
+    "WirelessCouplingState" : {
+      "description" : "Current coupling state of a WAP",
+      "type" : "object",
+      "properties" : {
+        "coupled" : {
+          "description" : "Is the wap currently coupled or not",
+          "type" : "boolean"
+        }
+      },
+      "example" : {
+        "coupled" : true
+      }
     }
   },
   "tags" : [ {
@@ -13332,5 +13375,8 @@
   }, {
     "name" : "AudioAdvanced",
     "description" : "Advanced audio configuration"
+  }, {
+    "name" : "WirelessCoupling",
+    "description" : "Only present on WAP. Indicates current coupling state with Plixus Engine"
   } ]
 }
