@@ -13099,7 +13099,7 @@
       }
     },
     "AdhocMeetingVotingResult" : {
-      "required" : [ "votingId", "global", "individual" ],
+      "required" : [ "votingId", "global", "individual", "votingTitle", "votingDescription" ],
       "type" : "object",
       "properties" : {
         "votingId" : {
@@ -13117,11 +13117,19 @@
           "items" : {
             "$ref" : "#/definitions/AdHocMeetingIndividualVotingOptionResult"
           }
+        },
+        "votingTitle" : {
+          "description" : "Title of the voting",
+          "type" : "string"
+        },
+        "votingDescription" : {
+          "description" : "Description of the voting",
+          "type" : "string"
         }
       }
     },
     "AdHocMeetingGlobalVotingOptionResult" : {
-      "required" : [ "optionId", "count" ],
+      "required" : [ "optionId", "count", "optionTitle" ],
       "type" : "object",
       "properties" : {
         "optionId" : {
@@ -13129,6 +13137,10 @@
         },
         "count" : {
           "type" : "integer"
+        },
+        "optionTitle" : {
+          "description" : "Title of the voting option",
+          "type" : "string"
         }
       }
     },
