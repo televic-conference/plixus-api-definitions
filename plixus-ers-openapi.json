@@ -11855,6 +11855,9 @@
         },
         "contentId" : {
           "type" : "string"
+        },
+        "roomLayoutId" : {
+          "type" : "string"
         }
       }
     },
