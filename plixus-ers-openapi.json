@@ -8332,6 +8332,20 @@
           }
         }
       }
+    },
+    "/api/events/discussion/seatrolechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the seat role has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for SeatRoleChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/SeatRoleChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
