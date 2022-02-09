@@ -5481,6 +5481,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "cloud participant requests to speak",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericCommand"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -5502,6 +5510,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "cloud participant cancels request to speak",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericCommand"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -5523,6 +5539,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "cloud participant wants to leave the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericCommand"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -5544,6 +5568,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "cloud participant want to join the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericCommand"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -5565,6 +5597,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "cloud participant wants to stop speaking",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericCommand"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -5960,6 +6000,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "cloud participant wants to start audio recording",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericCommand"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -5981,6 +6029,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "cloud participant wants to stop audio recording",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericCommand"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -6707,6 +6763,14 @@
       "post" : {
         "tags" : [ "Meeting" ],
         "summary" : "cloud participant want to join the meeting",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CloudGenericCommand"
+          }
+        } ],
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -12473,6 +12537,9 @@
         },
         "cloudParticipantId" : {
           "type" : "string"
+        },
+        "meetingId" : {
+          "type" : "string"
         }
       }
     },
@@ -12577,6 +12644,9 @@
       "properties" : {
         "participantId" : {
           "type" : "string"
+        },
+        "meetingId" : {
+          "type" : "string"
         }
       }
     },
@@ -12586,6 +12656,9 @@
       "properties" : {
         "participantId" : {
           "type" : "string"
+        },
+        "meetingId" : {
+          "type" : "string"
         }
       }
     },
@@ -12594,6 +12667,9 @@
       "type" : "object",
       "properties" : {
         "itemId" : {
+          "type" : "string"
+        },
+        "meetingId" : {
           "type" : "string"
         }
       }
@@ -12775,6 +12851,9 @@
       "properties" : {
         "participantId" : {
           "type" : "string"
+        },
+        "meetingId" : {
+          "type" : "string"
         }
       }
     },
@@ -12793,6 +12872,9 @@
         },
         "agendaItem" : {
           "$ref" : "#/definitions/AgendaItem"
+        },
+        "meetingId" : {
+          "type" : "string"
         }
       }
     },
@@ -13317,6 +13399,14 @@
       },
       "example" : {
         "coupled" : true
+      }
+    },
+    "CloudGenericCommand" : {
+      "type" : "object",
+      "properties" : {
+        "meetingId" : {
+          "type" : "string"
+        }
       }
     }
   },
