@@ -8411,24 +8411,21 @@
         }
       }
     },
-    "/speech-timers/participants/{participantId}" : {
+    "/speech-timers/participants/" : {
       "post" : {
         "tags" : [ "SpeechTimers" ],
-        "summary" : "add a new speech timer for a participant",
+        "summary" : "set speech timers for 1 or more participants",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/ParticipantSpeechTimer"
+            "$ref" : "#/definitions/ParticipantSpeechTimers"
           }
         } ],
         "responses" : {
           "204" : {
             "description" : "ok"
-          },
-          "412" : {
-            "description" : "no meeting or unknown participant"
           }
         }
       }
@@ -13449,6 +13446,21 @@
         },
         "totalTimeInSeconds" : {
           "type" : "integer"
+        },
+        "countDown" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "ParticipantSpeechTimers" : {
+      "required" : [ "timers" ],
+      "type" : "object",
+      "properties" : {
+        "timers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ParticipantSpeechTimer"
+          }
         }
       }
     }
