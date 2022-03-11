@@ -8411,10 +8411,33 @@
         }
       }
     },
-    "/speech-timers/participants/" : {
-      "put" : {
+    "/api/v1/speech-timers/participants/actions/delete-all-timers" : {
+      "post" : {
         "tags" : [ "SpeechTimers" ],
-        "summary" : "bulk update participant speech timers",
+        "summary" : "delete all participant speech timers",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          }
+        }
+      }
+    },
+    "/api/v1/speech-timers/participants/actions/pause-all-timers" : {
+      "post" : {
+        "tags" : [ "SpeechTimers" ],
+        "summary" : "pause all active participant timers",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          }
+        }
+      }
+    },
+    "/api/v1/speech-timers/participants/actions/bulk-set-timers" : {
+      "post" : {
+        "tags" : [ "SpeechTimers" ],
+        "summary" : "bulk set a partial list of participant timers",
+        "description" : "This call sets a number of participant timers. It can be used to update a single timers or to update all and anything in between.",
         "parameters" : [ {
           "name" : "body",
           "in" : "body",
@@ -8423,38 +8446,6 @@
             "$ref" : "#/definitions/ParticipantSpeechTimers"
           }
         } ],
-        "responses" : {
-          "204" : {
-            "description" : "ok"
-          },
-          "412" : {
-            "description" : "occurs when some speech timers can't be updated",
-            "schema" : {
-              "$ref" : "#/definitions/BulkUpdateParticipantSpeechTimerResult"
-            }
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "SpeechTimers" ],
-        "summary" : "add a new participant speech timer",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/ParticipantSpeechTimer"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "ok"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "SpeechTimers" ],
-        "summary" : "remove all participant speech timers",
         "responses" : {
           "204" : {
             "description" : "ok"
@@ -13461,7 +13452,7 @@
       }
     },
     "ParticipantSpeechTimer" : {
-      "required" : [ "participantId", "state", "remainingTimeInSeconds", "warningTimeInSeconds", "totalTimeInSeconds" ],
+      "required" : [ "participantId", "state", "remainingTimeInSeconds", "warningTimeInSeconds", "totalTimeInSeconds", "warningTimeDeviceIndication", "countDown" ],
       "type" : "object",
       "properties" : {
         "participantId" : {
@@ -13481,6 +13472,9 @@
         },
         "state" : {
           "enum" : [ "active", "idle" ]
+        },
+        "warningTimeDeviceIndication" : {
+          "type" : "boolean"
         }
       }
     },
@@ -13493,30 +13487,6 @@
           "items" : {
             "$ref" : "#/definitions/ParticipantSpeechTimer"
           }
-        }
-      }
-    },
-    "BulkUpdateParticipantSpeechTimerResult" : {
-      "required" : [ "timers" ],
-      "type" : "object",
-      "properties" : {
-        "timers" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/ParticipantSpeechTimerUpdateStatus"
-          }
-        }
-      }
-    },
-    "ParticipantSpeechTimerUpdateStatus" : {
-      "required" : [ "participantId", "updateStatus" ],
-      "type" : "object",
-      "properties" : {
-        "participantId" : {
-          "type" : "string"
-        },
-        "updateStatus" : {
-          "enum" : [ "succeeded", "failed" ]
         }
       }
     }
