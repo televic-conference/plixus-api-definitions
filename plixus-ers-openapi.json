@@ -8411,29 +8411,7 @@
         }
       }
     },
-    "/api/v1/speech-timers/participants/actions/delete-all-timers" : {
-      "post" : {
-        "tags" : [ "SpeechTimers" ],
-        "summary" : "delete all participant speech timers",
-        "responses" : {
-          "204" : {
-            "description" : "ok"
-          }
-        }
-      }
-    },
-    "/api/v1/speech-timers/participants/actions/pause-all-timers" : {
-      "post" : {
-        "tags" : [ "SpeechTimers" ],
-        "summary" : "pause all active participant timers",
-        "responses" : {
-          "204" : {
-            "description" : "ok"
-          }
-        }
-      }
-    },
-    "/api/v1/speech-timers/participants/actions/bulk-set-timers" : {
+    "/api/v1/speech-timers/participants/actions/bulk-set" : {
       "post" : {
         "tags" : [ "SpeechTimers" ],
         "summary" : "bulk set a partial list of participant timers",
@@ -8444,6 +8422,47 @@
           "required" : true,
           "schema" : {
             "$ref" : "#/definitions/ParticipantSpeechTimers"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          }
+        }
+      }
+    },
+    "/api/v1/speech-timers/participants/actions/delete-all" : {
+      "post" : {
+        "tags" : [ "SpeechTimers" ],
+        "summary" : "delete all participant speech timers",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          }
+        }
+      }
+    },
+    "/api/v1/speech-timers/participants/actions/pause-all" : {
+      "post" : {
+        "tags" : [ "SpeechTimers" ],
+        "summary" : "pause all active participant timers",
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          }
+        }
+      }
+    },
+    "/api/v1/speech-timers/participants/actions/bulk-delete" : {
+      "post" : {
+        "tags" : [ "SpeechTimers" ],
+        "summary" : "delete all participant speech timers",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ParticipantSpeechTimerBulkDeleteAction"
           }
         } ],
         "responses" : {
@@ -13486,6 +13505,18 @@
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/ParticipantSpeechTimer"
+          }
+        }
+      }
+    },
+    "ParticipantSpeechTimerBulkDeleteAction" : {
+      "required" : [ "participantIds" ],
+      "type" : "object",
+      "properties" : {
+        "participantIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
           }
         }
       }
