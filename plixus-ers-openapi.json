@@ -8471,6 +8471,28 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/participant-roles" : {
+      "put" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Update the participant roles",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ParticipantRoles"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "ok"
+          },
+          "400" : {
+            "description" : "invalid data"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -13517,6 +13539,54 @@
           "type" : "array",
           "items" : {
             "type" : "string"
+          }
+        }
+      }
+    },
+    "ParticipantRole" : {
+      "required" : [ "id", "contentId", "name" ],
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "contentId" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "meetingRights" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MeetingRight"
+          }
+        }
+      }
+    },
+    "MeetingRight" : {
+      "required" : [ "kind" ],
+      "type" : "object",
+      "properties" : {
+        "kind" : {
+          "enum" : [ "Voting", "Chairperson" ]
+        },
+        "votingWeight" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "ParticipantRoles" : {
+      "required" : [ "defaultRole", "customRoles" ],
+      "type" : "object",
+      "properties" : {
+        "defaultRole" : {
+          "$ref" : "#/definitions/ParticipantRole"
+        },
+        "customRoles" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ParticipantRole"
           }
         }
       }
