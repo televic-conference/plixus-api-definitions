@@ -8473,6 +8473,18 @@
       }
     },
     "/api/v1/meeting/participant-roles" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "get participant roles",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ParticipantRoles"
+            }
+          }
+        }
+      },
       "put" : {
         "tags" : [ "Meeting" ],
         "summary" : "Update the participant roles",
