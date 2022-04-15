@@ -13556,7 +13556,7 @@
       }
     },
     "ParticipantRole" : {
-      "required" : [ "id", "contentId", "name" ],
+      "required" : [ "id", "contentId", "name", "kind" ],
       "type" : "object",
       "properties" : {
         "id" : {
@@ -13573,6 +13573,9 @@
           "items" : {
             "$ref" : "#/definitions/MeetingRight"
           }
+        },
+        "kind" : {
+          "enum" : [ "ParticipantRole" ]
         }
       }
     },
