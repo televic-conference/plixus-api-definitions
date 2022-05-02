@@ -12329,9 +12329,9 @@
           "description" : "Participant ID in the context of the room (Central Unit)",
           "type" : "string"
         },
-        "role" : {
-          "description" : "Role of the participant in the meeting: delegate, vip, chairperson.",
-          "enum" : [ "delegate", "chairperson", "vip" ]
+        "roleId" : {
+          "description" : "RoleId of the participant in the meeting",
+          "type" : "string"
         }
       }
     },
@@ -12785,6 +12785,7 @@
       }
     },
     "PublishedMeetingDelegate" : {
+      "required" : [ "roleId" ],
       "type" : "object",
       "properties" : {
         "id" : {
@@ -12805,8 +12806,8 @@
         "memberId" : {
           "type" : "string"
         },
-        "role" : {
-          "enum" : [ "delegate", "chairperson", "vip" ]
+        "roleId" : {
+          "type" : "string"
         }
       }
     },
