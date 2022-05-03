@@ -8505,6 +8505,146 @@
           }
         }
       }
+    },
+    "/api/events/network/8021xSettingsChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change in the 8021x network settings",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Network8021XSettings"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/diagnostics/deviceHighlightStateChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the highlight state of a device",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/HighlightStateChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/devicelicensing/deviceLicenseChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the license of a device",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DeviceLicense"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/devicelicensing/deviceLicensesLeftChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the amount of device licenses left",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DeviceLicensesLeft"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/devices/standbyScreenSettingsChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the standby screen settings of a particular device type",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/StandbyScreenSettingsChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiobasic/microphonesAlwaysActiveChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the microphones always on setting",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiobasic/loudspeakersAlwaysActiveChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the loudspeakers always on setting",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiobasic/mixMinuxChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the mix minus setting",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiobasic/bassCutChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the bass cut setting",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/recording/recordingFilesRemoved/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client that some recording files were removed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingFilesRemoved"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -13604,6 +13744,80 @@
           "items" : {
             "$ref" : "#/definitions/ParticipantRole"
           }
+        }
+      }
+    },
+    "HighlightStateChanged" : {
+      "required" : [ "serial", "highlightState" ],
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Device serial number",
+          "type" : "string"
+        },
+        "highlightState" : {
+          "$ref" : "#/definitions/HighlightState",
+          "description" : "The HighlightState of the device"
+        }
+      }
+    },
+    "DeviceLicense" : {
+      "required" : [ "serial", "licenses", "deviceType" ],
+      "type" : "object",
+      "properties" : {
+        "serial" : {
+          "description" : "Serial number of the device",
+          "type" : "string"
+        },
+        "licenses" : {
+          "$ref" : "#/definitions/ConfideaLicense",
+          "description" : "Licenses applied to the device"
+        },
+        "deviceType" : {
+          "description" : "The type of device",
+          "enum" : [ "confidea" ]
+        }
+      }
+    },
+    "DeviceLicensesLeft" : {
+      "required" : [ "deviceType", "licensesLeft" ],
+      "type" : "object",
+      "properties" : {
+        "deviceType" : {
+          "description" : "The type of device",
+          "enum" : [ "confidea" ]
+        },
+        "licensesLeft" : {
+          "$ref" : "#/definitions/ConfideaLicensesLeft",
+          "description" : "The amount of licenses left of each type"
+        }
+      }
+    },
+    "StandbyScreenSettingsChanged" : {
+      "required" : [ "deviceType", "settings" ],
+      "type" : "object",
+      "properties" : {
+        "deviceType" : {
+          "description" : "Device type of which the standby screen settings changed",
+          "enum" : [ "confideaflex", "unicos7", "unicos10", "unibox" ]
+        },
+        "settings" : {
+          "$ref" : "#/definitions/StandbyScreenSettings",
+          "description" : "The new settings"
+        }
+      }
+    },
+    "RecordingFilesRemoved" : {
+      "required" : [ "storageType", "files" ],
+      "type" : "object",
+      "properties" : {
+        "storageType" : {
+          "description" : "The storage type from which files where removed",
+          "enum" : [ "internal", "external" ]
+        },
+        "files" : {
+          "$ref" : "#/definitions/RecordingFilesInfo",
+          "description" : "The files which were removed"
         }
       }
     }
