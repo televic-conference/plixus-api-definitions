@@ -8604,20 +8604,6 @@
         }
       }
     },
-    "/api/events/audiobasic/mixMinuxChanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event notifying the client of a change of the mix minus setting",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SwitchValue"
-            }
-          }
-        }
-      }
-    },
     "/api/events/audiobasic/bassCutChanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -8641,6 +8627,20 @@
             "description" : "OK",
             "schema" : {
               "$ref" : "#/definitions/RecordingFilesRemoved"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audiobasic/mixMinusChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event notifying the client of a change of the mix minus setting",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/SwitchValue"
             }
           }
         }
