@@ -13748,16 +13748,19 @@
       }
     },
     "HighlightStateChanged" : {
-      "required" : [ "serial", "highlightState" ],
+      "required" : [ "serials", "highlightState" ],
       "type" : "object",
       "properties" : {
-        "serial" : {
-          "description" : "Device serial number",
-          "type" : "string"
-        },
         "highlightState" : {
           "$ref" : "#/definitions/HighlightState",
           "description" : "The HighlightState of the device"
+        },
+        "serials" : {
+          "description" : "The serial numbers of the devices whom's highlight state changed",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
