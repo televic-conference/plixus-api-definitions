@@ -8905,6 +8905,10 @@
         "powerStatus" : {
           "$ref" : "#/definitions/PowerStatus",
           "description" : "General power status of the device"
+        },
+        "articleNumber" : {
+          "$ref" : "#/definitions/DeviceArticleNumber",
+          "description" : "The article number of the device"
         }
       }
     },
@@ -13821,6 +13825,21 @@
         "files" : {
           "$ref" : "#/definitions/RecordingFilesInfo",
           "description" : "The files which were removed"
+        }
+      }
+    },
+    "DeviceArticleNumber" : {
+      "description" : "Represents the article number of a device",
+      "required" : [ "article", "version" ],
+      "type" : "object",
+      "properties" : {
+        "article" : {
+          "description" : "The article number of the device. E.g.: \"71.98.0034\"",
+          "type" : "string"
+        },
+        "version" : {
+          "description" : "The article version of the device. E.g.: \"1.01\"",
+          "type" : "string"
         }
       }
     }
