@@ -12131,7 +12131,7 @@
       "type" : "object",
       "properties" : {
         "id" : {
-          "description" : "meeting id",
+          "description" : "published meeting id",
           "type" : "string"
         },
         "agendaItems" : {
@@ -12174,6 +12174,14 @@
           "type" : "string"
         },
         "roomLayoutId" : {
+          "type" : "string"
+        },
+        "roomId" : {
+          "description" : "room id",
+          "type" : "string"
+        },
+        "preparedMeetingId" : {
+          "description" : "meeting id of the confero cloud prepared meeting from which this meeting was published",
           "type" : "string"
         }
       }
