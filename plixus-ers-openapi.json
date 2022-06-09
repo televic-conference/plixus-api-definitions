@@ -12111,7 +12111,13 @@
     },
     "ConfigArchiveReady" : {
       "description" : "event when the config archive is ready for download.",
-      "type" : "object"
+      "type" : "object",
+      "properties" : {
+        "dummy" : {
+          "description" : "This is a dummy property. It's purpose is to eliminate a compiler warning.\nThis property can be removed when a useful property is added",
+          "type" : "integer"
+        }
+      }
     },
     "ExternalVote" : {
       "type" : "object",
