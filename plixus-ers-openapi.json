@@ -13887,7 +13887,6 @@
         "events" : {
           "type" : "array",
           "items" : {
-            "format" : "byte",
             "type" : "string"
           }
         }
