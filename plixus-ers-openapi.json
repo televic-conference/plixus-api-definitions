@@ -8645,6 +8645,23 @@
           }
         }
       }
+    },
+    "/api/v1/meeting/archive/event-queue" : {
+      "get" : {
+        "tags" : [ "Meeting" ],
+        "summary" : "Get event queues for all archived meetings",
+        "responses" : {
+          "200" : {
+            "description" : "ok",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/MeetingEventQueue"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -13854,6 +13871,25 @@
         "version" : {
           "description" : "The article version of the device. E.g.: \"1.01\"",
           "type" : "string"
+        }
+      }
+    },
+    "MeetingEventQueue" : {
+      "required" : [ "publishedMeetingId", "preparedMeetingId", "events" ],
+      "type" : "object",
+      "properties" : {
+        "publishedMeetingId" : {
+          "type" : "string"
+        },
+        "preparedMeetingId" : {
+          "type" : "string"
+        },
+        "events" : {
+          "type" : "array",
+          "items" : {
+            "format" : "byte",
+            "type" : "string"
+          }
         }
       }
     }
