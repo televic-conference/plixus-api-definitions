@@ -13875,20 +13875,18 @@
       }
     },
     "MeetingEventQueue" : {
-      "required" : [ "publishedMeetingId", "preparedMeetingId", "events" ],
+      "required" : [ "id", "events" ],
       "type" : "object",
       "properties" : {
-        "publishedMeetingId" : {
-          "type" : "string"
-        },
-        "preparedMeetingId" : {
-          "type" : "string"
-        },
         "events" : {
           "type" : "array",
           "items" : {
             "type" : "string"
           }
+        },
+        "id" : {
+          "description" : "unique identifier for this event queue",
+          "type" : "string"
         }
       }
     }
