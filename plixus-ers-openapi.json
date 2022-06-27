@@ -3620,34 +3620,6 @@
         }
       }
     },
-    "/api/events/audio/audioinputentrylevelchanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when an aux audio input entry level has changed",
-        "responses" : {
-          "200" : {
-            "description" : "Metadata for AudioInputEntryLevelChanged event",
-            "schema" : {
-              "$ref" : "#/definitions/AudioInputEntryLevelChanged"
-            }
-          }
-        }
-      }
-    },
-    "/api/events/audio/audiooutputentrylevelchanged" : {
-      "get" : {
-        "tags" : [ "Events" ],
-        "summary" : "Event when an aux audio output entry level has changed",
-        "responses" : {
-          "200" : {
-            "description" : "Metadata for AudioOutputEntryLevelChanged event",
-            "schema" : {
-              "$ref" : "#/definitions/AudioOutputEntryLevelChanged"
-            }
-          }
-        }
-      }
-    },
     "/api/events/audio/defaultchannelselectorvolumechanged" : {
       "get" : {
         "tags" : [ "Events" ],
@@ -8662,6 +8634,90 @@
           }
         }
       }
+    },
+    "/api/events/audio/auxlevelschanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when one or more of the audio AUX levels have changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AuxLevels"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audio/inputsensitivityoffsetchanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the input sensitivity of a specific seat changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InputSensitivityOffsetChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audio/defaultinputsensitivityoffsetchanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the default input sensitivity offset of a specific seat changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/InputSensitivityOffsetChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/recording/recordingstorageinfochanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the recording storage info changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RecordingStorageInfoChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/diagnostics/testModeStateChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the diagnostics test mode state changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/TestEnabled"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/diagnostics/deviceTestStateChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the device test state changed",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/DeviceTestStateChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -10007,32 +10063,6 @@
         "interpretationMode" : {
           "enum" : [ "mixed", "override" ],
           "type" : "string"
-        }
-      }
-    },
-    "AudioInputEntryLevelChanged" : {
-      "type" : "object",
-      "properties" : {
-        "auxInputNumber" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "level" : {
-          "format" : "int32",
-          "type" : "integer"
-        }
-      }
-    },
-    "AudioOutputEntryLevelChanged" : {
-      "type" : "object",
-      "properties" : {
-        "auxOutputNumber" : {
-          "format" : "int32",
-          "type" : "integer"
-        },
-        "level" : {
-          "format" : "int32",
-          "type" : "integer"
         }
       }
     },
@@ -13886,6 +13916,67 @@
         },
         "id" : {
           "description" : "unique identifier for this event queue",
+          "type" : "string"
+        }
+      }
+    },
+    "InputSensitivityOffsetChanged" : {
+      "required" : [ "seat", "offset" ],
+      "type" : "object",
+      "properties" : {
+        "offset" : {
+          "description" : "Input sensitivity offset, expressed in 0.1 dB. Example: for an offset of 1.4 dB, the provided value should be set to 14 dB",
+          "type" : "integer"
+        },
+        "seat" : {
+          "description" : "Seat id",
+          "type" : "integer"
+        }
+      }
+    },
+    "RecordingStorageInfoChanged" : {
+      "required" : [ "freeSize", "fullSize", "state", "type" ],
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "description" : "Reflects the state of the storage.",
+          "enum" : [ "free", "almostFull", "full", "invalid" ]
+        },
+        "fullSize" : {
+          "format" : "int64",
+          "description" : "The full capacity of the storage in kilobytes (0 if not connected)",
+          "type" : "integer"
+        },
+        "freeSize" : {
+          "format" : "int64",
+          "description" : "The remaining capacity of the storage in kilobytes (0 if not connected)",
+          "type" : "integer"
+        },
+        "type" : {
+          "description" : "Recording storage type",
+          "enum" : [ "internal", "external" ]
+        }
+      }
+    },
+    "DeviceTestStateChanged" : {
+      "description" : "Request for testing a device",
+      "required" : [ "testLED", "testMicrophone", "testSpeakers", "serial" ],
+      "type" : "object",
+      "properties" : {
+        "testMicrophone" : {
+          "description" : "True when microphone should be tested",
+          "type" : "boolean"
+        },
+        "testSpeakers" : {
+          "description" : "True when speakers should be tested",
+          "type" : "boolean"
+        },
+        "testLED" : {
+          "description" : "True when LED's should be tested",
+          "type" : "boolean"
+        },
+        "serial" : {
+          "description" : "The serial number of the device who's test state was changed.",
           "type" : "string"
         }
       }
