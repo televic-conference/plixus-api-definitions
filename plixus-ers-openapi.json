@@ -9257,7 +9257,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/AudioAdvancedDiscussionMixMinusGroup"
+              "$ref" : "#/definitions/AudioAdvancedDiscussionMixMinusSettings"
             }
           },
           "404" : {
@@ -9276,10 +9276,7 @@
           "description" : "The discussion mix minus configuration to set",
           "required" : true,
           "schema" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/definitions/AudioAdvancedDiscussionMixMinusGroup"
-            }
+            "$ref" : "#/definitions/AudioAdvancedDiscussionMixMinusSettings"
           }
         } ],
         "responses" : {
@@ -9301,6 +9298,126 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/events/audioadvanced/discussionGlobalSettingsChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that the global discussion related audio settings have changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedDiscussionGlobalSettingsChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/discussionSeatSettingsChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that the discussion related audio settings of a specific seat have changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedDiscussionSeatSettingsChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/discussionMixMinusSettingsChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that the mix-minus related settings have changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedDiscussionMixMinusSettingsChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/inputDynamicsClassChanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that an input dynamics class has changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedInputDynamicsClassChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/inputEqualizerClassChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that an input equalizer class has changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedInputEqualizerClassChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/inputGainClassChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that an input gain class has changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedInputGainClassChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/inputSeatSettingsChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client that the audio input related settings of a specific seat changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedInputChanged"
+            }
+          }
+        }
+      }
+    },
+    "/api/events/audioadvanced/routingChanged/" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Notify the client than an audio routing configuration changed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AudioAdvancedRoutingConfigurationChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -14951,7 +15068,7 @@
       }
     },
     "AudioAdvancedInput" : {
-      "description" : "A audio input",
+      "description" : "An audio input",
       "type" : "object",
       "properties" : {
         "sensitivityGain" : {
@@ -15033,6 +15150,144 @@
           "items" : {
             "type" : "integer"
           }
+        }
+      }
+    },
+    "AudioAdvancedDiscussionGlobalSettingsChanged" : {
+      "description" : "Global discussion related audio settings changed",
+      "required" : [ "configuration", "newSettings" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "description" : "The UUID of the configuration which changed",
+          "type" : "string"
+        },
+        "newSettings" : {
+          "$ref" : "#/definitions/AudioAdvancedDiscussionGlobalSettings",
+          "description" : "The new global discussion related audio settings"
+        }
+      }
+    },
+    "AudioAdvancedDiscussionSeatSettingsChanged" : {
+      "description" : "Discussion related audio settings of a specific seat changed",
+      "required" : [ "configuration", "seatId", "newSettings" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "description" : "The UUID of the configuration which changed",
+          "type" : "string"
+        },
+        "seatId" : {
+          "description" : "The seat id which changed",
+          "type" : "integer"
+        },
+        "newSettings" : {
+          "$ref" : "#/definitions/AudioAdvancedDiscussionSeatSettings",
+          "description" : "The new discussion related audio settings of the seat"
+        }
+      }
+    },
+    "AudioAdvancedDiscussionMixMinusSettingsChanged" : {
+      "description" : "The mix-minus related settings changed",
+      "required" : [ "configuration", "newSettings" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "description" : "The UUID of the configuration which changed",
+          "type" : "string"
+        },
+        "newSettings" : {
+          "$ref" : "#/definitions/AudioAdvancedDiscussionMixMinusSettings",
+          "description" : "The new mix-minus related settings"
+        }
+      }
+    },
+    "AudioAdvancedDiscussionMixMinusSettings" : {
+      "description" : "The mix-minus related settings",
+      "required" : [ "groups" ],
+      "type" : "object",
+      "properties" : {
+        "groups" : {
+          "description" : "The mix-minus groups",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AudioAdvancedDiscussionMixMinusGroup"
+          }
+        }
+      }
+    },
+    "AudioAdvancedInputDynamicsClassChanged" : {
+      "description" : "Dynamics class configuration changed",
+      "required" : [ "configuration", "newClass" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "description" : "UUID of the configuration which changed",
+          "type" : "string"
+        },
+        "newClass" : {
+          "$ref" : "#/definitions/AudioAdvancedInputDynamicsClass",
+          "description" : "The new dynamics class settings"
+        }
+      }
+    },
+    "AudioAdvancedInputEqualizerClassChanged" : {
+      "description" : "Equalizer class configuration changed",
+      "required" : [ "configuration", "newClass" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "description" : "UUID of the configuration which changed",
+          "type" : "string"
+        },
+        "newClass" : {
+          "$ref" : "#/definitions/AudioAdvancedInputEqualizerClass",
+          "description" : "The new equalizer class settings"
+        }
+      }
+    },
+    "AudioAdvancedInputGainClassChanged" : {
+      "description" : "Gain class configuration changed",
+      "required" : [ "configuration", "newClass" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "description" : "UUID of the configuration which changed",
+          "type" : "string"
+        },
+        "newClass" : {
+          "$ref" : "#/definitions/AudioAdvancedInputGainClass",
+          "description" : "The new gain class settings"
+        }
+      }
+    },
+    "AudioAdvancedInputChanged" : {
+      "description" : "Audio input changed",
+      "required" : [ "configuration", "newSettings" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "description" : "UUID of the configuration which changed",
+          "type" : "string"
+        },
+        "newSettings" : {
+          "$ref" : "#/definitions/AudioAdvancedInput",
+          "description" : "The new settings of the audio input"
+        }
+      }
+    },
+    "AudioAdvancedRoutingConfigurationChanged" : {
+      "description" : "Audio routing configuration changed",
+      "required" : [ "configuration", "newRouting" ],
+      "type" : "object",
+      "properties" : {
+        "configuration" : {
+          "description" : "UUID of the configuration which changed",
+          "type" : "string"
+        },
+        "newRouting" : {
+          "$ref" : "#/definitions/AudioAdvancedRoutingConfiguration",
+          "description" : "The new audio routing"
         }
       }
     }
