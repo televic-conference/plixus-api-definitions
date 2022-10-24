@@ -11008,6 +11008,22 @@
           "description" : "optional room layout ID for Confero Cloud meetings",
           "type" : "string"
         },
+        "roomName" : {
+          "description": "id of the room (cloud context)",
+          "type": "string"
+        },
+        "roomId" : {
+          "description" : "room id",
+          "type" : "string"
+        },
+        "publishedMeetingId" : {
+          "description" : "meeting id of the confero cloud published meeting",
+          "type" : "string"
+        },
+        "preparedMeetingId" : {
+          "description" : "meeting id of the confero cloud prepared meeting from which this meeting was published",
+          "type" : "string"
+        },
         "speechTimerSettings" : {
           "$ref" : "#/definitions/SpeechTimerSettings"
         }
