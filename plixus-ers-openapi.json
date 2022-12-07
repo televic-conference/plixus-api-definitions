@@ -12125,8 +12125,7 @@
           "type" : "integer"
         },
         "microphoneMode" : {
-          "enum" : [ "directAccess", "request", "group", "other" ],
-          "type" : "string"
+          "enum" : [ "directAccess", "request", "group", "other", "autoMix" ]
         },
         "microphoneActivationType" : {
           "enum" : [ "toggle", "push", "vox" ],
