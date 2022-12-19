@@ -9418,6 +9418,20 @@
           }
         }
       }
+    },
+    "/api/v1/devices/wireless/{serial}" : {
+      "delete" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Delete a specific wireless device from the network",
+        "responses" : {
+          "204" : {
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Unable to delete device (e.g: device with given serial was not in network)"
+          }
+        }
+      }
     }
   },
   "definitions" : {
