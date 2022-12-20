@@ -9423,6 +9423,13 @@
       "delete" : {
         "tags" : [ "Devices" ],
         "summary" : "Delete a specific wireless device from the network",
+        "parameters" : [ {
+          "name" : "serial",
+          "in" : "path",
+          "description" : "serial number of the device which needs to be kicked out",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "204" : {
             "description" : "Ok"
