@@ -12201,6 +12201,10 @@
         "voxHoldTime" : {
           "description" : "The hold time to be used with vox, expressed in units of 0.1s (boundaries: 0s - 10s)",
           "type" : "integer"
+        },
+        "canPushToMute" : {
+          "description" : "Indicate if the meeting participant can push his microphone button to mute himself. The default is true.",
+          "type" : "boolean"
         }
       }
     },
@@ -13834,6 +13838,18 @@
         },
         "interpretationOnDante" : {
           "type" : "boolean"
+        },
+        "nbOfMixMinusChannels" : {
+          "description" : "The number of mix-minus channels to be included in the audio routing, the minimum is 0, the maximum is 29. The default is 29 in the case of normal routing, distance conferencing and hybrid routing (distance conferencing with speakers). In the other routing configurations this field should be set to 0, otherwise the API call will fail.",
+          "type" : "integer"
+        },
+        "nbOfIntercomSessions" : {
+          "description" : "The maximum number of intercom sessions the audio routing supports, the minimum is 0, the maximum 8. The default is 8.",
+          "type" : "integer"
+        },
+        "nbOfTranslationChannels" : {
+          "description" : "The number of translation channels to be included in the audio routing configuration, the minimum is 0, the maximum is 11. The default is 11.",
+          "type" : "integer"
         }
       }
     },
