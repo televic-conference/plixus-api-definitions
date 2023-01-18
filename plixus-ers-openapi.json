@@ -9439,6 +9439,33 @@
           }
         }
       }
+    },
+    "/api/v1/discussion/seats/{seat}/mute/" : {
+      "put" : {
+        "tags" : [ "Discussion" ],
+        "summary" : "Set the mute state of a seat",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The mute state to be set",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SeatMuteState"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "seat",
+        "in" : "path",
+        "description" : "The addressed seat ID",
+        "required" : true,
+        "type" : "integer"
+      } ]
     }
   },
   "definitions" : {
@@ -10245,6 +10272,9 @@
         "role" : {
           "description" : "The role of the seat",
           "enum" : [ "delegate", "vip", "chairman" ]
+        },
+        "isMuted" : {
+          "type" : "boolean"
         }
       }
     },
@@ -15348,6 +15378,17 @@
         "newRouting" : {
           "$ref" : "#/definitions/AudioAdvancedRoutingConfiguration",
           "description" : "The new audio routing"
+        }
+      }
+    },
+    "SeatMuteState" : {
+      "description" : "The mute state of a seat",
+      "required" : [ "muted" ],
+      "type" : "object",
+      "properties" : {
+        "muted" : {
+          "description" : "Is the seat muted or not",
+          "type" : "boolean"
         }
       }
     }
