@@ -9440,7 +9440,7 @@
         }
       }
     },
-    "/api/v1/discussion/seats/{seat}/mute/" : {
+    "/api/v1/discussion/seats/{seat}/mute" : {
       "put" : {
         "tags" : [ "Discussion" ],
         "summary" : "Set the mute state of a seat",
