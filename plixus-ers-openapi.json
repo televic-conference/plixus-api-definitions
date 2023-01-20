@@ -9423,6 +9423,7 @@
       "delete" : {
         "tags" : [ "Devices" ],
         "summary" : "Delete a specific wireless device from the network",
+        "description" : "Delete a specific wireless device from the network. \nOnly used on a CU with a wireless accesspoint connected and in coupled mode. ",
         "parameters" : [ {
           "name" : "serial",
           "in" : "path",
@@ -9466,6 +9467,18 @@
         "required" : true,
         "type" : "integer"
       } ]
+    },
+    "/api/v1/devices/wireless" : {
+      "delete" : {
+        "tags" : [ "Devices" ],
+        "summary" : "Delete all wireless devices from the network",
+        "description" : "Delete all wireless device from the network. \nOnly used on a CU with a wireless accesspoint connected and in coupled mode. ",
+        "responses" : {
+          "204" : {
+            "description" : "Ok"
+          }
+        }
+      }
     }
   },
   "definitions" : {
