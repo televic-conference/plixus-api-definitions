@@ -12211,8 +12211,7 @@
           "enum" : [ "prior", "next" ]
         },
         "ledColorOn" : {
-          "enum" : [ "red", "green" ],
-          "type" : "string"
+          "enum" : [ "red", "green", "off" ]
         },
         "ledColorRequest" : {
           "enum" : [ "red", "green" ],
