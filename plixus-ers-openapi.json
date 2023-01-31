@@ -11952,26 +11952,6 @@
         }
       }
     },
-    "LicenseModule" : {
-      "type" : "object",
-      "properties" : {
-        "name" : {
-          "description" : "Name of the module",
-          "type" : "string"
-        },
-        "state" : {
-          "description" : "Validity state of the module",
-          "enum" : [ "valid", "invalid", "nearlyExpired" ]
-        },
-        "parameters" : {
-          "description" : "Parameters with info about module",
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/LicenseParameter"
-          }
-        }
-      }
-    },
     "LogLevel" : {
       "type" : "object",
       "properties" : {
@@ -15401,6 +15381,27 @@
         "muted" : {
           "description" : "Is the seat muted or not",
           "type" : "boolean"
+        }
+      }
+    },
+    "LicenseModule" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "description" : "Name of the module",
+          "enum" : [ "SignageApplication", "T-Cast", "Voting", "Authentication", "Advanded Logging", "Video", "Documents", "Messages_Services", "Configurable Import/Export", "AudioApplication", "RoomServerOnly", "Interpretation", "Intercom", "VideoApplication", "Nameplate", "Discussion", "Advanced Timer", "Advanced Recording", "Operator Customization", "Virtual Interpretation", "Badge Identification", "Language Selection", "Dual Use", "Bluetooth Communication", "Base license" ],
+          "type" : "string"
+        },
+        "state" : {
+          "description" : "Validity state of the module",
+          "enum" : [ "valid", "invalid", "nearlyExpired" ]
+        },
+        "parameters" : {
+          "description" : "Parameters with info about module",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LicenseParameter"
+          }
         }
       }
     }
