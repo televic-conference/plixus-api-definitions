@@ -10288,6 +10288,9 @@
         },
         "isMuted" : {
           "type" : "boolean"
+        },
+        "muteSources" : {
+          "$ref" : "#/definitions/SeatMuteSources"
         }
       }
     },
@@ -15402,6 +15405,20 @@
           "items" : {
             "$ref" : "#/definitions/LicenseParameter"
           }
+        }
+      }
+    },
+    "SeatMuteSources" : {
+      "type" : "object",
+      "properties" : {
+        "by_delegate" : {
+          "type" : "boolean"
+        },
+        "by_chairperson" : {
+          "type" : "boolean"
+        },
+        "by_operator" : {
+          "type" : "boolean"
         }
       }
     }
