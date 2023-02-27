@@ -9479,6 +9479,20 @@
           }
         }
       }
+    },
+    "/api/events/discussion/seatsdiscussionstatechanged" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Event when the discussion state of multiple seats has changed",
+        "responses" : {
+          "200" : {
+            "description" : "Metadata for SeatDiscussionStateChanged event",
+            "schema" : {
+              "$ref" : "#/definitions/SeatsDiscussionStateChanged"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -15419,6 +15433,18 @@
         },
         "by_operator" : {
           "type" : "boolean"
+        }
+      }
+    },
+    "SeatsDiscussionStateChanged" : {
+      "required" : [ "discussionStates" ],
+      "type" : "object",
+      "properties" : {
+        "discussionStates" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SeatDiscussionState"
+          }
         }
       }
     }
