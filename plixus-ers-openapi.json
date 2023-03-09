@@ -15425,13 +15425,13 @@
     "SeatMuteSources" : {
       "type" : "object",
       "properties" : {
-        "by_delegate" : {
+        "chairperson" : {
           "type" : "boolean"
         },
-        "by_chairperson" : {
+        "delegate" : {
           "type" : "boolean"
         },
-        "by_operator" : {
+        "operator" : {
           "type" : "boolean"
         }
       }
