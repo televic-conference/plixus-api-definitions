@@ -9493,6 +9493,24 @@
           }
         }
       }
+    },
+    "/api/v1/wirelessaccesspoints/{serial}/devices" : {
+      "delete" : {
+        "tags" : [ "WirelessAccessPoints" ],
+        "summary" : "Remove all assiciated devices from the accesspoint",
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "serial",
+        "in" : "path",
+        "description" : "Device serial",
+        "required" : true,
+        "type" : "string"
+      } ]
     }
   },
   "definitions" : {
