@@ -9511,6 +9511,34 @@
         "required" : true,
         "type" : "string"
       } ]
+    },
+    "/api/notification/{client}/nextevents" : {
+      "get" : {
+        "tags" : [ "Notification" ],
+        "summary" : "Make a long polling request for the next events",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "client",
+          "in" : "path",
+          "description" : "Unique id of client that makes the request (retrieved by call to connect)",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Notification"
+              }
+            }
+          },
+          "408" : {
+            "description" : "Request Timeout"
+          }
+        }
+      }
     }
   },
   "definitions" : {
