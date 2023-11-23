@@ -9538,7 +9538,14 @@
             "description" : "Request Timeout"
           }
         }
-      }
+      },
+      "parameters" : [ {
+        "name" : "max",
+        "in" : "query",
+        "description" : "Max amount of events thay may be returned",
+        "required" : true,
+        "type" : "integer"
+      } ]
     }
   },
   "definitions" : {
